@@ -40,7 +40,12 @@ menu:
     - name: "Work"
       url: "/work/"
       weight: 4
+    - name: "Newsletter"
+      url: "/newsletter/"
+      weight: 5
 
 taxonomies:
   series: "series"
   projects: "projects"
+  newsletter: "newsletter"
+
