@@ -1,0 +1,573 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en"
+  dir="ltr"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Golang: Interfaces - Meet Rajesh Gor</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Introduction
+In the 19th post of the series, we will be taking a look into interfaces in golang. Interfaces allow us to create function signatures common to different structs or types. So, we can allow multiple structs to have a common interface(method) that can have different implementations.
+What are Interfaces
+Interface as the name suggests is a way to create methods that are common to different structures or types but can have different implementations. It&rsquo;s an interface to define the method or function signatures but not the implementation. Let&rsquo;s take an example of Laptop and Phone having the functionality of wifi. We can connect to wifi more or the less in a similar way on both devices. The implementation behind the functionality might be different but they share the same operation. The WiFi can act as an interface for both devices to connect to the internet." />
+  <meta name="author" content="Meet Rajesh Gor" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/twitter.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link
+    rel="icon"
+    href="http://localhost:1313/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="http://localhost:1313/apple-touch-icon.png"
+  />
+
+  
+  <meta name="generator" content="Hugo 0.136.5">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-[--w] px-8 lg:justify-center">
+  <div class="relative z-50 ltr:mr-auto rtl:ml-auto flex items-center">
+    <a class="-translate-y-[1px] text-2xl font-medium" href="http://localhost:1313/"
+      >Meet Rajesh Gor</a
+    >
+    <div
+      class="btn-dark text-[0] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 ltr:-mr-8 rtl:-ml-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse">
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/"
+        >Home</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/blog/"
+        >Blog</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/work/"
+        >Work</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 rtl:space-x-reverse dark:invert ltr:lg:ml-14 rtl:lg:mr-14 lg:mt-0 lg:items-center"
+    >
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/meetgor21"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/mr-destructive"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/meetgor"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100vh-9rem)] max-w-[--w] px-8 pb-16 pt-14 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-14">
+    <h1 class="!my-0 pb-2.5">Golang: Interfaces</h1>
+
+    
+    <div class="text-xs antialiased opacity-60">
+      
+      <time>Sep 10, 2022</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="introduction">Introduction</h2>
+<p>In the 19th post of the series, we will be taking a look into interfaces in golang. Interfaces allow us to create function signatures common to different structs or types. So, we can allow multiple structs to have a common interface(method) that can have different implementations.</p>
+<h2 id="what-are-interfaces">What are Interfaces</h2>
+<p>Interface as the name suggests is a way to create methods that are common to different structures or types but can have different implementations. It&rsquo;s an interface to define the method or function signatures but not the implementation. Let&rsquo;s take an example of <code>Laptop</code> and <code>Phone</code> having the functionality of wifi. We can connect to wifi more or the less in a similar way on both devices. The implementation behind the functionality might be different but they share the same operation. The WiFi can act as an interface for both devices to connect to the internet.</p>
+<h2 id="define-an-interface">Define an Interface</h2>
+<p>To declare an interface in golang, we can use the <code>interface</code> keyword in golang. An interface is created with the type keyword, providing the name of the interface and defining the function declaration. Inside the interface which acts as a struct of general method signatures. The method signatures usually consist of the name of the function with its parameters if any and the return type of the function.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Player</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">name</span>   <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">health</span> <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Mob</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">name</span>     <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">health</span>   <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">is_passive</span> <span style="color:#66d9ef">bool</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Creature</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">intro</span>() <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//attack() int
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">//heal() int
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">player</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Player</span>{<span style="color:#a6e22e">name</span>: <span style="color:#e6db74">&#34;Steve&#34;</span>}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">mob</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Mob</span>{<span style="color:#a6e22e">name</span>: <span style="color:#e6db74">&#34;Zombie&#34;</span>}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">player</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">mob</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><pre tabindex="0"><code>go run main.go
+
+{Steve 0}
+{Zombie 0 false}
+</code></pre><p>In this above example, we have created an interface called <code>Creature</code>. There are a few structs that we have to define like <code>Player</code> and <code>Mob</code>, these two methods have a few attributes like <code>name</code> as <code>string</code> and <code>health</code> as <code>int</code> which are common in both structs but the <code>Mob</code> struct has an additional attribute <code>is_passive</code> as a <code>boolean</code> value. The <code>Creature</code> is an interface that will define certain function signatures, here we have declared <code>intro</code>, <code>attack</code>, and <code>heal</code> as the methods bound to the Creature interface. This means, that any object which satisfies the Creature interface, can define the methods associated with the interface.</p>
+<h2 id="defining-interfaces">Defining Interfaces</h2>
+<p>Once we have declared the interface method signatures, we can move into defining the functionality of these methods depending on the struct. If we want a different working method for different types of struct objects passed we can define those for each type of struct that we want. Here, we have two types of structs namely <code>Creature</code> and <code>Mob</code>, based on the struct we can define the <code>intro</code> method for them individually.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Creature</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">intro</span>() <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">attack</span>(<span style="color:#f92672">*</span><span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Player</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">name</span>   <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">health</span> <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Mob</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">name</span>     <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">health</span>   <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">category</span> <span style="color:#66d9ef">bool</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#a6e22e">Player</span>) <span style="color:#a6e22e">intro</span>() <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Player has spawned&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">name</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#a6e22e">Player</span>) <span style="color:#a6e22e">attack</span>(<span style="color:#a6e22e">m_health</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Player has attacked!&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">*</span><span style="color:#a6e22e">m_health</span> = <span style="color:#f92672">*</span><span style="color:#a6e22e">m_health</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">m_health</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">m</span> <span style="color:#a6e22e">Mob</span>) <span style="color:#a6e22e">intro</span>() <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;A wild %s has appeared!\n&#34;</span>, <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">name</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">name</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">m</span> <span style="color:#a6e22e">Mob</span>) <span style="color:#a6e22e">attack</span>(<span style="color:#a6e22e">p_health</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%s has attacked you! -%d\n&#34;</span>, <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">name</span>, <span style="color:#ae81ff">30</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">*</span><span style="color:#a6e22e">p_health</span> = <span style="color:#f92672">*</span><span style="color:#a6e22e">p_health</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">p_health</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">player</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Player</span>{<span style="color:#a6e22e">name</span>: <span style="color:#e6db74">&#34;Steve&#34;</span>, <span style="color:#a6e22e">health</span>: <span style="color:#ae81ff">100</span>}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">mob</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Mob</span>{<span style="color:#a6e22e">name</span>: <span style="color:#e6db74">&#34;Zombie&#34;</span>, <span style="color:#a6e22e">health</span>: <span style="color:#ae81ff">140</span>}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">player</span>.<span style="color:#a6e22e">intro</span>())
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">mob</span>.<span style="color:#a6e22e">intro</span>())
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">mob</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">player</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">player</span>.<span style="color:#a6e22e">attack</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">mob</span>.<span style="color:#a6e22e">health</span>))
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">mob</span>.<span style="color:#a6e22e">attack</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">player</span>.<span style="color:#a6e22e">health</span>))
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">mob</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">player</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><pre tabindex="0"><code>go run main.go
+
+Player has spawned
+Steve
+A wild Zombie has appeared!
+Zombie
+{Zombie 140 false}
+{Steve 100}
+Player has attacked!
+90
+Zombie has attacked you! -30
+70
+{Zombie 90 false}
+{Steve 70}
+</code></pre><p>As we can see, the method <code>intro()</code> is bound to both the struct depending on what struct signature is associated with the method. The method <code>intro</code> takes in the object struct associated as per the call and returns <code>string</code> as defined in the method signature.</p>
+<p>The <code>attack</code> method in the <code>Creature</code> interface is also implemented separately for the two structs. For the <code>Player</code> method, we simply take in a pointer to an integer and return an <code>int</code>. The parameter is the pointer to the mob health, and it returns the modified health. We take in a pointer to the mob or player health so as to parse in the actual value and not the copy of the value. If we modify the value, we want to reflect those changes in the actual object. So that is how we can use interfaces to construct dynamic operations on objects as well as different types of structs.</p>
+<p>We have seen a simple example of how to declare and define interfaces for given type structs. Also, we can pass by value as well as by pointers so as to define the behavior of the method whether to dynamically modify or change the values of the object associated with it.</p>
+<h2 id="examples-of-interfaces">Examples of Interfaces</h2>
+<p>There are quite some use cases of interfaces, in object-oriented programming, the above example fits the polymorphism feature quite well. The ability to reuse certain method signatures and define the functions as per requirement brings flexibility to the code structure.</p>
+<p>We will see a few examples for understanding how we can use interfaces in various ways.</p>
+<h3 id="type-switch-interface">Type Switch Interface</h3>
+<p>We can use an empty interface to check for the type of variable we have parsed. Using this empty interface we can create a kind of dynamic parameter to a function.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;strconv&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">parse_int</span>(<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">interface</span>{}) <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">switch</span> <span style="color:#a6e22e">n</span>.(<span style="color:#66d9ef">type</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">case</span> <span style="color:#66d9ef">int</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> (<span style="color:#a6e22e">n</span>).(<span style="color:#66d9ef">int</span>) <span style="color:#f92672">*</span> (<span style="color:#a6e22e">n</span>).(<span style="color:#66d9ef">int</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">case</span> <span style="color:#66d9ef">string</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">strconv</span>.<span style="color:#a6e22e">Atoi</span>(<span style="color:#a6e22e">n</span>.(<span style="color:#66d9ef">string</span>))
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">s</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">case</span> <span style="color:#66d9ef">float64</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> int(<span style="color:#a6e22e">n</span>.(<span style="color:#66d9ef">float64</span>))
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">default</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">n</span>.(<span style="color:#66d9ef">int</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">num</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">parse_int</span>(<span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">num</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">num</span> = <span style="color:#a6e22e">parse_int</span>(<span style="color:#e6db74">&#34;4&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">num</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">num</span> = <span style="color:#a6e22e">parse_int</span>(<span style="color:#ae81ff">4.1243</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">num</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><pre tabindex="0"><code>go run main.go
+
+16
+4
+4
+</code></pre><p>Here, we can see we have an interface as a parameter to the function <code>parse_int</code>, the return type is <code>int</code>, so the incoming parameter can be any valid type. But if we don&rsquo;t convert the given type into an appropriate int, it will result in an error as we are returning the int value of the parsed parameter. We are taking the parameter as <code>interface{}</code> which is an empty interface, this will contain the parameter parsed as an interface type. That&rsquo;s why we need to convert the interface object into an int or the parsed type of the interface.</p>
+<h3 id="interface-slice">Interface Slice</h3>
+<p>We can even create a slice of interfaces, which means we can initialize or group together various objects of different structs in a single slice. This might be helpful for calling functions associated with different objects via the interface very easily and in a much cleaner way.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Creature</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">intro</span>() <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Player</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">name</span>   <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">health</span> <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Mob</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">name</span>     <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">health</span>   <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">category</span> <span style="color:#66d9ef">bool</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#a6e22e">Player</span>) <span style="color:#a6e22e">intro</span>() <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Player has spawned&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">name</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">m</span> <span style="color:#a6e22e">Mob</span>) <span style="color:#a6e22e">intro</span>() <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">name</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;&#34;</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">name</span> = <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">name</span>
+</span></span><span style="display:flex;"><span>	} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">name</span> = <span style="color:#e6db74">&#34;Mob&#34;</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;A wild %s has appeared!\n&#34;</span>, <span style="color:#a6e22e">name</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">name</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">entity</span> <span style="color:#f92672">:=</span> []<span style="color:#a6e22e">Creature</span>{<span style="color:#a6e22e">Player</span>{}, <span style="color:#a6e22e">Mob</span>{}, <span style="color:#a6e22e">Mob</span>{}, <span style="color:#a6e22e">Player</span>{}}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">obj</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">entity</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">obj</span>.<span style="color:#a6e22e">intro</span>())
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><pre tabindex="0"><code>Player has spawned
+A wild Zombie has appeared!
+A wild Zombie has appeared!
+Player has spawned
+</code></pre><p>In the above example, we can see that the entity variable is created as a slice of interfaces <code>Creature</code>, i.e. various objects associated with the <code>Creature</code> interface can be contained in a single slice. There are 2 instances of Player and Mob each in the slice. We can further iterate over the slice as a range-based loop and thereby the functions associated with the interfaces can be called. Here, we have called the <code>intro</code> function.</p>
+<p>So, there are a lot of things that can be done with interfaces, we can create multiple interfaces for a single object struct and nest interfaces. Based on the use case of the program, interfaces can be used to reduce the boilerplate code as well as improve the readability of the code.</p>
+<p>That&rsquo;s it from this part. Reference for all the code examples and commands can be found in the <a href="https://github.com/mr-destructive/100-days-of-golang/tree/main/scripts/interfaces/main.go">100 days of Golang</a> GitHub repository.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>From this part of the series, we were able to understand the basics of interfaces using a few examples. We explored how interfaces can be used to bring in polymorphism in golang, also we can improve the readability of the code. The boilerplate code can be considerably reduced by using interfaces when dealing with structs and types. Hopefully, you found this post helpful and understood even the basics of interfaces in golang. Thank you for reading, if you have any queries, questions, or feedback, you can ping me on my social handles or in the comments. Happy Coding :)</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/go"
+      >go</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg !leading-[1.2] *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  >
+    
+    <a class="ltr:pr-3 rtl:pl-3" href="http://localhost:1313/golang-error-handling/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Golang: Error Handling</span></a
+    >
+    
+    
+    <a class="ltr:ml-auto rtl:mr-auto justify-end pl-3" href="http://localhost:1313/golang-closures/"
+      ><span>Golang: Closures</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="mx-auto flex h-[4.5rem] max-w-[--w] items-center px-8 text-xs uppercase tracking-wider opacity-60"
+>
+  <div class="mr-auto">
+  
+    &copy; 2024
+    <a class="link" href="http://localhost:1313/">Meet Rajesh Gor</a>
+  
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+
+  </body>
+</html>

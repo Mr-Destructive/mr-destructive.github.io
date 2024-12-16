@@ -1,0 +1,724 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en"
+  dir="ltr"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Django &#43; PostgreSQL Deployment on Heroku - Meet Rajesh Gor</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Introduction
+Django projects are quite easy to build and simple to understand, you might have created a Django application and wanted to show it to the world? You can deploy a basic Django application with a database(PostgreSQL) with Heroku. It provides a decent free tier with some great features and add-ons. A free tier Heroku account has a limitation of 5 apps, limited data in the database, limited connections to the server per month, and so on." />
+  <meta name="author" content="Meet Rajesh Gor" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/twitter.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link
+    rel="icon"
+    href="http://localhost:1313/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="http://localhost:1313/apple-touch-icon.png"
+  />
+
+  
+  <meta name="generator" content="Hugo 0.136.5">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-[--w] px-8 lg:justify-center">
+  <div class="relative z-50 ltr:mr-auto rtl:ml-auto flex items-center">
+    <a class="-translate-y-[1px] text-2xl font-medium" href="http://localhost:1313/"
+      >Meet Rajesh Gor</a
+    >
+    <div
+      class="btn-dark text-[0] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 ltr:-mr-8 rtl:-ml-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse">
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/"
+        >Home</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/blog/"
+        >Blog</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/work/"
+        >Work</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 rtl:space-x-reverse dark:invert ltr:lg:ml-14 rtl:lg:mr-14 lg:mt-0 lg:items-center"
+    >
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/meetgor21"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/mr-destructive"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/meetgor"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100vh-9rem)] max-w-[--w] px-8 pb-16 pt-14 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-14">
+    <h1 class="!my-0 pb-2.5">Django &#43; PostgreSQL Deployment on Heroku</h1>
+
+    
+    <div class="text-xs antialiased opacity-60">
+      
+      <time>May 15, 2022</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="introduction">Introduction</h2>
+<p>Django projects are quite easy to build and simple to understand, you might have created a Django application and wanted to show it to the world? You can deploy a basic Django application with a database(PostgreSQL) with Heroku. It provides a decent free tier with some great features and add-ons. A free tier Heroku account has a limitation of 5 apps, limited data in the database, limited connections to the server per month, and so on.</p>
+<p>Though the free tier is not a great option for bigger applications, it suits really well for smaller scale and ide projects, so we will be looking into the details of how to deploy a Django application to <a href="https://heroku.com/">Heroku</a> which is a Platform as Service (PaS).</p>
+<p>This series will be an extension of the series <a href="https://techstructiveblog.hashnode.dev/series/django-basics">Django basics</a> which covered the basics of the Django framework, we covered from basic Django fundamentals to building a CRUD API. In this series, we will be exploring some platforms for giving a better understanding of how things work and understanding a few components that were left as default while understanding the basics of Django. Let&rsquo;s get started with <a href="https://techstructiveblog.hashnode.dev/series/django-deployment">Django Deployment</a>!</p>
+<h2 id="creating-a-django-application">Creating a Django Application</h2>
+<p>For deploying an app, we definitely need an app, we need to create a basic Django application to deploy on the web. We&rsquo;ll be creating a simple blog application with a couple of views and a simple model structure. As for the database, we&rsquo;ll be using Postgres as Heroku has an add-on for it and it is pretty easy to configure.</p>
+<h3 id="set-up-a-virtual-environment">Set up a virtual environment</h3>
+<p>We need to set up a virtual environment in order to keep the Django project neat and tidy by managing the project-specific dependencies and packages. We can use the <a href="https://pypi.org/project/virtualenv/">virtualenv</a> package to isolate a python project from the rest of the system.</p>
+<pre tabindex="0"><code># install the virtualenv package
+pip install virtualenv
+
+# create a virtual env for the project
+virtualenv .venv
+
+# activate the virtualenv
+Windows:
+.venv\Scripts\activate
+
+Linux/macOS:
+source .venv/bin/activate
+</code></pre><p>This will set up the project nicely for a Django project, you now install the core Django package and get started with creating a Django application.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># install django</span>
+</span></span><span style="display:flex;"><span>pip install django
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># start a django project</span>
+</span></span><span style="display:flex;"><span>django-admin startproject blog .
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cd blog
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># create a application in django project</span>
+</span></span><span style="display:flex;"><span>python manage.py createapp api
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create some models, views, URLs, templates</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># run the server</span>
+</span></span><span style="display:flex;"><span>python manag.py runserver
+</span></span></code></pre></div><p>We assume you already have a Django project configured with some basic URLs, views and templates or static files as per your project and requirements, for this tutorial I will be using the simple blog application from my previous Django tutorials as a reference. You can follow along with my <a href="https://techstructiveblog.hashnode.dev/series/django-basics">Django Basics</a> series and refer to the Blog Application project on <a href="https://github.com/Mr-Destructive/django-blog">GitHub</a>.</p>
+<h2 id="configuring-the-django-application">Configuring the Django Application</h2>
+<p>Make sure to create and activate the virtual environment for this django project. This should be done to manage the dependencies and packages used in the project. If you are not aware of the virtual environment and django setup, you can follow up with this <a href="https://mr-destructive.github.io/techstructive-blog/django-setup-script/">post</a>.</p>
+<h3 id="creating-a-runtimetxt-file">Creating a runtime.txt file</h3>
+<p>Now, Firstly we need to specify which type and version of language we are using. Since Django is a Python-based web framework, we need to select the python version in a text file.</p>
+<p><strong>runtime.txt</strong></p>
+<pre tabindex="0"><code>python-3.9.5
+</code></pre><p>Here, the version can be anything as per your project and the packages installed.</p>
+<h3 id="creating-requirementstxt-file">Creating requirements.txt file</h3>
+<p>We&rsquo;ll first create a <code>requirements.txt</code> file for storing all the dependencies and packages installed in the application. This will help in installing dependencies while deploying the application. We can either use a <code>requirements.txt</code> file using <code>virtualenv</code> or a <code>Pipfile</code> using Pipenv. Both serve the same purpose but a bit differently.</p>
+<p>Assuming you are in an isolated virtual environment for this Django project, you can create a requirements.txt file using the below command:</p>
+<p>Make sure the virtualenv is activated before running the command:</p>
+<pre tabindex="0"><code>pip freeze &gt; requirements.txt
+</code></pre><p>This will create a simple text file that contains the package names along with the versions used in the current virtual environment. A simple Django requirements file would look something like this:</p>
+<pre tabindex="0"><code>asgiref==3.4.1
+Django==3.2.11
+pytz==2021.3
+sqlparse==0.4.2
+typing_extensions==4.0.1
+</code></pre><p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1652614060461/kPTZ9R8Xp.png" alt="image.png"></p>
+<p>This is vanilla Django without any additional dependencies but if you have integrated other functionalities like Django Rest Framework, PostgreSQL, Crispy Forms, Schedulers, etc. there might be additional dependencies that become quite crucial for the smooth working of the project.</p>
+<p>If you are using pipenv, you don&rsquo;t need to make any efforts to manually activate and manage virtual environment, the dependencies are installed and taken care of by the pipenv installer. You just need to make sure to install any package with <code>pipenv install</code> and not <code>pip install</code> for better and improved package tracking.</p>
+<p>So, that&rsquo;s all we need to take care of packages and keep a list of these integrated packages for the project. You need to update the requirements.txt file every time you install any new package or modify the dependencies for a project. Simply use the command <code>pip freeze &gt; requirements.txt</code> in the activated virtual environment.</p>
+<h3 id="creating-a-procfile">Creating a Procfile</h3>
+<p>Next up, we have the <code>Procfile</code>, a procfile is a special file that holds information about the processes to be run to start or activate the project. In our case, for django we need a web process that can manage the server.</p>
+<p>A Procfile is a simple file without any extension, make sure to write <code>Procfile</code> as it is as the name of the file in the root folder of the project. Inside the file add the following contents:</p>
+<p><strong>Procfile</strong></p>
+<pre tabindex="0"><code class="language-Procfile" data-lang="Procfile">web: gunicorn &lt;project_name&gt;.wsgi
+</code></pre><p>As we can see we have defined the <code>web</code> process using <code>gunicorn</code>, <a href="https://pypi.org/project/gunicorn/">Gunicorn</a> is a python package that helps in creating WSGI HTTP Server for the UNIX operating systems. So, we need to install the package and update the package dependency list.</p>
+<pre tabindex="0"><code>pip install gunicorn
+
+pip freeze &gt; requirements.txt
+</code></pre><p>That would be good to go for creating and serving up the project while deploying the project on Heroku.</p>
+<h2 id="creating-a-heroku-app">Creating a Heroku App</h2>
+<p>A Heroku App is basically like your Django Project, you can create apps for deploying your django projects on Heroku. You are limited to 5 apps on the Free tier but that can be expanded on the paid plans.</p>
+<p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1652456732519/cyOQZ3UZK.png" alt="image.png"></p>
+<p>The name of your heroku app should be unique globally, you need to try a few combinations before a good one fits your project. This name has no significance on your django project code, though it would be the name from which you would access the web application as a name <code>&lt;app-name&gt;.herokuapp.com</code>.</p>
+<p>So, choose it wisely if you are not attaching a custom domain. You can attach a custom domain, you can navigate to the <code>domain</code> section in the settings tab.</p>
+<h2 id="setting-up-the-database">Setting up the database</h2>
+<p>To set up and configure a database in django on Heroku, we need to manually acquire and attach a PostgreSQL add-on to the heroku app.</p>
+<ul>
+<li>Firstly locate to the Resources Tab in your Heroku app.</li>
+<li>Search <code>postgres</code> in the Add-ons Search bar</li>
+<li>Click on the <code>Heroku Postgres</code> Add-on</li>
+<li>Submit the Order Form and you have the add-on enabled in the app.</li>
+</ul>
+<p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1652456842273/ijeWsVdOf.png" alt="image.png"></p>
+<p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1652456877447/dLG30ac_m.png" alt="image.png"></p>
+<p>Alternately, you can use the Heroku CLI,</p>
+<h3 id="heroku-cli-setup">Heroku CLI Setup</h3>
+<p>You can use the Heroku CLI which is a command-line interface for managing and creating Heroku applications.  You need to first install the CLI by heading towards the <a href="https://devcenter.heroku.com/articles/heroku-command-line">heroku documentation</a>. Once the CLI is installed, you need to login into your Heroku account by entering the following command:</p>
+<pre tabindex="0"><code>heroku login
+</code></pre><p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1652605604920/HnTr2KbTi.png" alt="image.png"></p>
+<p>This will allow us to work with heroku commands and manage our heroku application from the command line itself. The below command will create a add-on for <code>heroku-postgres</code> for the application provided as the parameter options</p>
+<pre tabindex="0"><code>heroku addons:create heroku-postgresql:hobby-dev --app &lt;app_name&gt;
+</code></pre><p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1652507166978/i1IJ5EGjJ.png" alt="image.png"></p>
+<p>This should hopefully add a fresh instance of a postgres database for your heroku app. You can now configure the database for your project, we simply need the Database URL from the heroku app dashboard. We&rsquo;ll see how to configure the environment variables in Django for Heroku to keep your secrets like the <code>SECRET_KEY</code>, <code>DATABSE_URL</code>, etc.</p>
+<p>If you want MySQL as a database, you can check out the <a href="https://devcenter.heroku.com/articles/cleardb">ClearDB</a> Add-On for Heroku to simply attach it like Postgres on your Heroku application. Also, if you wish to add <a href="https://www.mongodb.com/compatibility/mongodb-and-django">MongoDB</a> into your Django application on Heroku, you can use <a href="https://devcenter.heroku.com/articles/ormongo">Object Rocket</a>(OR Mongo). It is not available in the free tier though, unlike PostgreSQL and MySQL.</p>
+<h2 id="configuring-environment-variables">Configuring Environment Variables</h2>
+<p>We need to keep our secrets for the django project out of the deployed code and in a safe place, we can create environment variables and keep them in a <code>.env</code> file which will be git-ignored. We do not want this <code>.env</code> file to be open source and thus should not be committed.</p>
+<p>We first need to create a new secret key if you already have a GitHub repository, chances are you would have committed the default secret key open for the world to see, it is an insecure way of deploying django apps in production.</p>
+<p>So, open up a terminal and launch a python REPL:</p>
+<pre tabindex="0"><code>python
+
+import secrets
+secrets.token_hex(24)
+</code></pre><p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1652512239319/5AACaTGOD.png" alt="image.png"></p>
+<p>This should generate a secret key that only you know now. So, just copy the key without the quotes and create a file <code>.env</code> in the root project folder.</p>
+<p><strong>.env</strong></p>
+<pre tabindex="0"><code>SECRET_KEY=76419fd6885a677f802fd1d2b5acd0188e23e001042b05a8
+</code></pre><p>The <code>.env</code> file should also be added to the <code>.gitignore</code> file, so simply append the following in the <code>.gitignore</code> file</p>
+<pre tabindex="0"><code>.env
+</code></pre><p>This file is only created to test the project locally, so we need to also make this key available on heroku. For doing that we need to add Config Variables to the heroku app.</p>
+<ul>
+<li>Locate to the Settings Tab in your Heroku Application Dashboard</li>
+<li>We have the <code>Config Vars</code> section in the located tab
+= We need to reveal those variables and we will be able to see all the variables.</li>
+</ul>
+<p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1652456988713/5VM6E29_o.png" alt="image.png"></p>
+<p>We already have a <code>DATABASE_URL</code> variable declared when we attached the <code>django-postgres</code> database to our application. We will now add one more variable to the Application, i.e. the <code>SECRET_KEY</code>. Simply, enter the name of the key and also enter the value of the key, so basically a key-value pair. Simply click on the <code>Add</code> button and this will add the variable to your application.</p>
+<p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1652515244870/LRyPzJr41.png" alt="image.png"></p>
+<p>You also need to copy the <code>DATABSE_URL</code> into our local setup file(<code>.env</code> file). Copy the Database URL and paste it into the <code>.env</code> file as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-env" data-lang="env"><span style="display:flex;"><span>DATABASE_URL<span style="color:#f92672">=</span>postgres://sjxgipufegmgsw:78cbb568e@ec2-52-4-104-184.compute-1.amazonaws.com:5432/dbmuget
+</span></span></code></pre></div><p>The format for the postgres URL is as follows:</p>
+<pre tabindex="0"><code>postgresql://[user[:password]@][netloc][:port][/dbname]
+</code></pre><p>We have now created environment variables for our django application and also added config vars in the heroku app, we now need a way to parse these environment variables into the Django project.</p>
+<h3 id="parsing-environment-variables-using-python-dotenv">Parsing Environment variables using python-dotenv</h3>
+<p>We will use <a href="https://pypi.org/project/python-dotenv/">python-dotenv</a> to parse variables into the django settings configurations like <code>SECRET_KEY</code> and <code>DATABASES</code>.</p>
+<ul>
+<li>Install <code>python-dotenv</code> with pip with the command :</li>
+</ul>
+<pre tabindex="0"><code>pip install python-dotenv
+</code></pre><p>We need to then modify the default variables in the <code>settings.py</code> file. Firstly, we will load in the <code>.env</code> file for accessing the environment variables for the configuration of the project.</p>
+<p>Append the following code, to the top of the <code>settings.py</code> file, make sure don&rsquo;t override the configuration so remove unnecessary imports and configurations.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># &lt;project_name&gt;/settings.py</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> dotenv <span style="color:#f92672">import</span> load_dotenv
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>BASE_DIR <span style="color:#f92672">=</span> Path(__file__)<span style="color:#f92672">.</span>resolve()<span style="color:#f92672">.</span>parent<span style="color:#f92672">.</span>parent
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>load_dotenv(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(BASE_DIR, <span style="color:#e6db74">&#34;.env&#34;</span>))
+</span></span></code></pre></div><p>We have imported the package <code>dotenv</code> basically the <code>python-dotenv</code> into the <code>settings.py</code> file and the module <code>os</code> for loading the <code>.env</code> file. The <code>load_dotenv</code> function helps in loading the <code>key-value</code> pairs which are the configuration variables that can act as actual environment variables. We provide in a file to the <a href="https://saurabh-kumar.com/python-dotenv/">load_dotenv</a> function which is the <code>.env</code> file in our case, you can pick up any location for the <code>.env</code> file but make sure to change the location while parsing the file into the <code>load_dotenv</code> function.</p>
+<p>After loading the variables into the <code>settings.py</code> file, we now need to access those variables and set the appropriate variables the configuration from the variables received from the <code>load_dotenv</code> function. The <code>os.getenv</code> function to access the environment variables. The <code>os.getenv</code> function takes a parameter as the <code>key</code> for the environment variable and returns the value of the environment variable.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>SECRET_KEY <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>getenv(<span style="color:#e6db74">&#34;SECRET_KEY&#34;</span>)
+</span></span></code></pre></div><p>We have secretly configured the <code>SECRET_KEY</code> for the django project. If you have any other variables as simple key-value pairs like <code>AUTH</code> passwords, username, etc. you can use this method to get the configuration variables.</p>
+<h3 id="loading-database-configuration">Loading Database configuration</h3>
+<p>Databases are a bit different as compared to other simple configurations in django. We need to make a few adjustments to the default database configuration. We will install another package <code>dj-database-url</code> to configure <code>DATABASE_URL</code>. Since the databse_url has a few components we need a way to extract the details like the <code>hostname</code>, <code>port</code>, <code>database_name</code>, and <code>password</code>. Using the <code>dj-database-url</code> package we have a few functions that can serve the purpose.</p>
+<pre tabindex="0"><code>pip install dj-database-url
+</code></pre><p>At the end of your <code>settings.py</code> file, append the following code.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> dj_database_url
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>DATABASE_URL <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>getenv(<span style="color:#e6db74">&#34;DATABASE_URL&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>DATABASES <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;default&#34;</span>: dj_database_url<span style="color:#f92672">.</span>config(default<span style="color:#f92672">=</span>DATABASE_URL, conn_max_age<span style="color:#f92672">=</span><span style="color:#ae81ff">1800</span>),
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>We would need an adapter for making migrations to the <code>PostgreSQL</code> database i.e. the <code>psycopg2</code> package. This is a mandatory step if you are working with <code>postgres</code> database. This can be installed with the simple pip install:</p>
+<pre tabindex="0"><code>pip install psycopg2
+
+# If it does not work try
+pip install psycopg2-binary
+
+
+# if still error persists try installing setuptools
+pip install -U setuptools
+pip install psycopg2
+</code></pre><p>Now, that we have configured the database, we can now apply migrations to the fresh database of postgres provided by heroku. We will simply run the migrate command and in the heroku app the PostgreSQL database would have been modified and an appropriate schema should be applied.</p>
+<pre tabindex="0"><code>python manage.py migrate
+</code></pre><p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1652602284553/oTtGev28-.png" alt="image.png"></p>
+<p>Make sure to update the <code>requirements.txt</code> file before pushing the project to Heroku for making sure everything works as expected. Since we have installed a few additional packages that are directly used in the <code>settings.py</code> file, we need to run the <code>pip freeze</code> command to update the <code>requiremnets.txt</code> file.</p>
+<h2 id="serving-static-files">Serving Static Files</h2>
+<p>Now, if you have some static files like <code>CSS</code>, <code>Javascript</code>, or <code>images</code>, you need to configure the staticfiles in order to serve them from the heroku server. We will require another config variable for collecting the static files from the selected repository.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>STATIC_URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;static/&#34;</span>
+</span></span><span style="display:flex;"><span>STATICFILES_DIRS <span style="color:#f92672">=</span> [os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(BASE_DIR, <span style="color:#e6db74">&#34;static&#34;</span>)]
+</span></span><span style="display:flex;"><span>STATIC_ROOT <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(BASE_DIR, <span style="color:#e6db74">&#34;staticfiles&#34;</span>)
+</span></span></code></pre></div><p>Here, if you have served your static files from the <code>static</code> folder in the root directory of your django project, you can add the above code in the settings.py file. We will collect all static files in the folder along with the default static files provided by django in the <code>staticfiles</code> directory. Run the following command if you want to test whether the static files are properly collected and served.</p>
+<pre tabindex="0"><code>python manage.py collectstatic 
+</code></pre><p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1652600828657/JgL4nLuiL.png" alt="image.png"></p>
+<p>So, this command will collect all the static files and store them in a single place. We see that the files from the admin section are also copied as well as the custom static files from the project configuration. Now, we can move on to set the config variable for the heroku app.</p>
+<pre tabindex="0"><code>DISABLE_COLLECTSTATIC = 0
+</code></pre><p>We can set the <code>DISABLE_COLLECTSTATIC</code> variable as <code>0</code> or <code>1</code> indicating whether to disable it or not. We have currently enabled the static file collection while deploying the app but you can set it to <code>1</code> to disable the collection of static files.</p>
+<p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1652613798420/mbqzf1Kqd.png" alt="image.png"></p>
+<p>Since I first tested the application on heroku, the static files don&rsquo;t work as expected, we need another package to make sure the staticfiles are served property. We will be installing the <code>whitenoise</code> package which serves as the middleware for serving the static files.</p>
+<pre tabindex="0"><code>pip install whitenoise
+</code></pre><p>Add the whitenoise middleware <code>whitenoise.middleware.WhiteNoiseMiddleware</code> to the <code>MIDDLEWARE</code> list in the <code>settings.py</code> file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>MIDDLEWARE <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;whitenoise.middleware.WhiteNoiseMiddleware&#39;</span>,
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>That should be enough to make the most of the deployment on heroku<span style="color:#f92672">.</span> You will have to make a few adjustments <span style="color:#66d9ef">as</span> per your requirements <span style="color:#f92672">and</span> project<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Deploy from GitHub</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>We are now all set to deploy the application on Heroku, we can use the <span style="color:#960050;background-color:#1e0010">`</span>Connect to GitHub<span style="color:#960050;background-color:#1e0010">`</span> <span style="color:#f92672">or</span> <span style="color:#960050;background-color:#1e0010">`</span>Heroku CLI<span style="color:#960050;background-color:#1e0010">`</span> to push the code into production<span style="color:#f92672">.</span> Heroku CLI <span style="color:#f92672">is</span> quite easy <span style="color:#66d9ef">with</span> a few sets of commands but <span style="color:#66d9ef">if</span> your project <span style="color:#f92672">is</span> deployed on GitHub, you can straightaway let the deployment start the build on a push to a specific branch<span style="color:#f92672">.</span> This becomes quite automotive <span style="color:#f92672">and</span> easy to scale <span style="color:#66d9ef">while</span> deploying a large<span style="color:#f92672">-</span>scale application<span style="color:#f92672">.</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>
+</span></span><span style="display:flex;"><span>pip freeze <span style="color:#f92672">&gt;</span> requirements<span style="color:#f92672">.</span>txt
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>This step <span style="color:#f92672">is</span> quite important because you need to make sure that all the packages are listed <span style="color:#f92672">in</span> the <span style="color:#960050;background-color:#1e0010">`</span>requirements<span style="color:#f92672">.</span>txt<span style="color:#960050;background-color:#1e0010">`</span> file <span style="color:#66d9ef">else</span> you will have to wait <span style="color:#66d9ef">for</span> the build to fail <span style="color:#f92672">and</span> redeploy<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Make sure the server <span style="color:#f92672">is</span> running first on your local machine, remember the server will be set up <span style="color:#f92672">from</span> scratch but the database will already have applied migrations <span style="color:#66d9ef">if</span> you have applied migrations before after connecting the Heroku Postgres database<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>
+</span></span><span style="display:flex;"><span>python manage<span style="color:#f92672">.</span>py collectstatic
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>python manage<span style="color:#f92672">.</span>py runserver
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>This will set up the origin of the remote repository that will be pushing the project code<span style="color:#f92672">.</span> Next, make sure to commit the code which will contain all the required stuff <span style="color:#66d9ef">for</span> deploying the code<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Checklist <span style="color:#66d9ef">for</span> deploying the code
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">-</span> requirements<span style="color:#f92672">.</span>txt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">-</span> Procfile
+</span></span><span style="display:flex;"><span><span style="color:#f92672">-</span> runtime<span style="color:#f92672">.</span>txt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">-</span> django<span style="color:#f92672">-</span>project
+</span></span><span style="display:flex;"><span><span style="color:#f92672">-</span> environment variables <span style="color:#f92672">/</span> config variables 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">-</span> static file configuration
+</span></span><span style="display:flex;"><span><span style="color:#f92672">-</span> database configuration
+</span></span><span style="display:flex;"><span><span style="color:#f92672">-</span> migrate schema of database 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">-</span> gitignore file <span style="color:#66d9ef">for</span> ignoring virtualenvs, <span style="color:#f92672">.</span>env file, staticfiles, etc
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>here<span style="color:#e6db74">&#39;s a sample `.gitignore` for a minimal django project.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>gitignore
+</span></span><span style="display:flex;"><span><span style="color:#f92672">.</span>env<span style="color:#f92672">/</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">.</span>venv<span style="color:#f92672">/</span>
+</span></span><span style="display:flex;"><span>env<span style="color:#f92672">/</span>
+</span></span><span style="display:flex;"><span>venv<span style="color:#f92672">/</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*.</span>env
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">*.</span>pyc
+</span></span><span style="display:flex;"><span>db<span style="color:#f92672">.</span>sqlite3
+</span></span><span style="display:flex;"><span>staticfiles<span style="color:#f92672">/</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>If you want a full<span style="color:#f92672">-</span>fledged <span style="color:#960050;background-color:#1e0010">`</span><span style="color:#f92672">.</span>gitignore<span style="color:#960050;background-color:#1e0010">`</span> <span style="color:#66d9ef">for</span> a complex django project, you can take the reference <span style="color:#f92672">from</span> Jose Padilla<span style="color:#e6db74">&#39;s [gitignore Template](https://github.com/jpadilla/django-project-template/blob/master/.gitignore) for a django project.  </span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### Git Commit the Django Project</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>
+</span></span><span style="display:flex;"><span>git status 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>git add <span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>git commit <span style="color:#f92672">-</span>m <span style="color:#e6db74">&#34;config for heroku deployment&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>
+</span></span><span style="display:flex;"><span>Carefully check the status of the git repository before committing <span style="color:#f92672">and</span> make sure you don<span style="color:#e6db74">&#39;t forget anything by mistake, it won&#39;</span>t a big problem but it would mess up the build process<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">!</span>[image<span style="color:#f92672">.</span>png](https:<span style="color:#f92672">//</span>cdn<span style="color:#f92672">.</span>hashnode<span style="color:#f92672">.</span>com<span style="color:#f92672">/</span>res<span style="color:#f92672">/</span>hashnode<span style="color:#f92672">/</span>image<span style="color:#f92672">/</span>upload<span style="color:#f92672">/</span>v1652613991525<span style="color:#f92672">/</span>hxQgtGOoM<span style="color:#f92672">.</span>png)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>After committing the code, we can now push the code to GitHub<span style="color:#f92672">.</span> We first need to set the remote repository reference to be able to push the code to it<span style="color:#f92672">.</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>
+</span></span><span style="display:flex;"><span>git remote add origin https:<span style="color:#f92672">//</span>github<span style="color:#f92672">.</span>com<span style="color:#f92672">/&lt;</span>username<span style="color:#f92672">&gt;/&lt;</span>repo_name<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>
+</span></span><span style="display:flex;"><span>This will set up the <span style="color:#960050;background-color:#1e0010">`</span>origin<span style="color:#960050;background-color:#1e0010">`</span> <span style="color:#66d9ef">as</span> the remote repository on GitHub<span style="color:#f92672">.</span> Once the remote repository <span style="color:#f92672">is</span> created, we can move into the push of the git repository that will trigger the build<span style="color:#f92672">.</span> First, navigate to the <span style="color:#960050;background-color:#1e0010">`</span>Deploy<span style="color:#960050;background-color:#1e0010">`</span> section <span style="color:#f92672">in</span> the heroku app<span style="color:#e6db74">&#39;s dashboard where we want to connect the `GitHub` repository and allow the automatic deploy from a branch in this case we have chosen the `main` branch.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Due to some <span style="color:#960050;background-color:#1e0010">`</span>Heroku<span style="color:#960050;background-color:#1e0010">`</span> Internal Server Issues, the GitHub integration seems to have broken <span style="color:#f92672">and</span> isn<span style="color:#e6db74">&#39;t working as of May 2022, but it might work later. </span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Below <span style="color:#f92672">is</span> a screenshot of my previous project deployed to Heroku using a GitHub repository<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">!</span>[image<span style="color:#f92672">.</span>png](https:<span style="color:#f92672">//</span>cdn<span style="color:#f92672">.</span>hashnode<span style="color:#f92672">.</span>com<span style="color:#f92672">/</span>res<span style="color:#f92672">/</span>hashnode<span style="color:#f92672">/</span>image<span style="color:#f92672">/</span>upload<span style="color:#f92672">/</span>v1652605497382<span style="color:#f92672">/</span><span style="color:#ae81ff">5</span>VuQUQ0t0<span style="color:#f92672">.</span>png)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>
+</span></span><span style="display:flex;"><span>git push origin main
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>This will prompt you <span style="color:#66d9ef">for</span> your GitHub credentials <span style="color:#f92672">and</span> will deploy the commits to the remote repository on GitHub<span style="color:#f92672">.</span> This push on the main branch should also trigger the build process of the heroku app <span style="color:#66d9ef">for</span> this django project<span style="color:#f92672">.</span> You can navigate to the Activity section <span style="color:#66d9ef">for</span> the Build logs<span style="color:#f92672">.</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>If you have followed the article well, <span style="color:#f92672">and</span> your repository has all the correct configurations, the build will succeed, <span style="color:#66d9ef">else</span> chances are you might have missed a few things <span style="color:#f92672">and</span> the app might have crashed<span style="color:#f92672">.</span> You can debug your application build <span style="color:#66d9ef">with</span> the simple heroku CLI command:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>
+</span></span><span style="display:flex;"><span>heroku logs <span style="color:#f92672">--</span>tail <span style="color:#f92672">-</span>a <span style="color:#f92672">&lt;</span>app_name<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>This can be quite handy <span style="color:#f92672">and</span> saves a lot of time <span style="color:#f92672">in</span> understanding what went wrong <span style="color:#f92672">in</span> the build<span style="color:#f92672">.</span> It might be related to database migration, static files, python package <span style="color:#f92672">not</span> found, <span style="color:#f92672">and</span> some silly mistakes <span style="color:#f92672">and</span> errors that can be fixed after committing the code <span style="color:#f92672">and</span> pushing it to GitHub again<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>If you do <span style="color:#f92672">not</span> want a GitHub repository, you can directly push the code <span style="color:#f92672">from</span> the local git repository to the remote heroku app center<span style="color:#f92672">.</span> This will require us the Heroku CLI<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Heroku CLI</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>We can use the heroku CLI <span style="color:#66d9ef">for</span> pushing the code via the simple git repository<span style="color:#f92672">.</span> We can push the references via the branch <span style="color:#f92672">and</span> a remote repository on heroku to build our app<span style="color:#f92672">.</span>  For this, we assume you have heroku installed <span style="color:#f92672">and</span> logged <span style="color:#f92672">in</span><span style="color:#f92672">.</span> We will require the django project code <span style="color:#f92672">and</span> heroku cli to build the django web application<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>bash
+</span></span><span style="display:flex;"><span>heroku git:remote <span style="color:#f92672">-</span>a <span style="color:#f92672">&lt;</span>heroku_app_name<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># for my case</span>
+</span></span><span style="display:flex;"><span>heroku git:remote <span style="color:#f92672">-</span>a blog<span style="color:#f92672">-</span>django<span style="color:#f92672">-</span>dep
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">!</span>[image<span style="color:#f92672">.</span>png](https:<span style="color:#f92672">//</span>cdn<span style="color:#f92672">.</span>hashnode<span style="color:#f92672">.</span>com<span style="color:#f92672">/</span>res<span style="color:#f92672">/</span>hashnode<span style="color:#f92672">/</span>image<span style="color:#f92672">/</span>upload<span style="color:#f92672">/</span>v1652614221069<span style="color:#f92672">/</span>vCAKD0zsz<span style="color:#f92672">.</span>png)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>After this, you can commit your code <span style="color:#f92672">and</span> the project <span style="color:#66d9ef">as</span> git repository<span style="color:#f92672">.</span> We have added the remote repository location on heroku, we can now simply push the code to the remote repository<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>
+</span></span><span style="display:flex;"><span>git push heroku main
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">```</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">!</span>[image<span style="color:#f92672">.</span>png](https:<span style="color:#f92672">//</span>cdn<span style="color:#f92672">.</span>hashnode<span style="color:#f92672">.</span>com<span style="color:#f92672">/</span>res<span style="color:#f92672">/</span>hashnode<span style="color:#f92672">/</span>image<span style="color:#f92672">/</span>upload<span style="color:#f92672">/</span>v1652614125785<span style="color:#f92672">/</span>uEzFQ9VvQ<span style="color:#f92672">.</span>png)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Here, <span style="color:#960050;background-color:#1e0010">`</span>heroku<span style="color:#960050;background-color:#1e0010">`</span> <span style="color:#f92672">is</span> the remote repository location <span style="color:#f92672">and</span> <span style="color:#960050;background-color:#1e0010">`</span>main<span style="color:#960050;background-color:#1e0010">`</span> <span style="color:#f92672">is</span> the branch of the repository<span style="color:#f92672">.</span> This will push the code to the repository <span style="color:#f92672">and</span> thereafter create a build to deploy the Django project <span style="color:#66d9ef">as</span> a Heroku application<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">!</span>[image<span style="color:#f92672">.</span>png](https:<span style="color:#f92672">//</span>cdn<span style="color:#f92672">.</span>hashnode<span style="color:#f92672">.</span>com<span style="color:#f92672">/</span>res<span style="color:#f92672">/</span>hashnode<span style="color:#f92672">/</span>image<span style="color:#f92672">/</span>upload<span style="color:#f92672">/</span>v1652614381808<span style="color:#f92672">/</span>kYTmB3EO2p<span style="color:#f92672">.</span>png)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>You can hit the <span style="color:#960050;background-color:#1e0010">`</span>Open App<span style="color:#960050;background-color:#1e0010">`</span> button on the top right corner <span style="color:#f92672">and</span> there should be your deployed Django application<span style="color:#f92672">.</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">!</span>[image<span style="color:#f92672">.</span>png](https:<span style="color:#f92672">//</span>cdn<span style="color:#f92672">.</span>hashnode<span style="color:#f92672">.</span>com<span style="color:#f92672">/</span>res<span style="color:#f92672">/</span>hashnode<span style="color:#f92672">/</span>image<span style="color:#f92672">/</span>upload<span style="color:#f92672">/</span>v1652610395538<span style="color:#f92672">/</span>xjUiODhoK<span style="color:#f92672">.</span>png)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## A Few Tricks and Gotchas</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>There are a few tricks <span style="color:#f92672">and</span> issues that you might pop into <span style="color:#66d9ef">while</span> deploying a django project on heroku, especially the build process<span style="color:#f92672">.</span> It requires a few iterations to get the complete app setup<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### Run command from the Dashboard console</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>If you don<span style="color:#e6db74">&#39;t have heroku CLI set up and want to fix a few things on the pushed code to the heroku app, you can use the `Run Console` option from the `More` Tab on the top right corner of theApplication dashboard. This is a great way to run migrations, configure static files or tweak a few things here and there without messing up the code on GitHub or the remote git repositories. </span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">!</span>[image<span style="color:#f92672">.</span>png](https:<span style="color:#f92672">//</span>cdn<span style="color:#f92672">.</span>hashnode<span style="color:#f92672">.</span>com<span style="color:#f92672">/</span>res<span style="color:#f92672">/</span>hashnode<span style="color:#f92672">/</span>image<span style="color:#f92672">/</span>upload<span style="color:#f92672">/</span>v1652614775294<span style="color:#f92672">/</span>lgDPwr2yr<span style="color:#f92672">.</span>png)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">!</span>[image<span style="color:#f92672">.</span>png](https:<span style="color:#f92672">//</span>cdn<span style="color:#f92672">.</span>hashnode<span style="color:#f92672">.</span>com<span style="color:#f92672">/</span>res<span style="color:#f92672">/</span>hashnode<span style="color:#f92672">/</span>image<span style="color:#f92672">/</span>upload<span style="color:#f92672">/</span>v1652614821950<span style="color:#f92672">/</span>uTzQVB8sC<span style="color:#f92672">.</span>png)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">!</span>[image<span style="color:#f92672">.</span>png](https:<span style="color:#f92672">//</span>cdn<span style="color:#f92672">.</span>hashnode<span style="color:#f92672">.</span>com<span style="color:#f92672">/</span>res<span style="color:#f92672">/</span>hashnode<span style="color:#f92672">/</span>image<span style="color:#f92672">/</span>upload<span style="color:#f92672">/</span>v1652614845269<span style="color:#f92672">/</span>BkZhu3SGH<span style="color:#f92672">.</span>png)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### Deploy with Docker </span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>You can even use the docker container to deploy a Django application on Heroku<span style="color:#f92672">.</span> It <span style="color:#f92672">is</span> a great way of learning a lot of deployment strategies <span style="color:#f92672">and</span> techniques using Docker<span style="color:#f92672">.</span> You<span style="color:#e6db74">&#39;ll get familiar with interesting concepts like virtualization, and containerization, and also learn Docker on the way. You can follow this tutorial on [Deploying Django applications with Docker on Heroku](https://testdriven.io/blog/deploying-django-to-heroku-with-docker/). Also, you can check out the official Heroku documentation for [deploying python applications](https://devcenter.heroku.com/articles/deploying-python).</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### What are Dynos?</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Dynos are simply web processes <span style="color:#f92672">or</span> workers that serve your web application<span style="color:#f92672">.</span> Dynos <span style="color:#f92672">in</span> Heroku are allocated based on the build process, once the slug <span style="color:#f92672">is</span> created a dyno <span style="color:#f92672">is</span> created <span style="color:#66d9ef">as</span> it runs on a VM container<span style="color:#f92672">.</span> This simply means there are limitations on how to use the web application <span style="color:#f92672">and</span> its sleep process<span style="color:#f92672">.</span> The hobby tier <span style="color:#f92672">is</span> sufficient <span style="color:#66d9ef">for</span> normal testing projects <span style="color:#f92672">and</span> side projects though you will have to pay <span style="color:#f92672">and</span> move into advance tiers to increase the dyno allocations <span style="color:#f92672">and</span> scaling of those web processes<span style="color:#f92672">.</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>It<span style="color:#e6db74">&#39;s not a simple thing to understand but to keep it simple, it might be a container to process the client&#39;</span>s request <span style="color:#f92672">and</span> serve the page <span style="color:#66d9ef">for</span> a finite duration of the interaction<span style="color:#f92672">.</span> Also, your application will sleep after half an hour, <span style="color:#66d9ef">if</span> you <span style="color:#66d9ef">try</span> to reload the application every half an hour it will consume your resource allocation <span style="color:#66d9ef">for</span> the month <span style="color:#f92672">and</span> this <span style="color:#f92672">is</span> how the tiers <span style="color:#f92672">and</span> divided <span style="color:#66d9ef">for</span> paid services on Heroku<span style="color:#f92672">.</span> You can check out the detail over [here](https:<span style="color:#f92672">//</span>www<span style="color:#f92672">.</span>heroku<span style="color:#f92672">.</span>com<span style="color:#f92672">/</span>pricing<span style="color:#75715e">#containers).</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Conclusion</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>So, that <span style="color:#f92672">is</span> one of the ways we can deploy a Django application on Heroku <span style="color:#66d9ef">with</span> the PostgreSQL database<span style="color:#f92672">.</span> You can find the [django<span style="color:#f92672">-</span>blog project] on [GitHub] <span style="color:#66d9ef">for</span> following along <span style="color:#66d9ef">with</span> the deployment process<span style="color:#f92672">.</span>  In the next few parts of the series, we will be hopefully covering other platforms where you can deploy a Django o application<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Hopefully, you liked the above tutorial, <span style="color:#66d9ef">if</span> you have any questions<span style="color:#f92672">.</span> feedback, <span style="color:#f92672">or</span> queries, you can contact me on the Social handles provided below<span style="color:#f92672">.</span> Thank you <span style="color:#66d9ef">for</span> reading <span style="color:#f92672">and</span> till the next post Happy Coding :) 
+</span></span></code></pre></div></section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/django"
+      >django</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/web-development"
+      >web-development</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/python"
+      >python</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg !leading-[1.2] *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  >
+    
+    <a class="ltr:pr-3 rtl:pl-3" href="http://localhost:1313/blog/django-deploy-railway/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Django Project with PostgreSQL Deployment on Railway App</span></a
+    >
+    
+    
+    <a class="ltr:ml-auto rtl:mr-auto justify-end pl-3" href="http://localhost:1313/blog/golang-operators/"
+      ><span>Golang: Operators</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="mx-auto flex h-[4.5rem] max-w-[--w] items-center px-8 text-xs uppercase tracking-wider opacity-60"
+>
+  <div class="mr-auto">
+  
+    &copy; 2024
+    <a class="link" href="http://localhost:1313/">Meet Rajesh Gor</a>
+  
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+
+  </body>
+</html>

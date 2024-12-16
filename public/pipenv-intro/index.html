@@ -1,0 +1,511 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en"
+  dir="ltr"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Pipenv: Python&#39;s Official Package Management tool - Meet Rajesh Gor</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Introduction
+Pipenv is Python&rsquo;s officially recommended Package management tool, as the name suggests it combines the power of pip and virtualenv. It is really powerful and gives control of package management for a python project. It also has support for adding dev packages, python versions, smartly recognizing main and derived package installation/uninstallation, and so on. It is the official package management tool for Python.
+It is quite similar to npm for Nodejs in Javascript, or bundle for Ruby, cargo for Rust, and so on. It really simple and easy to use as it manages the overhead for package management for us and hence it is also a high-level package management tool as opposed to pip, which is not as powerful as Pipenv. So, in this article, we&rsquo;ll explore Pipenv package manager for Python and how you can use it in your next python project. Let&rsquo;s get started." />
+  <meta name="author" content="Meet Rajesh Gor" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/twitter.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link
+    rel="icon"
+    href="http://localhost:1313/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="http://localhost:1313/apple-touch-icon.png"
+  />
+
+  
+  <meta name="generator" content="Hugo 0.136.5">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-[--w] px-8 lg:justify-center">
+  <div class="relative z-50 ltr:mr-auto rtl:ml-auto flex items-center">
+    <a class="-translate-y-[1px] text-2xl font-medium" href="http://localhost:1313/"
+      >Meet Rajesh Gor</a
+    >
+    <div
+      class="btn-dark text-[0] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 ltr:-mr-8 rtl:-ml-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse">
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/"
+        >Home</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/blog/"
+        >Blog</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/work/"
+        >Work</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 rtl:space-x-reverse dark:invert ltr:lg:ml-14 rtl:lg:mr-14 lg:mt-0 lg:items-center"
+    >
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/meetgor21"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/mr-destructive"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/meetgor"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100vh-9rem)] max-w-[--w] px-8 pb-16 pt-14 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-14">
+    <h1 class="!my-0 pb-2.5">Pipenv: Python&#39;s Official Package Management tool</h1>
+
+    
+    <div class="text-xs antialiased opacity-60">
+      
+      <time>Mar 14, 2022</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="introduction">Introduction</h2>
+<p>Pipenv is Python&rsquo;s officially recommended Package management tool, as the name suggests it combines the power of <code>pip</code> and <code>virtualenv</code>. It is really powerful and gives control of package management for a python project. It also has support for adding dev packages, python versions, smartly recognizing main and derived package installation/uninstallation, and so on. It is the <a href="https://packaging.python.org/en/latest/tutorials/managing-dependencies/#managing-dependencies">official package management tool for Python</a>.</p>
+<p>It is quite similar to npm for Nodejs in Javascript, or bundle for Ruby, cargo for Rust, and so on. It really simple and easy to use as it manages the overhead for package management for us and hence it is also a high-level package management tool as opposed to pip, which is not as powerful as Pipenv. So, in this article, we&rsquo;ll explore <a href="https://pypi.org/project/pipenv/">Pipenv</a> package manager for Python and how you can use it in your next python project. Let&rsquo;s get started.</p>
+<h2 id="install-pipenv">Install Pipenv</h2>
+<p><a href="https://pypi.org/project/pipenv/">Pipenv</a> is just like any other package in python, you can install it with pip as normally you install any other package with the command:</p>
+<pre tabindex="0"><code>pip install pipenv
+</code></pre><p><img src="https://res.cloudinary.com/techstructive-blog/image/upload/v1647193069/blog-media/hnhoeigfhx2hsypexgm5.png" alt="Pipenv Install"></p>
+<p>You can refer to the documentation of Pipenv from <a href="https://pipenv.pypa.io/en/latest/">here</a>.</p>
+<h2 id="set-up-a-python-environment">Set up a Python Environment</h2>
+<p>This step is not mandatory but it avoids any mistakes that you can make in the future while installing the package, so to simply create a new python environment for your project, you simply have to write the following command:</p>
+<pre tabindex="0"><code>pipenv shell
+</code></pre><p><img src="https://res.cloudinary.com/techstructive-blog/image/upload/v1647192853/blog-media/dahwaqnblvvvqyyw62uq.png" alt="Pipenv initialize">
+This will create the virtual environment for Python in the local folder. It is quite similar to installing <code>virtualenv</code> and then activating the env/venv folder script. Though pipenv is quite powerful as it automatically detects the environment.</p>
+<p>If you look at it carefully, there will be a file generated after the command has been executed successfully. The file called <code>Pipfile</code> without any extension will have been created in your current folder where you executed the command from. The file contains the version of python used in this project along with the list of dependencies(currently empty). Also the source from where it will download and manage the dependencies.</p>
+<p>The Pipfile after simply creating the virtualenv via the command <code>pipenv shell</code> looks something like follows:</p>
+<pre tabindex="0"><code>[[source]]
+url = &#34;https://pypi.org/simple&#34;
+verify_ssl = true
+name = &#34;pypi&#34;
+
+[packages]
+
+[dev-packages]
+
+[requires]
+python_version = &#34;3.8&#34;
+</code></pre><p>If you want to set up a specific version of python for the virtual environment, you can do this using pipenv. The version should be installed in your system though for the pipenv to pick it up, if you have the specific version of python set up with all path variables configured, you can use the below command to set up the version of python in pipenv.</p>
+<pre tabindex="0"><code>pipenv --python version-number
+</code></pre><p>For example : <code>pipenv --python 3.9</code> will set up the virtual environment with python version <code>3.9</code>.</p>
+<h2 id="what-is-pipfile">What is Pipfile</h2>
+<p>Pipfile is basically a TOML file that has all the details of the different dependencies/packages and the version of Python used in the project/directory. A TOML is a simple configuration file that is reader-friendly, it is a map of keys and values as configuration data structures. In Pipenv, we can have keys like <code>package-names</code> and the value as the <code>version-number</code>, certain groups of dependencies like <code>dev-packages</code> and <code>packages</code>, etc. Pipenv is the file that Pipenv implements its package management environment. The file is really important and powerful as it can install all dependencies even if provided with <code>requirements.txt</code> file. Yes, it can automatically detect that if you provide the path to that file.</p>
+<p>Pipenv also has additional features like adding dev dependencies/packages in the project as a separate dependency. So if you want to test a feature with a specific package you can add it as a dev package and it will be stored separately. The pipfile will segregate the dependencies so that Pipenv can install/uninstall from the virtual environment. In short, Pipfile lets you have great control over your project&rsquo;s packages management.</p>
+<h2 id="installing-python-packages">Installing Python Packages</h2>
+<p>Once your Pipenv is initialized as a virtual environment for Python, we can install dependencies with either <code>pip</code> or <code>pipenv</code>. This is the mistake that might get you trapped, if you already have not run the command <code>pipenv shell</code> and installed any dependencies with <code>pip</code>, you will install that dependency globally and make some mess of the project. So, it is advised to use <code>pipenv shell</code> in order to activate your virtual environment. If you do not wanna do that, you can use the command to install any dependency without activating the virtual environment.</p>
+<pre tabindex="0"><code>pipenv install &lt;package-name&gt;
+</code></pre><p><img src="https://res.cloudinary.com/techstructive-blog/image/upload/v1647192980/blog-media/dfsokm6e1easwvxtgehh.png" alt="Pipenv Install Flask"></p>
+<p>This will detect any virtual environment in the project, if it&rsquo;s not created already it will create it and install that package in that environment.</p>
+<p>Installing any package using <code>pipenv</code> will update the Pipenv file and the package to its packages list.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[[<span style="color:#a6e22e">source</span>]]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">url</span> = <span style="color:#e6db74">&#34;https://pypi.org/simple&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">verify_ssl</span> = <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">name</span> = <span style="color:#e6db74">&#34;pypi&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">packages</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">flask</span> = <span style="color:#e6db74">&#34;*&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">dev-packages</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">requires</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">python_version</span> = <span style="color:#e6db74">&#34;3.8&#34;</span>
+</span></span></code></pre></div><p>OR</p>
+<p>If you wish to install with pip, as usual, you need to be in the virtual subshell. If you already are, then Pipenv will add that dependency to the virtual environment. Note though, if you install any package with <code>pip</code> and not with <code>pipenv</code>, the package won&rsquo;t be added to Pipfile but would be installed in the virtual environment.</p>
+<p><img src="https://res.cloudinary.com/techstructive-blog/image/upload/v1647193149/blog-media/suaykqsyrgn1w0mou7f0.png" alt="Pipenv pip install"></p>
+<p>Here, if we type the command <code>pipenv graph</code> it will show us a nice detailed list of all the installed dependencies.</p>
+<pre tabindex="0"><code>pipenv graph
+</code></pre><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ pipenv graph
+</span></span><span style="display:flex;"><span>Flask<span style="color:#f92672">==</span>2.0.3
+</span></span><span style="display:flex;"><span>  - click <span style="color:#f92672">[</span>required: &gt;<span style="color:#f92672">=</span>7.1.2, installed: 8.0.4<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>    - colorama <span style="color:#f92672">[</span>required: Any, installed: 0.4.4<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  - itsdangerous <span style="color:#f92672">[</span>required: &gt;<span style="color:#f92672">=</span>2.0, installed: 2.1.1<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  - Jinja2 <span style="color:#f92672">[</span>required: &gt;<span style="color:#f92672">=</span>3.0, installed: 3.0.3<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>    - MarkupSafe <span style="color:#f92672">[</span>required: &gt;<span style="color:#f92672">=</span>2.0, installed: 2.1.0<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  - Werkzeug <span style="color:#f92672">[</span>required: &gt;<span style="color:#f92672">=</span>2.0, installed: 2.0.3<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>requests<span style="color:#f92672">==</span>2.27.1
+</span></span><span style="display:flex;"><span>  - certifi <span style="color:#f92672">[</span>required: &gt;<span style="color:#f92672">=</span>2017.4.17, installed: 2021.10.8<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  - charset-normalizer <span style="color:#f92672">[</span>required: ~<span style="color:#f92672">=</span>2.0.0, installed: 2.0.12<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  - idna <span style="color:#f92672">[</span>required: &gt;<span style="color:#f92672">=</span>2.5,&lt;4, installed: 3.3<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  - urllib3 <span style="color:#f92672">[</span>required: &gt;<span style="color:#f92672">=</span>1.21.1,&lt;1.27, installed: 1.26.8<span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>As you might have guessed, the above command is equivalent to the <code>pip freeze</code> command, but just compare the details both tools have. Pipenv really shines here.</p>
+<p>If you compare the output of Pipfile and <code>pipenv graph</code> you get a bit confused as to why is there are so fewer packages in the file. So, <strong>Pipfile doesn&rsquo;t store the sub-packages/dependencies of a certain base package</strong>. Let&rsquo;s take, for example, Flask here, we have Flask as the main package, and <code>click</code>, <code>Jinja2</code>, <code>Werkzeug</code> are its sub dependencies, further <code>colorama</code> and <code>MarkupSafe</code> are in turn dependencies of <code>click</code> and <code>Jinja2</code>. So, Pipfile just includes the top-level packages, pipenv is smart enough to install the rest. It also doesn&rsquo;t include <code>requests</code> but it is indeed included in the <code>graph</code>. This is because Pipenv will only put the dependencies in the Pipfile if it has been installed via the <code>pipenv</code> command.</p>
+<p><img src="https://res.cloudinary.com/techstructive-blog/image/upload/v1647193333/blog-media/gzo95pbquaioujtqvntu.png" alt="Pipenv Graph vs pip freeze"></p>
+<p>You can use <code>pip freeze</code> here as well as we are technically in a Python virtual environment. And you can clearly see the difference. Pipenv is a high-level tool compared to pip, it technically uses <code>pip</code> and <code>virtualenv</code> and leverages both of them to become a smart package management tool.</p>
+<h2 id="what-is-the-pipfilelock">What is the Pipfile.lock</h2>
+<ul>
+<li>If you are coming from <code>Javascript</code> world, it is similar to <code>package-lock.json</code> file.</li>
+<li>If you are coming from <code>Ruby</code> world, it is similar to the <code>Gemfile.lock</code> file.</li>
+<li>If you are coming from <code>Rust</code> world, it is similar to the <code>cargo.lock</code> file.</li>
+</ul>
+<p>Ok, you get the idea, it is a file that more robustly specifies the version of the packages without conflicting with the other version or the Python version itself. If you look at the Pipfile.lock also has hashes that store the sub-packages as well. The file format here is JSON as opposed to TOML for the Pipfile.</p>
+<h2 id="configuring-the-pipenv-environment">Configuring the Pipenv environment</h2>
+<p>Now, a question you might have is where is the virtual environment? Is it there? Of course, it will be there, it is configured to a different location though. By default, it will be stored in the <code>~\.virtualenvs\</code> folder.</p>
+<p>You can get the location of the current virtualenv with the following command:</p>
+<pre tabindex="0"><code>pipenv --venv
+</code></pre><pre tabindex="0"><code>$ pipenv --venv
+C:\Users\acer\.virtualenvs\pipenv-blog-gHY6vF9t
+</code></pre><p>For Windows, it is in the Admin user(in my case it is named <code>acer</code>) followed by the hidden folder <code>virtualenvs</code>, this folder will contain all the virtualenvs for different projects using <code>pipenv</code>.</p>
+<p>If you wished to change this location and keep the virtual environment folder in the same directory as your project, you can set up the environment variable for it as follows:</p>
+<p>For Linux/macOS:
+Add the following to your <code>~/.bashrc</code> or other equivalent shell configuration file.</p>
+<pre tabindex="0"><code>export PIPENV_VENV_IN_PROJECT=&#34;enabled&#34;
+</code></pre><p>For Windows:</p>
+<p>Add it to the PATH Environment variable.</p>
+<pre tabindex="0"><code>set PIPENV_VENV_IN_PROJECT=&#34;enabled&#34;   
+</code></pre><p>This will make sure the virtualenvs for the project in <code>pipenv</code> are created inside the current folder itself and not in a single <code>~\.virtualenvs\</code> folder.</p>
+<h2 id="creating-the-requirementstxt-file">Creating the requirements.txt file</h2>
+<p>Let&rsquo;s say you also want to create a requirements.txt file for distributing your project to someone else, as not everyone will use Pipenv to manage their dependencies. It is really straightforward and quick to create a requirements.txt file from the Pipenv environment.</p>
+<p>The below command will make the <code>requirements.txt</code> file from the existing Pipenv project.</p>
+<pre tabindex="0"><code>pipenv lock -r &gt;requirements.txt
+</code></pre><p><img src="https://res.cloudinary.com/techstructive-blog/image/upload/v1647193388/blog-media/e6t68b7ckrsrvadvmeqa.png" alt="Pipenv to requirements.txt file"><br>
+This will create the requirements.txt file, based on the Pipfile. Pipenv is smart again to provide all of the required dependencies to the requirements.txt in order that pip will be able to install all the required dependencies.</p>
+<h2 id="using-requirementstxt-in-pipenv">Using requirements.txt in Pipenv</h2>
+<p>We can install all the dependencies from the requirements.txt file while we are migrating from bare-bones virtualenv and pip to Pipenv. Pipenv will install all the mentioned dependencies and it will also add its checks for the appropriate checks for dependencies.</p>
+<pre tabindex="0"><code>pipenv install -r requirements.txt
+</code></pre><p>This will install the dependencies mentioned in the requirements.txt file into the Pipenv virtual environment.</p>
+<h2 id="managing-dev-packages">Managing Dev Packages</h2>
+<p>Let&rsquo;s say we want to install a package but we are not sure to use it in production or the actual script, just a test for how it will work. Thus we have dev packages to install optional or testing packages.</p>
+<p>To install a dev-dependency or package, you can install via the following command:</p>
+<pre tabindex="0"><code>pipenv install &lt;package-name&gt; --dev
+</code></pre><p><img src="https://res.cloudinary.com/techstructive-blog/image/upload/v1647194653/blog-media/x5dimgfd2ikm2ercbzhv.png" alt="Pipenv dev package install"></p>
+<p>If we see the Pipfile, the <code>django</code> package that we installed tagged with <code>--dev</code> will be in the <code>dev-packages</code></p>
+<pre tabindex="0"><code>$ cat Pipfile
+[[source]]
+url = &#34;https://pypi.org/simple&#34;
+verify_ssl = true
+name = &#34;pypi&#34;
+
+[packages]
+flask = &#34;*&#34;
+
+[dev-packages]
+django = &#34;*&#34;
+
+[requires]
+python_version = &#34;3.8&#34;
+</code></pre><p>If we wanted to uninstall all the dev-packages, we can simply enter the command:</p>
+<pre tabindex="0"><code>pipenv uninstall --all-dev
+</code></pre><p><img src="https://res.cloudinary.com/techstructive-blog/image/upload/v1647261079/blog-media/bg9n7aj6rfxsvdwflnah.gif" alt="Pipenv uninstall devpackages"></p>
+<p>This will simply uninstall all the dev dependencies/packages from the pipenv environment and also remove them from the packages list in Pipfile. If you wished to uninstall a specific package in pipenv, you can uninstall it by the simple command:</p>
+<pre tabindex="0"><code>pipenv uninstall &lt;package-name&gt;
+</code></pre><h2 id="installinguninstalling-all-packages">Installing/Uninstalling all packages</h2>
+<p>To install only the default packages and not dev-packages.</p>
+<pre tabindex="0"><code>pipenv install 
+</code></pre><p>To install or configure a project, if you want to test the project with all the dev dependencies, you can install them with:</p>
+<pre tabindex="0"><code>pipenv install --dev
+</code></pre><p>This will install all the packages both <code>packages</code> and <code>dev-packages</code>.</p>
+<p>If you want to uninstall all the packages in pipenv, you can use the command :</p>
+<pre tabindex="0"><code>pipenv uninstall --all
+</code></pre><p>This will uninstall all the default and dev packages from pipenv. This is like starting a fresh virtual environment.</p>
+<h3 id="references">References:</h3>
+<ul>
+<li><a href="https://pipenv.pypa.io/en/latest/">Pipenv documentation</a></li>
+<li><a href="https://realpython.com/pipenv-guide/">Real Python - Pipenv Guide</a></li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>So, this was a brief introduction to <code>pipenv</code> which is Python&rsquo;s recommended package management tool. We saw that we have control over the dependencies and packages in a virtual environment which is taken care of automatically for us. We don&rsquo;t have to activate the environment to install or manage any package for a project.</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/python"
+      >python</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg !leading-[1.2] *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  >
+    
+    <a class="ltr:pr-3 rtl:pl-3" href="http://localhost:1313/pipx-intro/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Pipx: A python package consumption tool for CLI packages</span></a
+    >
+    
+    
+    <a class="ltr:ml-auto rtl:mr-auto justify-end pl-3" href="http://localhost:1313/podevcast-project/"
+      ><span>Podevcast: A single source for developer podcasts</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="mx-auto flex h-[4.5rem] max-w-[--w] items-center px-8 text-xs uppercase tracking-wider opacity-60"
+>
+  <div class="mr-auto">
+  
+    &copy; 2024
+    <a class="link" href="http://localhost:1313/">Meet Rajesh Gor</a>
+  
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+
+  </body>
+</html>

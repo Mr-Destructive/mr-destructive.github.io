@@ -1,0 +1,779 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en"
+  dir="ltr"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Golang: JSON YAML TOML (config) File Reading. - Meet Rajesh Gor</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Reading specific file types (JSON, YAML, TOML)
+In the previous post, we have seen how to read files in golang, in this extended post of that part, we will look into reading some specific files used for configuration and storing data like JSON, YAML, TOML, CSV, etc.
+We will see how to read files and get individual pieces in the files. We&rsquo;ll use packages like os, ioutil and encoding to perform reading operations on file and file objects." />
+  <meta name="author" content="Meet Rajesh Gor" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/twitter.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link
+    rel="icon"
+    href="http://localhost:1313/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="http://localhost:1313/apple-touch-icon.png"
+  />
+
+  
+  <meta name="generator" content="Hugo 0.136.5">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-[--w] px-8 lg:justify-center">
+  <div class="relative z-50 ltr:mr-auto rtl:ml-auto flex items-center">
+    <a class="-translate-y-[1px] text-2xl font-medium" href="http://localhost:1313/"
+      >Meet Rajesh Gor</a
+    >
+    <div
+      class="btn-dark text-[0] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 ltr:-mr-8 rtl:-ml-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse">
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/"
+        >Home</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/blog/"
+        >Blog</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/work/"
+        >Work</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 rtl:space-x-reverse dark:invert ltr:lg:ml-14 rtl:lg:mr-14 lg:mt-0 lg:items-center"
+    >
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/meetgor21"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/mr-destructive"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/meetgor"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100vh-9rem)] max-w-[--w] px-8 pb-16 pt-14 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-14">
+    <h1 class="!my-0 pb-2.5">Golang: JSON YAML TOML (config) File Reading.</h1>
+
+    
+    <div class="text-xs antialiased opacity-60">
+      
+      <time>Nov 1, 2022</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="reading-specific-file-types-json-yaml-toml">Reading specific file types (JSON, YAML, TOML)</h2>
+<p>In the previous post, we have seen how to read files in golang, in this extended post of that part, we will look into reading some specific files used for configuration and storing data like JSON, YAML, TOML, CSV, etc.</p>
+<p>We will see how to read files and get individual pieces in the files. We&rsquo;ll use packages like <code>os</code>, <code>ioutil</code> and <code>encoding</code> to perform reading operations on file and file objects.</p>
+<h3 id="reading-a-json-file">Reading a JSON File</h3>
+<p>Golang has built-in support for reading JSON files, but still, we can and need to have low-level controls on how to parse and extract content from the file.</p>
+<p>Let&rsquo;s say we have a <code>json</code> file named <code>blog.json</code>, we can use the <a href="https://pkg.go.dev/encoding/json">encoding/json</a> package to convert the JSON data into a GO object (an object that is native and understandable to go). The <a href="https://pkg.go.dev/encoding/json#Unmarshal">Unmarshal</a> function is used to convert the slice of bytes from the file, into a map object.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;title&#34;</span>: <span style="color:#e6db74">&#34;Golang Blog Series&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;date&#34;</span>: <span style="color:#e6db74">&#34;22nd October 2022&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;tags&#34;</span>: [<span style="color:#e6db74">&#34;go&#34;</span>, <span style="color:#e6db74">&#34;files&#34;</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;words&#34;</span>: <span style="color:#ae81ff">1500</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;published&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The above is a simple JSON file, this file has a few types of key-value pairs like string, list, integer, and boolean. But we can also have nested objects and a list of those nested objects.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;encoding/json&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;os&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">ReadFile</span>(<span style="color:#e6db74">&#34;blog.json&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">data</span> <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">interface</span>{}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Unmarshal</span>([]byte(<span style="color:#a6e22e">f</span>), <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">data</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">data</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">k</span>, <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">data</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">k</span>, <span style="color:#e6db74">&#34;:&#34;</span>, <span style="color:#a6e22e">v</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>I have removed the time stamp from the logs below so as to clearly see the output. We can use <code>fmt</code> to print the simple things while keeping consistent with the rest of the snippets in the series.</strong></p>
+<pre tabindex="0"><code>$ go run json.go
+
+map[date:22nd October 2022 published:true tags:[go files] title:Golang Blog Series words:1500]
+published : true
+title : Golang Blog Series
+date : 22nd October 2022
+tags : [go files]
+words : 1500
+</code></pre><p>The file is read using the <a href="https://pkg.go.dev/os#ReadFile">os.ReadFile</a> method, that takes in a string as a path to the file and returns a slice of bytes or an error if there was an issue in reading the file. The parsed slice of byte is than passed as the first argument to the <code>Unmarshal</code> method in the <code>encoding/json</code> package. The second parameter is the output reference where the parsed JSON will be stored or returned. The function does not return the parsed content instead returns an error if there arose any while parsing the JSON content.</p>
+<p>As we can see we have got a map of <code>string</code> with an <code>interface</code>. The interface is used because the value of the key can be anything. There is no fixed value like a <code>string</code>, <code>int</code>, <code>bool</code>, or a nested <code>map</code>, <code>slice</code>. Hence we have mapped the JSON object as a map of <code>string</code> with an <code>interface</code>. The type of the value is identified with the interface it has attached to it. Let&rsquo;s take a look what is the type of each value in the map.</p>
+<pre tabindex="0"><code>published : true
+bool
+
+title : Golang Blog Series
+string
+
+date : 22nd October 2022
+string
+
+tags : [go files]
+[]interface {}
+
+words : 1500
+float64
+</code></pre><p>Here, we can see it has correctly identified the string type of the fields like bool in case of true or false, a string for string type of values, the fourth field however has a list interface attached to it. The default precedence for <code>float64</code> over integer is the reason the <code>1500</code> value is of type <code>float64</code>.</p>
+<h3 id="reading-a-yaml-file">Reading a YAML File</h3>
+<p>Though there is no standard package for parsing/unmarshaling <code>YAML</code> files in golang, it&rsquo;s quite easy to use a third-party package and use it to read YAML files.</p>
+<p>The package <a href="https://pkg.go.dev/gopkg.in/yaml.v3">gopkg.in/yaml.v3</a> is used for encoding and decoding YAML files. We&rsquo;ll be just using it for decoding a YAML file by reading it and converting the file object into native Go objects like maps, lists, strings, etc.</p>
+<p>The below steps can be used for setting up the package and installing the YAML package locally.</p>
+<pre tabindex="0"><code>go mod init &lt;your_project_package_name&gt;
+go get gopkg.in/yaml.v3
+</code></pre><p>This should create two files namely <code>go.mod</code> and <code>go.sum</code> with the dependency of the <code>gopkg.in/yaml.v3</code> package.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#f92672">title</span>: <span style="color:#e6db74">&#34;Golang Blog Series&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">date</span>: <span style="color:#e6db74">&#34;22nd October 2022&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tags</span>: [<span style="color:#e6db74">&#34;go&#34;</span>, <span style="color:#e6db74">&#34;files&#34;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">published</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">words</span>: <span style="color:#ae81ff">1500</span>
+</span></span></code></pre></div><p>The above file is a simple YAML config, we&rsquo;ll follow similar kind of examples for the dummy files used in the examples.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;os&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">yaml</span> <span style="color:#e6db74">&#34;gopkg.in/yaml.v3&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">ReadFile</span>(<span style="color:#e6db74">&#34;blog.yaml&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">data</span> <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">interface</span>{}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">yaml</span>.<span style="color:#a6e22e">Unmarshal</span>(<span style="color:#a6e22e">f</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">data</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">data</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">k</span>, <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">data</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">k</span>, <span style="color:#e6db74">&#34;:&#34;</span>, <span style="color:#a6e22e">v</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><pre tabindex="0"><code>$ go run yaml.go
+
+map[date:22nd October 2022 published:false tags:[go files] title:Golang Blog Series words:1500]
+published : false
+words : 1500
+title : Golang Blog Series
+date : 22nd October 2022
+tags : [go files]
+</code></pre><p>The above code and output demonstrate the usage of the <code>yaml.v3</code> package for reading a YAML file.</p>
+<p>Firstly, we read the file into a single-string object with the <a href="https://pkg.go.dev/os#ReadFile">os.ReadFile()</a> method. The method will return a <code>[]byte</code> (slice of byte) or an error. If there is an error, we simply log or panic out of the program, else we can use the <a href="https://pkg.go.dev/gopkg.in/yaml.v3#Unmarshal">yaml.Unmarshal</a> method to convert the string/slice of the byte into a map or a pre-defined struct. In this example, we just keep things simple by storing the file content as <code>map [string, interface{}]</code>, i.e. a map of <code>string</code> and an <code>interface</code>. The key for YAML can be only a string or an integer. It can&rsquo;t have unrestricted data types like the value can have. Though if you want to be unrestrictive, you can use a map of <code>map[interface{}]interface{}</code> to make the key any shape you like to have.</p>
+<p>So, we have created a variable called <code>data</code> as a map of <code>string</code> and <code>interface{}</code>, basically key can be a string and the value can be any type of interface depending on the parsed literally from the file object. The <code>Unmarshal</code> function takes in two parameters, the first being the slice of byte i.e. the file contents, and the second being the output variable. Now, the method does not return the parsed YAML, it can return an error if there arose, so we need to set the second parameter as a pointer to the object into which we want to store the parsed YAML.</p>
+<p>In the example, we have called <code>Unmarshal(f, &amp;data)</code> which will fetch the contents from the slice of bytes <code>f</code> and output the parsed YAML from the slice of bytes into the memory location of <code>data</code> and hence using <code>&amp;data</code> indicating the pointer to the variable(fetch the memory address).</p>
+<p>So, that is how we obtain the map of keys and values from the YAML config, thereafter, you can iterate on the map, access the keys and values, type caste them as per requirement, and basically have control over what processing needs to be done to the parsed YAML content.</p>
+<pre tabindex="0"><code>published : false
+bool
+
+words : 1500
+int
+
+title : Golang Blog Series
+string
+
+date : 22nd October 2022
+string
+
+tags : [go files]
+[]interface {}
+</code></pre><p>I have just printed the types of the values in the above output as <code>log.Printf(&quot;%T&quot;, v)</code>, we can see the types are being correctly recognized and being parsed. The last object is indeed a <code>slice</code> so it has an interface of the slice(array) attached to it.</p>
+<h3 id="reading-a-toml-file">Reading a TOML file</h3>
+<p>YAML and TOML are almost identical, though toml has more restrictive configuration options, but is more readable than YAML, as YAML can get complicated pretty quickly. Though both of them have their pros and cons, YAML is used everywhere in the DevOps world, configs, whereas TOML is the format of choice for python packaging, and static site generation configs.</p>
+<p>Let&rsquo;s see how we can use golang to read TOML files.</p>
+<pre tabindex="0"><code>$ go mod init &lt;your_project_package_name&gt;
+$ go get github.com/pelletier/go-toml
+</code></pre><p>The above commands are used for setting up a golang package or project and installing the <a href="https://pkg.go.dev/github.com/pelletier/go-toml">go-toml</a> package. Once the above commands are done executing, it will generate <code>go.mod</code> and <code>go.sum</code> files used for storing dependencies and packages installed for the project locally.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[<span style="color:#a6e22e">blog</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">name</span>=<span style="color:#e6db74">&#39;techstructive-blog&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">tags</span>=[<span style="color:#e6db74">&#39;go&#39;</span>,<span style="color:#e6db74">&#39;django&#39;</span>,<span style="color:#e6db74">&#39;vim&#39;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">author</span>=<span style="color:#e6db74">&#39;meet gor&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">active</span>=<span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#a6e22e">author</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">name</span>=<span style="color:#e6db74">&#39;Meet Gor&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">github</span>=<span style="color:#e6db74">&#39;mr-destructive&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">twitter</span>=<span style="color:#e6db74">&#39;meetgor21&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">posts</span>=<span style="color:#ae81ff">80</span>
+</span></span></code></pre></div><p>The above is the sample file <code>blog.toml</code> which we will use to read in the go script below. The toml file has a similar structure as we have seen in the previous examples. We have different data types like string, boolean, integer, and list.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;os&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">toml</span> <span style="color:#e6db74">&#34;github.com/pelletier/go-toml&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">ReadFile</span>(<span style="color:#e6db74">&#34;blog.toml&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">data</span> <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">interface</span>{}]<span style="color:#66d9ef">interface</span>{}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">toml</span>.<span style="color:#a6e22e">Unmarshal</span>(<span style="color:#a6e22e">f</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">data</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">data</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">k</span>, <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">data</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">k</span>, <span style="color:#e6db74">&#34;:&#34;</span>, <span style="color:#a6e22e">v</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">switch</span> <span style="color:#a6e22e">t</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v</span>.(<span style="color:#66d9ef">type</span>) {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">case</span> <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">interface</span>{}:
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">b</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">t</span> {
+</span></span><span style="display:flex;"><span>				<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">a</span>, <span style="color:#e6db74">&#34;:&#34;</span>, <span style="color:#a6e22e">b</span>)
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><pre tabindex="0"><code>$ go run toml.go
+
+map[author:map[github:mr-destructive name:Meet Gor posts:80 twitter:meetgor21] blog:map[active:true author:meet gor
+
+name:techstructive-blog tags:[go django vim]]]
+
+blog : map[active:true author:meet gor name:techstructive-blog tags:[go django vim]]
+name : techstructive-blog
+tags : [go django vim]
+author : meet gor
+active : true
+
+author : map[github:mr-destructive name:Meet Gor posts:80 twitter:meetgor21]
+
+name : Meet Gor
+github : mr-destructive
+twitter : meetgor21
+posts : 80
+</code></pre><p>So, in the above example and output, the YAML file was read and the key-value pairs inside them were read. The first thing we do is read the file <code>blog.toml</code> with <code>ioutil</code> package, with the <code>ReadFile</code> function. The function takes in the string as the path to the file to be read and returns a slice of byte. We use this slice of byte as a parameter to the <a href="https://pkg.go.dev/github.com/pelletier/go-toml#Unmarshal">Unmarshal</a> method. The second paramter for the <code>Unmarshal</code> is the output variable(usually a pointer to a variable), we have created a map of <code>interface{]</code> with an <code>interface</code> as we see there can be nested keys which hold the name of the config.</p>
+<p>The variable <code>data</code> is a map of <code>interface{}</code> to an <code>interface{}</code>, and we parse the memory address to the <code>data</code> variable to the <code>Unmarshal</code> method. Thereby the parsed <code>TOML</code> content is stored in the data variable.</p>
+<pre tabindex="0"><code>name : techstructive-blog
+string
+
+tags : [go django vim]
+[]interface{}
+
+author : meet gor
+string
+
+active : true
+bool
+
+name : Meet Gor
+string
+
+github : mr-destructive
+string
+
+twitter : meetgor21
+string
+
+posts : 80
+int64
+</code></pre><p>The above is a verbose output for the type of the values as parsed by golang, we have <code>string</code>, <code>bool</code>, <code>int64</code>, and a <code>slice</code> (list with interface{} attached with it). Only types like <code>string</code>, <code>bool</code>, <code>int</code>, <code>float64</code> can be parsed from the Unmarshal function, other than these types, the type will have an interface attached to it.</p>
+<p>In such cases, where the type of value is not among the 4 types(string, bool, int float), we can use a pre-defined struct to parse the content from the file. Though it would require a strict structure and predictable response from the parsed file.</p>
+<h3 id="reading-csv-file">Reading CSV file</h3>
+<p>We can even read a CSV file in golang, we have seen in the previous post, we have used custom delimiters in the parsing of the file.</p>
+<pre tabindex="0"><code class="language-csv" data-lang="csv">id,name,posts,exp
+21,jim,23,2
+33,kevin,39,1
+45,james,70,2
+56,chris,89,3
+</code></pre><p>The above file is a sample csv file, though the size is too small, we can use it as an example.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;encoding/csv&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;os&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Open</span>(<span style="color:#e6db74">&#34;temp.csv&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">check_error</span>(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">reader</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">csv</span>.<span style="color:#a6e22e">NewReader</span>(<span style="color:#a6e22e">f</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">n</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">reader</span>.<span style="color:#a6e22e">ReadAll</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">check_error</span>(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">line</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">n</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">text</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">line</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">text</span>)
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><pre tabindex="0"><code>$ go run main.go
+id
+name
+posts
+exp
+21
+jim
+23
+2
+33
+kevin
+39
+1
+45
+james
+70
+2
+56
+chris
+89
+3
+</code></pre><p>The CSV package has a <a href="https://pkg.go.dev/encoding/csv#NewReader">NewReader</a> method that accepts an <code>io.Reader</code> and returns a <code>Reader</code> object. After parsing the reader, we use the <a href="https://pkg.go.dev/encoding/csv#Reader.ReadAll">ReadAll</a> method to return a 2d string or an error if there exists an error while parsing the content. You can get a detailed explanation of the CSV parsing and reading in the <a href="https://www.meetgor.com/golang-file-read/#Read%20File%20by%20a%20delimiter">previous post</a>.</p>
+<h3 id="reading-csv-from-url">Reading CSV from URL</h3>
+<p>The CSV file can also be read from the URL, the content of the file is a <code>response.Body</code> in place of the file object reference, in the previous example, the <a href="https://pkg.go.dev/os#Open">os.Open()</a> method returns a <a href="https://pkg.go.dev/os#File">os.File</a> object.</p>
+<p>We use the <code>http.Get(string)</code> method to get the response from the URL for reading the CSV file present on the web.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;encoding/csv&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;net/http&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">url</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;https://github.com/woocommerce/woocommerce/raw/master/sample-data/sample_products.csv&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">response</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#a6e22e">url</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">Body</span>.<span style="color:#a6e22e">Close</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">reader</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">csv</span>.<span style="color:#a6e22e">NewReader</span>(<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">Body</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">n</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">reader</span>.<span style="color:#a6e22e">ReadAll</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">line</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">n</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">text</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">line</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">text</span>)
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><pre tabindex="0"><code>$ go run csv.go
+&lt;feff&gt;ID
+Type
+SKU
+Name
+Published
+Is featured?
+Visibility in catalog
+Short description
+Description
+Date sale price starts
+Date sale price ends
+...
+...
+...
+</code></pre><p>So, that&rsquo;s how we can read a CSV file from the URL. By fetching the CSV URL <code>https://github.com/woocommerce/woocommerce/raw/master/sample-data/sample_products.csv</code> from the <a href="https://pkg.go.dev/net/http#Client.Get">http.Get</a> method, this will get us the <a href="https://pkg.go.dev/net/http#Response">response.Body</a> that contains the actual CSV file content. The response than can be parsed to the <code>csv.NewReader(*Os.File).ReadAll()</code> i.e. <a href="https://pkg.go.dev/encoding/csv#Reader.ReadAll">reader.ReadAll()</a>. The function returns a multidimensional slice <code>[][]slice</code> that can be iterated and parsed as per requirement.</p>
+<h3 id="reading-xml-file">Reading XML file</h3>
+<p>XML is the de facto standard for RSS feeds, it is widely used in many places and is still all over the web. We&rsquo;ll see an example to read an XML file locally, but as we saw in the above example, we can also read an RSS link from the web.</p>
+<p>Just like CSV, we have <a href="https://pkg.go.dev/encoding/xml">encoding/xml</a>, and the standard library has all the functions used for parsing the XML files.</p>
+<p>We will be using a local XML file called <code>rss.xml</code>, and reading the contents from the tags in the file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; ?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;channel&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;title&gt;</span>Meet Gor<span style="color:#f92672">&lt;/title&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;description&gt;</span>Techstructive Blog Feed<span style="color:#f92672">&lt;/description&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;item&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;title&gt;</span>Why and How to make and use Vim as a text editor and customizable IDE<span style="color:#f92672">&lt;/title&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;link&gt;</span>https://www.meetgor.com/vim-text-editor-ide<span style="color:#f92672">&lt;/link&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/item&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;item&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;title&gt;</span>Setting up Vim for Python<span style="color:#f92672">&lt;/title&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;link&gt;</span>https://www.meetgor.com/vim-for-python<span style="color:#f92672">&lt;/link&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/item&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/channel&gt;</span>
+</span></span></code></pre></div><p>The above example is a short part of my blog&rsquo;s <a href="https://www.meetgor.com/rss">rss</a> feed. I have just trimmed the unwanted part and will be just using the tags that we want to fetch.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;encoding/xml&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;os&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Channel</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">XMLName</span>     <span style="color:#a6e22e">xml</span>.<span style="color:#a6e22e">Name</span> <span style="color:#e6db74">`xml:&#34;channel&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Title</span>       <span style="color:#66d9ef">string</span>   <span style="color:#e6db74">`xml:&#34;title&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Description</span> <span style="color:#66d9ef">string</span>   <span style="color:#e6db74">`xml:&#34;description&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Item</span>        []<span style="color:#a6e22e">Item</span>   <span style="color:#e6db74">`xml:&#34;item&#34;`</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Item</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">XMLName</span> <span style="color:#a6e22e">xml</span>.<span style="color:#a6e22e">Name</span> <span style="color:#e6db74">`xml:&#34;item&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Title</span>   <span style="color:#66d9ef">string</span>   <span style="color:#e6db74">`xml:&#34;title&#34;`</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Link</span>    <span style="color:#66d9ef">string</span>   <span style="color:#e6db74">`xml:&#34;link&#34;`</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">check_error</span>(<span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">ReadFile</span>(<span style="color:#e6db74">&#34;rss.xml&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">check_error</span>(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">Close</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">d</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Channel</span>{}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">xml</span>.<span style="color:#a6e22e">Unmarshal</span>(<span style="color:#a6e22e">f</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">d</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">check_error</span>(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">item</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">Item</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">item</span>.<span style="color:#a6e22e">Title</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><pre tabindex="0"><code>$ go run xml.go
+
+{{ channel} Meet Gor Techstructive Blog Feed [{{ item} Why and How to make and use Vim as a text editor and customizable IDE https://www.meetgor.com/vim-text-editor-ide} {{ item} Setting up Vim for Python https://www.meetgor.com/vim-for-python}]}
+
+Why and How to make and use Vim as a text editor and customizable IDE
+Setting up Vim for Python
+</code></pre><p>The above example uses a couple of <code>struct</code> like <code>Channel</code> and <code>Item</code> that stores the tag data like <code>title</code>, <code>description</code>, <code>link</code>, etc. Unlike the JSON, YAML, and toml files, XML can&rsquo;t parse the content directly we need a structure to parse into. And that&rsquo;s fine as XML is not much dynamic in terms of config, we usually have standard tags and elements which can be pre-defined in a struct type.</p>
+<p>In this example, the RSS feed has a <code>Channel</code> tag with <code>title</code>, <code>description</code>, and <code>item</code>.</p>
+<p><strong>NOTE: Use Title case for the fields of the structs. It will make the fields public, I spent a few hours debugging that really :)</strong></p>
+<p>So, we define the <code>Channel</code> struct with fields like <code>Title</code> as a string which is a tag in the file as <code>xml:&quot;title&quot;</code>. This means the title in the tag of the XML will be stored in the field as a string in the attribute name as <code>Title</code>. Similarly, we have fields like <code>Description</code> and <code>Item[]</code> this is a list or multiple of <code>item</code> tags that might be present in the XML file. The <code>XMLName</code> is used for identifying the parent tag for the struct, so we use <code>channel</code> for the first struct as it is the first tag appearing of the hierarchy in the XML file.</p>
+<p>So, we create an object for the root structure as <code>Channel{}</code> (an empty object instantiated). The <code>xml.Unmarshal</code> function is parsed with the content of the file as <code>data</code> which is a slice of byte as we have seen in the previous examples. The slice of byte is then used in the <code>Unmarshal</code> method as the first parameter and the reference of an empty <code>Channel</code> object as the second parameter. The second parameter will be to store the parsed XML content from the file.</p>
+<p>I have a few examples on the GitHub repository covering the reading of files from a URL for the CSV, and XML files. But, this concept in the example, can be applied to JSON, YAML, and other file formats as well.</p>
+<p>That&rsquo;s it from this part. Reference for all the code examples and commands can be found in the <a href="https://github.com/Mr-Destructive/100-days-of-golang/tree/main/scripts/files/read/config_files">100 days of Golang</a> GitHub repository.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>So, that&rsquo;s it from this post, we covered how to read specific configuration files like <code>JSON</code>, <code>CSV</code>, <code>YAML</code>, <code>TOML</code>, and <code>XML</code>. We saw how to read a local file and also touched on the concept to read contents from a file on the web with a URL. We also saw how we can use pre-defined structs to parse content from a file, especially for XML.</p>
+<p>Thank you for reading. If you have any queries, questions, or feedback, you can let me know in the discussion below or on my social handles. Happy Coding :)</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/go"
+      >go</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg !leading-[1.2] *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  >
+    
+    <a class="ltr:pr-3 rtl:pl-3" href="http://localhost:1313/blog/golang-file-write/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Golang: File Write</span></a
+    >
+    
+    
+    <a class="ltr:ml-auto rtl:mr-auto justify-end pl-3" href="http://localhost:1313/blog/golang-file-read/"
+      ><span>Golang: File Reading</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="mx-auto flex h-[4.5rem] max-w-[--w] items-center px-8 text-xs uppercase tracking-wider opacity-60"
+>
+  <div class="mr-auto">
+  
+    &copy; 2024
+    <a class="link" href="http://localhost:1313/">Meet Rajesh Gor</a>
+  
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+
+  </body>
+</html>

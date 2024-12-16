@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Works on Meet Rajesh Gor</title>
+    <link>http://localhost:1313/work/</link>
+    <description>Recent content in Works on Meet Rajesh Gor</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 15 Dec 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/work/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docsumo</title>
+      <link>http://localhost:1313/work/docsumo/</link>
+      <pubDate>Sun, 15 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/work/docsumo/</guid>
+      <description>&lt;h3 id=&#34;junior-backend-engineer---docsumohttpswwwdocsumocom&#34;&gt;Junior Backend Engineer - &lt;a href=&#34;https://www.docsumo.com/&#34;&gt;Docsumo&lt;/a&gt;&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;June 2024 - Present&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Maintaining and improving APIs for document extraction&lt;/li&gt;&#xA;&lt;li&gt;Research and Experimentation for better table extraction from documents&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;python-intern---docsumohttpswwwdocsumocom&#34;&gt;Python Intern - &lt;a href=&#34;https://www.docsumo.com/&#34;&gt;Docsumo&lt;/a&gt;&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;November 2023 - June 2024&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Developed fraud detection algorithms for bank statement analysis.&lt;/li&gt;&#xA;&lt;li&gt;Built analytics features for banking clients.&lt;/li&gt;&#xA;&lt;li&gt;Collaborated with the R&amp;amp;D team to enhance security features.&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Solar Labs</title>
+      <link>http://localhost:1313/work/solar-labs/</link>
+      <pubDate>Fri, 26 May 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/work/solar-labs/</guid>
+      <description>&lt;h3 id=&#34;backend-developer-intern---the-solar-labshttpswwwthesolarlabscom&#34;&gt;Backend Developer Intern - &lt;a href=&#34;https://www.thesolarlabs.com/&#34;&gt;The Solar Labs&lt;/a&gt;&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;July 2022 - April 2023&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Developed REST APIs using Python and Django/DRF.&lt;/li&gt;&#xA;&lt;li&gt;Worked on backend services and database optimization.&lt;/li&gt;&#xA;&lt;li&gt;Utilized Azure Pipelines for continuous integration and deployment.&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>GeeksForGeeks</title>
+      <link>http://localhost:1313/work/geeks-for-geeks/</link>
+      <pubDate>Wed, 15 Sep 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/work/geeks-for-geeks/</guid>
+      <description>&lt;h3 id=&#34;technical-content-writer---geeksforgeekshttpswwwgeeksforgeeksorg&#34;&gt;Technical Content Writer - &lt;a href=&#34;https://www.geeksforgeeks.org/&#34;&gt;GeeksForGeeks&lt;/a&gt;&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;June 2021 - September 2021&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Authored 60+ technical articles on topics like shell scripting, Linux, and web development.&lt;/li&gt;&#xA;&lt;li&gt;Contributed to tutorials and educational resources for the programming community.&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+  </channel>
+</rss>

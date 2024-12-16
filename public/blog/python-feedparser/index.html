@@ -1,0 +1,505 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en"
+  dir="ltr"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Feedparser: Python package for reading RSS feeds - Meet Rajesh Gor</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Introduction
+Feedparser is a simple but powerful python package that can be used to extract information about a specific webpage or a publication with its RSS feed(not only RSS). By providing the RSS feed link, we can get structured information in the form of python lists and dictionaries. It can be basically used in a pythonic way to read RSS feeds, it is really simple to use and it even normalizes different types of feeds." />
+  <meta name="author" content="Meet Rajesh Gor" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/twitter.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link
+    rel="icon"
+    href="http://localhost:1313/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="http://localhost:1313/apple-touch-icon.png"
+  />
+
+  
+  <meta name="generator" content="Hugo 0.136.5">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-[--w] px-8 lg:justify-center">
+  <div class="relative z-50 ltr:mr-auto rtl:ml-auto flex items-center">
+    <a class="-translate-y-[1px] text-2xl font-medium" href="http://localhost:1313/"
+      >Meet Rajesh Gor</a
+    >
+    <div
+      class="btn-dark text-[0] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 ltr:-mr-8 rtl:-ml-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse">
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/"
+        >Home</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/blog/"
+        >Blog</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/work/"
+        >Work</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 rtl:space-x-reverse dark:invert ltr:lg:ml-14 rtl:lg:mr-14 lg:mt-0 lg:items-center"
+    >
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/meetgor21"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/mr-destructive"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/meetgor"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100vh-9rem)] max-w-[--w] px-8 pb-16 pt-14 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-14">
+    <h1 class="!my-0 pb-2.5">Feedparser: Python package for reading RSS feeds</h1>
+
+    
+    <div class="text-xs antialiased opacity-60">
+      
+      <time>Mar 26, 2022</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="introduction">Introduction</h2>
+<p><a href="https://pypi.org/project/feedparser/">Feedparser</a> is a simple but powerful python package that can be used to extract information about a specific webpage or a publication with its RSS feed(not only RSS). By providing the RSS feed link, we can get structured information in the form of python lists and dictionaries. It can be basically used in a pythonic way to read RSS feeds, it is really simple to use and it even normalizes different types of feeds.</p>
+<p>Today, we will be taking a look at the feedparser package in python and how to extract information from a given RSS feed.</p>
+<h2 id="what-is-feedparser">What is feedparser</h2>
+<p>Feedparser is a python package for parsing feeds of almost any type such as RSS, Atom, RDF, etc. It is a package that allows us to parse or extract information using python semantics. For example, all the latest posts from a given blog can be accessed on a list in python, further different attributes like links, images, titles, descriptions, can be accessed within a dictionary as key-value pairs.</p>
+<h2 id="installing-feedparser">Installing feedparser</h2>
+<p>As feedparser is a python package you can install it with pip very easily.</p>
+<pre tabindex="0"><code>pip install feedparser
+</code></pre><p>This will install feedparser in your respective python environment, it can be a virtual environment or a global environment.</p>
+<h2 id="using-feedparser">Using feedparser</h2>
+<p>To test out feedparser, you can open up a python repl, in the environment where you installed the Feedparser package.</p>
+<pre tabindex="0"><code>python
+</code></pre><p>Firstly import the package.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> feedparser
+</span></span></code></pre></div><p>Now, we can use the module in our application to get all of the functions or methods from the package.</p>
+<h2 id="parse-an-rss-feed-url">Parse an RSS feed URL</h2>
+<p>To parse an RSS feed link, we can simply use the <code>parse</code> function from the feedparser package. The <a href="https://feedparser.readthedocs.io/en/latest/introduction.html">parse</a> function takes in a string that can be a URL or a file path. Generally, the URL seems to be more useful. So, we can look up any RSS feed on the internet like your blog&rsquo;s feed, publications feeds, and so on.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>feedparser<span style="color:#f92672">.</span>parse(<span style="color:#e6db74">&#34;url_of_the_rss_feed&#34;</span>)
+</span></span></code></pre></div><p>The parse function basically fetches the feed from the provided URL or the file. It extracts the feed in a systematic way storing each piece of information in a structured format. At the high level, it returns a dictionary with a few key-value pairs. Further, each key might have a list or nested dictionaries in it. The key identifiers are named in a uniform manner for any feed you parse in the function. Though there might be a few cases where there might be additional information to be parsed, it can even add more information ad shape the structure accordingly.</p>
+<p>This will give you a dictionary in python, that can have more or less similar keys. The most common keys that can be used in extracting information are <code>entries</code> and <code>feed</code>. We can get all the keys associated with a feed that is parsed using the <code>keys</code> function.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>feedparser<span style="color:#f92672">.</span>parse(<span style="color:#e6db74">&#34;url_of_the_rss_feed&#34;</span>)<span style="color:#f92672">.</span>keys()
+</span></span></code></pre></div><p><img src="https://res.cloudinary.com/techstructive-blog/image/upload/v1648370871/blog-media/ph6bsxobyifqmusumirx.png" alt="Feedparser Keys"></p>
+<p>The keys function basically gets all the keys in the dictionary in python.</p>
+<pre tabindex="0"><code>&gt;&gt;&gt; feedparser.parse(&#34;https://dev.to/feed/&#34;).keys()
+dict_keys([&#39;bozo&#39;, &#39;entries&#39;, &#39;feed&#39;, &#39;headers&#39;, &#39;etag&#39;, &#39;href&#39;, &#39;status&#39;, &#39;encoding&#39;, &#39;version&#39;, &#39;namespaces&#39;])
+</code></pre><p>This will give out a list of all the keys in the feed which we have parsed from the RSS feed previously. From this list of keys, we can extract the required information from the feed.</p>
+<p>Before we extract content from the feed, we can store the dictionary that we get from calling the parse function. We can assign it to a variable and store the dictionary for later use.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>feed <span style="color:#f92672">=</span> feedparser<span style="color:#f92672">.</span>parse(<span style="color:#e6db74">&#34;url_of_the_rss_feed&#34;</span>)
+</span></span></code></pre></div><h2 id="extract-the-contents-from-the-feed">Extract the contents from the feed</h2>
+<p>Now, we have the dictionary of the feed, we can easily access the values from the listed keys. We can get the list of all the posts/podcasts/entries or any other form of content the feed is serving for from the <code>entries</code> key in the dictionary.</p>
+<p>To get more information and the most possible keys in the returned dictionary, you can refer to the feedparser <a href="https://feedparser.readthedocs.io/en/latest/reference.html">reference list</a></p>
+<h3 id="access-articles-from-feed">Access Articles from Feed</h3>
+<p>To access the articles from the feed, we can access those as a list of the articles. Using the <code>entries</code> key in the dictonary as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>feedparser<span style="color:#f92672">.</span>parse(<span style="color:#e6db74">&#34;url_of_the_rss_feed&#34;</span>)[<span style="color:#e6db74">&#34;entries&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>OR
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>feedparser<span style="color:#f92672">.</span>parse(<span style="color:#e6db74">&#34;url_of_the_rss_feed&#34;</span>)<span style="color:#f92672">.</span>entries
+</span></span></code></pre></div><p>If you have already defined a variable set to the parse function, you can use that for more efficient extraction.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>feed <span style="color:#f92672">=</span> feedparser<span style="color:#f92672">.</span>parse(<span style="color:#e6db74">&#34;url_of_the_rss_feed&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>feed[<span style="color:#e6db74">&#39;entries&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>OR 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>feed<span style="color:#f92672">.</span>entries
+</span></span></code></pre></div><h3 id="get-number-of-articlesentries-from-feed">Get Number of Articles/Entries from Feed</h3>
+<p>To get the number of entries in the list, we can simply use the len function in python.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>len(feed<span style="color:#f92672">.</span>entries)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>OR 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>len(feedparser<span style="color:#f92672">.</span>parse(<span style="color:#e6db74">&#34;url_of_the_rss_feed&#34;</span>)<span style="color:#f92672">.</span>entries)
+</span></span></code></pre></div><p><img src="https://res.cloudinary.com/techstructive-blog/image/upload/v1648371042/blog-media/didijxcvsgvl4scrnhje.png" alt="Feedparser Number of Entries"></p>
+<p>This gives us the number of entries in the provided feed. This is basically the list that stores all the content from the publication/website. So, we can iterate over the list and find all the different attributes we can extract.</p>
+<h3 id="get-details-of-the-entries-from-the-feed">Get details of the entries from the feed</h3>
+<p>To get detail information about a particular article/entry in the feed, we can iterate over the <code>feed.entries</code> list and access what we require.</p>
+<p>So, we will iterate over the entries and simply print those entries one by one to inspect what and how we can extract them.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> feed<span style="color:#f92672">.</span>entries:
+</span></span><span style="display:flex;"><span>  print(entry)
+</span></span></code></pre></div><p>It turns out that every entry in the list is a dictionary again containing a few key-value pairs like <code>title</code>, <code>summary</code>, <code>link</code>, etc. To get a clear idea of those keys we can again use the keys function in python.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>feed <span style="color:#f92672">=</span> feedparser<span style="color:#f92672">.</span>parse(<span style="color:#e6db74">&#34;url_of_the_rss_feed&#34;</span>)
+</span></span><span style="display:flex;"><span>print(feed<span style="color:#f92672">.</span>entries[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>keys())
+</span></span></code></pre></div><p><img src="https://res.cloudinary.com/techstructive-blog/image/upload/v1648371221/blog-media/c8uog85goe9jzrzl1pq1.png" alt="Feedparser Entries Keys"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> feed<span style="color:#f92672">.</span>entries[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>keys()
+</span></span><span style="display:flex;"><span>dict_keys([<span style="color:#e6db74">&#39;title&#39;</span>, <span style="color:#e6db74">&#39;title_detail&#39;</span>, <span style="color:#e6db74">&#39;authors&#39;</span>, <span style="color:#e6db74">&#39;author&#39;</span>, <span style="color:#e6db74">&#39;author_detail&#39;</span>, <span style="color:#e6db74">&#39;published&#39;</span>, <span style="color:#e6db74">&#39;published_parsed&#39;</span>, <span style="color:#e6db74">&#39;links&#39;</span>, <span style="color:#e6db74">&#39;link&#39;</span>, <span style="color:#e6db74">&#39;id&#39;</span>, <span style="color:#e6db74">&#39;guidislink&#39;</span>, <span style="color:#e6db74">&#39;summary&#39;</span>, <span style="color:#e6db74">&#39;summary_detail&#39;</span>, <span style="color:#e6db74">&#39;tags&#39;</span>])
+</span></span></code></pre></div><p>Now, we have all the keys associated with the entries we can now extract the specific details like the content, like <code>title</code>, <code>author</code>, <code>summary_detail</code>(actual content in this case).</p>
+<p>Though this might not be the same for all RSS feeds, it might be very similar and a matter of using the right keyword for the associated keys in the list of dictionaries.</p>
+<p>Let&rsquo;s say, we want to print out the titles of all the entries in the feed, we can do that by iterating over the entries list and fetching the title from the iterator as <code>entry.title</code> if <code>entry</code> is the iterator.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> feed<span style="color:#f92672">.</span>entries:
+</span></span><span style="display:flex;"><span>  print(entry<span style="color:#f92672">.</span>title)
+</span></span></code></pre></div><p><img src="https://res.cloudinary.com/techstructive-blog/image/upload/v1648372532/blog-media/lhofdzmr3ks0fuut7pxm.png" alt="Feedparser List of Entries"></p>
+<p>Similarly, we will get the links of the entries using the link key in the dictionary.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> feed<span style="color:#f92672">.</span>entries:
+</span></span><span style="display:flex;"><span>  print(entry<span style="color:#f92672">.</span>link)
+</span></span></code></pre></div><h3 id="get-information-about-the-websitepublication">Get information about the Website/Publication</h3>
+<p>To get the metadata about the information you are extracting from i.e. the website or any publication, we can use the key <code>feed</code>. This key stores another dictionary as its value which might have information like <code>title</code>, <code>description</code> or <code>subtitle</code>, <code>canonical_url</code>, or any other data related to the website company.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>feed<span style="color:#f92672">.</span>feed
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">or</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>feedparser<span style="color:#f92672">.</span>parse(<span style="color:#e6db74">&#34;url_of_the_rss_feed&#34;</span>)<span style="color:#f92672">.</span>feed
+</span></span></code></pre></div><p><img src="https://res.cloudinary.com/techstructive-blog/image/upload/v1648373487/blog-media/r7hiojfdrtrjqfhkjbdt.png" alt="Feedparser Feed"></p>
+<p>From this dictionary, we can now simply extract the specific information from the keys. But first, as in the previous examples, we need a clear idea of what are the keys in the dictionary where we can extract the specific value.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>feed<span style="color:#f92672">.</span>feed<span style="color:#f92672">.</span>keys()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">or</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>feedparser<span style="color:#f92672">.</span>parse(<span style="color:#e6db74">&#34;url_of_the_rss_feed&#34;</span>)<span style="color:#f92672">.</span>feed<span style="color:#f92672">.</span>keys()
+</span></span></code></pre></div><p>Using the keys like <code>title</code>, <code>links</code>, <code>subtitle</code>, we can get the information on the website/company level and not related to the specific post in the entries list.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># get the title of the webpage/publication</span>
+</span></span><span style="display:flex;"><span>feed<span style="color:#f92672">.</span>feed<span style="color:#f92672">.</span>title
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># get the links associated with the webpage</span>
+</span></span><span style="display:flex;"><span>feed<span style="color:#f92672">.</span>feed<span style="color:#f92672">.</span>links
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># get the cover-image for the webpage</span>
+</span></span><span style="display:flex;"><span>feed<span style="color:#f92672">.</span>feed<span style="color:#f92672">.</span>image
+</span></span></code></pre></div><p>You can further get information specific to your feed.</p>
+<h2 id="checking-for-keys-existence-in-the-dictionary-of-feed">Checking for keys existence in the dictionary of feed</h2>
+<p>We also need to check for the existence of a key in a dictionary in the provided feed, this can be a good problem if we are parsing multiple RSS feeds which might have a different structure. This problem occurred to me in the making of <a href="https://podevcast.netlify.app">podevcast</a> where I had to parse multiple RSS feeds from different RSS generators. Some of the feeds had the cover image but most of them didn&rsquo;t. So, we need to make sure we have a check over those missing keys.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>feedlist <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;https://freecodecamp.libsyn.com/rss&#39;</span>, <span style="color:#e6db74">&#39;https://feeds.devpods.dev/devdiscuss_podcast.xml&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> feed <span style="color:#f92672">in</span> feedlist:
+</span></span><span style="display:flex;"><span>    feed <span style="color:#f92672">=</span> feedparser<span style="color:#f92672">.</span>parse(feed)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    print(feed<span style="color:#f92672">.</span>entries[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>keys())
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> feed<span style="color:#f92672">.</span>entries:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;image&#39;</span> <span style="color:#f92672">in</span> entry:
+</span></span><span style="display:flex;"><span>            image_url <span style="color:#f92672">=</span> entry<span style="color:#f92672">.</span>image
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            image_url <span style="color:#f92672">=</span> feed<span style="color:#f92672">.</span>feed<span style="color:#f92672">.</span>image
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#print(image_url)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> feedlist <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;https://freecodecamp.libsyn.com/rss&#39;</span>, <span style="color:#e6db74">&#39;https://feeds.devpods.dev/devdiscuss_podcast.xml&#39;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#66d9ef">for</span> feed <span style="color:#f92672">in</span> feedlist:
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>     feed <span style="color:#f92672">=</span> feedparser<span style="color:#f92672">.</span>parse(feed)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>     <span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> feed<span style="color:#f92672">.</span>entries:
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>             <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;image&#39;</span> <span style="color:#f92672">in</span> entry:
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>                     image_url <span style="color:#f92672">=</span> entry<span style="color:#f92672">.</span>image
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>             <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>                     image_url <span style="color:#f92672">=</span> feed<span style="color:#f92672">.</span>feed<span style="color:#f92672">.</span>image
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>     print(feed<span style="color:#f92672">.</span>entries[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>keys())
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>dict_keys([<span style="color:#e6db74">&#39;title&#39;</span>, <span style="color:#e6db74">&#39;title_detail&#39;</span>, <span style="color:#e6db74">&#39;itunes_title&#39;</span>, <span style="color:#e6db74">&#39;published&#39;</span>, <span style="color:#e6db74">&#39;published_parsed&#39;</span>, <span style="color:#e6db74">&#39;id&#39;</span>, <span style="color:#e6db74">&#39;guidislink&#39;</span>, <span style="color:#e6db74">&#39;links&#39;</span>, <span style="color:#e6db74">&#39;link&#39;</span>, <span style="color:#e6db74">&#39;image&#39;</span>, <span style="color:#e6db74">&#39;summary&#39;</span>, <span style="color:#e6db74">&#39;summary_detail&#39;</span>, <span style="color:#e6db74">&#39;content&#39;</span>, <span style="color:#e6db74">&#39;itunes_duration&#39;</span>, <span style="color:#e6db74">&#39;itunes_explicit&#39;</span>, <span style="color:#e6db74">&#39;subtitle&#39;</span>, <span style="color:#e6db74">&#39;subtitle_detail&#39;</span>, <span style="color:#e6db74">&#39;itunes_episode&#39;</span>, <span style="color:#e6db74">&#39;itunes_episodetype&#39;</span>, <span style="color:#e6db74">&#39;authors&#39;</span>, <span style="color:#e6db74">&#39;author&#39;</span>, <span style="color:#e6db74">&#39;author_detail&#39;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>dict_keys([<span style="color:#e6db74">&#39;title&#39;</span>, <span style="color:#e6db74">&#39;title_detail&#39;</span>, <span style="color:#e6db74">&#39;links&#39;</span>, <span style="color:#e6db74">&#39;link&#39;</span>, <span style="color:#e6db74">&#39;published&#39;</span>, <span style="color:#e6db74">&#39;published_parsed&#39;</span>, <span style="color:#e6db74">&#39;id&#39;</span>, <span style="color:#e6db74">&#39;guidislink&#39;</span>, <span style="color:#e6db74">&#39;tags&#39;</span>, <span style="color:#e6db74">&#39;summary&#39;</span>, <span style="color:#e6db74">&#39;summary_detail&#39;</span>, <span style="color:#e6db74">&#39;content&#39;</span>, <span style="color:#e6db74">&#39;subtitle&#39;</span>, <span style="color:#e6db74">&#39;subtitle_detail&#39;</span>, <span style="color:#e6db74">&#39;authors&#39;</span>, <span style="color:#e6db74">&#39;author&#39;</span>, <span style="color:#e6db74">&#39;author_detail&#39;</span>, <span style="color:#e6db74">&#39;itunes_explicit&#39;</span>, <span style="color:#e6db74">&#39;itunes_duration&#39;</span>])
+</span></span></code></pre></div><p>As we can see we do not have an image key in the second RSS feed which means each entry doesn&rsquo;t have a unique cover image, so we have to fetch the image from the <code>feed</code> key then the <code>image</code> key in the entries list.</p>
+<p><img src="https://res.cloudinary.com/techstructive-blog/image/upload/v1648373275/blog-media/fzdqie5dubigxzfhtv2x.png" alt="Feedparser Cover Image Demo"></p>
+<p>As we can see here, the image_url will pick up the <code>image</code> key in the dictionary if it is present else we will assign it to another URL which is the website/podcast cover image. This is how we handle exceptions in providing the keys when there are multiple feeds to be extracted though they are quite similar, they will have subtle changes like this that need to be handled and taken care of.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>From this little article, we were able to understand and use the feedparser Python package which can be used to extract information from different feeds. We saw how to extract contents for the entries, a number of entries in the feed, check for keys in the dictionary, and so on. Using Python&rsquo;s Feedparser package, some of the projects I have created include:</p>
+<ul>
+<li><a href="https://podevcast.netlify.app">podevcast</a></li>
+<li><a href="https://pypi.org/project/dailydotdev-bookmark-cli/">dailydotdev-bookmark-cli</a></li>
+<li><a href="https://github.com/Mr-Destructive/newsletter">Django Newsletter</a></li>
+</ul>
+<p>For further reading, you can specifically target a feed type by getting the appropriate methods from the feedparser <a href="https://feedparser.readthedocs.io/en/latest/">documentation</a></p>
+<p>Thank you for reading, if you have any suggestions, additions, feedback, please let me know in the comments or my social handles below. Hope you enjoyed reading. Happy Coding :)</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/python"
+      >python</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg !leading-[1.2] *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  >
+    
+    <a class="ltr:pr-3 rtl:pl-3" href="http://localhost:1313/blog/golang-intro/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Golang: What and Why?</span></a
+    >
+    
+    
+    <a class="ltr:ml-auto rtl:mr-auto justify-end pl-3" href="http://localhost:1313/blog/pipx-intro/"
+      ><span>Pipx: A python package consumption tool for CLI packages</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="mx-auto flex h-[4.5rem] max-w-[--w] items-center px-8 text-xs uppercase tracking-wider opacity-60"
+>
+  <div class="mr-auto">
+  
+    &copy; 2024
+    <a class="link" href="http://localhost:1313/">Meet Rajesh Gor</a>
+  
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+
+  </body>
+</html>

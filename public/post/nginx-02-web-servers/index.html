@@ -1,0 +1,503 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en"
+  dir="ltr"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>NGINX Survival Guide: Serving Web Applications - Meet Rajesh Gor</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Introduction
+In the second part of our NGINX Survival Guide, we dive into the practical aspects of using NGINX to serve web applications. This section will guide you through the essential tasks of setting up a basic HTTP server, configuring NGINX to serve content from custom directories, and using it as a reverse proxy to forward requests to backend servers.
+NGINX is a versatile web server that can be used to serve applications in a variety of ways, from simple web servers to complex proxy configurations. NGINX can be used to serve static HTML content, proxy requests to a backend server, or load balance traffic across multiple servers. In this guide, we&rsquo;ll explore the different ways to use NGINX to serve applications, including setting up a simple HTTP server, serving content from custom directories, and using it to load balance traffic across multiple upstream servers." />
+  <meta name="author" content="Meet Rajesh Gor" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/twitter.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link
+    rel="icon"
+    href="http://localhost:1313/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="http://localhost:1313/apple-touch-icon.png"
+  />
+
+  
+  <meta name="generator" content="Hugo 0.136.5">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-[--w] px-8 lg:justify-center">
+  <div class="relative z-50 ltr:mr-auto rtl:ml-auto flex items-center">
+    <a class="-translate-y-[1px] text-2xl font-medium" href="http://localhost:1313/"
+      >Meet Rajesh Gor</a
+    >
+    <div
+      class="btn-dark text-[0] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 ltr:-mr-8 rtl:-ml-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse">
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/"
+        >Home</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/work/"
+        >Work</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 rtl:space-x-reverse dark:invert ltr:lg:ml-14 rtl:lg:mr-14 lg:mt-0 lg:items-center"
+    >
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/meetgor21"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/mr-destructive"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/meetgor"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100vh-9rem)] max-w-[--w] px-8 pb-16 pt-14 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-14">
+    <h1 class="!my-0 pb-2.5">NGINX Survival Guide: Serving Web Applications</h1>
+
+    
+    <div class="text-xs antialiased opacity-60">
+      
+      <time>Jul 21, 2024</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="introduction">Introduction</h2>
+<p>In the second part of our NGINX Survival Guide, we dive into the practical aspects of using NGINX to serve web applications. This section will guide you through the essential tasks of setting up a basic HTTP server, configuring NGINX to serve content from custom directories, and using it as a reverse proxy to forward requests to backend servers.</p>
+<p>NGINX is a versatile web server that can be used to serve applications in a variety of ways, from simple web servers to complex proxy configurations. NGINX can be used to serve static HTML content, proxy requests to a backend server, or load balance traffic across multiple servers. In this guide, we&rsquo;ll explore the different ways to use NGINX to serve applications, including setting up a simple HTTP server, serving content from custom directories, and using it to load balance traffic across multiple upstream servers.</p>
+<h2 id="simple-http-server">Simple HTTP Server</h2>
+<p>NGINX serves as the default HTTP server on port 80 of your local machine if NGINX is properly installed and running on your system. If you head on to the localhost, you will see the default NGINX HTML page like the one below:</p>
+<p><img src="https://meetgor-cdn.pages.dev/nginx-survival-guide/nginx-default-page.png" alt="NGINX Default Page"></p>
+<p>This is the default HTML page served by NGINX as per the configuration in the <code>/etc/nginx/nginx.conf</code> file. The default folder for NGINX to serve HTML content is located at <code>/usr/share/nginx/html/index.html</code> , If you change the contents of this file and restart NGINX, the http server will load the new HTML content.</p>
+<p>Let&rsquo;s first look, at how we can serve a simple http message within the configuration file in NGINX.</p>
+<h2 id="serving-simple-text">Serving simple text</h2>
+<p>We will try to write our simple HTTP server from scratch, so it would be nice to empty the existing <code>/etc/nginx/nginx.conf</code> file or use other ports to serve the content rather than the default <code>127.0.0.1:80</code> port.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#66d9ef">http</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">server</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">listen</span> <span style="color:#ae81ff">8000</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">return</span> <span style="color:#ae81ff">200</span> <span style="color:#e6db74">&#34;Hello,</span> <span style="color:#e6db74">World!\n&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The above config will serve the text <code>Hello, World!</code> when there is a request to the URL <code>127.0.0.1:8000</code> or <code>localhost:8000</code> You can change the port per your requirements and even add a <code>server_name</code> for your domain name.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ curl http://127.0.0.1:8000 
+</span></span><span style="display:flex;"><span>Hello, World!
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ curl -i http://127.0.0.1:8000
+</span></span><span style="display:flex;"><span>HTTP/1.1 <span style="color:#ae81ff">200</span> OK
+</span></span><span style="display:flex;"><span>Server: nginx/1.18.0 <span style="color:#f92672">(</span>Ubuntu<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Date: Sat, <span style="color:#ae81ff">03</span> Feb <span style="color:#ae81ff">2024</span> 11:41:16 GMT
+</span></span><span style="display:flex;"><span>Content-Type: application/octet-stream
+</span></span><span style="display:flex;"><span>Content-Length: <span style="color:#ae81ff">14</span>
+</span></span><span style="display:flex;"><span>Connection: keep-alive
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Hello, World!
+</span></span></code></pre></div><p>As we can see the NGINX served the HTTP content when the request was made to port 8000 on the localhost.</p>
+<h2 id="serving-from-a-custom-pathfolder">Serving from a custom path/folder</h2>
+<p>But things are not like these in the real world, we need to serve an entire directory of HTML pages. We need to add the <code>root</code> directive with the path to the folder where our HTML content resides. The path should have the <code>index.html</code> file as the starting point of the request.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#66d9ef">http</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">server</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">listen</span> <span style="color:#ae81ff">8000</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">root</span> <span style="color:#e6db74">/srv/techstructive-blog</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">index</span> <span style="color:#e6db74">index.html</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>NOTE: The path to the HTML content needs to be accessible and the Nginx process should have the read permission to serve the contents.</strong></p>
+<p>It is commonly recommended to store HTML/static content files in directories such as <code>/srv</code> or <code>/var/www</code>. These paths follow conventions for serving static files and web applications in Unix-type operating systems. While it&rsquo;s not a strict requirement, adhering to these conventions can improve the organization and maintainability of web content.</p>
+<h2 id="serving-from-a-web-server">Serving from a web server</h2>
+<p>If you already have a web server running in a port on your system, you could use Nginx as a gateway to the application instead of exposing your application to the internet.</p>
+<p>We could use the <a href="https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass">proxy_pass</a> directive in the location setting to specify which URL to pass the request to, the <code>listen</code> will forward the request to the proxy specified in the location directive.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#66d9ef">http</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">server</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">listen</span> <span style="color:#ae81ff">80</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">location</span> <span style="color:#e6db74">/</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#f92672">proxy_pass</span> <span style="color:#e6db74">http://localhost:8001</span>;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>In the above example, the NGINX listens to port 80 in the local system and sends the request to the localhost at port 8001. The <code>proxy_pass</code> is used to specify the URL to redirect the request to.</p>
+<ul>
+<li>
+<p><strong>listen 80:</strong> Nginx listens for incoming requests on port 80, the standard HTTP port.</p>
+</li>
+<li>
+<p><strong>location /:</strong> This directive matches all incoming requests, regardless of the path.</p>
+</li>
+<li>
+<p><strong>proxy_pass</strong><a href="http://localhost:8001"><strong>http://localhost:8001</strong></a><strong>:</strong> Requests are forwarded to the web application running on <a href="http://localhost">localhost</a> at port 8001.</p>
+</li>
+</ul>
+<p>This example configuration is a basic building block for setting up more complex proxy configurations with NGINX.</p>
+<h2 id="serving-from-multiple-upstream-servers">Serving from Multiple Upstream Servers</h2>
+<p>NGINX can also serve content from multiple upstream servers, balancing the load between them. This is useful for high-traffic applications that require multiple backend servers to handle the load.</p>
+<p>What are upstream servers, you might ask, well in the context of NGINX, upstream servers refer to backend servers that handle the actual processing of requests. NGINX acts as a gateway, forwarding incoming requests to these upstream servers. This setup allows NGINX to manage the traffic efficiently and distribute it among multiple servers, which can be particularly beneficial for high-traffic applications. . For example, you might have your application running on <a href="http://localhost:8001"><code>localhost:8001</code></a> and <a href="http://localhost:8002"><code>localhost:8002</code></a>.</p>
+<p>Here’s an example configuration:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#66d9ef">http</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">upstream</span> <span style="color:#e6db74">myapp</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">server</span> <span style="color:#e6db74">backend1.example.com</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">server</span> <span style="color:#e6db74">backend2.example.com</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">server</span> <span style="color:#e6db74">backend3.example.com</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">server</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">listen</span> <span style="color:#ae81ff">80</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">location</span> <span style="color:#e6db74">/</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">proxy_pass</span> <span style="color:#e6db74">http://myapp</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>In this configuration:</p>
+<ul>
+<li>
+<p>The <code>upstream</code> block defines a named group of backend servers (<code>myapp</code>).</p>
+</li>
+<li>
+<p>The <code>server</code> block listens on port 80 and proxies requests to the upstream group defined earlier.</p>
+</li>
+<li>
+<p><code>upstream myapp</code>: This directive creates a group of backend servers named <code>myapp</code>.</p>
+</li>
+<li>
+<p><a href="http://backend1.example.com"><code>server backend1.example.com</code></a> : These directives list the backend servers that will handle the requests. These can be specified by hostname, IP address, or combination.</p>
+</li>
+<li>
+<p><code>proxy_pass</code> <a href="http://myapp"><code>http://myapp</code></a>: This directive tells NGINX to forward incoming requests to the <code>myapp</code> upstream group.</p>
+</li>
+</ul>
+<h3 id="why-use-upstream-servers">Why Use Upstream Servers?</h3>
+<p>Using upstream servers has several advantages:</p>
+<ul>
+<li>
+<p>Scalability: By distributing requests across multiple servers, you can handle more traffic and scale your application horizontally.</p>
+</li>
+<li>
+<p>Fault Tolerance: If one of the backend servers goes down, NGINX can continue to serve requests using the remaining servers, ensuring high availability.</p>
+</li>
+<li>
+<p>Load Distribution: Upstream servers help in balancing the load, which can improve the performance and responsiveness of your web application.</p>
+</li>
+</ul>
+<p>The below configuration sets up NGINX to act as a gateway that distributes incoming traffic to multiple upstream servers. It defines an upstream block with servers at <a href="http://localhost:8001"><code>localhost:8001</code></a> and <a href="http://localhost:8002"><code>localhost:8002</code></a>, and forward requests to these servers.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#66d9ef">http</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">upstream</span> <span style="color:#e6db74">myapp</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">server</span> localhost:<span style="color:#ae81ff">8001</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">server</span> localhost:<span style="color:#ae81ff">8002</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">server</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">listen</span> <span style="color:#ae81ff">80</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">location</span> <span style="color:#e6db74">/</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">proxy_pass</span> <span style="color:#e6db74">http://myapp</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The provided NGINX configuration sets up an upstream block named <code>myapp</code> with two backend servers running on <a href="http://localhost"><code>localhost</code></a> at ports 8001 and 8002. The server block listens on port 80 and uses a location block to match all incoming requests to the root URL (<code>/</code>). These requests are forwarded to the <code>myapp</code> upstream group via the <code>proxy_pass</code> directive, allowing NGINX to distribute the requests between the two backend servers, effectively balancing the load and enhancing the application&rsquo;s performance and reliability.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>From this part of ther series, we have learned how to set up a simple HTTP server to serve content from custom directories and using NGINX as a gateway to backend servers, which covered essential ways to utilize NGINX for serving web applications.</p>
+<p>That&rsquo;s it from this part of the series, we will look into detail how to use NGINX as a load balancer and reverse proxy, serving static files, and caching content in the next part of the series, where we&rsquo;ll dive deeper into advanced NGINX configurations.
+Thank you for reading, hopefully you found this helpful. If you have any feedback, questions, or queries drop them below in the comments or reach me out directly on my social handles.</p>
+<p>Happy Coding :)</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/nginx"
+      >nginx</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/web-development"
+      >web-development</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg !leading-[1.2] *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  >
+    
+    <a class="ltr:pr-3 rtl:pl-3" href="http://localhost:1313/post/golang-safely-using-maps/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Safely using Maps in Golang: Differences in declaration and initialization</span></a
+    >
+    
+    
+    <a class="ltr:ml-auto rtl:mr-auto justify-end pl-3" href="http://localhost:1313/post/golang-web-put-method/"
+      ><span>Golang Web: PUT Method</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="mx-auto flex h-[4.5rem] max-w-[--w] items-center px-8 text-xs uppercase tracking-wider opacity-60"
+>
+  <div class="mr-auto">
+  
+    &copy; 2024
+    <a class="link" href="http://localhost:1313/">Meet Rajesh Gor</a>
+  
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+
+  </body>
+</html>

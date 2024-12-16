@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Developer-Life on Meet Rajesh Gor</title>
+    <link>http://localhost:1313/tags/developer-life/</link>
+    <description>Recent content in Developer-Life on Meet Rajesh Gor</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 31 Dec 2023 00:15:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/developer-life/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2023: Year Review</title>
+      <link>http://localhost:1313/2023-review/</link>
+      <pubDate>Sun, 31 Dec 2023 00:15:00 +0000</pubDate>
+      <guid>http://localhost:1313/2023-review/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;2023, what a year! If you&amp;rsquo;re a developer and haven&amp;rsquo;t heard the word &amp;lsquo;AI&amp;rsquo; a million times, where have you been? With the introduction of Chat GPT in December 2022, the start of 2023 was buzzing with Open AI&amp;rsquo;s flagship product. I also did a &lt;a href=&#34;https://www.meetgor.com/2022-review/&#34;&gt;2022 review&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;The year 2023 was a pivotal year for me to gain experience in solving and delivering real-world problems to solutions. I went from a code-first approach to a code-last approach for solving a problem. The year was not ideal for freshers, as from the end of 2022 till 2023 there was a huge round of layoffs in big tech companies. The competition was too much for freshers and the AI hype added salt to the injury.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2022: Year Review</title>
+      <link>http://localhost:1313/2022-review/</link>
+      <pubDate>Sat, 31 Dec 2022 12:15:00 +0000</pubDate>
+      <guid>http://localhost:1313/2022-review/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Well, what a year! If 2021 was a start, 2022 was a year to convert a start into a goal. From collaborating on open-source projects to getting an internship, it was an exciting year! Created a couple dozen of projects(not finished as usual), wrote 40+ articles, did a couple of streams, learned the basics of golang, and spend 6 months as a backend dev intern at &lt;a href=&#34;https://thesolarlabs.com/&#34;&gt;Solarlabs&lt;/a&gt;, just a year that was awaited for the hard work over the span of 2 years.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

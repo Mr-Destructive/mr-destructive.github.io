@@ -1,0 +1,569 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en"
+  dir="ltr"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Safely using Maps in Golang: Differences in declaration and initialization - Meet Rajesh Gor</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Introduction
+This week, I was working on one of the API wrapper packages for golang, and that dealt with sending post requests with URL encoded values, setting cookies, and all the fun stuff. However, while I was constructing the body, I was using url.Value type to construct the body, and use that to add and set key-value pairs. However, I was getting a wired nil pointer reference error in some of the parts, I thought it was because of some of the variables I set manually. However, by debugging closer, I found out a common pitfall or bad practice of just declaring a type but initializing it and that causing nil reference errors." />
+  <meta name="author" content="Meet Rajesh Gor" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/twitter.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link
+    rel="icon"
+    href="http://localhost:1313/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="http://localhost:1313/apple-touch-icon.png"
+  />
+
+  
+  <meta name="generator" content="Hugo 0.136.5">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-[--w] px-8 lg:justify-center">
+  <div class="relative z-50 ltr:mr-auto rtl:ml-auto flex items-center">
+    <a class="-translate-y-[1px] text-2xl font-medium" href="http://localhost:1313/"
+      >Meet Rajesh Gor</a
+    >
+    <div
+      class="btn-dark text-[0] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 ltr:-mr-8 rtl:-ml-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse">
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/"
+        >Home</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/blog/"
+        >Blog</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/work/"
+        >Work</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 rtl:space-x-reverse dark:invert ltr:lg:ml-14 rtl:lg:mr-14 lg:mt-0 lg:items-center"
+    >
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/meetgor21"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/mr-destructive"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/meetgor"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100vh-9rem)] max-w-[--w] px-8 pb-16 pt-14 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-14">
+    <h1 class="!my-0 pb-2.5">Safely using Maps in Golang: Differences in declaration and initialization</h1>
+
+    
+    <div class="text-xs antialiased opacity-60">
+      
+      <time>Aug 31, 2024</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="introduction">Introduction</h2>
+<p>This week, I was working on one of the API wrapper packages for golang, and that dealt with sending post requests with URL encoded values, setting cookies, and all the fun stuff. However, while I was constructing the body, I was using <a href="https://pkg.go.dev/net/url#Values">url.Value</a> type to construct the body, and use that to add and set key-value pairs. However, I was getting a wired <code>nil</code> pointer reference error in some of the parts, I thought it was because of some of the variables I set manually. However, by debugging closer, I found out a common pitfall or bad practice of just declaring a type but initializing it and that causing <code>nil</code> reference errors.</p>
+<p>In this post, I will cover, what are maps, how to create maps, and especially how to properly declare and initialize them. Create a proper distinction between the declaration and initialization of maps or any similar data type in golang.</p>
+<h2 id="what-is-a-map-in-golang">What is a map in Golang?</h2>
+<p>A <a href="https://go.dev/src/runtime/map.go">map</a> or a hashmap in golang is a basic data type that allows us to store key-value pairs. Under the hood, it is a header map-like data structure that holds buckets, which are basically pointers to bucket arrays (contiguous memory). It has hash codes that store the actual key-value pairs, and pointers to new buckets if the current overflows with the number of keys. This is a really smart data structure that provides almost constant time access.</p>
+<h2 id="how-to-create-maps-in-golang">How to create maps in Golang</h2>
+<p>To create a simple map in golang, you can take an example of a letter frequency counter using a map of string and integer. The map will store the letters as keys and their frequency as values.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">words</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;hello how are you&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">letters</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">int</span>{}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">word</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">words</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">wordCount</span>[<span style="color:#a6e22e">word</span>]<span style="color:#f92672">++</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Word counts:&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">word</span>, <span style="color:#a6e22e">count</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">wordCount</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%s: %d\n&#34;</span>, <span style="color:#a6e22e">word</span>, <span style="color:#a6e22e">count</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ go run main.go
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Word counts:
+</span></span><span style="display:flex;"><span>e: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span> : <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>w: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>r: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>y: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>u: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>h: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>l: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>o: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>a: <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p>So, by initializing the map as <code>map[string]int{}</code> you will get an empty map. This can be then used to populate the keys and values, we iterate over the string, and for each character (rune) we cast that byte of character into the string and increment the value, the zero value for int is <code>0</code>, so by default if the key is not present, it will be zero, it is a bit of double-edged swords though, we never know the key is present in the map with the value <code>0</code> or the key is not present but the default value is <code>0</code>. For that, you need to check if the <code>key</code> exists in the map or not.</p>
+<p>For further details, you can check out my <a href="https://www.meetgor.com/golang-maps/">Golang Maps</a> post in detail.</p>
+<h2 id="difference-between-declaration-and-initialization">Difference between declaration and initialization</h2>
+<p>There is a difference in declaring and initializing any variable in a programming language and has to do a lot more with the implementation of the underlying type. In the case of primary data types like <code>int</code>, <code>string</code>, <code>float</code>, etc. there are default/zero values, so that is the same as the declaration and initialization of the variables. However, in the case of maps and slices, the declaration is just making sure the variable is available to the scope of the program, however for initialization is setting it to its default/zero value or the actual value that should be assigned.</p>
+<p>So, declaration simply makes the variable available within the scope of the program. For maps and slices, declaring a variable without initialization sets it to <code>nil</code>, meaning it points to no allocated memory and cannot be used directly.</p>
+<p>Whereas the <code>initialization</code> allocates memory and sets the variable to a usable state. For maps and slices, you need to explicitly initialize them using syntax like <code>myMap = make(map[keyType]valueType)</code> or <code>slice = []type{}</code>. Without this initialization, attempting to use the map or slice will lead to runtime errors, such as panics for accessing or modifying a nil map or slice.</p>
+<p>Let&rsquo;s looks at the values of a map when it is declared/initialized/not initialized.</p>
+<p>Imagine you&rsquo;re building a configuration manager that reads settings from a map. The map will be declared globally but initialized only when the configuration is loaded.</p>
+<ol>
+<li>Declared but not initialized</li>
+</ol>
+<p>The below code demonstrates a map access that is not initialized.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Global map to store configuration settings
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">configSettings</span> <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">string</span> <span style="color:#75715e">// Declared but not initialized
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Attempt to get a configuration setting before initializing the map
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">serverPort</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">getConfigSetting</span>(<span style="color:#e6db74">&#34;server_port&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Server port: %s\n&#34;</span>, <span style="color:#a6e22e">serverPort</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">getConfigSetting</span>(<span style="color:#a6e22e">key</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">configSettings</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#e6db74">&#34;Configuration settings map is not initialized&#34;</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">value</span>, <span style="color:#a6e22e">exists</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">configSettings</span>[<span style="color:#a6e22e">key</span>]
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">exists</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Setting not found&#34;</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">value</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ go run main.go
+</span></span><span style="display:flex;"><span>Server port: Setting not found
+</span></span></code></pre></div><ol start="2">
+<li>Declared and Initialized at the same time</li>
+</ol>
+<p>The below code demonstrates a map access that is initialized at the same time.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Global map to store configuration settings
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">configSettings</span> = <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">string</span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;server_port&#34;</span>:  <span style="color:#e6db74">&#34;8080&#34;</span>,
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;database_url&#34;</span>: <span style="color:#e6db74">&#34;localhost:5432&#34;</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">serverPort</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">getConfigSetting</span>(<span style="color:#e6db74">&#34;server_port&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Server port: %s\n&#34;</span>, <span style="color:#a6e22e">serverPort</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">getConfigSetting</span>(<span style="color:#a6e22e">key</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">value</span>, <span style="color:#a6e22e">exists</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">configSettings</span>[<span style="color:#a6e22e">key</span>]
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">exists</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Setting not found&#34;</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">value</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ go run main.go
+</span></span><span style="display:flex;"><span>Server port: <span style="color:#ae81ff">8080</span>
+</span></span></code></pre></div><ol start="3">
+<li>Declared and later initialized</li>
+</ol>
+<p>The below code demonstrates a map access that is initialized later.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Global map to store configuration settings
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">configSettings</span> <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">string</span> <span style="color:#75715e">// declared but not initialized
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Initialize configuration settings
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">initializeConfigSettings</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// if the function is not called, the map will be nil
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Get a configuration setting safely
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">serverPort</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">getConfigSetting</span>(<span style="color:#e6db74">&#34;server_port&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Server port: %s\n&#34;</span>, <span style="color:#a6e22e">serverPort</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">initializeConfigSettings</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">configSettings</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">configSettings</span> = make(<span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">string</span>) <span style="color:#75715e">// Properly initialize the map
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>		<span style="color:#a6e22e">configSettings</span>[<span style="color:#e6db74">&#34;server_port&#34;</span>] = <span style="color:#e6db74">&#34;8080&#34;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">configSettings</span>[<span style="color:#e6db74">&#34;database_url&#34;</span>] = <span style="color:#e6db74">&#34;localhost:5432&#34;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Configuration settings initialized&#34;</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">getConfigSetting</span>(<span style="color:#a6e22e">key</span> <span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">configSettings</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#e6db74">&#34;Configuration settings map is not initialized&#34;</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">value</span>, <span style="color:#a6e22e">exists</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">configSettings</span>[<span style="color:#a6e22e">key</span>]
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">exists</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Setting not found&#34;</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">value</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ go run main.go
+</span></span><span style="display:flex;"><span>Configuration settings initialized
+</span></span><span style="display:flex;"><span>Server port: <span style="color:#ae81ff">8080</span>
+</span></span></code></pre></div><p>In the above code, we declared the global map <code>configSettings</code> but didn&rsquo;t initialize it at that point, until we wanted to access the map. We initialize the map in the main function, this main function could be other specific parts of the code, and the global variable <code>configSettings</code> a map from another part of the code, by initializing it in the required scope, we prevent it from causing nil pointer access errors. We only initialize the map if it is <code>nil</code> i.e. it has not been initialized elsewhere in the code. This prevents overriding the map/flushing out the config set from other parts of the scope.</p>
+<h2 id="pitfalls-in-access-of-un-initialized-maps">Pitfalls in access of un-initialized maps</h2>
+<p>But since it deals with pointers, it comes with its own pitfalls like nil pointers access when the map is not initialized.</p>
+<p>Let&rsquo;s take a look at an example, a real case where this might happen.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;net/url&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">vals</span> <span style="color:#a6e22e">url</span>.<span style="color:#a6e22e">Values</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">vals</span>.<span style="color:#a6e22e">Add</span>(<span style="color:#e6db74">&#34;foo&#34;</span>, <span style="color:#e6db74">&#34;bar&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">vals</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This will result in a runtime panic.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#66d9ef">$</span> <span style="color:#e6db74">go</span> <span style="color:#e6db74">run</span> <span style="color:#e6db74">main.go</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">panic:</span> <span style="color:#e6db74">assignment</span> <span style="color:#e6db74">to</span> <span style="color:#e6db74">entry</span> <span style="color:#e6db74">in</span> <span style="color:#e6db74">nil</span> <span style="color:#e6db74">map</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">goroutine</span> <span style="color:#ae81ff">1</span> <span style="color:#e6db74">[running]:</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">net/url.Values.Add(...)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">/usr/local/go/src/net/url/url.go:902</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">main.main()</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">/home/meet/code/playground/go/main.go:10</span> <span style="color:#e6db74">+0x2d</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">exit</span> <span style="color:#e6db74">status</span> <span style="color:#ae81ff">2</span>
+</span></span></code></pre></div><p>This is because the <a href="https://pkg.go.dev/net/url#Values">url.Values</a> is a map of string and a list of string values. Since the underlying type is a map for <code>Values</code>, and in the example, we only have declared the variable <code>vals</code> with the type <code>url.Values</code>, it will point to a <code>nil</code> reference, hence the message on adding the value to the type. So, it is a good practice to use <code>make</code> while declaring or initializing a map data type. If you are not sure the underlying type is <code>map</code> then you could use <code>Type{}</code> to initialize an empty value of that type.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;net/url&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">vals</span> <span style="color:#f92672">:=</span> make(<span style="color:#a6e22e">url</span>.<span style="color:#a6e22e">Values</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// OR
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// vals := url.Values{}
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#a6e22e">vals</span>.<span style="color:#a6e22e">Add</span>(<span style="color:#e6db74">&#34;foo&#34;</span>, <span style="color:#e6db74">&#34;bar&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">vals</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ go run urlvals.go
+</span></span><span style="display:flex;"><span>map<span style="color:#f92672">[</span>foo:<span style="color:#f92672">[</span>bar<span style="color:#f92672">]]</span>
+</span></span><span style="display:flex;"><span>foo<span style="color:#f92672">=</span>bar
+</span></span></code></pre></div><p>It is also recommended by the <a href="https://go.dev/blog/maps">golang team</a> to use the make function while initializing a map. So, either use <code>make</code> for maps, slices, and channels, or initialize the empty value variable with <code>Type{}</code>. Both of them work similarly, but the latter is more generally applicable to structs as well.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Understanding the difference between declaring and initializing maps in Golang is essential for any developer, not just in golang, but in general. As we&rsquo;ve explored, simply declaring a map variable without initializing it can lead to runtime errors, such as panics when attempting to access or modify a nil map. Initializing a map ensures that it is properly allocated in memory and ready for use, thereby avoiding these pitfalls.</p>
+<p>By following best practices—such as using the make function or initializing with Type{}—you can prevent common issues related to uninitialized maps. Always ensure that maps and slices are explicitly initialized before use to safeguard against unexpected nil pointer dereferences</p>
+<p>Thank you for reading this post, If you have any questions, feedback, and suggestions, feel free to drop them in the comments.</p>
+<p>Happy Coding :)</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/go"
+      >go</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg !leading-[1.2] *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  >
+    
+    <a class="ltr:pr-3 rtl:pl-3" href="http://localhost:1313/blog/turso-libsql-db-golang/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Connect LibSQL Database hosted on Turso in a Golang Application</span></a
+    >
+    
+    
+    <a class="ltr:ml-auto rtl:mr-auto justify-end pl-3" href="http://localhost:1313/blog/nginx-02-web-servers/"
+      ><span>NGINX Survival Guide: Serving Web Applications</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="mx-auto flex h-[4.5rem] max-w-[--w] items-center px-8 text-xs uppercase tracking-wider opacity-60"
+>
+  <div class="mr-auto">
+  
+    &copy; 2024
+    <a class="link" href="http://localhost:1313/">Meet Rajesh Gor</a>
+  
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+
+  </body>
+</html>

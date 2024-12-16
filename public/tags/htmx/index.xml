@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Htmx on Meet Rajesh Gor</title>
+    <link>http://localhost:1313/tags/htmx/</link>
+    <description>Recent content in Htmx on Meet Rajesh Gor</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 05 Feb 2023 17:15:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/htmx/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Creating a Chat Application with Django and HTMX</title>
+      <link>http://localhost:1313/django-htmx-chat-app/</link>
+      <pubDate>Sun, 05 Feb 2023 17:15:00 +0000</pubDate>
+      <guid>http://localhost:1313/django-htmx-chat-app/</guid>
+      <description>&lt;h1 id=&#34;django--htmx-chat-application&#34;&gt;Django + HTMX Chat application&lt;/h1&gt;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In this article, we will be creating a Django project, which will be a chat-room kind of application. The user needs to authenticate to the app and then and there he/she can create or join rooms, every room will have some name and URL associated with it. So, the user simply needs to enter the name of the room, which will be unique. The user can then simply enter the messages in the chat room. This is a core chat application that uses web sockets.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django &#43; HTMX CRUD application</title>
+      <link>http://localhost:1313/django-htmx-crud/</link>
+      <pubDate>Sun, 31 Jul 2022 12:30:00 +0000</pubDate>
+      <guid>http://localhost:1313/django-htmx-crud/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Gone are the days of writing Ajax requests with javascript, just add a few parameters to the HTML content tags and you will be ready for sending requests to your backend. So, we are going back in time and correcting the way we think of APIs and client/server-side rendering. We are referring to the &lt;a href=&#34;https://en.wikipedia.org/wiki/Hypermedia&#34;&gt;Hypermedia model&lt;/a&gt; for levering the server-side processing of data. Let&amp;rsquo;s get our feets wet with this ancient but revolutionary methodology of development with &lt;a href=&#34;https://htmx.org/&#34;&gt;HTMX&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

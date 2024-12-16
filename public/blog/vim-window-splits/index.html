@@ -1,0 +1,447 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en"
+  dir="ltr"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Vim: Window Splits - Meet Rajesh Gor</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Introduction
+Have you ever been stuck in Vim opening multiple files within a single window? Didn&rsquo;t anyone tell you, you can create multiple windows and split them within a single tab. Definitely, the window splits will be in separate buffers. In this way you can create multiple windows inside of a single Tab, what are Tabs? You can learn some basics about it from my previous article about  Tabs in Vim. We can either create Vertical or Horizontal splits within the window making it flexible to work with multiple files in Vim. This article will look into the creation, navigation, closing, and rearrangement of Window Splits." />
+  <meta name="author" content="Meet Rajesh Gor" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/twitter.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link
+    rel="icon"
+    href="http://localhost:1313/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="http://localhost:1313/apple-touch-icon.png"
+  />
+
+  
+  <meta name="generator" content="Hugo 0.136.5">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-[--w] px-8 lg:justify-center">
+  <div class="relative z-50 ltr:mr-auto rtl:ml-auto flex items-center">
+    <a class="-translate-y-[1px] text-2xl font-medium" href="http://localhost:1313/"
+      >Meet Rajesh Gor</a
+    >
+    <div
+      class="btn-dark text-[0] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 ltr:-mr-8 rtl:-ml-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse">
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/"
+        >Home</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/blog/"
+        >Blog</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/work/"
+        >Work</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 rtl:space-x-reverse dark:invert ltr:lg:ml-14 rtl:lg:mr-14 lg:mt-0 lg:items-center"
+    >
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/meetgor21"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/mr-destructive"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/meetgor"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100vh-9rem)] max-w-[--w] px-8 pb-16 pt-14 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-14">
+    <h1 class="!my-0 pb-2.5">Vim: Window Splits</h1>
+
+    
+    <div class="text-xs antialiased opacity-60">
+      
+      <time>Aug 6, 2021</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="introduction">Introduction</h2>
+<p>Have you ever been stuck in Vim opening multiple files within a single window? Didn&rsquo;t anyone tell you, you can create multiple windows and split them within a single tab. Definitely, the window splits will be in separate buffers. In this way you can create multiple windows inside of a single Tab, what are Tabs? You can learn some basics about it from my previous article about  <a href="https://mr-destructive.github.io/techstructive-blog/vim/2021/08/03/Vim-Tabs.html">Tabs in Vim</a>. We can either create Vertical or Horizontal splits within the window making it flexible to work with multiple files in Vim. This article will look into the creation, navigation, closing, and rearrangement of Window Splits.</p>
+<h2 id="creating-a-window-split">Creating a Window Split</h2>
+<p>Creating Window splits is quite straightforward. You should keep in mind the following things though:</p>
+<ul>
+<li>You can create a horizontal or a vertical split within a window.</li>
+<li>Creating a Split either vertically or horizontally can shorten the current window&rsquo;s size, making it equally spaced.</li>
+</ul>
+<p>Let&rsquo;s take a look at creating the vertical and horizontal splits one by one:</p>
+<h3 id="vertical-splits">Vertical Splits</h3>
+<p>Vertical Split as the name suggests, it will split the current window into <strong>two halves vertically</strong> or a <strong>standing split between two windows</strong>.</p>
+<p>The below image clearly shows a vertical split between two windows. Here we are splitting a single window into two windows. We can also think it of in splitting the window from left to right.</p>
+<p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1628232885853/xtBgWb-Yg.png" alt="image.png"></p>
+<p>To create a vertical split, you can use <code>:vsp</code> or <code>:vsplit</code> to create a split of the same file/ blank file.</p>
+<p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1628233753115/4seJbY-h9.gif" alt="vsp.gif"></p>
+<p>If you already have a file open, it will open the same file in the split as long as you don&rsquo;t specify which file to open. You can specify the name of the file after the command <code>:vsp filename</code> or <code>:vsplit filename</code></p>
+<p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1628233871768/B3D_3NNGo.gif" alt="vsp.gif"></p>
+<p>It&rsquo;s not like that you can create only a single split, you can create multiple vertical splits. That can get pretty wild pretty quickly.</p>
+<p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1628234228391/vmJxW5HOo.png" alt="image.png"></p>
+<p>In the above screenshot, I have created 5 vertical splits from a single window, so making them equally wide and evenly spaced. This might not be useful every time but can get quite handy in some tricky situations.</p>
+<h3 id="horizontal-splits">Horizontal Splits</h3>
+<p>Similar to Vertical splits, we have horizontal Splits indicating to split from top to bottom. We can <strong>split a single window into two halves horizontally</strong> or a <strong>sleeping split between the windows</strong>.</p>
+<p>The below image clearly shows a horizontal split between two windows. Here we are splitting a single window into two windows. We can also think it of in splitting the window from top to bottom.</p>
+<p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1628233063400/5PVdEsGHZ.png" alt="image.png"></p>
+<p>To create a horizontal split, you can use <code>:sp</code> or <code>:split</code> to create a horizontal split of the same file/ blank file. This will create a blank file inside a horizontal split.</p>
+<p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1628235156757/ckfDxh-1D.gif" alt="sp.gif"></p>
+<p>Similar to the vertical splits, you can open files by creating the split. You can use the command <code>:sp filename</code> or <code>:split filename</code> to create the horizontal split between the windows and opening a specified file in it.</p>
+<p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1628235452142/eVGrEZmHVK.gif" alt="sp.gif"></p>
+<p>Again as seen in the vertical split, we can create as many splits as we like. This looks very ugly but who knows when you may need this. We can basically create Splits in any order of vertical or horizontal, we&rsquo;ll see it in the later section to the same.</p>
+<p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1628235679425/9dtK5TV6G.png" alt="image.png"></p>
+<h3 id="vertical-and-horizontal-splits-together">Vertical and Horizontal Splits Together</h3>
+<p>We can also create Vertical split and horizontal splits independently like we are not restricted to only creating the only kinds of splits at a time. You can create a vertical split once and then can create a horizontal split within the vertical split created, in this way we can make good use of both the splits as per our needs.</p>
+<p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1628236573469/7FOJIgP-z.png" alt="image.png"></p>
+<p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1628236677571/CCeVePLkp.png" alt="image.png"></p>
+<h2 id="moving-around-splits">Moving around Splits</h2>
+<p>Now let&rsquo;s talk about the navigation around these splits, it&rsquo;s again a simple thing. We can use <code>Ctrl+w</code> as our primary command along with Vim navigation to move around the splits. Like for example <code>Ctrl + w + h</code> will take you to the left split to your current open window. You can also use <code>Ctrl+w</code>** twice** to hop around to the next window split in a repeating loop.</p>
+<p>So, we can use:</p>
+<p><code>Ctrl + w </code>+ <code>w</code> -&gt; Switch to the next split (in the order of creation of those splits).</p>
+<p><code>Ctrl + w </code> + <code>h</code> -&gt; Move to the left split.</p>
+<p><code>Ctrl + w </code> + <code>l</code> -&gt; Move to the right split.</p>
+<p><code>Ctrl + w </code> + <code>j</code>  -&gt; Move to the below split.</p>
+<p><code>Ctrl + w </code> + <code>k</code>  -&gt; Move to a upper split.</p>
+<p>These commands might be good enough to pull you through any splits from anywhere, it just becomes easy to use Vim navigation inside of these. You can use arrow keys if you are stuck somewhere but using Vim key bindings will work out of the box.</p>
+<h2 id="creating-splits-using-keyboard-shortcuts">Creating Splits using Keyboard shortcuts</h2>
+<p>If you think you are wasting time going into the command mode and typing the commands to create splits, well there are some shortcuts for you.</p>
+<p><code>Ctrl + w</code> + <code>v</code> -&gt; Create a vertical split.</p>
+<p><code>Ctrl + w </code>+ <code>s</code> -&gt; Create a horizontal split.</p>
+<p>This will open the split with the current file in the original window, so if you need to change the file, you can use the edit command (<code>:e filename</code>) inside the split.</p>
+<h2 id="rearranging-the-window-splits">Rearranging the Window Splits</h2>
+<p>If you have a  specific set of splits of a kind open, you can rotate between those. Like for example, if we have a horizontal split, you can rotate the split to move the upper split down and below split up.</p>
+<p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1628240624930/HBIKPummz.gif" alt="cwr.gif"></p>
+<p>From the above illustration, we can see we rotated(swapped) the splits. We can also use certain commands to arrange the splits into appropriate positions according to the user.</p>
+<p><code>Ctrl + w</code> + <code>r</code> -&gt; Swap the two splits(either horizontal or vertical)</p>
+<p><code>Ctrl + w</code> + <code>H</code> -&gt; Move the split to the left ( <code>Ctrl + w</code> + <code>Shift + h</code>).</p>
+<p><code>Ctrl + w</code> + <code>J</code> -&gt; Move the split down ( <code>Ctrl + w</code> + <code>Shift + j</code>).</p>
+<p><code>Ctrl + w</code> + <code>K</code> -&gt; Move the split up ( <code>Ctrl + w</code> + <code>Shift + k</code>). .</p>
+<p><code>Ctrl + w</code> + <code>L</code> -&gt; Move the split to the right ( <code>Ctrl + w</code> + <code>Shift + l</code>).</p>
+<p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1628242295049/_HadBQPrs.gif" alt="spr.gif"></p>
+<p>We can see that we were able to swap the splits to a location suitable according to our wish. We can definitely switch the splits internally as well.</p>
+<p>We can resize the splits as per the requirement and remove the equality in those splits. We have a couple of options to do this:</p>
+<p><code>Ctrl +w</code> + <code>+</code> -&gt;  Increase the height of the current split.</p>
+<p><code>Ctrl +w</code> + <code>-</code> -&gt;  Decrease the height of the current split.</p>
+<p><code>Ctrl +w</code> + <code>&gt;</code> -&gt;  Increase the width of the current split.</p>
+<p><code>Ctrl +w</code> +  <code>&lt;</code> -&gt;  Decrease the width of the current split.</p>
+<p><code>Ctrl +w</code> + <code>=</code> -&gt;  Make the splits equal in width and height.</p>
+<p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1628243827459/nL3mus88d.gif" alt="spr.gif"></p>
+<p>We can also use <code>:resize {number}</code> to manually set the size of the horizontal split and <code>:vertical resize {number}</code> to manually set the size of the vertical split. This is really risky, like if you know what you are doing then it&rsquo;s totally fine. The commands demonstrated earlier are really adjustable and user-friendly.</p>
+<p>We can also use <code>Ctrl + w</code> + <code>_</code> to minimize all the window split except the current one.</p>
+<h2 id="closing-the-splits">Closing the Splits</h2>
+<p>Now after doing all sorts of wizardry with the window splits the finishing touch is to close those splits after use. We can surely use <code>:q</code> to close the current window split but that is not intuitive to enter each split and manually close all of them, we can use:</p>
+<p><code>Ctrl +w</code> + <code>c</code> -&gt;  Close the current split.</p>
+<p><code>Ctrl +w</code> + <code>o</code> -&gt;  Quit all other splits except the current one.</p>
+<p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1628244089101/Ebdup7wNE.gif" alt="closesp.gif"></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>So, we have seen the basics of using Window Splits in Vim. Please let me know if there is some important point that is missing. Thank you for reading through here. We have seen how to create, navigate, rearrange, closing and other basic stuff related to Window splits in Vim.</p>
+<h3 id="references">References:</h3>
+<ul>
+<li><a href="https://sodocumentation.net/vim/topic/1705/split-windows">Sodocumentation</a></li>
+<li><a href="https://linuxhint.com/vim_split_screen/">Linux Hint Vim Split Screen</a></li>
+<li><a href="https://gist.github.com/Starefossen/5957088">Starefossen</a></li>
+</ul>
+<p>Hopefully, this might have given you some good idea to deal with Vim in windows splits. Happy Coding and Viming :)</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/vim"
+      >vim</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg !leading-[1.2] *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  >
+    
+    <a class="ltr:pr-3 rtl:pl-3" href="http://localhost:1313/blog/vim-buffers/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Vim: Buffers</span></a
+    >
+    
+    
+    <a class="ltr:ml-auto rtl:mr-auto justify-end pl-3" href="http://localhost:1313/blog/vim-tabs/"
+      ><span>Vim: Tabs</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="mx-auto flex h-[4.5rem] max-w-[--w] items-center px-8 text-xs uppercase tracking-wider opacity-60"
+>
+  <div class="mr-auto">
+  
+    &copy; 2024
+    <a class="link" href="http://localhost:1313/">Meet Rajesh Gor</a>
+  
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+
+  </body>
+</html>

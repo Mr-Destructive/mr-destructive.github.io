@@ -1,0 +1,46 @@
+baseURL: https://example.org/
+languageCode: en-us
+title: Meet Rajesh Gor
+theme: paper
+author: "Meet"
+paginate: 20
+languageCode: "en"
+DefaultContentLanguage: "en"
+enableInlineShortcodes: true
+
+params:
+  color: 'linen'
+  twitter: 'meetgor21'
+  github: 'mr-destructive'
+  linkedin: "meetgor"
+  devto: "mr_destructive"
+  youtube: "meet-technically"
+
+
+markup:
+  markup.goldmark:
+    markup.goldmark.renderer:
+      unsafe: true
+
+
+permalinks:
+  blog: "/:slug/"
+
+menu:
+  main:
+    - name: "Home"
+      url: "/"
+      weight: 1
+    - name: "Blog"
+      url: "/blog/"
+      weight: 2
+    - name: "About"
+      url: "/about/"
+      weight: 3
+    - name: "Work"
+      url: "/work/"
+      weight: 4
+
+taxonomies:
+  series: "series"
+  projects: "projects"

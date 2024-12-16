@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on Meet Rajesh Gor</title>
+    <link>http://localhost:1313/tags/python/</link>
+    <description>Recent content in Python on Meet Rajesh Gor</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 30 Nov 2023 20:45:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Connecting LibSQL database with Python</title>
+      <link>http://localhost:1313/libsql-python/</link>
+      <pubDate>Thu, 30 Nov 2023 20:45:00 +0000</pubDate>
+      <guid>http://localhost:1313/libsql-python/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;LibSQL is an &lt;strong&gt;Open Contribution&lt;/strong&gt; fork of SQLite. Open Contribution means that it allows suggestions and contributions from the community as opposed to SQLite which is open source but doesn&amp;rsquo;t accept community contributions.&lt;/p&gt;&#xA;&lt;h2 id=&#34;installation-of-libsql-clients&#34;&gt;Installation of LibSQL Client(s)&lt;/h2&gt;&#xA;&lt;p&gt;There are two libraries for LibSQL to interact with Python, the &lt;a href=&#34;https://github.com/libsql/libsql-client-py/&#34;&gt;libsql-client&lt;/a&gt; and the &lt;a href=&#34;https://github.com/libsql/libsql-experimental-python&#34;&gt;libsql-experimental-python&lt;/a&gt;. The former is the recommended client as it is stable, whereas the latter is in development and has the latest features from the libsql database engine, however, it is compatible with the &lt;a href=&#34;https://docs.python.org/3/library/sqlite3.html&#34;&gt;sqlite&lt;/a&gt; module.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creating a Chat Application with Django and HTMX</title>
+      <link>http://localhost:1313/django-htmx-chat-app/</link>
+      <pubDate>Sun, 05 Feb 2023 17:15:00 +0000</pubDate>
+      <guid>http://localhost:1313/django-htmx-chat-app/</guid>
+      <description>&lt;h1 id=&#34;django--htmx-chat-application&#34;&gt;Django + HTMX Chat application&lt;/h1&gt;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In this article, we will be creating a Django project, which will be a chat-room kind of application. The user needs to authenticate to the app and then and there he/she can create or join rooms, every room will have some name and URL associated with it. So, the user simply needs to enter the name of the room, which will be unique. The user can then simply enter the messages in the chat room. This is a core chat application that uses web sockets.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PGCLI: Postgres from the terminal</title>
+      <link>http://localhost:1313/pgcli-pg-from-terminal/</link>
+      <pubDate>Sun, 07 Aug 2022 20:30:00 +0000</pubDate>
+      <guid>http://localhost:1313/pgcli-pg-from-terminal/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Have you ever used the Postgres database and did you know you don&amp;rsquo;t have to launch PGAdmin every time you want to write SQL queries, you can write down those queries even inside a terminal with a python package. It&amp;rsquo;s PGCLI, that can act as an editor window for writing SQL queries for Postgres Databases. We can simply execute SQL queries in a PSQL-like shell with additional features like autocompletion, text-editing modes, file input/output options, etc.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django &#43; HTMX CRUD application</title>
+      <link>http://localhost:1313/django-htmx-crud/</link>
+      <pubDate>Sun, 31 Jul 2022 12:30:00 +0000</pubDate>
+      <guid>http://localhost:1313/django-htmx-crud/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Gone are the days of writing Ajax requests with javascript, just add a few parameters to the HTML content tags and you will be ready for sending requests to your backend. So, we are going back in time and correcting the way we think of APIs and client/server-side rendering. We are referring to the &lt;a href=&#34;https://en.wikipedia.org/wiki/Hypermedia&#34;&gt;Hypermedia model&lt;/a&gt; for levering the server-side processing of data. Let&amp;rsquo;s get our feets wet with this ancient but revolutionary methodology of development with &lt;a href=&#34;https://htmx.org/&#34;&gt;HTMX&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Deploying Django Project with Railway Nixpacks</title>
+      <link>http://localhost:1313/django-deploy-railway-nixpacks/</link>
+      <pubDate>Sat, 16 Jul 2022 16:15:00 +0000</pubDate>
+      <guid>http://localhost:1313/django-deploy-railway-nixpacks/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;We have seen how to deploy a Django application on railway app in the &lt;a href=&#34;https://www.meetgor.com/django-deploy-railway/&#34;&gt;previous article&lt;/a&gt; of the &lt;a href=&#34;https://www.meetgor.com/series/django-deployment/&#34;&gt;series&lt;/a&gt;. We deployed the django project using the Heroku Buildpacks under the hood. The railway app provides a couple of options on how to build your web application. Currently, there are three options, one of which is the &lt;a href=&#34;https://devcenter.heroku.com/articles/heroku-20-stack&#34;&gt;heroku buildpacks&lt;/a&gt; which is the default one, second, we have the nixpacks which we will see today, and the third is the &lt;a href=&#34;https://paketo.io/&#34;&gt;Paketo buildpack&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django Project with PostgreSQL Deployment on Railway App</title>
+      <link>http://localhost:1313/django-deploy-railway/</link>
+      <pubDate>Thu, 19 May 2022 20:30:00 +0000</pubDate>
+      <guid>http://localhost:1313/django-deploy-railway/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;We have already seen the process of deployment of a Django app on Heroku, now we can move to another platform which is &lt;a href=&#34;https://railway.app&#34;&gt;Railway App&lt;/a&gt;. This allows a faster and more intuitive way to deploy a Django app(or any sort of web app). This platform has several &lt;a href=&#34;https://railway.app/starters&#34;&gt;Starter Apps&lt;/a&gt; for shipping your app in several clicks, definitely, it would require some configuration and tweaking a bit.&lt;/p&gt;&#xA;&lt;p&gt;We will be following similar steps from the &lt;a href=&#34;https://mr-destructive.github.io/techstructive-blog/series/django-deployment/&#34;&gt;Django-Heroku Deployment Guide&lt;/a&gt; for configuring and setting up our Django project for the deployment on the Railway app. We explore a few different ways to create and deploy a Django project on Railway.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django &#43; PostgreSQL Deployment on Heroku</title>
+      <link>http://localhost:1313/django-deploy-heroku/</link>
+      <pubDate>Sun, 15 May 2022 20:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/django-deploy-heroku/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Django projects are quite easy to build and simple to understand, you might have created a Django application and wanted to show it to the world? You can deploy a basic Django application with a database(PostgreSQL) with Heroku. It provides a decent free tier with some great features and add-ons. A free tier Heroku account has a limitation of 5 apps, limited data in the database, limited connections to the server per month, and so on.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Feedparser: Python package for reading RSS feeds</title>
+      <link>http://localhost:1313/python-feedparser/</link>
+      <pubDate>Sat, 26 Mar 2022 15:45:00 +0000</pubDate>
+      <guid>http://localhost:1313/python-feedparser/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://pypi.org/project/feedparser/&#34;&gt;Feedparser&lt;/a&gt; is a simple but powerful python package that can be used to extract information about a specific webpage or a publication with its RSS feed(not only RSS). By providing the RSS feed link, we can get structured information in the form of python lists and dictionaries. It can be basically used in a pythonic way to read RSS feeds, it is really simple to use and it even normalizes different types of feeds.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Pipx: A python package consumption tool for CLI packages</title>
+      <link>http://localhost:1313/pipx-intro/</link>
+      <pubDate>Sun, 20 Mar 2022 20:30:00 +0000</pubDate>
+      <guid>http://localhost:1313/pipx-intro/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Previously, I explored the &lt;a href=&#34;https://mr-destructive.github.io/techstructive-blog/pipenv-intro/&#34;&gt;pipenv&lt;/a&gt; as a python package management tool and this week it is time for exploring a python CLI package isolation tool called &lt;code&gt;pipx&lt;/code&gt;. It is a really simple and powerful tool for running commands as an executable from an isolated environment. Those commands should be associated with a python package that has CLI. In pipx, we install the package once and we can use the package anywhere on our system isolated from other virtual environments.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Pipenv: Python&#39;s Official Package Management tool</title>
+      <link>http://localhost:1313/pipenv-intro/</link>
+      <pubDate>Mon, 14 Mar 2022 14:35:00 +0000</pubDate>
+      <guid>http://localhost:1313/pipenv-intro/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Pipenv is Python&amp;rsquo;s officially recommended Package management tool, as the name suggests it combines the power of &lt;code&gt;pip&lt;/code&gt; and &lt;code&gt;virtualenv&lt;/code&gt;. It is really powerful and gives control of package management for a python project. It also has support for adding dev packages, python versions, smartly recognizing main and derived package installation/uninstallation, and so on. It is the &lt;a href=&#34;https://packaging.python.org/en/latest/tutorials/managing-dependencies/#managing-dependencies&#34;&gt;official package management tool for Python&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;It is quite similar to npm for Nodejs in Javascript, or bundle for Ruby, cargo for Rust, and so on. It really simple and easy to use as it manages the overhead for package management for us and hence it is also a high-level package management tool as opposed to pip, which is not as powerful as Pipenv. So, in this article, we&amp;rsquo;ll explore &lt;a href=&#34;https://pypi.org/project/pipenv/&#34;&gt;Pipenv&lt;/a&gt; package manager for Python and how you can use it in your next python project. Let&amp;rsquo;s get started.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Podevcast: A single source for developer podcasts</title>
+      <link>http://localhost:1313/podevcast-project/</link>
+      <pubDate>Fri, 18 Feb 2022 22:30:00 +0530</pubDate>
+      <guid>http://localhost:1313/podevcast-project/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Hello Developers! Want to listen to programming podcasts from a single place? Podevcast is the place you should be searching for.&lt;/p&gt;&#xA;&lt;p&gt;I am Meet Gor and I present this project as a submission to the Netlify x Hashnode Hackathon. Podevcast is a webpage(static) for listening to podcasts centered around developers and programming. Just pick your favorite one and start listening straight away. Let&amp;rsquo;s dive into the making of Podevcast. Head on to &lt;a href=&#34;https://podevcast.netlify.app/&#34;&gt;https://podevcast.netlify.app/&lt;/a&gt; to check out the live app.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django Basics: CRUD API</title>
+      <link>http://localhost:1313/django-basics-crud-api/</link>
+      <pubDate>Thu, 03 Feb 2022 23:45:00 +0530</pubDate>
+      <guid>http://localhost:1313/django-basics-crud-api/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;After understanding the admin section and setting up a database, we can finally move on to the CRUD API in Django. We will create a API in pure Django with Model Form, Class Based Views and templates. We will go in two parts in this section, first revising the workflow of the app creation and setup, the next part all about CRUD API. We&amp;rsquo;ll dive into a lot of familiar topics and concepts from previous parts but there are is still a lot to learn beyond the basics.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django Basics: Admin Section</title>
+      <link>http://localhost:1313/django-basics-admin/</link>
+      <pubDate>Wed, 26 Jan 2022 22:25:00 +0530</pubDate>
+      <guid>http://localhost:1313/django-basics-admin/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In the previous section, we configured the database in our Django project. We will move ahead and interact with the Admin Section in Django. Django has a built-in Admin Section which we can use to manage our apps and models. We will create a admin account(superuser) and try to render our custom Model in the Admin Interface. We shall further discuss the customization in the Admin section as per our requirements and necessity.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django Basics: Database Configurations</title>
+      <link>http://localhost:1313/django-database-conf/</link>
+      <pubDate>Fri, 21 Jan 2022 16:40:34 +0000</pubDate>
+      <guid>http://localhost:1313/django-database-conf/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In this part of the series, we will create an external database and configure the settings for that database. We also look into the process of migrations which is to convert a model which we created in the previous part into the actual structure/schema for the database. I&amp;rsquo;ll be using &lt;code&gt;PostgreSQL&lt;/code&gt; for most of the demonstrations but it should be similar for other database management tools. This part will make your Django project link to a local database.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django Basics: Creating Models</title>
+      <link>http://localhost:1313/django-basics-models/</link>
+      <pubDate>Tue, 04 Jan 2022 22:15:00 +0530</pubDate>
+      <guid>http://localhost:1313/django-basics-models/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;We have seen the basics of Django templating in the previous parts of the series. Now, we can move on to the more backend stuff in Django which deals with the Databases, queries, admin section, and so on. In this particular part, we&amp;rsquo;ll cover the fundamental part of any application in Django i.e the &lt;code&gt;Model&lt;/code&gt;. We&amp;rsquo;ll understand what the model is, how to structure one, how to create relationships and add constraints on the fields, etc.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django Basics: Static Files</title>
+      <link>http://localhost:1313/django-basics-static-files/</link>
+      <pubDate>Mon, 27 Dec 2021 22:45:00 +0530</pubDate>
+      <guid>http://localhost:1313/django-basics-static-files/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;After creating templates, it should be rather tempting to add some styles and logic to them. Well yes, we&amp;rsquo;ll see how to add static files in a web application using django. Static files are not only CSS, but also media/images and Javascript files as well. In this part of the series, we&amp;rsquo;ll cover the basics of working with static files in django including the configuration, rendering and storing of the static files.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django Basics: Templates</title>
+      <link>http://localhost:1313/django-basics-templates/</link>
+      <pubDate>Tue, 14 Dec 2021 16:45:00 +0530</pubDate>
+      <guid>http://localhost:1313/django-basics-templates/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;After learning the basics of views and URLs, we can now move on to the next concept i.e. Templates. In Django, Templates are quite an important component for the application as it acts as the &lt;code&gt;frontend&lt;/code&gt; for the web application. With the help of templates and some features provided by Django, it becomes very intuitive and simple to make dynamic web content.&#xA;In this part, we understand what are templates and what is the way to render them.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django Basics: Views and URLS</title>
+      <link>http://localhost:1313/django-basics-views-urls/</link>
+      <pubDate>Tue, 30 Nov 2021 12:03:00 +0530</pubDate>
+      <guid>http://localhost:1313/django-basics-views-urls/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;After getting familiar with the folder structure of the Django framework, we&amp;rsquo;ll create our first view in an app. The basics of creating and mapping a view with a URL will be cleared by the end of this part.&lt;/p&gt;&#xA;&lt;h2 id=&#34;creating-views&#34;&gt;Creating Views&lt;/h2&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Views are the functions written in python as a logic control unit of the webserver&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;To create a view or typically-like function, we need to write a function in the &lt;code&gt;views.py&lt;/code&gt; file inside of the application folder. The function name can be anything but should be a sensible name as far as its usability is concerned. Let&amp;rsquo;s take a basic example of sending an HTTP response of &amp;ldquo;Hello World&amp;rdquo;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django Basics: Folder Structure</title>
+      <link>http://localhost:1313/django-basics-folder-struct/</link>
+      <pubDate>Wed, 24 Nov 2021 15:45:00 +0530</pubDate>
+      <guid>http://localhost:1313/django-basics-folder-struct/</guid>
+      <description>&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;After setting up the development for the Django framework, we will explore the project structure. In this part, we understand the structure along with the various components in the Project as well as individual apps. We will understand the objective of each file and folder in a brief and hopefully by the end of this part, you&amp;rsquo;ll be aware of how the Django project is structured and get a good overview of the flow of development in the Django project.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django Basics: Setup and Installation</title>
+      <link>http://localhost:1313/django-basics-setup/</link>
+      <pubDate>Sat, 20 Nov 2021 16:30:00 +0530</pubDate>
+      <guid>http://localhost:1313/django-basics-setup/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;The crucial aspect of starting to learn any framework is the ease to set it up and Django by far is the easiest of the options out there. There is just a few lines of code to install django if you already have python installed in your system. In this article, we see how to setup a django project along with a virtual environment.&lt;/p&gt;&#xA;&lt;p&gt;If you already have python and pip installed, you can move on to the &lt;a href=&#34;#setting-up-virtual-environment-in-python&#34;&gt;virtual environment setup&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django Basics: What is it?</title>
+      <link>http://localhost:1313/django-basics-intro/</link>
+      <pubDate>Tue, 16 Nov 2021 20:45:00 +0530</pubDate>
+      <guid>http://localhost:1313/django-basics-intro/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Welcome to Django Basics series, in this series we&amp;rsquo;ll explore the basics of the Django web framework. In this part, we&amp;rsquo;ll understand what this web framework provides and what actually the back-end development consists of. We&amp;rsquo;ll discuss where Django is used and why it is a great choice for beginners as well as experienced developers.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-django&#34;&gt;What is Django?&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Introduction&#34;&gt;Django&lt;/a&gt; is a back-end web framework. It is based on python which means you have to write most of the project&amp;rsquo;s code in Python. But Django comes with a lot of boilerplate code and thus it becomes quite quick in the development.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Flask and Django - the backend web frameworks</title>
+      <link>http://localhost:1313/flask-django-frameworks/</link>
+      <pubDate>Sun, 24 Oct 2021 19:00:00 +0530</pubDate>
+      <guid>http://localhost:1313/flask-django-frameworks/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;We all have seen the buzz around web frameworks like Django, Flask, Node.js, etc but have you taken time to learn all of them? No, and you shouldn&amp;rsquo;t! Because many web frameworks share the same principle and workflow with a bit of difference. It&amp;rsquo;s just like learning one programming language and applying the same concepts in a different syntax and mechanism. In the world of web frameworks, this is the case as well, but most of them will disagree with it as every web framework is unique in its design and that&amp;rsquo;s true, don&amp;rsquo;t get me wrong.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django &#43; Auth0 Quick Setup</title>
+      <link>http://localhost:1313/djagno-auth0-script/</link>
+      <pubDate>Tue, 28 Sep 2021 20:08:47 +0530</pubDate>
+      <guid>http://localhost:1313/djagno-auth0-script/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;This is a guide and a walkthrough of how to quickly set up a base Django project with Auth0 as integration for authentication and authorization. I will walk you through the Django setup and how to use and integrate the functionalities of the Auth0.  I will also discuss how why you should be using Auth0 and why I love it.&lt;/p&gt;&#xA;&lt;p&gt;The script takes &lt;code&gt;2:44&lt;/code&gt; minutes time to do everything from scratch. From installing virtualenv in python to integrating the Auth0 application.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Dev Quotes: A platform for developers to quote and get inspired - Auth0 x Hashnode Hackathon</title>
+      <link>http://localhost:1313/devquotes-platform/</link>
+      <pubDate>Fri, 27 Aug 2021 23:45:00 +0530</pubDate>
+      <guid>http://localhost:1313/devquotes-platform/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;No one can understand the joy in finishing a personal project, except the dreamer&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;It was a while,since I have posted an article here, as I was busy on a project or a hackathon.&lt;/p&gt;&#xA;&lt;p&gt;Hello, world! I am Meet a student and a self-taught web developer. I like to make and break stuff, especially when it comes to programming and Linux. I like shell scripting and learning different languages at once, love to learn about Vim and Linux everyday.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django Quick Setup Script</title>
+      <link>http://localhost:1313/django-setup-script/</link>
+      <pubDate>Sun, 15 Aug 2021 18:50:46 +0530</pubDate>
+      <guid>http://localhost:1313/django-setup-script/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Once you learn something very neatly and understand it very clearly, it feels like you are wasting time doing things over and over again. Same things in setting up a Django project, you feel like you could save those typing minutes by making a script.&lt;/p&gt;&#xA;&lt;p&gt;In this article, we will make a script a batch script for windows and a BASH script for Linux/macOS. We will make a virtual environment using python and then install the libraries and dependencies like in this case we will install Django. You can also tinker with these scripts and install other dependencies if you want like Django rest framework, crispy forms, markdown, Redis, etc. We will also make a Django project using the positional parameter passed before running the script from the command line.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Setting up Vim for Python</title>
+      <link>http://localhost:1313/vim-for-python/</link>
+      <pubDate>Sun, 06 Jun 2021 11:35:25 +0530</pubDate>
+      <guid>http://localhost:1313/vim-for-python/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Vim is quite a powerful text editor which can add performance to the already fast typed language Python. Vim can be highly customizable and efficient to use as it has the power of &lt;strong&gt;adding custom plugins and plugins managers, key mappings&lt;/strong&gt;, and the most critical weapon of vim - Access to the terminal straight away.&#xA;This is not a full-featured guide of using vim for python, it&amp;rsquo;s just a quick setup for using python on vim blazingly fast!!&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

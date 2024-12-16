@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nginx-Survival-Guide on Meet Rajesh Gor</title>
+    <link>http://localhost:1313/series/nginx-survival-guide/</link>
+    <description>Recent content in Nginx-Survival-Guide on Meet Rajesh Gor</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 21 Jul 2024 22:45:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/series/nginx-survival-guide/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>NGINX Survival Guide: Serving Web Applications</title>
+      <link>http://localhost:1313/nginx-02-web-servers/</link>
+      <pubDate>Sun, 21 Jul 2024 22:45:00 +0000</pubDate>
+      <guid>http://localhost:1313/nginx-02-web-servers/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In the second part of our NGINX Survival Guide, we dive into the practical aspects of using NGINX to serve web applications. This section will guide you through the essential tasks of setting up a basic HTTP server, configuring NGINX to serve content from custom directories, and using it as a reverse proxy to forward requests to backend servers.&lt;/p&gt;&#xA;&lt;p&gt;NGINX is a versatile web server that can be used to serve applications in a variety of ways, from simple web servers to complex proxy configurations. NGINX can be used to serve static HTML content, proxy requests to a backend server, or load balance traffic across multiple servers. In this guide, we&amp;rsquo;ll explore the different ways to use NGINX to serve applications, including setting up a simple HTTP server, serving content from custom directories, and using it to load balance traffic across multiple upstream servers.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NGINX Basics and Setup</title>
+      <link>http://localhost:1313/nginx-01-basics/</link>
+      <pubDate>Sun, 14 Jan 2024 18:15:00 +0000</pubDate>
+      <guid>http://localhost:1313/nginx-01-basics/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;NGINX is a tool that can be used as a web server, reverse proxy, load balancer, streaming media files, application gateway, content caching, and so much more. It can be said to be a Swiss army knife for optimizing and securing your web application deployment.&lt;/p&gt;&#xA;&lt;p&gt;The series &amp;ldquo;NGINX Survival Guide&amp;rdquo; will start from the basics and cover the bare minimum required for a backend developer to get going with NGINX. I will use Docker widely throughout this course as it is a great combination with NGINX to server web applications. However, you can use NGINX without docker, and spawn multiple servers.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Github on Meet Rajesh Gor</title>
+    <link>http://localhost:1313/tags/github/</link>
+    <description>Recent content in Github on Meet Rajesh Gor</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 09 Sep 2021 17:42:30 +0530</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/github/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Filter and Find an Issue on GitHub</title>
+      <link>http://localhost:1313/find-filter-github-issues/</link>
+      <pubDate>Thu, 09 Sep 2021 17:42:30 +0530</pubDate>
+      <guid>http://localhost:1313/find-filter-github-issues/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Are you stuck in finding an open-source project to contribute to?&lt;/p&gt;&#xA;&lt;p&gt;We will see how you can pick up an issue on GitHub appropriate as per your preferences of languages, labels, complexity, and thus you can find a Community or a project to work and continue with further contributions.&lt;/p&gt;&#xA;&lt;p&gt;This process might not be as efficient but is quite helpful for beginners or people getting started to contributing to Open Source.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

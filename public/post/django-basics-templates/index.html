@@ -1,0 +1,628 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en"
+  dir="ltr"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Django Basics: Templates - Meet Rajesh Gor</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Introduction
+After learning the basics of views and URLs, we can now move on to the next concept i.e. Templates. In Django, Templates are quite an important component for the application as it acts as the frontend for the web application. With the help of templates and some features provided by Django, it becomes very intuitive and simple to make dynamic web content.
+In this part, we understand what are templates and what is the way to render them." />
+  <meta name="author" content="Meet Rajesh Gor" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/twitter.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link
+    rel="icon"
+    href="http://localhost:1313/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="http://localhost:1313/apple-touch-icon.png"
+  />
+
+  
+  <meta name="generator" content="Hugo 0.136.5">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-[--w] px-8 lg:justify-center">
+  <div class="relative z-50 ltr:mr-auto rtl:ml-auto flex items-center">
+    <a class="-translate-y-[1px] text-2xl font-medium" href="http://localhost:1313/"
+      >Meet Rajesh Gor</a
+    >
+    <div
+      class="btn-dark text-[0] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 ltr:-mr-8 rtl:-ml-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse">
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/"
+        >Home</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/work/"
+        >Work</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 rtl:space-x-reverse dark:invert ltr:lg:ml-14 rtl:lg:mr-14 lg:mt-0 lg:items-center"
+    >
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/meetgor21"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/mr-destructive"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/meetgor"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100vh-9rem)] max-w-[--w] px-8 pb-16 pt-14 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-14">
+    <h1 class="!my-0 pb-2.5">Django Basics: Templates</h1>
+
+    
+    <div class="text-xs antialiased opacity-60">
+      
+      <time>Dec 14, 2021</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="introduction">Introduction</h2>
+<p>After learning the basics of views and URLs, we can now move on to the next concept i.e. Templates. In Django, Templates are quite an important component for the application as it acts as the <code>frontend</code> for the web application. With the help of templates and some features provided by Django, it becomes very intuitive and simple to make dynamic web content.
+In this part, we understand what are templates and what is the way to render them.</p>
+<h2 id="what-are-templates">What are Templates</h2>
+<p>Templates are simply a <code>html</code> document or kind of a wireframe for content to be displayed for the web app. Templates allow us to render some more relevant pieces of data rather than simple text HTTP responses as we did earlier. We can even re-use certain components of a template in other using the Django Templating Language (more on this later).</p>
+<p>So, using HTML templates, we can write a complete Webpage. If you are unfamiliar with HTML, you can check out the basics of HTML with this <a href="https://www.youtube.com/playlist?list=PL081AC329706B2953">playlist</a>.</p>
+<p>Even If you are not familiar with HTML, this tutorial might be quite basic and not overwhelm you with all the tags.</p>
+<h2 id="creating-templates">Creating Templates</h2>
+<p>To create a Template, we can write a simple HTML document like the below:</p>
+<p>Create a folder <code>templates</code> in the base folder, inside the templates folder, create a file <code>index.html</code></p>
+<p><strong>templates\index.html</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE html&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">html</span> <span style="color:#a6e22e">lang</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">head</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">charset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">title</span>&gt;Django Blog&lt;/<span style="color:#f92672">title</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">head</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">h1</span>&gt;Hello, World!&lt;/<span style="color:#f92672">h1</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">html</span>&gt;
+</span></span></code></pre></div><p>This is a simple HTML template, with the <code>&lt;h1&gt;</code> tags. As Django is a framework, there is a standard for storing all the templates for the project and application. There are a couple of standard of options:</p>
+<ul>
+<li>One of which is creating a <code>templates</code> folder in the root folder as discussed earlier, also we need to modify the <code>project_name/settings.py</code> file.</li>
+</ul>
+<p>Inside the <code>settings.py</code> file, we need to locate the <code>TEMPLATES</code> section and modify as below:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>TEMPLATES <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;BACKEND&#39;</span>: <span style="color:#e6db74">&#39;django.template.backends.django.DjangoTemplates&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;DIRS&#39;</span>: [os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(BASE_DIR, <span style="color:#e6db74">&#39;templates&#39;</span>),],
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;APP_DIRS&#39;</span>: <span style="color:#66d9ef">True</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;OPTIONS&#39;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;context_processors&#39;</span>: [
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;django.template.context_processors.debug&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;django.template.context_processors.request&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;django.contrib.auth.context_processors.auth&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;django.contrib.messages.context_processors.messages&#39;</span>,
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>]
+</span></span></code></pre></div><p>In this snippet, we have changed the <code>DIRS</code> option to search the templates in the folder <code>templates</code> in the root directory.</p>
+<ul>
+<li>The other standard is creating a templates folder in each application.</li>
+</ul>
+<p>We can create the templates folder in each application instead of a single folder.</p>
+<h2 id="rendering-templates">Rendering Templates</h2>
+<p>After creating a template and making the required settings to make sure Django is able to pick up those templates, we need to work with views and URLs to actually render those templates.</p>
+<p>There are a couple of ways to render templates in Django and some of them are discussed below:</p>
+<h3 id="using-templateview">Using TemplateView</h3>
+<p><a href="https://docs.djangoproject.com/en/3.2/ref/class-based-views/base/#django.views.generic.base.TemplateView">TemplateView</a> is a class which is comes with <code>django.views.generic</code> library. This class allows us to render a template by providing in the name of the template, arguments or variables to be parsed, and so on.</p>
+<p>The simplest way to render a template is by the following way:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> django.contrib <span style="color:#f92672">import</span> admin
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> django.urls <span style="color:#f92672">import</span> path, include
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> django.views.generic <span style="color:#f92672">import</span> TemplateView
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>urlpatterns <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    path(<span style="color:#e6db74">&#39;admin/&#39;</span>, admin<span style="color:#f92672">.</span>site<span style="color:#f92672">.</span>urls),
+</span></span><span style="display:flex;"><span>    path(<span style="color:#e6db74">&#39;&#39;</span>, TemplateView<span style="color:#f92672">.</span>as_view(template_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;index.html&#34;</span>), name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;index&#34;</span>),
+</span></span><span style="display:flex;"><span>]
+</span></span></code></pre></div><p>We need to import the <code>TemplateView</code> from the <code>django.core.generic</code> so as to use the class for rendering the template.</p>
+<p>The <code>TemplateView</code> class takes in a couple of arguments, we&rsquo;ll use the <code>template_name</code> as an argument that takes in the name of the template. Here, we use the <code>index.html</code> as the template which we created earlier. We don&rsquo;t need to specify the entire path to the template as we make modifications in the <code>settings.py</code> file to pick the template from the mentioned directory. We use <code>as_view</code> function to load the class as a function/view.</p>
+<p>Activate the virtual environment for the proper functioning of the project.</p>
+<p>After activating the virtual environment we can run the server as follows:</p>
+<pre tabindex="0"><code class="language-terminal" data-lang="terminal">python manage.py runserver
+</code></pre><p>We can now see the following output and thus, we are now rendering a simple HTML template in Django.</p>
+<p><img src="https://res.cloudinary.com/dgpxbrwoz/image/upload/v1639384994/blogmedia/templ1_vbwp5d.png" alt=""></p>
+<h3 id="using-render">Using render</h3>
+<p>We can also use the <a href="https://docs.djangoproject.com/en/4.0/topics/http/shortcuts/#render">render function</a> from <code>django.shortcuts</code> to simply render a template. But we will create a Python function or a View to actually render the template. So, we&rsquo;ll create a View-URL map as we created in the <a href="https://mr-destructive.github.io/techstructive-blog/django/python/web-development/2021/11/30/Django-Basics-P4.html">previous part</a>.</p>
+<p>Firstly, let&rsquo;s create a view function in the <code>post/views.py</code> file, more generally (<code>app_name/views.py</code> file). Firstly, we need to import the render function from <code>django.shortcuts</code> and then return the function call of render.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> render
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">home</span>(request):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> render(request,<span style="color:#e6db74">&#39;index.html&#39;</span>)
+</span></span></code></pre></div><p>And in the URLs, we&rsquo;ll create a different pattern like for e.g. &lsquo;home/&rsquo;</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> django.urls <span style="color:#f92672">import</span> path
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> post <span style="color:#f92672">import</span> views
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>urlpatterns<span style="color:#f92672">=</span>[
+</span></span><span style="display:flex;"><span>        path(<span style="color:#e6db74">&#39;home/&#39;</span>,views<span style="color:#f92672">.</span>home,name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;home&#34;</span>),
+</span></span><span style="display:flex;"><span>        ]
+</span></span></code></pre></div><p>So, after creating the View-URL map and making sure the URL of the app is loaded in the project URLs, we can see the result as a simple HTML template.</p>
+<p><img src="https://res.cloudinary.com/dgpxbrwoz/image/upload/v1639386932/blogmedia/templ2_rgoppj.png" alt=""></p>
+<h2 id="django-templating-language">Django Templating Language</h2>
+<p>The <a href="https://docs.djangoproject.com/en/3.2/ref/templates/language/">Django Templating Language</a> is Django&rsquo;s way of making templates more dynamic and easy to write dynamic web applications. We&rsquo;ll take a brief look at what we can do with this type of Templating Language in Django.</p>
+<h3 id="variables">Variables</h3>
+<p>This is the most common use case for the Django Templating Language/Engine as we can use the <a href="https://docs.djangoproject.com/en/3.2/ref/templates/language/#variables">variables</a> from the Backend and inject it in the template. We can parse the variable into the template by the syntax : <code>{{ variable_name &quot; }}}}</code></p>
+<p>To show its use cases, we can declare a variable in a view and then parse it in the Template. Though it is not dynamic right now we can later on fetch values from the database and store them in the form of variables in our views.</p>
+<p><strong>templates/home.html</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE html&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">html</span> <span style="color:#a6e22e">lang</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">head</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">charset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">title</span>&gt;Django Blog&lt;/<span style="color:#f92672">title</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">head</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">h1</span>&gt;Hello, {{ name }}&lt;/<span style="color:#f92672">h1</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">html</span>&gt;
+</span></span></code></pre></div><p><strong>post/views.py</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> render
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">variable_demo</span>(request):
+</span></span><span style="display:flex;"><span>    name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Kevin&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74">&#39;home.html&#39;</span>, {<span style="color:#e6db74">&#39;name&#39;</span>:name})
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#The name can be anything, like a database query object, form detail, etc</span>
+</span></span></code></pre></div><p>As we can see the variable in views is passed as a dictionary in python. The reference key along with a value of the variable as the name of the variable. We will use the key in the templates to parse the value of the variable.</p>
+<p><strong>post/urls.py</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> django.urls <span style="color:#f92672">import</span> path
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> post <span style="color:#f92672">import</span> views
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>urlpatterns<span style="color:#f92672">=</span>[
+</span></span><span style="display:flex;"><span>        path(<span style="color:#e6db74">&#39;home/&#39;</span>,views<span style="color:#f92672">.</span>home,name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;home&#34;</span>),
+</span></span><span style="display:flex;"><span>        path(<span style="color:#e6db74">&#39;vardemo/&#39;</span>,views<span style="color:#f92672">.</span>variable_demo, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;var&#34;</span>),
+</span></span><span style="display:flex;"><span>        ]
+</span></span></code></pre></div><p><img src="https://res.cloudinary.com/dgpxbrwoz/image/upload/v1639389288/blogmedia/templ3_wvhagw.png" alt="variable demo"></p>
+<p>As we can see, we were able to load the variable into the template using the Django Templating Engine.</p>
+<h3 id="conditional-statement">Conditional statement</h3>
+<p>We can even use the conditional statement in the Template using a very simple syntax. We can use <code>{% if condition&quot;  }} %}</code> to use certain special kinds of blocks in the Template. We need to end those blocks as well using the syntax <code>{% endif  %}</code>, here <code>if</code> can be other blocks which we&rsquo;ll explore ahead.</p>
+<p>To create a basic if condition in the template, we can understand with the following example.</p>
+<p><strong>app_name/views.py</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> render
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> random <span style="color:#f92672">import</span> randint
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">if_demo</span>(request):
+</span></span><span style="display:flex;"><span>   number <span style="color:#f92672">=</span> randint(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74">&#39;if_else.html&#39;</span>, {<span style="color:#e6db74">&#39;num&#39;</span>:number})
+</span></span></code></pre></div><p>Here, we have used the key name as <code>num</code> indicating we can give different names to the key which needs to be used in the template to render the values.</p>
+<p><strong>app_name/urls.py</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> django.urls <span style="color:#f92672">import</span> path
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> post <span style="color:#f92672">import</span> views
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>urlpatterns <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>        path(<span style="color:#e6db74">&#39;if/&#39;</span>, views<span style="color:#f92672">.</span>if_demo, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ifdemo&#34;</span>),
+</span></span><span style="display:flex;"><span>        ]
+</span></span></code></pre></div><p><strong>templates/if_else.html</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE html&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">html</span> <span style="color:#a6e22e">lang</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">head</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">charset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">title</span>&gt;Django Blog&lt;/<span style="color:#f92672">title</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">head</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>    {{ num }}
+</span></span><span style="display:flex;"><span>    {% if num &gt; 5 %}
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">h2</span>&gt;It&#39;s Greater then 5&lt;/<span style="color:#f92672">h2</span>&gt;
+</span></span><span style="display:flex;"><span>    {% elif num == 5 %}
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">h2</span>&gt;It&#39;s five!&lt;/<span style="color:#f92672">h2</span>&gt;
+</span></span><span style="display:flex;"><span>    {% else %}
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">h2</span>&gt;It&#39;s less than 5&lt;/<span style="color:#f92672">h2</span>&gt;
+</span></span><span style="display:flex;"><span>    {% endif %}
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">html</span>&gt;
+</span></span></code></pre></div><p><img src="https://res.cloudinary.com/dgpxbrwoz/image/upload/v1639411425/blogmedia/templ3_exj0fv.png" alt="if-else demo"></p>
+<p>So, as we can see that, we can use the if-else conditions in the template and that is already powerful. This can be a bit messy as to handle mathematical operations or conditions into a single condition. This can really be used for really large datasets that can be shimmed down to really less coding and also improve readability.</p>
+<h3 id="for-loop">For loop</h3>
+<p>Now, the most crucial component of the Django templating language is the loops. We can actually iterate over objects/lists in the template. This becomes a huge concept for actually making a dynamic web application. We n\might want to iterate over all the entries in a database, or any other form of data which can make the app a lot dynamic and feel real-time.</p>
+<p>The syntax of for loop is almost similar to the if-else condition. We just replace the condition with the iterator and the list/object from the view context. <code>{% for i in list %}</code>, also end the for loop like <code>{% endfor %}</code>.</p>
+<p><strong>app_name/views.py</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> render
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">for_demo</span>(request):
+</span></span><span style="display:flex;"><span>    sports <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;football&#39;</span>, <span style="color:#e6db74">&#39;cricket&#39;</span>, <span style="color:#e6db74">&#39;volleyball&#39;</span>, <span style="color:#e6db74">&#39;hockey&#39;</span>, <span style="color:#e6db74">&#39;basketball&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74">&#39;for.html&#39;</span>, {<span style="color:#e6db74">&#39;sport_list&#39;</span>: sports})
+</span></span></code></pre></div><p>We have created a simple Python list called <code>sports</code> and we parse them to the template using a dictionary object, <code>sport_list</code> as the key for storing the value of the <code>sports</code> list.</p>
+<p><strong>app_name/urls.py</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> django.urls <span style="color:#f92672">import</span> path
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> post <span style="color:#f92672">import</span> views
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>urlpatterns <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>        path(<span style="color:#e6db74">&#39;for/&#39;</span>, views<span style="color:#f92672">.</span>for_demo, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fordemo&#34;</span>),
+</span></span><span style="display:flex;"><span>        ]
+</span></span></code></pre></div><p><strong>templates/for.html</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE html&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">html</span> <span style="color:#a6e22e">lang</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">head</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">charset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">title</span>&gt;Django Blog&lt;/<span style="color:#f92672">title</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">head</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">ul</span>&gt;
+</span></span><span style="display:flex;"><span>        {% for sport in sport_list %}
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">li</span>&gt;{{ sport }}&lt;/<span style="color:#f92672">li</span>&gt;
+</span></span><span style="display:flex;"><span>        {% endfor %}
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">ul</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">html</span>&gt;
+</span></span></code></pre></div><p><img src="https://res.cloudinary.com/dgpxbrwoz/image/upload/v1639475328/blogmedia/templ3_q8z8fr.png" alt="for loop demo"></p>
+<p>We have used simple for loop in Pythonic syntax, we use an iterator in this case, <code>sport</code> acts as an iterator. We use this to store values one by one from the list <code>sport_list</code> which was earlier passed in the views as a key in the dictionary.</p>
+<p>Hence, this is quite scalable and used to fetch the objects/entries in the database and hence making it a lot easier to make a dynamic web application faster.</p>
+<h2 id="template-inheritance">Template Inheritance</h2>
+<p>So, far we have seen that we need to create the base template again and again like all the basic HTML elements, title, and all the basic structure. But what if, we can reuse a specific template in another and extend the functionality of that template into a new one. This avoids the redundancy of writing the entire basic template or the layout of a web app over and over again.</p>
+<p>To do that, Django has the Template inheritance. We can use a template as its basic layout or a specific component in the web application. Again, similar to the for, if-else blocks the syntax for inheriting a template is quite similar.</p>
+<p>Take, for example, the home.html which consisted of only a <code>&lt;h1&gt;</code> tag in it. We can use this kind of template in other templates to really make it the home page. For that, we first need to enclose the template in a <code>block</code>, which is what allows us to use it in other templates.
+To create a <code>block</code>, we simply need to write the following syntax before the component which we do not want in other templates:</p>
+<p><strong>templates/home.html</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#75715e">&lt;!DOCTYPE html&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">html</span> <span style="color:#a6e22e">lang</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">head</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">charset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">title</span>&gt;Django Blog&lt;/<span style="color:#f92672">title</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">head</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">h1</span>&gt;Hello, World!&lt;/<span style="color:#f92672">h1</span>&gt;
+</span></span><span style="display:flex;"><span>    {% block body %}
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">p</span>&gt;This is not going to get inherited &lt;/<span style="color:#f92672">p</span>&gt;
+</span></span><span style="display:flex;"><span>    {% endblock %}
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">p</span>&gt;This will be inherited&lt;/<span style="color:#f92672">p</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">html</span>&gt;
+</span></span></code></pre></div><p>In this we have used the <code>blocks</code> with a name like <code>body</code> as <code>{% block body %}</code> this can be anything you like. We end the block with the similar syntax as the for/if blocks as <code>{% endblock %}</code>. Anything in between the blocks i.e <code>block block_name</code> and <code>endblock</code> is not inherited i.e it is unique to this template.</p>
+<p>We will see how we can use this template in other templates. We will actually extend this template and use the blocks to render the content in the template.</p>
+<p><strong>templates/if_else.html</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>{% extends &#39;home.html&#39; %}
+</span></span><span style="display:flex;"><span>{% block body %}
+</span></span><span style="display:flex;"><span>    {{ num }}
+</span></span><span style="display:flex;"><span>    {% if num &gt; 5 %}
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">h2</span>&gt;It&#39;s Greater then 5&lt;/<span style="color:#f92672">h2</span>&gt;
+</span></span><span style="display:flex;"><span>    {% elif num == 5 %}
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">h2</span>&gt;It&#39;s five!&lt;/<span style="color:#f92672">h2</span>&gt;
+</span></span><span style="display:flex;"><span>    {% else %}
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">h2</span>&gt;It&#39;s less than 5&lt;/<span style="color:#f92672">h2</span>&gt;
+</span></span><span style="display:flex;"><span>    {% endif %}
+</span></span><span style="display:flex;"><span>{% endblock %}
+</span></span></code></pre></div><p>So, we first say to Django to extend the <code>home</code> template i.e. the Django will load the blocks from this template only, remember it will just load and not use the blocks until we explicitly tell it to.</p>
+<p>To use the blocks or kind of plug in the template content in the <code>if_else.html</code> or any other template, we need to again call the <code>blocks</code>. Here, we need to write the content inside the <code>blocks</code> to properly parse the blocks as this is an HTML template. The order of opening and closing elements do matter.
+So, when we say <code>endblock</code> the last part of the base template is loaded i.e. the closing <code>body</code> and <code>html</code> tags. This is like plugging the template as it is before and after the block body.</p>
+<p><strong>app_name/views.py</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> render
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">home</span>(request):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74">&#39;home.html&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> random <span style="color:#f92672">import</span> randint
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">if_demo</span>(request):
+</span></span><span style="display:flex;"><span>   number <span style="color:#f92672">=</span> randint(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74">&#39;if_else.html&#39;</span>, {<span style="color:#e6db74">&#39;num&#39;</span>:number})
+</span></span></code></pre></div><p><strong>app_name/urls.py</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> django.urls <span style="color:#f92672">import</span> path
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> post <span style="color:#f92672">import</span> views
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>urlpatterns <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>        path(<span style="color:#e6db74">&#39;&#39;</span>, views<span style="color:#f92672">.</span>home, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;home&#34;</span>),
+</span></span><span style="display:flex;"><span>        path(<span style="color:#e6db74">&#39;if/&#39;</span>, views<span style="color:#f92672">.</span>if_demo, name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ifdemo&#34;</span>),
+</span></span><span style="display:flex;"><span>        ]
+</span></span></code></pre></div><p><img src="https://res.cloudinary.com/dgpxbrwoz/image/upload/v1639479714/blogmedia/tempinher2_enisls.png" alt="">
+<img src="https://res.cloudinary.com/dgpxbrwoz/image/upload/v1639477721/blogmedia/tempinher_lk0op0.png" alt="template inheritance demo"></p>
+<p><img src="https://res.cloudinary.com/dgpxbrwoz/image/upload/v1639479954/blogmedia/template-inh_lc8szo.gif" alt=""></p>
+<p>The above gif illustrates the example in a neat way. The block is loaded from the given template as the extended template and hence it plugs the block into the frame of the template.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>So, from this part of the series, we were able to understand the concept of Templates in Django, we were able to use variables, loops, conditional statements, and template inheriting in a Django application. In the next part, we&rsquo;ll try to touch up with the static files and see how to properly structure and configure them.</p>
+<p>Thank you for reading, if you didn&rsquo;t understand any of the examples, please let me know, I&rsquo;ll be happy to share the code. Happy Coding :)</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/django"
+      >django</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/python"
+      >python</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/web-development"
+      >web-development</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg !leading-[1.2] *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  >
+    
+    <a class="ltr:pr-3 rtl:pl-3" href="http://localhost:1313/post/django-basics-static-files/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Django Basics: Static Files</span></a
+    >
+    
+    
+    <a class="ltr:ml-auto rtl:mr-auto justify-end pl-3" href="http://localhost:1313/post/django-basics-views-urls/"
+      ><span>Django Basics: Views and URLS</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="mx-auto flex h-[4.5rem] max-w-[--w] items-center px-8 text-xs uppercase tracking-wider opacity-60"
+>
+  <div class="mr-auto">
+  
+    &copy; 2024
+    <a class="link" href="http://localhost:1313/">Meet Rajesh Gor</a>
+  
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Django-Deployment on Meet Rajesh Gor</title>
+    <link>http://localhost:1313/series/django-deployment/</link>
+    <description>Recent content in Django-Deployment on Meet Rajesh Gor</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 16 Jul 2022 16:15:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/series/django-deployment/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Deploying Django Project with Railway Nixpacks</title>
+      <link>http://localhost:1313/django-deploy-railway-nixpacks/</link>
+      <pubDate>Sat, 16 Jul 2022 16:15:00 +0000</pubDate>
+      <guid>http://localhost:1313/django-deploy-railway-nixpacks/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;We have seen how to deploy a Django application on railway app in the &lt;a href=&#34;https://www.meetgor.com/django-deploy-railway/&#34;&gt;previous article&lt;/a&gt; of the &lt;a href=&#34;https://www.meetgor.com/series/django-deployment/&#34;&gt;series&lt;/a&gt;. We deployed the django project using the Heroku Buildpacks under the hood. The railway app provides a couple of options on how to build your web application. Currently, there are three options, one of which is the &lt;a href=&#34;https://devcenter.heroku.com/articles/heroku-20-stack&#34;&gt;heroku buildpacks&lt;/a&gt; which is the default one, second, we have the nixpacks which we will see today, and the third is the &lt;a href=&#34;https://paketo.io/&#34;&gt;Paketo buildpack&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django Project with PostgreSQL Deployment on Railway App</title>
+      <link>http://localhost:1313/django-deploy-railway/</link>
+      <pubDate>Thu, 19 May 2022 20:30:00 +0000</pubDate>
+      <guid>http://localhost:1313/django-deploy-railway/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;We have already seen the process of deployment of a Django app on Heroku, now we can move to another platform which is &lt;a href=&#34;https://railway.app&#34;&gt;Railway App&lt;/a&gt;. This allows a faster and more intuitive way to deploy a Django app(or any sort of web app). This platform has several &lt;a href=&#34;https://railway.app/starters&#34;&gt;Starter Apps&lt;/a&gt; for shipping your app in several clicks, definitely, it would require some configuration and tweaking a bit.&lt;/p&gt;&#xA;&lt;p&gt;We will be following similar steps from the &lt;a href=&#34;https://mr-destructive.github.io/techstructive-blog/series/django-deployment/&#34;&gt;Django-Heroku Deployment Guide&lt;/a&gt; for configuring and setting up our Django project for the deployment on the Railway app. We explore a few different ways to create and deploy a Django project on Railway.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django &#43; PostgreSQL Deployment on Heroku</title>
+      <link>http://localhost:1313/django-deploy-heroku/</link>
+      <pubDate>Sun, 15 May 2022 20:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/django-deploy-heroku/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Django projects are quite easy to build and simple to understand, you might have created a Django application and wanted to show it to the world? You can deploy a basic Django application with a database(PostgreSQL) with Heroku. It provides a decent free tier with some great features and add-ons. A free tier Heroku account has a limitation of 5 apps, limited data in the database, limited connections to the server per month, and so on.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lua on Meet Rajesh Gor</title>
+    <link>http://localhost:1313/tags/lua/</link>
+    <description>Recent content in Lua on Meet Rajesh Gor</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 09 Jul 2022 20:30:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/lua/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Configure Neovim in Lua</title>
+      <link>http://localhost:1313/neovim-vimscript-to-lua/</link>
+      <pubDate>Sat, 09 Jul 2022 20:30:00 +0000</pubDate>
+      <guid>http://localhost:1313/neovim-vimscript-to-lua/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;It has been a while since I have written a Vim article. Finally, I got some ideas after configuring my Neovim setup for Lua. I recently migrated to Ubuntu a couple of months back and it has been a cool change from Windows 7!&lt;/p&gt;&#xA;&lt;p&gt;In this article, we&amp;rsquo;ll see how you can set up neovim for Lua. Since Neovim 0.5, it supports lua out of the box, so in the recent release 0.7, it added more native support to lua making it a lot easier to configure and play with neovim. So, we will see how we can use lua to convert all the 200 liner vimscript into lua (We can even have packages and modules:) We will cover how to configure your keymaps, pull up all the plugins, vim options, and other customizations.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

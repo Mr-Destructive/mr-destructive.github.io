@@ -1,0 +1,689 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en"
+  dir="ltr"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Advent of Code Day 4 in Golang: Finding XMAS and X-MAS - Meet Rajesh Gor</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Introduction
+Moving on to day 4, we have a grid problem in front of us, we are given some numbers in the form of a grid, i.e. some rows and columns with some upper case letters. What we need to do is to find is the word XMAS in any direction (up, left, down, right, diagonals), and in the second part we need to find the word MAS forming an X." />
+  <meta name="author" content="Meet Rajesh Gor" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/twitter.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link
+    rel="icon"
+    href="http://localhost:1313/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="http://localhost:1313/apple-touch-icon.png"
+  />
+
+  
+  <meta name="generator" content="Hugo 0.136.5">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-[--w] px-8 lg:justify-center">
+  <div class="relative z-50 ltr:mr-auto rtl:ml-auto flex items-center">
+    <a class="-translate-y-[1px] text-2xl font-medium" href="http://localhost:1313/"
+      >Meet Rajesh Gor</a
+    >
+    <div
+      class="btn-dark text-[0] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 ltr:-mr-8 rtl:-ml-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse">
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/"
+        >Home</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/blog/"
+        >Blog</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/work/"
+        >Work</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 rtl:space-x-reverse dark:invert ltr:lg:ml-14 rtl:lg:mr-14 lg:mt-0 lg:items-center"
+    >
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/meetgor21"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/mr-destructive"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/meetgor"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100vh-9rem)] max-w-[--w] px-8 pb-16 pt-14 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-14">
+    <h1 class="!my-0 pb-2.5">Advent of Code Day 4 in Golang: Finding XMAS and X-MAS</h1>
+
+    
+    <div class="text-xs antialiased opacity-60">
+      
+      <time>Dec 9, 2024</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="introduction">Introduction</h2>
+<p>Moving on to day 4, we have a grid problem in front of us, we are given some numbers in the form of a grid, i.e. some rows and columns with some upper case letters. What we need to do is to find is the word <code>XMAS</code> in any direction (up, left, down, right, diagonals), and in the second part we need to find the word <code>MAS</code> forming an X.</p>
+<p>So, let’s see how we can approach this and solve it in golang.</p>
+<p>You can check out my solutions <a href="https://github.com/Mr-Destructive/advent_of_code/blob/main/2024/src/day04/main.go">here on GitHub</a><a href="https://github.com/Mr-Destructive/advent_of_code/blob/main/2024/src/day04/main.go">.</a></p>
+<h3 id="constructinhttpsgithubcommr-destructiveadvent_of_codeblobmain2024srcday02maingog-the-grid"><a href="https://github.com/Mr-Destructive/advent_of_code/blob/main/2024/src/day02/main.go">Constructin</a>g the grid</h3>
+<p>The most fundamental part of the problem lies in actually converting the text into a grid or a matrix form. We can split the lines, into individual lines and append each character as an element in a list, and that way we can have a list of list of strings which is a matrix or grid-like (2-dimensional) structure.</p>
+<p>So, below is the input for the puzzle.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>MMMSXXMASM
+</span></span><span style="display:flex;"><span>MSAMXMSMSA
+</span></span><span style="display:flex;"><span>AMXSXMAAMM
+</span></span><span style="display:flex;"><span>MSAMASMSMX
+</span></span><span style="display:flex;"><span>XMASAMXAMM
+</span></span><span style="display:flex;"><span>XXAMMXXAMA
+</span></span><span style="display:flex;"><span>SMSMSASXSS
+</span></span><span style="display:flex;"><span>SAXAMASAAA
+</span></span><span style="display:flex;"><span>MAMMMXMMMM
+</span></span><span style="display:flex;"><span>MXMXAXMASX
+</span></span></code></pre></div><p>We need to convert it into something like this</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>[
+</span></span><span style="display:flex;"><span>    [M M M S X X M A S M]
+</span></span><span style="display:flex;"><span>    [M S A M X M S M S A]
+</span></span><span style="display:flex;"><span>    [A M X S X M A A M M]
+</span></span><span style="display:flex;"><span>    [M S A M A S M S M X]
+</span></span><span style="display:flex;"><span>    [X M A S A M X A M M]
+</span></span><span style="display:flex;"><span>    [X X A M M X X A M A]
+</span></span><span style="display:flex;"><span>    [S M S M S A S X S S]
+</span></span><span style="display:flex;"><span>    [S A X A M A S A A A]
+</span></span><span style="display:flex;"><span>    [M A M M M X M M M M]
+</span></span><span style="display:flex;"><span>    [M X M X A X M A S X]
+</span></span><span style="display:flex;"><span>]
+</span></span></code></pre></div><p>So, this is a list of strings, we can say in golang it is a <code>[][]string</code> . We can do that by creating a function like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">ConstructGrid</span>(<span style="color:#a6e22e">lines</span> []<span style="color:#66d9ef">string</span>) [][]<span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">grid</span> <span style="color:#f92672">:=</span> [][]<span style="color:#66d9ef">string</span>{}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">line</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">lines</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">row</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">string</span>{}
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">char</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Split</span>(<span style="color:#a6e22e">line</span>, <span style="color:#e6db74">&#34;&#34;</span>) {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">row</span> = append(<span style="color:#a6e22e">row</span>, <span style="color:#a6e22e">char</span>)
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">grid</span> = append(<span style="color:#a6e22e">grid</span>, <span style="color:#a6e22e">row</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">grid</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The above function takes in a list of strings and returns a list of list of strings that are individual letters in the grid.<br>
+We can read the file bytes and split the bytes on newline characters and then this will be used as the input for this function.</p>
+<p>So, once the input is parsed into a grid, we can start thinking about the actual logic of finding the word <code>XMAS</code> in it.</p>
+<h2 id="part-1">Part 1</h2>
+<p>So, in the first part, we need to find the word <code>XMAS</code> in the matrix which could be appearing:</p>
+<ul>
+<li>
+<p>forwards (as <code>XMAS</code>)</p>
+</li>
+<li>
+<p>backward (as <code>SAMX</code>)</p>
+</li>
+<li>
+<p>upwards</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>       S
+</span></span><span style="display:flex;"><span>       A
+</span></span><span style="display:flex;"><span>       M
+</span></span><span style="display:flex;"><span>       X
+</span></span></code></pre></div></li>
+<li>
+<p>downwards</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>       X
+</span></span><span style="display:flex;"><span>       M
+</span></span><span style="display:flex;"><span>       A
+</span></span><span style="display:flex;"><span>       S
+</span></span></code></pre></div></li>
+<li>
+<p>Diagonal upwards (right or up left)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       S
+</span></span><span style="display:flex;"><span>         A
+</span></span><span style="display:flex;"><span>           M
+</span></span><span style="display:flex;"><span>             X
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       OR
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>             S
+</span></span><span style="display:flex;"><span>           A
+</span></span><span style="display:flex;"><span>         M 
+</span></span><span style="display:flex;"><span>       X
+</span></span></code></pre></div></li>
+<li>
+<p>Diagonals downwards (right or left)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        X
+</span></span><span style="display:flex;"><span>      M
+</span></span><span style="display:flex;"><span>    A
+</span></span><span style="display:flex;"><span>  S
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       OR
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  X
+</span></span><span style="display:flex;"><span>    M
+</span></span><span style="display:flex;"><span>      A
+</span></span><span style="display:flex;"><span>        S
+</span></span></code></pre></div></li>
+</ul>
+<p>So, there are 8 directions where <code>XMAS</code> could appear in the grid, there could n number of these <code>XMAS</code> . We need to find the count of these in the grid.</p>
+<p><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1733761379973/8a0a0263-b286-47f1-a338-410dec2c6b7b.png" alt=""></p>
+<p>To approach this, we can either find the first character in the word <code>XMAS</code> and then search in all directions one by one and check if we find <code>M</code> and if we have found <code>M</code> in any of the direction, we keep moving ahead in that direction and check if there is <code>A</code> and <code>S</code> in that direction.</p>
+<p>The approach looks like this:</p>
+<ul>
+<li>
+<p>Initialize the counter to 0</p>
+</li>
+<li>
+<p>Iterate over each line</p>
+<ul>
+<li>
+<p>Iterate over each character in the line</p>
+<ul>
+<li>
+<p>Check if the character is equal to <code>X</code></p>
+</li>
+<li>
+<p>If the character is <code>X</code>→</p>
+<ul>
+<li>
+<p>Iterate over all the directions (up, down, right, left, up-left, up-right, down-left, down-right)</p>
+<ul>
+<li>
+<p>For that direction if we find the character to be <code>M</code></p>
+</li>
+<li>
+<p>Keep moving ahead in the same direction to find <code>A</code> and <code>S</code> similarly, if we found all the characters <code>XMAS</code> then, increment the counter</p>
+</li>
+<li>
+<p>Else choose another direction in the loop</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>This looks complex and large but is simple, focus one thing at a time and you can solve this easily.</p>
+<p>So, for the implementation of this, we need to define a few things first:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span> <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">directions</span> [][]<span style="color:#66d9ef">int</span> = [][]<span style="color:#66d9ef">int</span>{
+</span></span><span style="display:flex;"><span>	[]<span style="color:#66d9ef">int</span>{<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>},   <span style="color:#75715e">// up
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	[]<span style="color:#66d9ef">int</span>{<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>},  <span style="color:#75715e">// down
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	[]<span style="color:#66d9ef">int</span>{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>},   <span style="color:#75715e">// right
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	[]<span style="color:#66d9ef">int</span>{<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>},  <span style="color:#75715e">// left
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	[]<span style="color:#66d9ef">int</span>{<span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>},   <span style="color:#75715e">// up right
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	[]<span style="color:#66d9ef">int</span>{<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>},  <span style="color:#75715e">// up left
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	[]<span style="color:#66d9ef">int</span>{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>},  <span style="color:#75715e">// down right
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	[]<span style="color:#66d9ef">int</span>{<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>}, <span style="color:#75715e">// down left
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">wordList</span> []<span style="color:#66d9ef">string</span> = []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;X&#34;</span>, <span style="color:#e6db74">&#34;M&#34;</span>, <span style="color:#e6db74">&#34;A&#34;</span>, <span style="color:#e6db74">&#34;S&#34;</span>}
+</span></span></code></pre></div><p>So, we have defined the list of integers in the directions which are the x and y coordinates that we need to add or subtract to get to the desired location. It is basically like a unit vector, it has a distance of 1 and a direction indicated by <code>+</code> or <code>-</code> indicating to move the left or right for x coordinates and up and down for y c-ordinates.</p>
+<p>So, let me explain that more clearly, let’s say I am at <code>(1,2)</code> in the grid which is of 4x4 dimension.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>A B C D
+</span></span><span style="display:flex;"><span>E F G H
+</span></span><span style="display:flex;"><span>I J K L
+</span></span><span style="display:flex;"><span>M N O P
+</span></span></code></pre></div><p>So, at 2,1 we have <code>G</code> , so we check some directions for this</p>
+<p>up → <code>0,-1</code> → 2+0, 1-1 → 2,0, we have moved to <code>C</code></p>
+<p>right → <code>1,0</code> → 2+1, 1+0 → 3,1 , we have moved to <code>H</code></p>
+<p>down, left → <code>-1,1</code> → 2-1, 1+1 → 1, 2, we have moved to <code>J</code></p>
+<p>So, you get the idea, that we are moving in some directions using these coordinates.</p>
+<p>We can use these to get the next direction jump we want to make to find if that element has the next character in the word that we are searching.</p>
+<p>We will write a function that does this first and abstract the function that checks if we have found the word in the grid.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TraverseGrid</span>(<span style="color:#a6e22e">grid</span> [][]<span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">score</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">row</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">grid</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">y</span>, <span style="color:#a6e22e">char</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">row</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">char</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">wordList</span>[<span style="color:#ae81ff">0</span>] {
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">direction</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">directions</span> {
+</span></span><span style="display:flex;"><span>					<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">FindXMAS</span>(<span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span>, <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">direction</span>, <span style="color:#a6e22e">grid</span>) {
+</span></span><span style="display:flex;"><span>						<span style="color:#a6e22e">score</span> <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>					}
+</span></span><span style="display:flex;"><span>				}
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">score</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The above function takes in a grid and returns an integer which will be the score i.e. the count of words <code>XMAS</code> found in the grid/matrix.</p>
+<p>First, we need to iterate through each of the rows in the grid, for each row, we iterate over the character, so we will have x and y coordinates as the index of the grid. We need to then check if the current character is <code>X</code> or <code>wordList[0]</code> , if that is the case, we iterate over all the directions and check if we can find <code>XMAS</code> i.e. <code>MAS</code> in that direction, if so we increment the counter. What is the <code>FindXMAS</code> function, let’s abstract that away, and pass in the <code>x</code>, <code>y</code>, which are the coordinates of the current word, <code>1</code> which will be the word position of the <code>XMAS</code> and in this case, we already have found <code>X</code> we need to find <code>MAS</code> in that direction. We pass the grid and the direction, so this function will return true or false if that direction has <code>MAS</code> in it.</p>
+<p>So to iterate:</p>
+<ul>
+<li>
+<p>We iterate over the grid and get <code>row</code> and <code>x</code> as the list of strings and index of the current row.</p>
+</li>
+<li>
+<p>For each row i.e. list of strings, we iterate over the list of strings to get <code>char</code> and <code>y</code> as the character (string) and the index of that character in the list of the string.</p>
+</li>
+<li>
+<p>If we find the current character to be equal to <code>X</code> which is the 0th index of the <code>wordList</code> then</p>
+<ul>
+<li>
+<p>We iterate over all the directions and call the function <code>FindXMAS</code> to check if the remaining word <code>MAS</code> in that direction</p>
+</li>
+<li>
+<p>If we find all the words, we increment the counter.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>So, we return the counter as we count the number of words <code>XMAS</code> in the grid/matrix.</p>
+</li>
+</ul>
+<p>Now, we can implement the <code>FindXMAS</code> function, that takes in a <code>x</code>, <code>y</code> coordinates, the <code>wordPosition</code>, the direction and the grid, and return if the word is found.</p>
+<ul>
+<li>
+<p>First, we take the current x coordinates and add the direction’s x component (0th index or first element)</p>
+</li>
+<li>
+<p>add current y coordinates to the direction’s y component (1st index or second element)</p>
+</li>
+<li>
+<p>if the word position i.e.. the word index or the word itself in the current function is equal to the wordList, it means that it has found the required word completely</p>
+</li>
+<li>
+<p>We need to check by adding the direction to the x and y coordinates, we are not overshooting the width and height of the grid, so if we do, we return a false</p>
+</li>
+<li>
+<p>The final if is for checking if the current character is equal to the word that we are looking for, it could be <code>M</code>, <code>A</code> , or <code>S</code> . If so, we return the recursively call the <code>FindXMAS</code> function by passing the updated x and y coordinates and the next word in the wordList, we keep the direction the same and pass the entire grid.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">FindXMAS</span>(<span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span>, <span style="color:#a6e22e">wordPosition</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">direction</span> []<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">grid</span> [][]<span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">bool</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">xNext</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">direction</span>[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">yNext</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">y</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">direction</span>[<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">wordPosition</span> &gt; len(<span style="color:#a6e22e">wordList</span>)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">xNext</span> &lt; <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">xNext</span> <span style="color:#f92672">&gt;=</span> len(<span style="color:#a6e22e">grid</span>) <span style="color:#f92672">||</span> <span style="color:#a6e22e">yNext</span> &lt; <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">yNext</span> <span style="color:#f92672">&gt;=</span> len(<span style="color:#a6e22e">grid</span>[<span style="color:#a6e22e">x</span>]) {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">grid</span>[<span style="color:#a6e22e">xNext</span>][<span style="color:#a6e22e">yNext</span>] <span style="color:#f92672">==</span> <span style="color:#a6e22e">wordList</span>[<span style="color:#a6e22e">wordPosition</span>] {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">FindXMAS</span>(<span style="color:#a6e22e">xNext</span>, <span style="color:#a6e22e">yNext</span>, <span style="color:#a6e22e">wordPosition</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">direction</span>, <span style="color:#a6e22e">grid</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>So, we have implemented the <code>FindXMAS</code> function, this will just return if we have found the <code>MAS</code> word by going in a particular direction by updating the coordinates and checking if the word at that position in the gird is the next word in <code>MAS</code> list.</p>
+<p>So, this is what the entire first part looks like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">lines</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ReadFileLines</span>(<span style="color:#e6db74">&#34;sample.txt&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">grid</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ConstructGrid</span>(<span style="color:#a6e22e">lines</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">score</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">TraverseGrid</span>(<span style="color:#a6e22e">grid</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">score</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>We take in the lines as a list of strings and pass that to <code>ConstructGrid</code> and get the grid, finally, we call <code>TraverseGrid</code> , by passing the grid and getting the score as the count of the words <code>XMAS</code> in the grid.</p>
+<p>That’s it from the part 1.</p>
+<h2 id="part-2">Part 2</h2>
+<p>For part two, we need to find <code>MAS</code> in the cross shape, like below:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>M.S
+</span></span><span style="display:flex;"><span>.A.
+</span></span><span style="display:flex;"><span>M.S
+</span></span></code></pre></div><p>So, to solve this, we can do a similar approach but much simpler, we just need to find <code>A</code> as there will always be the word <code>MAS</code> in the center, so we just check if we have <code>A</code> and the top-left, top-right, or bottom-right, bottom-left has <code>M</code> or <code>S</code> .</p>
+<p>We get the coordinates of the top-right, top-left positions, down-right, and down-left positions by adding and subtracting 1 from it. We make a basic check if we are not overshooting the boundary of the grid. If we overshoot the boundaries, we won’t find the <code>MAS</code></p>
+<p>But if we are within the grid, we now get the character at those 4 positions, we check if the top-left and bottom-right have <code>M</code> and <code>S</code> or <code>S</code> or <code>M</code>, similarly for top-right and bottom-left has <code>M</code> and <code>S</code> or <code>S</code> or <code>M</code> respectively. This is the diagonal search for <code>M</code> and <code>S</code> above and below the character <code>A</code>.</p>
+<p>So, if we have both the diagonal matched we return true.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">FindMAS</span>(<span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">grid</span> [][]<span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">wordList</span> []<span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">bool</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">xL</span>, <span style="color:#a6e22e">yT</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">x</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">y</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span> <span style="color:#75715e">// Top-left neighbor
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">xR</span>, <span style="color:#a6e22e">yD</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">x</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">y</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#75715e">// Bottom-right neighbor
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Check if the indices are within bounds
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">xL</span> &lt; <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">xR</span> <span style="color:#f92672">&gt;=</span> len(<span style="color:#a6e22e">grid</span>) <span style="color:#f92672">||</span> <span style="color:#a6e22e">yT</span> &lt; <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">yD</span> &lt; <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">yT</span> <span style="color:#f92672">&gt;=</span> len(<span style="color:#a6e22e">grid</span>[<span style="color:#a6e22e">xL</span>]) <span style="color:#f92672">||</span> <span style="color:#a6e22e">yD</span> <span style="color:#f92672">&gt;=</span> len(<span style="color:#a6e22e">grid</span>[<span style="color:#a6e22e">xR</span>]) {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">topLeft</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">grid</span>[<span style="color:#a6e22e">xL</span>][<span style="color:#a6e22e">yT</span>]
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">bottomRight</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">grid</span>[<span style="color:#a6e22e">xR</span>][<span style="color:#a6e22e">yD</span>]
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">topRight</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">grid</span>[<span style="color:#a6e22e">xR</span>][<span style="color:#a6e22e">yT</span>]
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">bottomLeft</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">grid</span>[<span style="color:#a6e22e">xL</span>][<span style="color:#a6e22e">yD</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">word1</span>, <span style="color:#a6e22e">word3</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">wordList</span>[<span style="color:#ae81ff">1</span>], <span style="color:#a6e22e">wordList</span>[<span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">isDiagonalMatch</span> <span style="color:#f92672">:=</span> (<span style="color:#a6e22e">topLeft</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">word1</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">bottomRight</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">word3</span>) <span style="color:#f92672">||</span> (<span style="color:#a6e22e">topLeft</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">word3</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">bottomRight</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">word1</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">isAntiDiagonalMatch</span> <span style="color:#f92672">:=</span> (<span style="color:#a6e22e">topRight</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">word1</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">bottomLeft</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">word3</span>) <span style="color:#f92672">||</span> (<span style="color:#a6e22e">topRight</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">word3</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">bottomLeft</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">word1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">isDiagonalMatch</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">isAntiDiagonalMatch</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>So, that is the simple implementation for finding the <code>MAS</code> the diagonal.</p>
+<p>Now, we need to change the <code>TraverseGrid</code> a bit, as we just iterate over the grid, and check if we have <code>A</code> in the character in the row, i.e. <code>wordList[2]</code>. Now, if we have <code>A</code>, we need to call the <code>FindMAS</code> function with the current coordinates and the grid, if that function returns true, we increment the counter,.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">TraverseGrid2</span>(<span style="color:#a6e22e">grid</span> [][]<span style="color:#66d9ef">string</span>) <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">score</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">row</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">grid</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">y</span>, <span style="color:#a6e22e">char</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">row</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">char</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">wordList</span>[<span style="color:#ae81ff">2</span>] {
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">FindMAS</span>(<span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span>, <span style="color:#a6e22e">grid</span>) {
+</span></span><span style="display:flex;"><span>					<span style="color:#a6e22e">score</span> <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>				}
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">score</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>So, that is the final implementation of part 2, we get the count of <code>MAS</code> in the cross direction.</p>
+<p>You can check out my solutions <a href="https://github.com/Mr-Destructive/advent_of_code/blob/main/2024/src/day04/main.go">here on GitHub</a><a href="https://github.com/Mr-Destructive/advent_of_code/blob/main/2024/src/day04/main.go">.</a></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>So, that is it from day 4 of Advent of Code in Golang, let me know if you have any suggestions, and how you approached it. any better solutions?</p>
+<p>Happy Coding :)</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/go"
+      >go</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/aoc"
+      >aoc</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/advent-of-code"
+      >advent-of-code</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/aoc-2024"
+      >aoc-2024</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg !leading-[1.2] *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  >
+    
+    <a class="ltr:pr-3 rtl:pl-3" href="http://localhost:1313/aoc-2024-day-5/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Advent of Code Day 5 in Golang: Ordering Pages</span></a
+    >
+    
+    
+    <a class="ltr:ml-auto rtl:mr-auto justify-end pl-3" href="http://localhost:1313/aoc-2024-day-3/"
+      ><span>Advent of Code Day 3 in Golang: Do Or Don’t Regex</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="mx-auto flex h-[4.5rem] max-w-[--w] items-center px-8 text-xs uppercase tracking-wider opacity-60"
+>
+  <div class="mr-auto">
+  
+    &copy; 2024
+    <a class="link" href="http://localhost:1313/">Meet Rajesh Gor</a>
+  
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,450 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en"
+  dir="ltr"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Connecting LibSQL database with Python - Meet Rajesh Gor</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Introduction
+LibSQL is an Open Contribution fork of SQLite. Open Contribution means that it allows suggestions and contributions from the community as opposed to SQLite which is open source but doesn&rsquo;t accept community contributions.
+Installation of LibSQL Client(s)
+There are two libraries for LibSQL to interact with Python, the libsql-client and the libsql-experimental-python. The former is the recommended client as it is stable, whereas the latter is in development and has the latest features from the libsql database engine, however, it is compatible with the sqlite module." />
+  <meta name="author" content="Meet Rajesh Gor" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/twitter.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link
+    rel="icon"
+    href="http://localhost:1313/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="http://localhost:1313/apple-touch-icon.png"
+  />
+
+  
+  <meta name="generator" content="Hugo 0.136.5">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-[--w] px-8 lg:justify-center">
+  <div class="relative z-50 ltr:mr-auto rtl:ml-auto flex items-center">
+    <a class="-translate-y-[1px] text-2xl font-medium" href="http://localhost:1313/"
+      >Meet Rajesh Gor</a
+    >
+    <div
+      class="btn-dark text-[0] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 ltr:-mr-8 rtl:-ml-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse">
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/"
+        >Home</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/blog/"
+        >Blog</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/work/"
+        >Work</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 rtl:space-x-reverse dark:invert ltr:lg:ml-14 rtl:lg:mr-14 lg:mt-0 lg:items-center"
+    >
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/meetgor21"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/mr-destructive"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/meetgor"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100vh-9rem)] max-w-[--w] px-8 pb-16 pt-14 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-14">
+    <h1 class="!my-0 pb-2.5">Connecting LibSQL database with Python</h1>
+
+    
+    <div class="text-xs antialiased opacity-60">
+      
+      <time>Nov 30, 2023</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="introduction">Introduction</h2>
+<p>LibSQL is an <strong>Open Contribution</strong> fork of SQLite. Open Contribution means that it allows suggestions and contributions from the community as opposed to SQLite which is open source but doesn&rsquo;t accept community contributions.</p>
+<h2 id="installation-of-libsql-clients">Installation of LibSQL Client(s)</h2>
+<p>There are two libraries for LibSQL to interact with Python, the <a href="https://github.com/libsql/libsql-client-py/">libsql-client</a> and the <a href="https://github.com/libsql/libsql-experimental-python">libsql-experimental-python</a>. The former is the recommended client as it is stable, whereas the latter is in development and has the latest features from the libsql database engine, however, it is compatible with the <a href="https://docs.python.org/3/library/sqlite3.html">sqlite</a> module.</p>
+<p>There are differences in how to connect and fetch responses in each of them, but if you want to get started quickly you can safely turn with the <code>libsql-client</code> as it is recommended from the official documentation. If you want to connect an existing SQLite database to libsql, you can turn up the <code>libsql-experimental-pyhon</code> package.</p>
+<p>We will explore both of them in this article. Let&rsquo;s dive straight into the installation of the package.</p>
+<h2 id="libsql-client">LibSQL Client</h2>
+<p>So, Libsql-client is the Python package provided by Turso as a Python client to interact with a libsql/sqlite database.</p>
+<h3 id="installation">Installation</h3>
+<p>The installation of a Python package is as simple as a pip install.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span> pip install libsql-client
+</span></span></code></pre></div><h3 id="connecting-to-the-database">Connecting to the database</h3>
+<p>Connecting to a libsql database is as simple as SQLite for the local database file. However, if you have a libsql database over the edge(Turso), you can use the API provided by SQLD to connect to that database.</p>
+<h4 id="connecting-local-database-file">Connecting Local database file</h4>
+<p>To connect to a simple libsql database file, you can either create a file as <code>mydb.db</code> or just move into the code straight away.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> libsql_client
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>client <span style="color:#f92672">=</span> libsql_client<span style="color:#f92672">.</span>create_client_sync(<span style="color:#e6db74">&#34;file:temp.db&#34;</span>)
+</span></span><span style="display:flex;"><span>result <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#34;SELECT 1;&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> result<span style="color:#f92672">.</span>rows:
+</span></span><span style="display:flex;"><span>    print(row)
+</span></span><span style="display:flex;"><span>client<span style="color:#f92672">.</span>close()
+</span></span></code></pre></div><p>OR</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> libsql_client
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> libsql_client<span style="color:#f92672">.</span>create_client_sync(<span style="color:#e6db74">&#34;file:temp.db&#34;</span>) <span style="color:#66d9ef">as</span> client:
+</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#34;SELECT 1;&#34;</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> result<span style="color:#f92672">.</span>rows:
+</span></span><span style="display:flex;"><span>        print(row)
+</span></span></code></pre></div><p>So, in the above code, the <code>client</code> object is a client of the libsql database. We use the <a href="https://libsql.org/libsql-client-py/reference.html#create_client_sync">create_client_sync</a> method that accepts a few parameters <code>url</code> i.e. the URL of the database we want to connect to, and the <code>auth_token</code> which we will see when we want to connect to a database on the edge.</p>
+<p>There is also <a href="https://libsql.org/libsql-client-py/reference.html#create_client">create_client</a> method which is an async method. You can turn up to this method if you are looking for async connections.</p>
+<p>We have used <code>file:temp.db</code> i.e. to connect a local file in the current directory named <code>temp.db</code> . This method will return a <a href="https://libsql.org/libsql-client-py/reference.html#Client">Client</a> object in this case a <a href="https://libsql.org/libsql-client-py/reference.html#ClientSync">ClientSync</a> object which is a wrapper around the <code>Client</code> object. We will be using the methods available for the Client class later while querying in detail. You can see that we have used the <a href="https://libsql.org/libsql-client-py/reference.html#ClientSync.execute">execute</a> method from the client object.</p>
+<h4 id="connecting-to-a-cloudturso-database">Connecting to a cloud(turso) database</h4>
+<p>To connect to a libsql database on the edge i.e. turso you need to specify the auth token(JWT) in the <code>create_client</code> method.</p>
+<p>You can create the token for accessing the database with the</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>turso db tokens create mydb-name
+</span></span></code></pre></div><p>This command will create a <code>JWT_TOKEN</code> , store this token securely and this will be used to access the database which is hosted on the Turso cloud.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export JWT_TOKEN<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;YOURTOKEN&#34;</span>
+</span></span><span style="display:flex;"><span>OR
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Save it in the .env file </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## JWT_TOKEN=YOURTOKEN</span>
+</span></span></code></pre></div><p>This will store the token in the environment variable and can be later used from the local environment.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> libsql_client
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> libsql_client<span style="color:#f92672">.</span>create_client_sync(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;libsql://dbname-orgname.turso.io&#34;</span>,
+</span></span><span style="display:flex;"><span>    auth_token<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;secret.something.secret&#34;</span>
+</span></span><span style="display:flex;"><span>) <span style="color:#66d9ef">as</span> client:
+</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>execute(<span style="color:#e6db74">&#34;SELECT 1;&#34;</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> result<span style="color:#f92672">.</span>rows:
+</span></span><span style="display:flex;"><span>        print(row)
+</span></span></code></pre></div><p>The <code>auth_token</code> is the JWT Token that we created in the previous step, you can load the token as an Environment variable with the following code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>JWT_TOKEN <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>environ<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;JWT_TOKEN&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## OR</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># pip install python-dotenv</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> dotenv <span style="color:#f92672">import</span> load_dotenv
+</span></span><span style="display:flex;"><span>load_dotenv()
+</span></span><span style="display:flex;"><span>JWT_TOKEN <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>environ<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;JWT_TOKEN&#34;</span>)
+</span></span></code></pre></div><p>This token can be used to authenticate the connection to the Turso database. The rest of the connection code remains as it is.</p>
+<h3 id="running-queries-and-fetching-results">Running Queries and Fetching results</h3>
+<p>Now, that we have the connection, we can move into querying the database through the client connection.</p>
+<h2 id="libsql-client-sqlite-compatible">LibSQL-Client (SQLite compatible)</h2>
+<h3 id="installation-1">Installation</h3>
+<p>The installation of the <a href="https://badge.fury.io/py/libsql-experimental">libsql-experimental-python</a> package is simple with the pip install command with the name of the package.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pip install libsql-experimental
+</span></span></code></pre></div><p>Now, we can move into connecting to the database with Python script.</p>
+<h3 id="connecting-to-the-database-1">Connecting to the database</h3>
+<p>Connecting to a libsql database is as simple as SQLite for the local database file.</p>
+<h3 id="syncing-with-a-remote-database">Syncing with a remote database</h3>
+<h3 id="running-queries-and-fetching-results-1">Running Queries and Fetching results</h3>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/libsql"
+      >libsql</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/python"
+      >python</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg !leading-[1.2] *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  >
+    
+    <a class="ltr:pr-3 rtl:pl-3" href="http://localhost:1313/blog/2023-review/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>2023: Year Review</span></a
+    >
+    
+    
+    <a class="ltr:ml-auto rtl:mr-auto justify-end pl-3" href="http://localhost:1313/blog/golang-web-get-method/"
+      ><span>Golang Web: GET Method</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="mx-auto flex h-[4.5rem] max-w-[--w] items-center px-8 text-xs uppercase tracking-wider opacity-60"
+>
+  <div class="mr-auto">
+  
+    &copy; 2024
+    <a class="link" href="http://localhost:1313/">Meet Rajesh Gor</a>
+  
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+
+  </body>
+</html>

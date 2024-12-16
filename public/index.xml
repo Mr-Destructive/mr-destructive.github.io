@@ -1,0 +1,894 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Meet Rajesh Gor</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Meet Rajesh Gor</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 15 Dec 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docsumo</title>
+      <link>http://localhost:1313/work/docsumo/</link>
+      <pubDate>Sun, 15 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/work/docsumo/</guid>
+      <description>&lt;h3 id=&#34;junior-backend-engineer---docsumohttpswwwdocsumocom&#34;&gt;Junior Backend Engineer - &lt;a href=&#34;https://www.docsumo.com/&#34;&gt;Docsumo&lt;/a&gt;&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;June 2024 - Present&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Maintaining and improving APIs for document extraction&lt;/li&gt;&#xA;&lt;li&gt;Research and Experimentation for better table extraction from documents&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;python-intern---docsumohttpswwwdocsumocom&#34;&gt;Python Intern - &lt;a href=&#34;https://www.docsumo.com/&#34;&gt;Docsumo&lt;/a&gt;&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;November 2023 - June 2024&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Developed fraud detection algorithms for bank statement analysis.&lt;/li&gt;&#xA;&lt;li&gt;Built analytics features for banking clients.&lt;/li&gt;&#xA;&lt;li&gt;Collaborated with the R&amp;amp;D team to enhance security features.&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Advent of Code Day 5 in Golang: Ordering Pages</title>
+      <link>http://localhost:1313/aoc-2024-day-5/</link>
+      <pubDate>Wed, 11 Dec 2024 23:45:00 +0000</pubDate>
+      <guid>http://localhost:1313/aoc-2024-day-5/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;It is day 5 of the advent of code, and today we have an interesting problem of ordering pages. Let’s dive into the problem and how I approached it. It was a pretty simple problem if thought it peacefully, otherwise, it would get into a map, list, and indices mess.&lt;/p&gt;&#xA;&lt;h2 id=&#34;input&#34;&gt;Input&lt;/h2&gt;&#xA;&lt;p&gt;In the input for day 5, we have two sections, The first defines the rules for ordering the pages, specifically which page should come before which and the second contains the actual order of pages.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Advent of Code Day 4 in Golang: Finding XMAS and X-MAS</title>
+      <link>http://localhost:1313/aoc-2024-day-4/</link>
+      <pubDate>Mon, 09 Dec 2024 20:45:00 +0000</pubDate>
+      <guid>http://localhost:1313/aoc-2024-day-4/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Moving on to day 4, we have a grid problem in front of us, we are given some numbers in the form of a grid, i.e. some rows and columns with some upper case letters. What we need to do is to find is the word &lt;code&gt;XMAS&lt;/code&gt; in any direction (up, left, down, right, diagonals), and in the second part we need to find the word &lt;code&gt;MAS&lt;/code&gt; forming an X.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Advent of Code Day 3 in Golang: Do Or Don’t Regex</title>
+      <link>http://localhost:1313/aoc-2024-day-3/</link>
+      <pubDate>Sat, 07 Dec 2024 20:45:00 +0000</pubDate>
+      <guid>http://localhost:1313/aoc-2024-day-3/</guid>
+      <description>&lt;p&gt;Inspired by Shradha Agarwal’s post on Byte Size Go :&lt;a href=&#34;https://www.bytesizego.com/blog/aoc-day3-golang&#34;&gt;here&lt;/a&gt;: I decided to write about my approach to this, it’s different, and would like to share it. That post was well written and the solution was compact and simple, I recommend reading that first as well.&lt;/p&gt;&#xA;&lt;p&gt;That is a blogvent series, I would also love to take part in blogvent but can&amp;rsquo;t be sure I&amp;rsquo;ll be completing this.&lt;/p&gt;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Well, it is day 3 of the advent of code 2024, and I have been doing it on live streams. I am behind two days but working through them one by one. So far, I have learned a lot of things in Go. Let’s dive in for the day 3.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Advent of Code Day 2 in Golang: Slicing and Dicing Reports</title>
+      <link>http://localhost:1313/aoc-2024-day-2/</link>
+      <pubDate>Mon, 02 Dec 2024 20:45:00 +0000</pubDate>
+      <guid>http://localhost:1313/aoc-2024-day-2/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;So, this is day 2 of the Advent of Code 2024 in Golang, and we will be exploring my approach and solution for the same. The problem was not as easy but was pretty simple after implemented and found correct.&lt;/p&gt;&#xA;&lt;p&gt;You can check out my solutions &lt;a href=&#34;https://github.com/Mr-Destructive/advent_of_code/blob/main/2024/src/day02/main.go&#34;&gt;here on GitHub&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;part-1&#34;&gt;Part 1&lt;/h2&gt;&#xA;&lt;p&gt;We have been given some lines called reports, and each report has a bunch of levels. and the requirement of the report is that it needs to be either strictly increasing or decreasing by a factor of at least 1 or at most 3.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Advent of Code, 2024, Day 1 in Golang: Historian Hysteria</title>
+      <link>http://localhost:1313/aoc-2024-day-1/</link>
+      <pubDate>Sun, 01 Dec 2024 20:45:00 +0000</pubDate>
+      <guid>http://localhost:1313/aoc-2024-day-1/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Hello everyone, it’s that time of the year, Advent of Code, I will be solving this year as well with Golang. In previous years I have been doing Advent of Code but was not able to keep up with the pace and left it midway (not even halfway). This year however I am determined and want to solve all the problems as much as I can.&lt;/p&gt;&#xA;&lt;p&gt;Let’s dive into the first day which should be and is pretty simple and straightforward. A simple list and map creation and traversal and basic math operations.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Use Embedded Replicas of LibSQL Database hosted on Turso with a Golang Application</title>
+      <link>http://localhost:1313/turso-libsql-embedded-replicas-golang/</link>
+      <pubDate>Thu, 31 Oct 2024 21:45:00 +0000</pubDate>
+      <guid>http://localhost:1313/turso-libsql-embedded-replicas-golang/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Welcome to the Let&amp;rsquo;s Go with Turso series. In this series, we will learn how to interact with LibSQL databases with Golang. In the past article of the series, we explored how to connect remote/local LibSQL database in golang.&lt;/p&gt;&#xA;&lt;p&gt;With this section, we will specifally dive into understanding how to create, connect, and query local embedded replicas of LibSQL database hosted on Turso with a Golang application.&lt;/p&gt;&#xA;&lt;p&gt;If you want to check out the YouTube video, check this out:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Connect LibSQL Database hosted on Turso in a Golang Application</title>
+      <link>http://localhost:1313/turso-libsql-db-golang/</link>
+      <pubDate>Mon, 30 Sep 2024 23:45:00 +0000</pubDate>
+      <guid>http://localhost:1313/turso-libsql-db-golang/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Welcome to the new series in Golang, Let&amp;rsquo;s Go with Turso. In this series, we will learn how to interact with LibSQL databases with Golang. We will connect with a remote/local LibSQL database, create Embedded replicas, set up a local LibSQL database, and so much more as we explore and find out more features of LibSQL.&lt;/p&gt;&#xA;&lt;h2 id=&#34;connect-a-libsql-database-in-a-golang-application&#34;&gt;Connect a LibSQL database in a Golang application&lt;/h2&gt;&#xA;&lt;p&gt;In this post, we will learn how to connect and query a LibSQL database hosted on Turso/Cloud in a Golang Application using libsql-client package. We will go from setting up golang project, installing turso-cli, creating a database on turso with the cli, connecting to the database with shell, and golang and finally, we can query the database using Golang.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Safely using Maps in Golang: Differences in declaration and initialization</title>
+      <link>http://localhost:1313/golang-safely-using-maps/</link>
+      <pubDate>Sat, 31 Aug 2024 18:30:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-safely-using-maps/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;This week, I was working on one of the API wrapper packages for golang, and that dealt with sending post requests with URL encoded values, setting cookies, and all the fun stuff. However, while I was constructing the body, I was using &lt;a href=&#34;https://pkg.go.dev/net/url#Values&#34;&gt;url.Value&lt;/a&gt; type to construct the body, and use that to add and set key-value pairs. However, I was getting a wired &lt;code&gt;nil&lt;/code&gt; pointer reference error in some of the parts, I thought it was because of some of the variables I set manually. However, by debugging closer, I found out a common pitfall or bad practice of just declaring a type but initializing it and that causing &lt;code&gt;nil&lt;/code&gt; reference errors.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NGINX Survival Guide: Serving Web Applications</title>
+      <link>http://localhost:1313/nginx-02-web-servers/</link>
+      <pubDate>Sun, 21 Jul 2024 22:45:00 +0000</pubDate>
+      <guid>http://localhost:1313/nginx-02-web-servers/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In the second part of our NGINX Survival Guide, we dive into the practical aspects of using NGINX to serve web applications. This section will guide you through the essential tasks of setting up a basic HTTP server, configuring NGINX to serve content from custom directories, and using it as a reverse proxy to forward requests to backend servers.&lt;/p&gt;&#xA;&lt;p&gt;NGINX is a versatile web server that can be used to serve applications in a variety of ways, from simple web servers to complex proxy configurations. NGINX can be used to serve static HTML content, proxy requests to a backend server, or load balance traffic across multiple servers. In this guide, we&amp;rsquo;ll explore the different ways to use NGINX to serve applications, including setting up a simple HTTP server, serving content from custom directories, and using it to load balance traffic across multiple upstream servers.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang Web: PUT Method</title>
+      <link>http://localhost:1313/golang-web-put-method/</link>
+      <pubDate>Sat, 15 Jun 2024 18:30:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-web-put-method/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In this section of the series, we will be exploring how to send a &lt;code&gt;PUT&lt;/code&gt; HTTP request in golang. We will understand how to send a basic PUT request, create an HTTP request, update a resource on a server, parsing the content from struct to json, headers, etc in the following section of this post.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-a-put-method&#34;&gt;What is a PUT Method&lt;/h2&gt;&#xA;&lt;p&gt;A PUT method is a type of request that is used to update or modify an entire resource on a server/database.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang Web: POST Method</title>
+      <link>http://localhost:1313/golang-web-post-method/</link>
+      <pubDate>Sun, 10 Mar 2024 20:15:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-web-post-method/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In this section of the series, we will be exploring how to send a &lt;code&gt;POST&lt;/code&gt; HTTP request in golang. We will understand how to send a basic POST request, create an HTTP request, and parse json, structs into the request body, add headers, etc in the following sections of this post. We will understand how to marshal the golang struct/types into JSON format, send files in the request, and handle form data with examples of each in this article. Let&amp;rsquo;s answer a few questions first.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>NGINX Basics and Setup</title>
+      <link>http://localhost:1313/nginx-01-basics/</link>
+      <pubDate>Sun, 14 Jan 2024 18:15:00 +0000</pubDate>
+      <guid>http://localhost:1313/nginx-01-basics/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;NGINX is a tool that can be used as a web server, reverse proxy, load balancer, streaming media files, application gateway, content caching, and so much more. It can be said to be a Swiss army knife for optimizing and securing your web application deployment.&lt;/p&gt;&#xA;&lt;p&gt;The series &amp;ldquo;NGINX Survival Guide&amp;rdquo; will start from the basics and cover the bare minimum required for a backend developer to get going with NGINX. I will use Docker widely throughout this course as it is a great combination with NGINX to server web applications. However, you can use NGINX without docker, and spawn multiple servers.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Neovim &#43; Sourcegraph Cody Plugin Integration</title>
+      <link>http://localhost:1313/neovim-sourcegraph-cody/</link>
+      <pubDate>Sat, 06 Jan 2024 20:15:00 +0000</pubDate>
+      <guid>http://localhost:1313/neovim-sourcegraph-cody/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Have you ever used Sourcegraph&amp;rsquo;s Cody? It is a great tool for developers, it is not just another LLM, it is tailored specifically for developers. Cody has some good features that allow parsing of context for the prompt in a smarter way.&lt;/p&gt;&#xA;&lt;h3 id=&#34;what-is-sourcegraphs-cody&#34;&gt;What is Sourcegraph&amp;rsquo;s Cody&lt;/h3&gt;&#xA;&lt;p&gt;Cody is an AI assistant for developers that understands code context and can generate code. It goes beyond just answering questions - it can write code for you.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2023: Year Review</title>
+      <link>http://localhost:1313/2023-review/</link>
+      <pubDate>Sun, 31 Dec 2023 00:15:00 +0000</pubDate>
+      <guid>http://localhost:1313/2023-review/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;2023, what a year! If you&amp;rsquo;re a developer and haven&amp;rsquo;t heard the word &amp;lsquo;AI&amp;rsquo; a million times, where have you been? With the introduction of Chat GPT in December 2022, the start of 2023 was buzzing with Open AI&amp;rsquo;s flagship product. I also did a &lt;a href=&#34;https://www.meetgor.com/2022-review/&#34;&gt;2022 review&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;The year 2023 was a pivotal year for me to gain experience in solving and delivering real-world problems to solutions. I went from a code-first approach to a code-last approach for solving a problem. The year was not ideal for freshers, as from the end of 2022 till 2023 there was a huge round of layoffs in big tech companies. The competition was too much for freshers and the AI hype added salt to the injury.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Connecting LibSQL database with Python</title>
+      <link>http://localhost:1313/libsql-python/</link>
+      <pubDate>Thu, 30 Nov 2023 20:45:00 +0000</pubDate>
+      <guid>http://localhost:1313/libsql-python/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;LibSQL is an &lt;strong&gt;Open Contribution&lt;/strong&gt; fork of SQLite. Open Contribution means that it allows suggestions and contributions from the community as opposed to SQLite which is open source but doesn&amp;rsquo;t accept community contributions.&lt;/p&gt;&#xA;&lt;h2 id=&#34;installation-of-libsql-clients&#34;&gt;Installation of LibSQL Client(s)&lt;/h2&gt;&#xA;&lt;p&gt;There are two libraries for LibSQL to interact with Python, the &lt;a href=&#34;https://github.com/libsql/libsql-client-py/&#34;&gt;libsql-client&lt;/a&gt; and the &lt;a href=&#34;https://github.com/libsql/libsql-experimental-python&#34;&gt;libsql-experimental-python&lt;/a&gt;. The former is the recommended client as it is stable, whereas the latter is in development and has the latest features from the libsql database engine, however, it is compatible with the &lt;a href=&#34;https://docs.python.org/3/library/sqlite3.html&#34;&gt;sqlite&lt;/a&gt; module.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang Web: GET Method</title>
+      <link>http://localhost:1313/golang-web-get-method/</link>
+      <pubDate>Sat, 28 Oct 2023 20:15:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-web-get-method/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In this section of the series, we will be exploring how to send a &lt;code&gt;GET&lt;/code&gt; HTTP request in golang. We will be understanding how to send a basic GET request, create an HTTP request and customize the client, add headers, read the response body, etc in the following sections of this post.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-a-get-method&#34;&gt;What is a GET method?&lt;/h2&gt;&#xA;&lt;p&gt;A &lt;a href=&#34;https://en.wikipedia.org/wiki/HTTP#Request_methods&#34;&gt;GET&lt;/a&gt; method in the context of an HTTP request is an action that is used to obtain data/resources. The &lt;code&gt;GET&lt;/code&gt; method is used in a web application to get a resource like an HTML page, image, video, media, etc.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang Web: URL Parsing</title>
+      <link>http://localhost:1313/golang-web-url-parsing/</link>
+      <pubDate>Tue, 05 Sep 2023 21:30:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-web-url-parsing/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;We have done around 32 posts on the fundamental concepts in golang, With that basic foundation, I&amp;rsquo;d like to start with the new section of this series which will be a major one as &lt;code&gt;web-development&lt;/code&gt;. This section will have nearly 40-50 posts, this will cover the fundamental concepts for web development like APIs, Database integrations, Authentication and Authorizations, Web applications, static sites, etc.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-a-url&#34;&gt;What is a URL?&lt;/h2&gt;&#xA;&lt;p&gt;A URL is a Uniform Resource Locator. It is a string of characters that identifies a resource on the Internet. URLs are the building blocks of the web, allowing us to access websites, documents, and data with just a click. URLs are all over the place, if we want to build a strong foundation in web development, it&amp;rsquo;s quite important to understand what URLs actually mean and what can they store.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Channels</title>
+      <link>http://localhost:1313/golang-channels/</link>
+      <pubDate>Mon, 28 Aug 2023 21:15:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-channels/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In this part of the series, we will be continuing with the concurrency features of golang with channels. In the last post, we covered the fundamentals of go routines and wait groups. By leveraging those understood concepts, we will explore channels to communicate the data between various go routines.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-are-channels&#34;&gt;What are Channels&lt;/h2&gt;&#xA;&lt;p&gt;A golang Channel is like a pipe that lets goroutines communicate. It lets you pass values from one goroutine to another. Channels are typed i.e. you declare them with &lt;code&gt;chan&lt;/code&gt; keyword followed by the type to be sent and received (e.g. &lt;code&gt;chan int&lt;/code&gt;). The &lt;code&gt;chan&lt;/code&gt; type specifies the type of values that will be passed through the channel. We will explore the detailed technicalities soon. Right now, we need to just focus on what problem is channels solving.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>MindsDB GraphQL API (Grafbase)</title>
+      <link>http://localhost:1313/projects/mindsdb-grafbase/</link>
+      <pubDate>Sun, 13 Aug 2023 20:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/mindsdb-grafbase/</guid>
+      <description>&lt;p&gt;A GraphQL API for MindsDB using Grafbase that allows you to interact with MindsDB databases, projects, models, and more through a GraphQL interface.&lt;/p&gt;&#xA;&lt;p&gt;Tech Stack:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Typescript&lt;/li&gt;&#xA;&lt;li&gt;Grafbase&lt;/li&gt;&#xA;&lt;li&gt;GraphQL&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Go Routines and WaitGroups</title>
+      <link>http://localhost:1313/golang-go-routines/</link>
+      <pubDate>Sat, 29 Jul 2023 15:15:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-go-routines/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;One of the key features that set Go apart from many other languages is its native support for Goroutines - lightweight concurrent functions that can run concurrently and efficiently manage concurrency tasks. Goroutines are an essential aspect of Go&amp;rsquo;s concurrency model, enabling developers to build highly concurrent and performant applications effortlessly.&lt;/p&gt;&#xA;&lt;p&gt;In this blog post, we will dive into the world of Goroutines and explore how they work, why they are essential for concurrent programming in Go, and how they can greatly improve the responsiveness and efficiency of your applications. This post will cover go routines and a primer on wait groups, in the next article we will be looking deeply into channels where all these three things can be demonstrated and understood in a better and more useful way.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Generics</title>
+      <link>http://localhost:1313/golang-generics/</link>
+      <pubDate>Sun, 23 Jul 2023 13:30:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-generics/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In the 29th post of the series, we will be looking into generics in Golang. Generics were added in Golang version 1.18, so they are quite new in the world of Golang but the concept is quite old in other programming languages.&lt;/p&gt;&#xA;&lt;p&gt;Generics provide a powerful toolset for writing more expressive and concise code that can handle a wide range of data types. With generics, we can write reusable algorithms, data structures, and functions that work seamlessly with various types, without sacrificing type safety.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Utility-Studio</title>
+      <link>http://localhost:1313/projects/utility-studio/</link>
+      <pubDate>Fri, 14 Jul 2023 22:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/utility-studio/</guid>
+      <description>&lt;p&gt;A application to perform extraction of information from web, youtube, or document links, download video/audio from youtube links, and summarize the text content.&lt;/p&gt;&#xA;&lt;p&gt;Tech Stack:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Refine (React, NextJS)&lt;/li&gt;&#xA;&lt;li&gt;Appwrite (Functions, Storage)&lt;/li&gt;&#xA;&lt;li&gt;Typescript&lt;/li&gt;&#xA;&lt;li&gt;Python (Cloud Functions)&lt;/li&gt;&#xA;&lt;li&gt;Material UI&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Google Generative AI PaLM2 Golang SDK(Client)</title>
+      <link>http://localhost:1313/projects/palm_go_sdk/</link>
+      <pubDate>Thu, 22 Jun 2023 15:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/palm_go_sdk/</guid>
+      <description>&lt;p&gt;A Golang Client (Wrapper) for the PaLM2 API.&lt;/p&gt;&#xA;&lt;p&gt;Tech Stack:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Golang&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Date and Time</title>
+      <link>http://localhost:1313/golang-date-time/</link>
+      <pubDate>Mon, 19 Jun 2023 18:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-date-time/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In the 28th post of the series, I will be exploring date and time handling in Golang. We will be covering the following topics:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Date and Time parsing&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Time Duration&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Time and Date Arithmetic&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Timezones&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Sleep and Tickers&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;This will cover most of the methods and properties used extensively in general use cases related to time and date operations.&lt;/p&gt;&#xA;&lt;h2 id=&#34;time-package&#34;&gt;Time package&lt;/h2&gt;&#xA;&lt;p&gt;The Golang standard library provides the time package to handle date and time-related operations. It has a lot of methods and constants to work and handle data related to time and dates.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Solar Labs</title>
+      <link>http://localhost:1313/work/solar-labs/</link>
+      <pubDate>Fri, 26 May 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/work/solar-labs/</guid>
+      <description>&lt;h3 id=&#34;backend-developer-intern---the-solar-labshttpswwwthesolarlabscom&#34;&gt;Backend Developer Intern - &lt;a href=&#34;https://www.thesolarlabs.com/&#34;&gt;The Solar Labs&lt;/a&gt;&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;July 2022 - April 2023&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Developed REST APIs using Python and Django/DRF.&lt;/li&gt;&#xA;&lt;li&gt;Worked on backend services and database optimization.&lt;/li&gt;&#xA;&lt;li&gt;Utilized Azure Pipelines for continuous integration and deployment.&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Hugging Chat Golang SDK(Client)</title>
+      <link>http://localhost:1313/projects/hugging_chat_go_sdk/</link>
+      <pubDate>Wed, 17 May 2023 19:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/hugging_chat_go_sdk/</guid>
+      <description>&lt;p&gt;A Golang Client (Wrapper) for the Hugging Chat.&lt;/p&gt;&#xA;&lt;p&gt;Tech Stack:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Golang&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Random Numbers</title>
+      <link>http://localhost:1313/golang-random-numbers/</link>
+      <pubDate>Sun, 14 May 2023 14:30:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-random-numbers/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In the 27th post of the series, we will be looking into random number generation in golang. We will be exploring how to create a random number, generate random numbers within a range, shuffle slices/arrays, and generate random strings, float, and bytes.&lt;/p&gt;&#xA;&lt;p&gt;There are two types of random number generation processes in software pseudo-random numbers and cryptographically secure pseudo-random number generation.&lt;/p&gt;&#xA;&lt;p&gt;The &lt;a href=&#34;https://pkg.go.dev/math/rand&#34;&gt;math/rand&lt;/a&gt; package in Golang provides a number of functions for generating pseudorandom numbers. These functions are suitable for a variety of applications, such as games, simulations, and to some extent in cryptography.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>MindsDB Golang SDK(Client)</title>
+      <link>http://localhost:1313/projects/mindsdb-go-sdk/</link>
+      <pubDate>Sat, 08 Apr 2023 10:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/mindsdb-go-sdk/</guid>
+      <description>&lt;p&gt;A Golang Client (Wrapper) for the MindsDB API.&lt;/p&gt;&#xA;&lt;p&gt;Tech Stack:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Golang&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Regex</title>
+      <link>http://localhost:1313/golang-regex/</link>
+      <pubDate>Wed, 22 Mar 2023 12:30:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-regex/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In this 26th part of the series, we will be covering the basics of using regular expressions in golang. This article will cover the basic operations like matching, finding, replacing, and sub-matches in a regular expression pattern from string source or file content. This will have examples for each of the concepts and similar variants will follow the same ideology in self-exploring the syntax.&lt;/p&gt;&#xA;&lt;h2 id=&#34;regex-in-golang&#34;&gt;Regex in golang&lt;/h2&gt;&#xA;&lt;p&gt;So, let&amp;rsquo;s start with what are regular expressions.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creating a Chat Application with Django and HTMX</title>
+      <link>http://localhost:1313/django-htmx-chat-app/</link>
+      <pubDate>Sun, 05 Feb 2023 17:15:00 +0000</pubDate>
+      <guid>http://localhost:1313/django-htmx-chat-app/</guid>
+      <description>&lt;h1 id=&#34;django--htmx-chat-application&#34;&gt;Django + HTMX Chat application&lt;/h1&gt;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In this article, we will be creating a Django project, which will be a chat-room kind of application. The user needs to authenticate to the app and then and there he/she can create or join rooms, every room will have some name and URL associated with it. So, the user simply needs to enter the name of the room, which will be unique. The user can then simply enter the messages in the chat room. This is a core chat application that uses web sockets.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Command Line Arguments</title>
+      <link>http://localhost:1313/golang-command-line-args/</link>
+      <pubDate>Sat, 07 Jan 2023 21:30:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-command-line-args/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In the 25th post of the series, we will be taking a look into parsing of command line arguments in golang. We will be exploring how to do the basics of parsing and using the positional parameters or arguments from the command line in the program. By using standard library packages like &lt;code&gt;os&lt;/code&gt; and &lt;code&gt;flag&lt;/code&gt;, we can make powerful yet easy-to-build CLI apps and programs.&lt;/p&gt;&#xA;&lt;h2 id=&#34;parsing-arguments-from-the-command-line-os-package&#34;&gt;Parsing Arguments from the command line (os package)&lt;/h2&gt;&#xA;&lt;p&gt;We can use the os package to get the arguments from the command line in a go script. We have to use the Args variable in the os package. The &lt;code&gt;Args&lt;/code&gt; variable is a slice of strings which thereby is the parsed arguments from the command line.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2022: Year Review</title>
+      <link>http://localhost:1313/2022-review/</link>
+      <pubDate>Sat, 31 Dec 2022 12:15:00 +0000</pubDate>
+      <guid>http://localhost:1313/2022-review/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Well, what a year! If 2021 was a start, 2022 was a year to convert a start into a goal. From collaborating on open-source projects to getting an internship, it was an exciting year! Created a couple dozen of projects(not finished as usual), wrote 40+ articles, did a couple of streams, learned the basics of golang, and spend 6 months as a backend dev intern at &lt;a href=&#34;https://thesolarlabs.com/&#34;&gt;Solarlabs&lt;/a&gt;, just a year that was awaited for the hard work over the span of 2 years.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: File Write</title>
+      <link>http://localhost:1313/golang-file-write/</link>
+      <pubDate>Sun, 18 Dec 2022 15:15:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-file-write/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In the 24th post of the series, we will be taking a look at how we can perform write operations to a file using golang. We will be using the &lt;code&gt;os&lt;/code&gt; package in most operations along with &lt;code&gt;bufio&lt;/code&gt; text manipulations. We will be performing write operations like appending, deleting, and replacing a file using golang. We will be heavily leveraging standard library packages like &lt;code&gt;os&lt;/code&gt;, &lt;code&gt;bufio&lt;/code&gt;, &lt;code&gt;bytes&lt;/code&gt; and &lt;code&gt;fmt&lt;/code&gt;. We will also be looking into overwriting and string formatting to a file.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: JSON YAML TOML (config) File Reading.</title>
+      <link>http://localhost:1313/golang-config-file-read/</link>
+      <pubDate>Tue, 01 Nov 2022 23:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-config-file-read/</guid>
+      <description>&lt;h2 id=&#34;reading-specific-file-types-json-yaml-toml&#34;&gt;Reading specific file types (JSON, YAML, TOML)&lt;/h2&gt;&#xA;&lt;p&gt;In the previous post, we have seen how to read files in golang, in this extended post of that part, we will look into reading some specific files used for configuration and storing data like JSON, YAML, TOML, CSV, etc.&lt;/p&gt;&#xA;&lt;p&gt;We will see how to read files and get individual pieces in the files. We&amp;rsquo;ll use packages like &lt;code&gt;os&lt;/code&gt;, &lt;code&gt;ioutil&lt;/code&gt; and &lt;code&gt;encoding&lt;/code&gt; to perform reading operations on file and file objects.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: File Reading</title>
+      <link>http://localhost:1313/golang-file-read/</link>
+      <pubDate>Sun, 23 Oct 2022 23:15:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-file-read/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In the 22nd post of the series, we will be looking into the file-handling process in golang, in the next few posts, we will cover the operations on file using golang. In this first entry of the file handling sub-series, we will understand the &lt;code&gt;READ&lt;/code&gt; operation with files. We will see different ways to read a file, it can be word by word, line by line, or even custom chink by chunk.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Paths</title>
+      <link>http://localhost:1313/golang-paths/</link>
+      <pubDate>Sun, 02 Oct 2022 12:45:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-paths/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In the 21st post of the series, we will be exploring the file paths in golang, we will be exploring how we can deal with paths. By using packages like &lt;code&gt;os&lt;/code&gt;, &lt;code&gt;path&lt;/code&gt;, &lt;code&gt;io&lt;/code&gt;, we can work with file systems and operating system-specific details. In this section, we will see how to resolve paths, details from paths, extract relative or absolute paths, iterate over file systems, etc.&lt;/p&gt;&#xA;&lt;p&gt;Starting from this post, it will follow a specific topic in the upcoming few posts which will be covering files and paths. We will be talking about dealing with paths and files in golang. This post is just about working with paths.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Error Handling</title>
+      <link>http://localhost:1313/golang-error-handling/</link>
+      <pubDate>Sat, 17 Sep 2022 20:15:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-error-handling/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Error handling is quite an important feature of any programming language to improve the quality and transparency between the user and the application. By raising appropriate error messages, the user can get a clear idea about the things happening in the interface as well as the application can handle the errors with appropriate actions.&lt;/p&gt;&#xA;&lt;p&gt;In the 20th post of the series, we will be exploring the concept of error handling in golang. From this article, we will be able to learn the fundamentals of error or exception handling in golang, create custom error classes, raise and ignore error messages, and exit or redirect the flow of state of the application when an error is raised.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Interfaces</title>
+      <link>http://localhost:1313/golang-interfaces/</link>
+      <pubDate>Sat, 10 Sep 2022 17:30:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-interfaces/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In the 19th post of the series, we will be taking a look into interfaces in golang. Interfaces allow us to create function signatures common to different structs or types. So, we can allow multiple structs to have a common interface(method) that can have different implementations.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-are-interfaces&#34;&gt;What are Interfaces&lt;/h2&gt;&#xA;&lt;p&gt;Interface as the name suggests is a way to create methods that are common to different structures or types but can have different implementations. It&amp;rsquo;s an interface to define the method or function signatures but not the implementation. Let&amp;rsquo;s take an example of &lt;code&gt;Laptop&lt;/code&gt; and &lt;code&gt;Phone&lt;/code&gt; having the functionality of wifi. We can connect to wifi more or the less in a similar way on both devices. The implementation behind the functionality might be different but they share the same operation. The WiFi can act as an interface for both devices to connect to the internet.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Closures</title>
+      <link>http://localhost:1313/golang-closures/</link>
+      <pubDate>Thu, 11 Aug 2022 18:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-closures/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In the previous part of the series, we covered &lt;a href=&#34;https://meetgor.com/golang-anonymous-functions/&#34;&gt;anonymous functions&lt;/a&gt; and in this section, we will look into &lt;code&gt;closures&lt;/code&gt; which are quite a cool concept for various things. Closures are basically a function that returns a function instead of a value, so basically we will leverage anonymous functions for creating closures.&lt;/p&gt;&#xA;&lt;h2 id=&#34;simple-closures&#34;&gt;Simple Closures&lt;/h2&gt;&#xA;&lt;p&gt;A simple closure can be constructed for understanding how we can use closures in golang. We will return a function from a function, that is a simple closure. So, in the below code example, we have created a function &lt;code&gt;gophy()&lt;/code&gt; which takes no parameters but returns a function that returns a &lt;code&gt;string&lt;/code&gt;.  The function simply returns an anonymous function that returns a string.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PGCLI: Postgres from the terminal</title>
+      <link>http://localhost:1313/pgcli-pg-from-terminal/</link>
+      <pubDate>Sun, 07 Aug 2022 20:30:00 +0000</pubDate>
+      <guid>http://localhost:1313/pgcli-pg-from-terminal/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Have you ever used the Postgres database and did you know you don&amp;rsquo;t have to launch PGAdmin every time you want to write SQL queries, you can write down those queries even inside a terminal with a python package. It&amp;rsquo;s PGCLI, that can act as an editor window for writing SQL queries for Postgres Databases. We can simply execute SQL queries in a PSQL-like shell with additional features like autocompletion, text-editing modes, file input/output options, etc.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django-Mermaid</title>
+      <link>http://localhost:1313/projects/django-mermaid/</link>
+      <pubDate>Wed, 03 Aug 2022 16:44:59 +0000</pubDate>
+      <guid>http://localhost:1313/projects/django-mermaid/</guid>
+      <description>&lt;p&gt;Create ER Diagrams (Entity Relationship Diagrams) of your Django projects related to different models of associated applications in Mermaid.&lt;/p&gt;&#xA;&lt;p&gt;Tech Stack:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Python&lt;/li&gt;&#xA;&lt;li&gt;Django&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Django &#43; HTMX CRUD application</title>
+      <link>http://localhost:1313/django-htmx-crud/</link>
+      <pubDate>Sun, 31 Jul 2022 12:30:00 +0000</pubDate>
+      <guid>http://localhost:1313/django-htmx-crud/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Gone are the days of writing Ajax requests with javascript, just add a few parameters to the HTML content tags and you will be ready for sending requests to your backend. So, we are going back in time and correcting the way we think of APIs and client/server-side rendering. We are referring to the &lt;a href=&#34;https://en.wikipedia.org/wiki/Hypermedia&#34;&gt;Hypermedia model&lt;/a&gt; for levering the server-side processing of data. Let&amp;rsquo;s get our feets wet with this ancient but revolutionary methodology of development with &lt;a href=&#34;https://htmx.org/&#34;&gt;HTMX&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Anonymous Functions</title>
+      <link>http://localhost:1313/golang-anonymous-functions/</link>
+      <pubDate>Sun, 24 Jul 2022 18:15:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-anonymous-functions/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;We have looked at the defer keyword in golang in the &lt;a href=&#34;https://www.meetgor.com/golang-defer/&#34;&gt;previous&lt;/a&gt; part of the series, in this section, we will understand how we can use anonymous functions in golang. We will explore how to declare and use anonymous functions with a few examples.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-are-anonymous-functions&#34;&gt;What are Anonymous Functions&lt;/h2&gt;&#xA;&lt;p&gt;Anonymous functions are quite simple to understand, we don&amp;rsquo;t define a function, we declare it and call it instantly. An anonymous function doesn&amp;rsquo;t have a name so hence it is called an anonymous function. As a normal function it can take in parameters and return values. With anonymous functions, we can bind the operations to a variable or a constant as a literal(value). If an anonymous function takes in a parameter, it needs to be parsed immediately after the end of the function body. We will see how we define the syntax and specifications of the anonymous functions in golang.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Deploying Django Project with Railway Nixpacks</title>
+      <link>http://localhost:1313/django-deploy-railway-nixpacks/</link>
+      <pubDate>Sat, 16 Jul 2022 16:15:00 +0000</pubDate>
+      <guid>http://localhost:1313/django-deploy-railway-nixpacks/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;We have seen how to deploy a Django application on railway app in the &lt;a href=&#34;https://www.meetgor.com/django-deploy-railway/&#34;&gt;previous article&lt;/a&gt; of the &lt;a href=&#34;https://www.meetgor.com/series/django-deployment/&#34;&gt;series&lt;/a&gt;. We deployed the django project using the Heroku Buildpacks under the hood. The railway app provides a couple of options on how to build your web application. Currently, there are three options, one of which is the &lt;a href=&#34;https://devcenter.heroku.com/articles/heroku-20-stack&#34;&gt;heroku buildpacks&lt;/a&gt; which is the default one, second, we have the nixpacks which we will see today, and the third is the &lt;a href=&#34;https://paketo.io/&#34;&gt;Paketo buildpack&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Configure Neovim in Lua</title>
+      <link>http://localhost:1313/neovim-vimscript-to-lua/</link>
+      <pubDate>Sat, 09 Jul 2022 20:30:00 +0000</pubDate>
+      <guid>http://localhost:1313/neovim-vimscript-to-lua/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;It has been a while since I have written a Vim article. Finally, I got some ideas after configuring my Neovim setup for Lua. I recently migrated to Ubuntu a couple of months back and it has been a cool change from Windows 7!&lt;/p&gt;&#xA;&lt;p&gt;In this article, we&amp;rsquo;ll see how you can set up neovim for Lua. Since Neovim 0.5, it supports lua out of the box, so in the recent release 0.7, it added more native support to lua making it a lot easier to configure and play with neovim. So, we will see how we can use lua to convert all the 200 liner vimscript into lua (We can even have packages and modules:) We will cover how to configure your keymaps, pull up all the plugins, vim options, and other customizations.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Defer</title>
+      <link>http://localhost:1313/golang-defer/</link>
+      <pubDate>Wed, 29 Jun 2022 22:30:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-defer/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In this part of the series, we will be taking a look at the &lt;code&gt;defer&lt;/code&gt; keyword in golang. The defer keyword is used for delaying the function call in a particular block of program(function or a loop).&lt;/p&gt;&#xA;&lt;h2 id=&#34;defer-keyword&#34;&gt;Defer Keyword&lt;/h2&gt;&#xA;&lt;p&gt;The &lt;code&gt;defer&lt;/code&gt; keyword is an interesting keyword in golang, it basically holds up the execution of the statement until all the statements around the local scope has been executed. It is basically like a stack holding the execution of statements. You can have multiple defer keywords in the single code block(function or a loop), those will be called by the principle of &lt;strong&gt;first in last out&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: String Manipulation</title>
+      <link>http://localhost:1313/golang-strings/</link>
+      <pubDate>Tue, 28 Jun 2022 22:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-strings/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In the 15th post of the Series, we will be looking into the details of the String manipulation and performing types of operations in Golang. We will explore string manipulation, concatenation, helper functions, etc. which will help in working with strings in Golang.&lt;/p&gt;&#xA;&lt;h2 id=&#34;string-concatenation&#34;&gt;String Concatenation&lt;/h2&gt;&#xA;&lt;p&gt;String Concatenation refers to the combining and formatting of strings in Golang. We can combine multiple strings and formating the way we display the strings in Golang. We have a few ways and functions to concatenate strings in Golang.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>DJ Notes</title>
+      <link>http://localhost:1313/projects/djnotes/</link>
+      <pubDate>Sat, 25 Jun 2022 16:44:59 +0000</pubDate>
+      <guid>http://localhost:1313/projects/djnotes/</guid>
+      <description>&lt;p&gt;A note taking application with features like markdown, syntax highlighting and filtering.&lt;/p&gt;&#xA;&lt;p&gt;Tech Stack:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Django&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>APTUI</title>
+      <link>http://localhost:1313/projects/aptui/</link>
+      <pubDate>Wed, 22 Jun 2022 17:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/aptui/</guid>
+      <description>&lt;p&gt;A terminal client interface for testing and working with APIs and web requests.&lt;/p&gt;&#xA;&lt;p&gt;Tech Stack:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Python&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Textual&lt;/li&gt;&#xA;&lt;li&gt;Rich&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Mutable and Immutable Data Types</title>
+      <link>http://localhost:1313/golang-mutable-immutable/</link>
+      <pubDate>Tue, 21 Jun 2022 21:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-mutable-immutable/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In this 14th Post of the 100 days of GOlang, we will be understanding about the mutable and immutable data types in Golang. Firstly, we will understand the concept of mutability and understand the differences in mutable and immutable data types, further we will explore which data types in Golang are Mutable and Immutable.&lt;/p&gt;&#xA;&lt;h2 id=&#34;mutable-data-type&#34;&gt;Mutable Data Type&lt;/h2&gt;&#xA;&lt;p&gt;Mutable data type is a data type which can be modified without reallocating any chunk of the memory assigned at the time of initialization. In simple words, a variable is mutable if its value can be altered without reallocating itself to a new memory space.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Lingo</title>
+      <link>http://localhost:1313/projects/lingo/</link>
+      <pubDate>Fri, 27 May 2022 17:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/lingo/</guid>
+      <description>&lt;p&gt;A simple link-tree clone in Golang. Create links for your website, blog, or social media handles from a single place for others to view.&lt;/p&gt;&#xA;&lt;p&gt;Tech Stack:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Golang&lt;/li&gt;&#xA;&lt;li&gt;Tailwind-CSS&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Django Project with PostgreSQL Deployment on Railway App</title>
+      <link>http://localhost:1313/django-deploy-railway/</link>
+      <pubDate>Thu, 19 May 2022 20:30:00 +0000</pubDate>
+      <guid>http://localhost:1313/django-deploy-railway/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;We have already seen the process of deployment of a Django app on Heroku, now we can move to another platform which is &lt;a href=&#34;https://railway.app&#34;&gt;Railway App&lt;/a&gt;. This allows a faster and more intuitive way to deploy a Django app(or any sort of web app). This platform has several &lt;a href=&#34;https://railway.app/starters&#34;&gt;Starter Apps&lt;/a&gt; for shipping your app in several clicks, definitely, it would require some configuration and tweaking a bit.&lt;/p&gt;&#xA;&lt;p&gt;We will be following similar steps from the &lt;a href=&#34;https://mr-destructive.github.io/techstructive-blog/series/django-deployment/&#34;&gt;Django-Heroku Deployment Guide&lt;/a&gt; for configuring and setting up our Django project for the deployment on the Railway app. We explore a few different ways to create and deploy a Django project on Railway.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django &#43; PostgreSQL Deployment on Heroku</title>
+      <link>http://localhost:1313/django-deploy-heroku/</link>
+      <pubDate>Sun, 15 May 2022 20:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/django-deploy-heroku/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Django projects are quite easy to build and simple to understand, you might have created a Django application and wanted to show it to the world? You can deploy a basic Django application with a database(PostgreSQL) with Heroku. It provides a decent free tier with some great features and add-ons. A free tier Heroku account has a limitation of 5 apps, limited data in the database, limited connections to the server per month, and so on.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Operators</title>
+      <link>http://localhost:1313/golang-operators/</link>
+      <pubDate>Sat, 07 May 2022 20:33:38 +0000</pubDate>
+      <guid>http://localhost:1313/golang-operators/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In this 13th part of the series, we will be exploring the fundamentals of operators in Golang. We will be exploring the basics of operators and the various types like Arithmetic, Bitwise, Comparison, Assignment operators in Golang.&lt;/p&gt;&#xA;&lt;p&gt;Operators are quite fundamentals in any programming language. Operators are basically expressions or a set of character(s) to perform certain fundamental tasks. They allow us to perform certain trivial operations with a simple expression or character. There are quite a few operators in Golang to perform various operations.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Math Package</title>
+      <link>http://localhost:1313/golang-math/</link>
+      <pubDate>Mon, 25 Apr 2022 20:30:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-math/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Moving on in the 100 days of golang series, we can take a look into the math package in golang&amp;rsquo;s standard library. In programming, math is quite critical aspect, we need to perform certain mathematical operations quite regularly so golang&amp;rsquo;s standard library has a package for serving some quite commonly used math functions and procedures. We&amp;rsquo;ll take a look at some of the basic and common functions which are available in the math package.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Packages</title>
+      <link>http://localhost:1313/golang-packages/</link>
+      <pubDate>Fri, 22 Apr 2022 22:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-packages/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In this 11th part of the series, we will be covering packages in golang. Package is a cool way to organize code in large projects. We can create a separate file which can include certain helper functions or variables from other files or scripts. There are couple of types of packages like packages from the standard library, open sourced community packages and custom packages that you can build of your own. In this particular section, we will be covering the fundamentals of packages and exploring the standard library in golang.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Pointers</title>
+      <link>http://localhost:1313/golang-pointers/</link>
+      <pubDate>Tue, 19 Apr 2022 23:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-pointers/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In the tenth part of the series, we will be looking into an interesting concept in programming i.e. Pointer. It&amp;rsquo;s a simple thing but a really powerful concept. Using pointers we can do several things very easily rather than writing a lot of code for a simple thing. We will be looking into basic concepts like declaration, referencing, de-referencing, and some examples on passing by reference, along with a pointer to struct instances.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Structs</title>
+      <link>http://localhost:1313/golang-structs/</link>
+      <pubDate>Thu, 14 Apr 2022 22:15:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-structs/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Moving on to the 9th part of the series, we will be understanding structs in golang. Structs are an important aspect of programming in Golang, they provide a way to define custom types and add functionality to them. We will be understanding the basics of operating on structs like declaration, initialization and adding functional logic into those structs.&lt;/p&gt;&#xA;&lt;h2 id=&#34;structs-in-golang&#34;&gt;Structs in Golang&lt;/h2&gt;&#xA;&lt;p&gt;Structs or Structures in Golang are the sequences or collections of built-in data types as a single type interface. Just like we have int, string, float, and complex, we can define our own data types in golang. They can consist of built-in data types as mentioned and also certain functions or methods which can be used to operate on them. Using structs we can create custom data types that can meet the specific requirements of our problem. We can define structs and later inside functions we can create instances of those structures.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Functions</title>
+      <link>http://localhost:1313/golang-functions/</link>
+      <pubDate>Wed, 13 Apr 2022 09:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-functions/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In the eighth part of the series, we will be exploring functions in golang. We will be diving into some basics of functions in golang like declaration, definition and calling. We won&amp;rsquo;t be exploring all the topics of functions as it is quite a large topic to cover in one shot. So, building from the base, we will be starting from the basic declaration to simple return statements.&lt;/p&gt;&#xA;&lt;h2 id=&#34;functions-in-golang&#34;&gt;Functions in Golang&lt;/h2&gt;&#xA;&lt;p&gt;Functions in golang are a simple way to structure a block of code that can be re-usable. Functions also allow us to process a piece of logic and return the output. Functions allow us to write readable and scalable code as we have to write the code once and we can re-use the functionality of it by calling it.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Maps</title>
+      <link>http://localhost:1313/golang-maps/</link>
+      <pubDate>Tue, 12 Apr 2022 20:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-maps/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In the seventh part of the series, we will be covering Maps. We have covered some basic data structures like arrays and slices, and now we can move into maps or hash tables. Maps allow us to store key-value pairs of a particular type. In this part of the series, we will be covering the basics of Maps in Golang like declaration, iteration, and Creating, updating, and deleting keys from the map.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Slices</title>
+      <link>http://localhost:1313/golang-slices/</link>
+      <pubDate>Thu, 07 Apr 2022 09:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-slices/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In the sixth part of the series, we will be covering slices. Slices are almost like arrays but have a lot of advantages over them, including flexibility and control over them. We can adjust the size and capacity of the data which we will store at a place using slices. We will be covering basic declaration, initialization, capacity in slices, iteration, and accessing the elements of the slices.&lt;/p&gt;&#xA;&lt;h2 id=&#34;slices-in-golang&#34;&gt;Slices in Golang&lt;/h2&gt;&#xA;&lt;p&gt;Slices are Arrays but can provide more control and are more flexible than arrays. In slices, we can increase the size of the array/list of elements whenever required. We can even have a capacity for slices i.e. the maximum length we wish to grow the initial slice.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Arrays</title>
+      <link>http://localhost:1313/golang-arrays/</link>
+      <pubDate>Wed, 06 Apr 2022 09:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-arrays/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In this fifth section of Golang, we will be understanding the basics of arrays. We will be covering some basic operations on arrays like declaration, initialization, modifications, and iterating over an array.&lt;/p&gt;&#xA;&lt;h2 id=&#34;declaring-arrays&#34;&gt;Declaring Arrays&lt;/h2&gt;&#xA;&lt;p&gt;Arrays are type of data structure that allow us to store multiple items at continuous memory locations of the same type. In golang, we can create arrays similar to any variable but by adding a few bits and pieces like the &lt;code&gt;[]&lt;/code&gt; square braces, length of the array, values, etc. In golang, we cannot resize the length once it is initialized.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Input</title>
+      <link>http://localhost:1313/golang-input/</link>
+      <pubDate>Tue, 05 Apr 2022 09:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-input/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In this fourth section of Golang, we will be understanding the basics of user input. In golang, we can get user input with several functions most of which are similar to the &lt;code&gt;C&lt;/code&gt; programming language like &lt;code&gt;scanf&lt;/code&gt;. This type of input is quite powerful and gives more control on the input to be received.&lt;/p&gt;&#xA;&lt;h2 id=&#34;scan-function&#34;&gt;Scan Function&lt;/h2&gt;&#xA;&lt;p&gt;The &lt;a href=&#34;https://pkg.go.dev/fmt#Scan&#34;&gt;Scan&lt;/a&gt; function helps in getting a value with space as delimiter i.e. The input is stored before a space is encountered. This means the input is only limited to adding a space or a new line. We can use the function by passing the reference to the variable we are going to store the input value. So, we can have a basic input in Golang as follows:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Conditionals and Loops</title>
+      <link>http://localhost:1313/golang-conditionals-loops/</link>
+      <pubDate>Mon, 04 Apr 2022 09:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-conditionals-loops/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Moving to the fourth part, we will be doing conditional statements and loops in golang. We will be seeing the basics of conditional statements like if-else and switch along with loops like for, while, and range-based loops. We won&amp;rsquo;t be covering iterating over arrays in a loop as this requires an understanding of arrays.&lt;/p&gt;&#xA;&lt;h2 id=&#34;conditional-statements&#34;&gt;Conditional statements&lt;/h2&gt;&#xA;&lt;p&gt;Conditional statements are quite a fundamental aspect of learning a programming language. In golang, we have if-else conditional statements as well as switch cases. We will be exploring both of them in this section. Firstly, we will dive into if-else statements which are quite easy to understand.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Variables and Types</title>
+      <link>http://localhost:1313/golang-variables/</link>
+      <pubDate>Sun, 03 Apr 2022 10:45:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-variables/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In the third part of the series, we will be covering the fundamentals for learning any programming language i.e. variables and data types. We will be covering from data types to variable declaration. We won&amp;rsquo;t be seeing each and every detail related to the data types as some of them require a knowledge of loops and other topics, so that can be left for the different part.&lt;/p&gt;&#xA;&lt;h2 id=&#34;types-in-golang&#34;&gt;Types in golang&lt;/h2&gt;&#xA;&lt;p&gt;In Golang there are 3 major types : Numeric, Bool and String. Further we also have specific types for the three data types like int, float, rune, byte, etc. We will first see how to declare a simple variable and then explore the data types in Golang.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: Installation and Hello-World</title>
+      <link>http://localhost:1313/hello-golang/</link>
+      <pubDate>Sat, 02 Apr 2022 16:36:33 +0000</pubDate>
+      <guid>http://localhost:1313/hello-golang/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Moving on to the second day, we will be installing and setting up Go lang on our systems. The installation and setup are quite simple and not much demonstration is required, so further in the article, I will also make a hello-world program in GO. We will explore the basic program in GO and how to compile, run and build a GO program in this section.&lt;/p&gt;&#xA;&lt;h2 id=&#34;installing-go&#34;&gt;Installing Go&lt;/h2&gt;&#xA;&lt;p&gt;Installing Go is pretty straightforward. You have to install the binaries from the official website as per your operating system.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Golang: What and Why?</title>
+      <link>http://localhost:1313/golang-intro/</link>
+      <pubDate>Fri, 01 Apr 2022 10:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/golang-intro/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;This is the first entry in my 100 days of Go lang challenge. I will share the things I will learn each day for 100 days related to Golang or its configuration in my environment. In this post, we will understand what is golang and why you should learn it. It&amp;rsquo;s not an in-depth guide but a high-level overview for understanding the context of learning Go lang.&lt;/p&gt;&#xA;&lt;h3 id=&#34;a-bit-of-context&#34;&gt;A bit of Context&lt;/h3&gt;&#xA;&lt;p&gt;In April 2021, I started learning Django and to date, I have more than 10 projects(not all deployed) created and publicly open on &lt;a href=&#34;https://github.com/Mr-Destructive?tab=repositories&amp;amp;q=django&amp;amp;type=&amp;amp;language=python&amp;amp;sort=&#34;&gt;GitHub&lt;/a&gt;. It has been a great experience so far, I am still in between an internship with a project to be created in Django. The learning process after I started blogging in June 2021 has been a different fantasy, I have been enjoying the process of writing the things I learn. So, this Spring/Summer I am creating a challenge of 100 days for learning Go lang and documenting the process. Hopefully, this will be a useful place to learn for a beginner and more than that a place for me to reflect back on the future.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Feedparser: Python package for reading RSS feeds</title>
+      <link>http://localhost:1313/python-feedparser/</link>
+      <pubDate>Sat, 26 Mar 2022 15:45:00 +0000</pubDate>
+      <guid>http://localhost:1313/python-feedparser/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://pypi.org/project/feedparser/&#34;&gt;Feedparser&lt;/a&gt; is a simple but powerful python package that can be used to extract information about a specific webpage or a publication with its RSS feed(not only RSS). By providing the RSS feed link, we can get structured information in the form of python lists and dictionaries. It can be basically used in a pythonic way to read RSS feeds, it is really simple to use and it even normalizes different types of feeds.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Pipx: A python package consumption tool for CLI packages</title>
+      <link>http://localhost:1313/pipx-intro/</link>
+      <pubDate>Sun, 20 Mar 2022 20:30:00 +0000</pubDate>
+      <guid>http://localhost:1313/pipx-intro/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Previously, I explored the &lt;a href=&#34;https://mr-destructive.github.io/techstructive-blog/pipenv-intro/&#34;&gt;pipenv&lt;/a&gt; as a python package management tool and this week it is time for exploring a python CLI package isolation tool called &lt;code&gt;pipx&lt;/code&gt;. It is a really simple and powerful tool for running commands as an executable from an isolated environment. Those commands should be associated with a python package that has CLI. In pipx, we install the package once and we can use the package anywhere on our system isolated from other virtual environments.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Pipenv: Python&#39;s Official Package Management tool</title>
+      <link>http://localhost:1313/pipenv-intro/</link>
+      <pubDate>Mon, 14 Mar 2022 14:35:00 +0000</pubDate>
+      <guid>http://localhost:1313/pipenv-intro/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Pipenv is Python&amp;rsquo;s officially recommended Package management tool, as the name suggests it combines the power of &lt;code&gt;pip&lt;/code&gt; and &lt;code&gt;virtualenv&lt;/code&gt;. It is really powerful and gives control of package management for a python project. It also has support for adding dev packages, python versions, smartly recognizing main and derived package installation/uninstallation, and so on. It is the &lt;a href=&#34;https://packaging.python.org/en/latest/tutorials/managing-dependencies/#managing-dependencies&#34;&gt;official package management tool for Python&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;It is quite similar to npm for Nodejs in Javascript, or bundle for Ruby, cargo for Rust, and so on. It really simple and easy to use as it manages the overhead for package management for us and hence it is also a high-level package management tool as opposed to pip, which is not as powerful as Pipenv. So, in this article, we&amp;rsquo;ll explore &lt;a href=&#34;https://pypi.org/project/pipenv/&#34;&gt;Pipenv&lt;/a&gt; package manager for Python and how you can use it in your next python project. Let&amp;rsquo;s get started.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Crossposter</title>
+      <link>http://localhost:1313/projects/crossposter/</link>
+      <pubDate>Fri, 25 Feb 2022 16:44:59 +0000</pubDate>
+      <guid>http://localhost:1313/projects/crossposter/</guid>
+      <description>&lt;p&gt;Tech Stack:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Python&lt;/li&gt;&#xA;&lt;li&gt;Python Pacakges&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Podevcast</title>
+      <link>http://localhost:1313/projects/podevcast/</link>
+      <pubDate>Fri, 25 Feb 2022 16:44:59 +0000</pubDate>
+      <guid>http://localhost:1313/projects/podevcast/</guid>
+      <description>&lt;p&gt;Tech Stack:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Python&lt;/li&gt;&#xA;&lt;li&gt;Python Pacakges&#xA;&lt;ul&gt;&#xA;&lt;li&gt;feedparser&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;Netlify&lt;/li&gt;&#xA;&lt;li&gt;GitHub Actions&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Podevcast: A single source for developer podcasts</title>
+      <link>http://localhost:1313/podevcast-project/</link>
+      <pubDate>Fri, 18 Feb 2022 22:30:00 +0530</pubDate>
+      <guid>http://localhost:1313/podevcast-project/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Hello Developers! Want to listen to programming podcasts from a single place? Podevcast is the place you should be searching for.&lt;/p&gt;&#xA;&lt;p&gt;I am Meet Gor and I present this project as a submission to the Netlify x Hashnode Hackathon. Podevcast is a webpage(static) for listening to podcasts centered around developers and programming. Just pick your favorite one and start listening straight away. Let&amp;rsquo;s dive into the making of Podevcast. Head on to &lt;a href=&#34;https://podevcast.netlify.app/&#34;&gt;https://podevcast.netlify.app/&lt;/a&gt; to check out the live app.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django Basics: CRUD API</title>
+      <link>http://localhost:1313/django-basics-crud-api/</link>
+      <pubDate>Thu, 03 Feb 2022 23:45:00 +0530</pubDate>
+      <guid>http://localhost:1313/django-basics-crud-api/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;After understanding the admin section and setting up a database, we can finally move on to the CRUD API in Django. We will create a API in pure Django with Model Form, Class Based Views and templates. We will go in two parts in this section, first revising the workflow of the app creation and setup, the next part all about CRUD API. We&amp;rsquo;ll dive into a lot of familiar topics and concepts from previous parts but there are is still a lot to learn beyond the basics.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>BackChat</title>
+      <link>http://localhost:1313/projects/backchat/</link>
+      <pubDate>Mon, 31 Jan 2022 12:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/backchat/</guid>
+      <description>&lt;p&gt;A simple chat/messaging app created for exploring HTMX and django-channels.&lt;/p&gt;&#xA;&lt;p&gt;Tech Stack:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Django&lt;/li&gt;&#xA;&lt;li&gt;Django-Channels&lt;/li&gt;&#xA;&lt;li&gt;Daphne&lt;/li&gt;&#xA;&lt;li&gt;HTMX&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Django Basics: Admin Section</title>
+      <link>http://localhost:1313/django-basics-admin/</link>
+      <pubDate>Wed, 26 Jan 2022 22:25:00 +0530</pubDate>
+      <guid>http://localhost:1313/django-basics-admin/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In the previous section, we configured the database in our Django project. We will move ahead and interact with the Admin Section in Django. Django has a built-in Admin Section which we can use to manage our apps and models. We will create a admin account(superuser) and try to render our custom Model in the Admin Interface. We shall further discuss the customization in the Admin section as per our requirements and necessity.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django Basics: Database Configurations</title>
+      <link>http://localhost:1313/django-database-conf/</link>
+      <pubDate>Fri, 21 Jan 2022 16:40:34 +0000</pubDate>
+      <guid>http://localhost:1313/django-database-conf/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;In this part of the series, we will create an external database and configure the settings for that database. We also look into the process of migrations which is to convert a model which we created in the previous part into the actual structure/schema for the database. I&amp;rsquo;ll be using &lt;code&gt;PostgreSQL&lt;/code&gt; for most of the demonstrations but it should be similar for other database management tools. This part will make your Django project link to a local database.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django Basics: Creating Models</title>
+      <link>http://localhost:1313/django-basics-models/</link>
+      <pubDate>Tue, 04 Jan 2022 22:15:00 +0530</pubDate>
+      <guid>http://localhost:1313/django-basics-models/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;We have seen the basics of Django templating in the previous parts of the series. Now, we can move on to the more backend stuff in Django which deals with the Databases, queries, admin section, and so on. In this particular part, we&amp;rsquo;ll cover the fundamental part of any application in Django i.e the &lt;code&gt;Model&lt;/code&gt;. We&amp;rsquo;ll understand what the model is, how to structure one, how to create relationships and add constraints on the fields, etc.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django Basics: Static Files</title>
+      <link>http://localhost:1313/django-basics-static-files/</link>
+      <pubDate>Mon, 27 Dec 2021 22:45:00 +0530</pubDate>
+      <guid>http://localhost:1313/django-basics-static-files/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;After creating templates, it should be rather tempting to add some styles and logic to them. Well yes, we&amp;rsquo;ll see how to add static files in a web application using django. Static files are not only CSS, but also media/images and Javascript files as well. In this part of the series, we&amp;rsquo;ll cover the basics of working with static files in django including the configuration, rendering and storing of the static files.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django Basics: Templates</title>
+      <link>http://localhost:1313/django-basics-templates/</link>
+      <pubDate>Tue, 14 Dec 2021 16:45:00 +0530</pubDate>
+      <guid>http://localhost:1313/django-basics-templates/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;After learning the basics of views and URLs, we can now move on to the next concept i.e. Templates. In Django, Templates are quite an important component for the application as it acts as the &lt;code&gt;frontend&lt;/code&gt; for the web application. With the help of templates and some features provided by Django, it becomes very intuitive and simple to make dynamic web content.&#xA;In this part, we understand what are templates and what is the way to render them.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django Basics: Views and URLS</title>
+      <link>http://localhost:1313/django-basics-views-urls/</link>
+      <pubDate>Tue, 30 Nov 2021 12:03:00 +0530</pubDate>
+      <guid>http://localhost:1313/django-basics-views-urls/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;After getting familiar with the folder structure of the Django framework, we&amp;rsquo;ll create our first view in an app. The basics of creating and mapping a view with a URL will be cleared by the end of this part.&lt;/p&gt;&#xA;&lt;h2 id=&#34;creating-views&#34;&gt;Creating Views&lt;/h2&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Views are the functions written in python as a logic control unit of the webserver&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;To create a view or typically-like function, we need to write a function in the &lt;code&gt;views.py&lt;/code&gt; file inside of the application folder. The function name can be anything but should be a sensible name as far as its usability is concerned. Let&amp;rsquo;s take a basic example of sending an HTTP response of &amp;ldquo;Hello World&amp;rdquo;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django Basics: Folder Structure</title>
+      <link>http://localhost:1313/django-basics-folder-struct/</link>
+      <pubDate>Wed, 24 Nov 2021 15:45:00 +0530</pubDate>
+      <guid>http://localhost:1313/django-basics-folder-struct/</guid>
+      <description>&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;&#xA;&lt;p&gt;After setting up the development for the Django framework, we will explore the project structure. In this part, we understand the structure along with the various components in the Project as well as individual apps. We will understand the objective of each file and folder in a brief and hopefully by the end of this part, you&amp;rsquo;ll be aware of how the Django project is structured and get a good overview of the flow of development in the Django project.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django Basics: Setup and Installation</title>
+      <link>http://localhost:1313/django-basics-setup/</link>
+      <pubDate>Sat, 20 Nov 2021 16:30:00 +0530</pubDate>
+      <guid>http://localhost:1313/django-basics-setup/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;The crucial aspect of starting to learn any framework is the ease to set it up and Django by far is the easiest of the options out there. There is just a few lines of code to install django if you already have python installed in your system. In this article, we see how to setup a django project along with a virtual environment.&lt;/p&gt;&#xA;&lt;p&gt;If you already have python and pip installed, you can move on to the &lt;a href=&#34;#setting-up-virtual-environment-in-python&#34;&gt;virtual environment setup&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django Basics: What is it?</title>
+      <link>http://localhost:1313/django-basics-intro/</link>
+      <pubDate>Tue, 16 Nov 2021 20:45:00 +0530</pubDate>
+      <guid>http://localhost:1313/django-basics-intro/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Welcome to Django Basics series, in this series we&amp;rsquo;ll explore the basics of the Django web framework. In this part, we&amp;rsquo;ll understand what this web framework provides and what actually the back-end development consists of. We&amp;rsquo;ll discuss where Django is used and why it is a great choice for beginners as well as experienced developers.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-django&#34;&gt;What is Django?&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Introduction&#34;&gt;Django&lt;/a&gt; is a back-end web framework. It is based on python which means you have to write most of the project&amp;rsquo;s code in Python. But Django comes with a lot of boilerplate code and thus it becomes quite quick in the development.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Basics of curl command</title>
+      <link>http://localhost:1313/curl-basics/</link>
+      <pubDate>Fri, 05 Nov 2021 20:50:00 +0530</pubDate>
+      <guid>http://localhost:1313/curl-basics/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;We all might have used the curl command but might be unaware of it. It&amp;rsquo;s super old&#xA;and still serves a great purpose. It has been available since 1996 and still is&#xA;widely used in many embedded technologies, web API testing, CLI applications,&#xA;etc. In this article, we&amp;rsquo;ll see some basics of using the curl command along with&#xA;its applications.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-the-curl-command&#34;&gt;What is the curl command?&lt;/h2&gt;&#xA;&lt;p&gt;Curl or cURL command is the utility or tool to access the internet from the command&#xA;line interface using various protocols. This looks trivial but it can blow up&#xA;your mind! Most people use this tool for fetching and processing the&#xA;data from the servers/internet from their terminal without the browser but&#xA;there is a lot more to it. It is used in various embedded devices for accessing&#xA;the network in a lightweight and accessible way. Let&amp;rsquo;s see how you can use the curl&#xA;command from the very basics.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Crossposting with a single script: Crossposter.sh</title>
+      <link>http://localhost:1313/crossposter-shellscript/</link>
+      <pubDate>Sun, 31 Oct 2021 15:45:00 +0530</pubDate>
+      <guid>http://localhost:1313/crossposter-shellscript/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;If you have been writing articles you know the pain to get some attention, if you have already been cross-posting your articles it usually takes some time to do that. This task can be automated with a shellscript. If you have been cross-posting articles on &lt;code&gt;medium.com&lt;/code&gt;, &lt;code&gt;dev.to&lt;/code&gt; and at &lt;code&gt;hashnode.com&lt;/code&gt;, then I have a treat for you.&lt;/p&gt;&#xA;&lt;p&gt;Introducing &lt;strong&gt;crossposter.sh&lt;/strong&gt;!!&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-crosspostersh&#34;&gt;What is Crossposter.sh?&lt;/h2&gt;&#xA;&lt;h3 id=&#34;crosspost-to-devtohahsnodemedium-from-the-command-line&#34;&gt;Crosspost to dev.to/hahsnode/medium from the command line.&lt;/h3&gt;&#xA;&lt;p&gt;Crossposter.sh is a shellscript(BASH) to automate crossposting to platforms like dev.to, medium.com and hashnode.com. The script takes in markdown version of your post with a few inputs from you and posts it to those platforms. You would require a token/key for each of those platforms to post it from the command line. You can check out the official repository of &lt;a href=&#34;https://github.com/Mr-Destructive/crossposter&#34;&gt;Crossposter&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hacktoberfest 2021</title>
+      <link>http://localhost:1313/hacktoberfest-2021/</link>
+      <pubDate>Thu, 28 Oct 2021 20:10:00 +0530</pubDate>
+      <guid>http://localhost:1313/hacktoberfest-2021/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;This was my second year as a Hacktoberfest participant, First year was very dry and not so exciting as this turned out to be a cracker of an experience. With more than month gone in with only a few contributions, the second half of October was a splendid one for me where I made a lot more than in entire 2 years.&lt;/p&gt;&#xA;&lt;p&gt;This is my Contributions so far in this month:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Flask and Django - the backend web frameworks</title>
+      <link>http://localhost:1313/flask-django-frameworks/</link>
+      <pubDate>Sun, 24 Oct 2021 19:00:00 +0530</pubDate>
+      <guid>http://localhost:1313/flask-django-frameworks/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;We all have seen the buzz around web frameworks like Django, Flask, Node.js, etc but have you taken time to learn all of them? No, and you shouldn&amp;rsquo;t! Because many web frameworks share the same principle and workflow with a bit of difference. It&amp;rsquo;s just like learning one programming language and applying the same concepts in a different syntax and mechanism. In the world of web frameworks, this is the case as well, but most of them will disagree with it as every web framework is unique in its design and that&amp;rsquo;s true, don&amp;rsquo;t get me wrong.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Comment/Uncomment Code: Vim for Programmers</title>
+      <link>http://localhost:1313/vim-un-comment-p1/</link>
+      <pubDate>Thu, 07 Oct 2021 16:45:42 +0530</pubDate>
+      <guid>http://localhost:1313/vim-un-comment-p1/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;We as programmers always fiddle with commenting out code for code testing, documenting the function of code, and most importantly debugging. So you can&amp;rsquo;t wait to comment on a large chunk of code manually, as it is quite a tedious thing to do. Let&amp;rsquo;s do it effectively in Vim.&lt;/p&gt;&#xA;&lt;p&gt;In this part of the series, I&amp;rsquo;ll cover how to comment/uncomment chunks/blocks of code effectively in Vim. We will see and use some commands, keybindings for doing so, and also we would add certain components to our vimrc file as well to design some custom key mappings.  Let&amp;rsquo;s get faster with Vim.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>What is Machine Learning?</title>
+      <link>http://localhost:1313/ml-intro/</link>
+      <pubDate>Wed, 29 Sep 2021 15:30:07 +0530</pubDate>
+      <guid>http://localhost:1313/ml-intro/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;We all hear about terms like &lt;code&gt;Machine Learning&lt;/code&gt;, &lt;code&gt;Artificial Intelligence&lt;/code&gt;, and others, but what do they actually mean and why do you need to care about these as a developer. This won&amp;rsquo;t be a perfect guide in terms of experience but surely enough to get anyone through the basics of Machine Learning.&lt;/p&gt;&#xA;&lt;p&gt;This is not the kind of article I write but, having such challenges can help me become a better technical writer, this is the challenge put forward in the Hashnode Bootcamp 4 to get out of my comfort zone. Here&amp;rsquo;s my take on what I know about Machine Learning till now (P.S. Half of the stuff I discovered and re-learned during writing).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Django &#43; Auth0 Quick Setup</title>
+      <link>http://localhost:1313/djagno-auth0-script/</link>
+      <pubDate>Tue, 28 Sep 2021 20:08:47 +0530</pubDate>
+      <guid>http://localhost:1313/djagno-auth0-script/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;This is a guide and a walkthrough of how to quickly set up a base Django project with Auth0 as integration for authentication and authorization. I will walk you through the Django setup and how to use and integrate the functionalities of the Auth0.  I will also discuss how why you should be using Auth0 and why I love it.&lt;/p&gt;&#xA;&lt;p&gt;The script takes &lt;code&gt;2:44&lt;/code&gt; minutes time to do everything from scratch. From installing virtualenv in python to integrating the Auth0 application.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Object-Oriented Programming in C&#43;&#43;: Constructors</title>
+      <link>http://localhost:1313/oop-cpp-p3/</link>
+      <pubDate>Thu, 23 Sep 2021 19:33:52 +0530</pubDate>
+      <guid>http://localhost:1313/oop-cpp-p3/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;After learning a bit about classes, objects, and access modifiers, we can move on to another important concept of Constructors and Destructors. This part will cover Constructors. We&amp;rsquo;ll explore what are constructors, why we need them, types of constructors, and their semantics in C++ as usual.&lt;/p&gt;&#xA;&lt;p&gt;So without wasting any time, let&amp;rsquo;s get started.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-a-constructor&#34;&gt;What is a constructor&lt;/h2&gt;&#xA;&lt;p&gt;A constructor is a method just like another method in a class, but it has a special name for a reason. The name itself speaks, &lt;code&gt;Constructor&lt;/code&gt;, which will get called just after the object gets created.  A constructor is just a method but it should only have the name same as of the class, that&amp;rsquo;s the thing that distinguishes it from other methods.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>What&#39;s in Techstructive Blog</title>
+      <link>http://localhost:1313/techstructive-blog-init/</link>
+      <pubDate>Sun, 19 Sep 2021 15:00:00 +0530</pubDate>
+      <guid>http://localhost:1313/techstructive-blog-init/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Hello World!&lt;/strong&gt; This is an article in which I&amp;rsquo;ll introduce why Techstructive Blog exists and what it covers in brief. This is just a casual introduction to my blogging niche. P.S. It&amp;rsquo;s not any technical blog but has challenged me enough to write and complete it.&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Techstructive Blog is my personal blog hosted on GitHub pages as well as on  &lt;a href=&#34;https://techstructiveblog.hashnode.dev/&#34;&gt;Hashnode&lt;/a&gt;. It first started on Hashnode and soon created my own using Jekyll on GitHub pages. On this blog, I write articles mainly Vim, BASH, and some programming languages and tools.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Object-Oriented Programming in C&#43;&#43;: Access Modifiers</title>
+      <link>http://localhost:1313/oop-cpp-p2/</link>
+      <pubDate>Sat, 18 Sep 2021 15:12:29 +0530</pubDate>
+      <guid>http://localhost:1313/oop-cpp-p2/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Moving on to Part 2 of Object-Oriented Programming in C++, we will look into the concept of access modifiers which we skipped in the first section. This won&amp;rsquo;t be a comprehensive guide on access modifiers as it requires some other concepts like &lt;code&gt;Inheritance&lt;/code&gt; which we will introduce in the next few sections. This series will be like connecting the pieces of OOP together and building a good foundation.&lt;/p&gt;&#xA;&lt;p&gt;In this part, we will discuss the access modifiers and their related concepts. The below is a gist of what will be covered in this part.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Object-Oriented Programming in C&#43;&#43;: Classes and Objects</title>
+      <link>http://localhost:1313/oop-cpp-p1/</link>
+      <pubDate>Thu, 16 Sep 2021 19:45:40 +0530</pubDate>
+      <guid>http://localhost:1313/oop-cpp-p1/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;We all know that C++ is famously known for Object-Oriented Programming, but what is Object-Oriented Programming? Well, this is the article, where we will explore the basics of Object-Oriented Programming, its building blocks i.e Classes and Objects, and get familiar with its basic semantics in C++. Let&amp;rsquo;s get into it straight away!&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-object-oriented-programming&#34;&gt;What is Object-Oriented Programming?&lt;/h2&gt;&#xA;&lt;p&gt;Object-Oriented Programming(OOP) is a way to structure and design a program or an application. Object-Oriented Programming deals with creating classes and objects and it&amp;rsquo;s related terminologies. OOP helps in following the principles like DRY(Don&amp;rsquo;t Repeat Yourself) and KISS(Keep it Simple Stupid). Using OOP certain applications and problems can be solved in a simple and efficient way. It helps in better understanding and readability of the code.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>GeeksForGeeks</title>
+      <link>http://localhost:1313/work/geeks-for-geeks/</link>
+      <pubDate>Wed, 15 Sep 2021 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/work/geeks-for-geeks/</guid>
+      <description>&lt;h3 id=&#34;technical-content-writer---geeksforgeekshttpswwwgeeksforgeeksorg&#34;&gt;Technical Content Writer - &lt;a href=&#34;https://www.geeksforgeeks.org/&#34;&gt;GeeksForGeeks&lt;/a&gt;&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;June 2021 - September 2021&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Authored 60+ technical articles on topics like shell scripting, Linux, and web development.&lt;/li&gt;&#xA;&lt;li&gt;Contributed to tutorials and educational resources for the programming community.&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>My Journey as a Technical Writer</title>
+      <link>http://localhost:1313/technical-writer-journey/</link>
+      <pubDate>Tue, 14 Sep 2021 19:30:37 +0530</pubDate>
+      <guid>http://localhost:1313/technical-writer-journey/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Hello World! I am Meet Gor, a self-taught web developer, Linux enthusiast, and a newbie technical writer. I am currently studying in an Engineering college pursuing my B. Tech in I.T.  I love to explore new programming languages and technologies, create innovative projects, love to write stories and blogs like this.&lt;/p&gt;&#xA;&lt;h2 id=&#34;how-it-started&#34;&gt;How it started&lt;/h2&gt;&#xA;&lt;p&gt;When I was learning Vim, I found the need to write some kind of cheatsheet for myself. So I started writing it, soon I realized I had written a kind of an article instead of a cheatsheet XD There were a lot of chunks of it unorganized but meaningful in some sense. So, from there I started to research on article writing. I found the term perfect for my techno feelings to express i.e. &amp;ldquo;Technical Writing&amp;rdquo;.  I soon landed on Hashnode, I knew Medium, GeeksforGeeks but found Hashnode absolutely perfect and much more viable to the creativity of an author.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vim for Competitive Programming</title>
+      <link>http://localhost:1313/vim-for-cp/</link>
+      <pubDate>Mon, 13 Sep 2021 17:42:30 +0530</pubDate>
+      <guid>http://localhost:1313/vim-for-cp/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Vim is not a bad text editor when it comes to using it for Competitive Programming. It&amp;rsquo;s kind of one way or the other, you would love it or you could trash it as it can waste a tremendous amount of time to write code every time. But once you are in a decent setup including some key-bindings and plugins can improve your speed in using Vim. I personally have used it since the beginning and haven&amp;rsquo;t regretted it even a tiny bit till date. It&amp;rsquo;s a flawless and enjoyable experience. I&amp;rsquo;ve used C++ for my CP journey, C is quite similar as well, but C++ has more library support and is a bit easier to write comparatively.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Filter and Find an Issue on GitHub</title>
+      <link>http://localhost:1313/find-filter-github-issues/</link>
+      <pubDate>Thu, 09 Sep 2021 17:42:30 +0530</pubDate>
+      <guid>http://localhost:1313/find-filter-github-issues/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Are you stuck in finding an open-source project to contribute to?&lt;/p&gt;&#xA;&lt;p&gt;We will see how you can pick up an issue on GitHub appropriate as per your preferences of languages, labels, complexity, and thus you can find a Community or a project to work and continue with further contributions.&lt;/p&gt;&#xA;&lt;p&gt;This process might not be as efficient but is quite helpful for beginners or people getting started to contributing to Open Source.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Why use Vim ?</title>
+      <link>http://localhost:1313/why-use-vim/</link>
+      <pubDate>Sun, 05 Sep 2021 13:30:55 +0530</pubDate>
+      <guid>http://localhost:1313/why-use-vim/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;So, Why would one use Vim? As Vim being the most complicated Text editor when it comes to &lt;strong&gt;closing it&lt;/strong&gt;!! Also, people think it&amp;rsquo;s not worth the time or it&amp;rsquo;s just not their type of Text Editor. Well, that&amp;rsquo;s true, I am not forcing anyone to use Vim, just to tell the reasons why people use Vim. Again, it&amp;rsquo;s not to show off to anyone that I use Vim, just to appreciate the power of Vim and its community, it&amp;rsquo;s just amazing!!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vim: NERDTree</title>
+      <link>http://localhost:1313/vim-nerdtree/</link>
+      <pubDate>Tue, 31 Aug 2021 20:45:06 +0530</pubDate>
+      <guid>http://localhost:1313/vim-nerdtree/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/preservim/nerdtree&#34;&gt;NERDTree&lt;/a&gt; is a great plugin in Vim for managing and navigating Files. Some might prefer fzf, telescope, and other plugins for navigation, NERDTree is not a bad option to begin within Vim. NERDTree allows you to even create/delete/move files and folders flawlessly without much effort, so it becomes a much more viable beginner&amp;rsquo;s plugin.&lt;/p&gt;&#xA;&lt;h2 id=&#34;installing-nerdtree-plugin&#34;&gt;Installing NERDTree Plugin&lt;/h2&gt;&#xA;&lt;p&gt;So, let&amp;rsquo;s start with the Installation of the NERDTree Plugin, it&amp;rsquo;s quite straightforward and simple.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Dev Quotes: A platform for developers to quote and get inspired - Auth0 x Hashnode Hackathon</title>
+      <link>http://localhost:1313/devquotes-platform/</link>
+      <pubDate>Fri, 27 Aug 2021 23:45:00 +0530</pubDate>
+      <guid>http://localhost:1313/devquotes-platform/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;No one can understand the joy in finishing a personal project, except the dreamer&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;It was a while,since I have posted an article here, as I was busy on a project or a hackathon.&lt;/p&gt;&#xA;&lt;p&gt;Hello, world! I am Meet a student and a self-taught web developer. I like to make and break stuff, especially when it comes to programming and Linux. I like shell scripting and learning different languages at once, love to learn about Vim and Linux everyday.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>DevQuotes</title>
+      <link>http://localhost:1313/projects/dev-quotes/</link>
+      <pubDate>Wed, 25 Aug 2021 23:45:00 +0000</pubDate>
+      <guid>http://localhost:1313/projects/dev-quotes/</guid>
+      <description>&lt;p&gt;A simple quote/post sharing app created for exploring Django.&lt;/p&gt;&#xA;&lt;p&gt;Tech Stack:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Django&lt;/li&gt;&#xA;&lt;li&gt;Bootstrap&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Django Quick Setup Script</title>
+      <link>http://localhost:1313/django-setup-script/</link>
+      <pubDate>Sun, 15 Aug 2021 18:50:46 +0530</pubDate>
+      <guid>http://localhost:1313/django-setup-script/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Once you learn something very neatly and understand it very clearly, it feels like you are wasting time doing things over and over again. Same things in setting up a Django project, you feel like you could save those typing minutes by making a script.&lt;/p&gt;&#xA;&lt;p&gt;In this article, we will make a script a batch script for windows and a BASH script for Linux/macOS. We will make a virtual environment using python and then install the libraries and dependencies like in this case we will install Django. You can also tinker with these scripts and install other dependencies if you want like Django rest framework, crispy forms, markdown, Redis, etc. We will also make a Django project using the positional parameter passed before running the script from the command line.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vim: Buffers</title>
+      <link>http://localhost:1313/vim-buffers/</link>
+      <pubDate>Wed, 11 Aug 2021 20:24:29 +0530</pubDate>
+      <guid>http://localhost:1313/vim-buffers/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;I have talked about Vim &lt;a href=&#34;https://mr-destructive.github.io/techstructive-blog/vim/2021/08/03/Vim-Tabs.html&#34;&gt;tabs&lt;/a&gt;,  &lt;a href=&#34;https://mr-destructive.github.io/techstructive-blog/vim/2021/08/06/Vim-Window-Splits.html&#34;&gt;window splits&lt;/a&gt;  in the previous articles, and now I am quite keen on explaining the finest unit of file that you can open using Vim and that is a buffer. Tabs are a collection of windows, Windows are the viewport on buffers (collection to view the buffers), and Buffers are the memory that holds text in the file. So let us explore buffer in detail. This article won&amp;rsquo;t cover each and every tiny detail about buffers but surely enough to make you understand what a buffer is and how to manage those.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vim: Window Splits</title>
+      <link>http://localhost:1313/vim-window-splits/</link>
+      <pubDate>Fri, 06 Aug 2021 15:40:49 +0530</pubDate>
+      <guid>http://localhost:1313/vim-window-splits/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Have you ever been stuck in Vim opening multiple files within a single window? Didn&amp;rsquo;t anyone tell you, you can create multiple windows and split them within a single tab. Definitely, the window splits will be in separate buffers. In this way you can create multiple windows inside of a single Tab, what are Tabs? You can learn some basics about it from my previous article about  &lt;a href=&#34;https://mr-destructive.github.io/techstructive-blog/vim/2021/08/03/Vim-Tabs.html&#34;&gt;Tabs in Vim&lt;/a&gt;. We can either create Vertical or Horizontal splits within the window making it flexible to work with multiple files in Vim. This article will look into the creation, navigation, closing, and rearrangement of Window Splits.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vim: Tabs</title>
+      <link>http://localhost:1313/vim-tabs/</link>
+      <pubDate>Tue, 03 Aug 2021 20:23:09 +0530</pubDate>
+      <guid>http://localhost:1313/vim-tabs/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;So, you are playing with Vim and getting good at but something pulls you off. Basically can&amp;rsquo;t get used to switching between files or windows, and that&amp;rsquo;s totally fine. Some may prefer using Window splitting, file managers, and whatnot. But let me introduce you to TABS in Vim. A simple and elegant way to open multiple files in Vim.&lt;/p&gt;&#xA;&lt;h2 id=&#34;opening-tabs&#34;&gt;Opening Tabs&lt;/h2&gt;&#xA;&lt;p&gt;To open a tab, you can press &lt;code&gt;:tabnew&lt;/code&gt;  or  &lt;code&gt;:tabedit&lt;/code&gt; to open a blank Tab with no file open in it. This basically works like the &lt;code&gt;:e&lt;/code&gt; command, which opens a buffer for you with no named file.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Scrapping the meaning of a word from dictionary.com using BASH script.</title>
+      <link>http://localhost:1313/bash-dictionary-scrapper/</link>
+      <pubDate>Tue, 27 Jul 2021 11:45:03 +0530</pubDate>
+      <guid>http://localhost:1313/bash-dictionary-scrapper/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Web Scraping is quite an interesting and powerful tool or skill to have in a Programmer&amp;rsquo;s toolkit.  It helps in analyzing data and getting some information in various formats. Web Scraping is a process in which a user fetches a website&amp;rsquo;s content using some pattern in those HTML tags and the desired content to be fetched or scraped.&lt;/p&gt;&#xA;&lt;p&gt;For this article, we aim to fetch the meaning of a word entered by the user from the dictionary.com website. We need to print just the meaning of the word from the HTML tags in it. We must have a good understanding of HTML and some basic Linux tools such as cURL, grep, sed, and others for doing all of these.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>World Atlas</title>
+      <link>http://localhost:1313/projects/world-atlas/</link>
+      <pubDate>Sun, 25 Jul 2021 16:44:59 +0000</pubDate>
+      <guid>http://localhost:1313/projects/world-atlas/</guid>
+      <description>&lt;p&gt;A simple word game using some django in the backend and javascript for frontend.&lt;/p&gt;&#xA;&lt;p&gt;Tech stack:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Django&lt;/li&gt;&#xA;&lt;li&gt;Django-Rest-Framework&lt;/li&gt;&#xA;&lt;li&gt;Javascript&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;Django rest framework as an api for most of the operations in the game like:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Validating a user input place from database&lt;/li&gt;&#xA;&lt;li&gt;Listing out all places from a given letter&lt;/li&gt;&#xA;&lt;li&gt;Get a random place from a given letter&lt;/li&gt;&#xA;&lt;li&gt;CRUD endpoint for the places in the database.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;API Link: &lt;a href=&#34;https://djangonaut.pythonanywhere.com/world-atlas/api/&#34;&gt;https://djangonaut.pythonanywhere.com/world-atlas/api/&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vim: Registers</title>
+      <link>http://localhost:1313/vim-registers/</link>
+      <pubDate>Wed, 21 Jul 2021 23:41:57 +0530</pubDate>
+      <guid>http://localhost:1313/vim-registers/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Have you ever found it difficult to manage and operate text in Vim, especially in Cut/Copy/Paste stuff. You cannot figure out how on earth am I supposed to retrieve my un-saved, un-committed changes in Vim. Then this my dear friend is an article for you. You will learn what are Vim registers and where your deletes and copied stuff resides. This won&amp;rsquo;t be a comprehensive guide but enough to let you through in performing the wizardry of registers in Vim.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vim: Enhancing Editing Speed</title>
+      <link>http://localhost:1313/vim-editing-speed/</link>
+      <pubDate>Sun, 18 Jul 2021 16:52:17 +0530</pubDate>
+      <guid>http://localhost:1313/vim-editing-speed/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Editing/ Writing is a crucial part of any text editor, the swiftness with which one can make changes in a file(s) or a structure is a bit dependent on the editor we use as well. Vim can be a bit hassle for beginners in the initial stage but it becomes second nature soon. It also depends majorly on the level of usage and the area of usage. If you are an advanced programmer, you will use these commands extensively, and might not be a big deal for you, But for a beginner, it might take some time to get used to the workflow in Vim.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Cryptocurrency Price Scrapping using BASH and Coingecko API</title>
+      <link>http://localhost:1313/bash-crypto-scrapper/</link>
+      <pubDate>Thu, 15 Jul 2021 17:56:47 +0530</pubDate>
+      <guid>http://localhost:1313/bash-crypto-scrapper/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Cryptocurrency is in such a hype that it is attracting even nerds and terminal fanboys, it is quite comfortable for such people to view the price inside of their terminal, also for normal people to learn about how to interact with an API from the local machine. We are gonna make a script about 20 lines in BASH to extract data from the  &lt;a href=&#34;https://www.coingecko.com/en/api#explore-api&#34;&gt;coingecko cryptocurrency API&lt;/a&gt; and some tools such as grep and sed. That being said let&amp;rsquo;s start scripting.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>BASH Scripting Guide - PART - 3</title>
+      <link>http://localhost:1313/bash-guide-p3/</link>
+      <pubDate>Mon, 12 Jul 2021 23:16:13 +0530</pubDate>
+      <guid>http://localhost:1313/bash-guide-p3/</guid>
+      <description>&lt;p&gt;Bash or shell won&amp;rsquo;t be much popular and powerful if they didn&amp;rsquo;t have some tools and utilities baked in. But even further they are supported natively in Bash, which just makes every task and challenge quite hassle-free to deal with. In this part of the series, I&amp;rsquo;ll try to cover an overview of some quite powerful and robust tools and utilities in Bash(shell in general) and also some of the advanced topics like dictionaries and positional parameters. Enough talk let&amp;rsquo;s dive in.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Learning BASH by making a Number game</title>
+      <link>http://localhost:1313/bash-game-numberjack/</link>
+      <pubDate>Thu, 08 Jul 2021 19:50:35 +0530</pubDate>
+      <guid>http://localhost:1313/bash-game-numberjack/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;OK! Learning BASH can be quite confusing without a proper goal in hand. So this will be a pretty good idea to start learning BASH and have a ton of fun. In this little time, we&amp;rsquo;ll make a Number game which I have designed myself last year in C++, which took about 3 months due to lazy research and wasting time. But I was surprised that I made this game within two hours in BASH. You can refer to the game instructions in this  &lt;a href=&#34;https://github.com/Mr-Destructive/NumberJack&#34;&gt;repository at Github&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>BASH Scripting Guide - PART - 2</title>
+      <link>http://localhost:1313/bash-guide-p2/</link>
+      <pubDate>Fri, 02 Jul 2021 15:57:34 +0530</pubDate>
+      <guid>http://localhost:1313/bash-guide-p2/</guid>
+      <description>&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;&#xA;&lt;p&gt;In this part, topics such as switch cases, mathematical expression, arrays, and strings. This won&amp;rsquo;t be an in-depth guide to understand each and every concept, but to make users aware of the things and features in Bash. This also would not be an absolute basic guide, I expect to have some basic programming knowledge such as binary systems, logical and mathematical concepts. Don&amp;rsquo;t worry, you won&amp;rsquo;t be bombarded with commands, I&amp;rsquo;ll just explain with easy examples to get started.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vim: Terminal Integration</title>
+      <link>http://localhost:1313/vim-plus-teminal/</link>
+      <pubDate>Tue, 29 Jun 2021 15:21:11 +0530</pubDate>
+      <guid>http://localhost:1313/vim-plus-teminal/</guid>
+      <description>&lt;h2 id=&#34;vim-and-terminal&#34;&gt;Vim and Terminal!?&lt;/h2&gt;&#xA;&lt;p&gt;Vim was made to work with the command line. Many beginners do not understand what are the true capabilities of Vim, myself included:) Vim can run terminal commands without leaving the text editor, open an instance of a terminal, work with shell environments, and other things depending on the use case.&lt;/p&gt;&#xA;&lt;h2 id=&#34;running-terminal-shell-commands-from-within-vim&#34;&gt;Running Terminal/ shell commands from within Vim&lt;/h2&gt;&#xA;&lt;p&gt;You can run the commands from inside of Vim by just using &lt;code&gt;:!&lt;/code&gt; before the command, this means you have to be in command mode. Just after being in command mode, the ! or bang operator will execute the command typed after it from the terminal(Linux/ macOS) or your default shell(Windows -&amp;gt; CMD/Powershell).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vim: Enhancing Movement Speed</title>
+      <link>http://localhost:1313/vim-movement-speed/</link>
+      <pubDate>Sat, 26 Jun 2021 15:27:05 +0530</pubDate>
+      <guid>http://localhost:1313/vim-movement-speed/</guid>
+      <description>&lt;p&gt;![]({{ page.image | relative_url }})&lt;/p&gt;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;OK! Vim and movement are like bread and butter or failed brakes. To become a proficient Vim user, you need to move in Vim very effectively. You don&amp;rsquo;t have to think about doing certain things, your fingertips should automatically move without wasting time thinking about it. I am sure, it takes time and effort but OH! it is so rewarding in the end.&lt;/p&gt;&#xA;&lt;h3 id=&#34;why-h-j-k-l&#34;&gt;Why H J K L?&lt;/h3&gt;&#xA;&lt;p&gt;First things first, unmap arrow keys and make a habit of using h,j,k, and l. Yes, this would not make any sense in the initial stage but that will make no sense for not using it later.&#xA;The thing with H J K L is that they are quite flexible to work with and if you use it with numbers you would navigate much faster than arrow keys. Such as &lt;code&gt;10j&lt;/code&gt; will move you 10 lines down at a time in normal mode. These keys are used with many of the other key shortcuts and commands which just make it most important to begin learning to move around in Vim with H J K L.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>BASH Scripting Guide - PART - 1</title>
+      <link>http://localhost:1313/bash-guide-p1/</link>
+      <pubDate>Tue, 22 Jun 2021 16:37:28 +0530</pubDate>
+      <guid>http://localhost:1313/bash-guide-p1/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;If you are new to BASH and Linux, don&amp;rsquo;t you worry the community is the driving force here. If someone&amp;rsquo;s stuck somewhere, the platforms, forums, and blogs are ready to help anyone there. BASH is a short term of Bourne-Again Shell, it is a shell interface that has much more capabilities and functions than the simple Bourne shell(sh). It has some quite remarkable features and it is even capable of calling itself a programming language in some sense.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>What is BASH?</title>
+      <link>http://localhost:1313/bash-intro/</link>
+      <pubDate>Fri, 18 Jun 2021 02:12:07 +0530</pubDate>
+      <guid>http://localhost:1313/bash-intro/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;BASH or Bourne Again Shell is an interface(program) between the user and the Operating System. BASH is just an application just like others, but not an ordinary one. It is quite powerful when used to its potential. It is used in various aspects of computing. No, it&amp;rsquo;s not only for server admins, but it specializes in that field though. We&amp;rsquo;ll see how we can use Bash to perform several tasks quite powerfully. Not just automation, you&amp;rsquo;ll be surprised what Bash is capable of.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vim: Keymapping Guide</title>
+      <link>http://localhost:1313/vim-keymaps/</link>
+      <pubDate>Mon, 14 Jun 2021 15:27:44 +0530</pubDate>
+      <guid>http://localhost:1313/vim-keymaps/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Keymapping or Key binding is a process in which a user or a system can assign certain keys or commands to perform a particular task or commands. This can be quite useful in Vim as well as in other text editors to avoid some repetitive tasks and save time. In Vim this can be a great power to have for programmers as it can be really very flexible to set up for any programming language and it&amp;rsquo;s&#xA;environment.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Setting up Vim for BASH Scripting</title>
+      <link>http://localhost:1313/vim-for-bash/</link>
+      <pubDate>Thu, 10 Jun 2021 04:52:07 +0530</pubDate>
+      <guid>http://localhost:1313/vim-for-bash/</guid>
+      <description>&lt;h2 id=&#34;vim-and-bash&#34;&gt;Vim and BASH?&lt;/h2&gt;&#xA;&lt;p&gt;Bash Scripting is a powerful skill to have as a programmer because we find Linux almost everywhere and to get through it you must have a command over its interface which is generally the BASH shell. Vim is a great option for doing this, or probably the best out there! Because Vim is pre-installed in almost every Linux distribution. This is not an in-depth setup for BASH on Vim, it is a simple editorial on starting up BASH scripting on the Vim editor. So without wasting time on &amp;ldquo;Vim features&amp;rdquo; let&amp;rsquo;s dive in with the setup for BASH in Vim.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Setting up Vim for Python</title>
+      <link>http://localhost:1313/vim-for-python/</link>
+      <pubDate>Sun, 06 Jun 2021 11:35:25 +0530</pubDate>
+      <guid>http://localhost:1313/vim-for-python/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Vim is quite a powerful text editor which can add performance to the already fast typed language Python. Vim can be highly customizable and efficient to use as it has the power of &lt;strong&gt;adding custom plugins and plugins managers, key mappings&lt;/strong&gt;, and the most critical weapon of vim - Access to the terminal straight away.&#xA;This is not a full-featured guide of using vim for python, it&amp;rsquo;s just a quick setup for using python on vim blazingly fast!!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Why and How to make and use Vim as a text editor and customizable IDE</title>
+      <link>http://localhost:1313/vim-text-editor-ide/</link>
+      <pubDate>Sat, 20 Feb 2021 15:05:20 +0530</pubDate>
+      <guid>http://localhost:1313/vim-text-editor-ide/</guid>
+      <description>&lt;p&gt;We all are asked to use visual studio code and other rich looking editors as a beginners text editor or an IDE but that makes a habit of a rich and pleasing interface of running and debugging programs, and that is the reason we don&amp;rsquo;t feel good to use command line or the terminal. Terminal or Command line are quite important to learn and are powerful as well.&lt;/p&gt;&#xA;&lt;p&gt;Vim is a text editor, not any text editor but a special and one of the fastest out there if you use it wisely. Vim can be used in the terminal which means it can run terminal commands inside the editor interface. That makes it quite a great option to improve your terminal command skills and also for enhancing your Linux knowledge. You can run program files from vim itself just with a few keystrokes. This text editor is preinstalled in most Linux distributions and hence you could quickly edit some files without going anywhere.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/about/</guid>
+      <description>&lt;h2 id=&#34;a-backend-developer-that-lives-in-the-terminal&#34;&gt;A Backend developer that lives in the terminal&lt;/h2&gt;&#xA;&lt;p&gt;Hi, I&amp;rsquo;m Meet, also known as &lt;em&gt;Mr. Destructive&lt;/em&gt; – a backend developer who thrives in the terminal. Currently an I.T. student based in India, my programming journey began as a self-taught developer with C and JavaScript. Over time, I expanded my skills to Python, C/C++, and Golang, contributing to open-source libraries and projects along the way.&lt;/p&gt;&#xA;&lt;p&gt;I have a passion for building side projects, many of which you can explore in my portfolio. I’m also an avid learner and share my insights on my &lt;a href=&#34;https://techstructive.com&#34;&gt;Techstructive Blog&lt;/a&gt;, where I write about Django, Vim, Golang, and more. When I&amp;rsquo;m not coding, I enjoy reading sci-fi, writing stories, and gaming.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/home/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/home/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

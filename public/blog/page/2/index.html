@@ -1,0 +1,665 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en"
+  dir="ltr"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title> - Meet Rajesh Gor</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  
+  <meta
+    name="description"
+    content="A personal blog"
+  />
+  <meta name="author" content="Meet Rajesh Gor" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/twitter.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+  
+  
+
+  
+  
+
+  
+  
+  
+
+  
+  <link
+    rel="icon"
+    href="http://localhost:1313/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="http://localhost:1313/apple-touch-icon.png"
+  />
+
+  
+  <meta name="generator" content="Hugo 0.136.5">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-[--w] px-8 lg:justify-center">
+  <div class="relative z-50 ltr:mr-auto rtl:ml-auto flex items-center">
+    <a class="-translate-y-[1px] text-2xl font-medium" href="http://localhost:1313/"
+      >Meet Rajesh Gor</a
+    >
+    <div
+      class="btn-dark text-[0] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 ltr:-mr-8 rtl:-ml-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse">
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/"
+        >Home</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/blog/"
+        >Blog</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/work/"
+        >Work</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 rtl:space-x-reverse dark:invert ltr:lg:ml-14 rtl:lg:mr-14 lg:mt-0 lg:items-center"
+    >
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/meetgor21"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/mr-destructive"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/meetgor"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100vh-9rem)] max-w-[--w] px-8 pb-16 pt-14 dark:prose-invert"
+    >
+      
+
+
+<h1 class="mb-14">Techstructive Blog</h1>
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0">
+  
+  <h2 class="!my-0">Golang: Date and Time</h2>
+  <time class="text-xs antialiased opacity-60"
+    >Jun 19, 2023</time
+  >
+  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/golang-date-time/">Golang: Date and Time</a>
+  <p class="!my-0">Performing date and time parsing, time duration, time and date arithmetic, timezones, sleep and tickers. We delve into the time … </p>
+    
+            <img src="https://meetgor-cdn.pages.dev/golang-028-date-time.png" alt="Post Thumbnail" class="post-thumbnail">
+      
+</section>
+
+
+
+
+
+<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0">
+  
+  <h2 class="!my-0">Golang: Random Numbers</h2>
+  <time class="text-xs antialiased opacity-60"
+    >May 14, 2023</time
+  >
+  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/golang-random-numbers/">Golang: Random Numbers</a>
+  <p class="!my-0">Generating random numbers, strings, shuffling arrays with golang, using packages like math/rand, crypto/rand, math/big. </p>
+    
+            <img src="https://meetgor-cdn.pages.dev/golang-027-random-numbers.png" alt="Post Thumbnail" class="post-thumbnail">
+      
+</section>
+
+
+
+
+
+<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0">
+  
+  <h2 class="!my-0">Golang: Regex</h2>
+  <time class="text-xs antialiased opacity-60"
+    >Mar 22, 2023</time
+  >
+  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/golang-regex/">Golang: Regex</a>
+  <p class="!my-0">Understanding the fundamentals and usage of regular expressions in golang with the regexp package. Exploring the package with … </p>
+    
+            <img src="https://meetgor-cdn.pages.dev/golang-026-regex.png" alt="Post Thumbnail" class="post-thumbnail">
+      
+</section>
+
+
+
+
+
+<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0">
+  
+  <h2 class="!my-0">Creating a Chat Application with Django and HTMX</h2>
+  <time class="text-xs antialiased opacity-60"
+    >Feb 5, 2023</time
+  >
+  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/django-htmx-chat-app/">Creating a Chat Application with Django and HTMX</a>
+  <p class="!my-0">Building a async, websocket based chat application using django, channels and htmx. With this chat application, the user can … </p>
+    
+            <img src="https://meetgor-cdn.pages.dev/django-htmx-chat-cover.png" alt="Post Thumbnail" class="post-thumbnail">
+      
+</section>
+
+
+
+
+
+<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0">
+  
+  <h2 class="!my-0">Golang: Command Line Arguments</h2>
+  <time class="text-xs antialiased opacity-60"
+    >Jan 7, 2023</time
+  >
+  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/golang-command-line-args/">Golang: Command Line Arguments</a>
+  <p class="!my-0">Parsing command line arguments / positional parameters in golang. Using os and flag packages to parse command line arguments … </p>
+    
+            <img src="https://meetgor-cdn.pages.dev/golang-025-cmd-args.png" alt="Post Thumbnail" class="post-thumbnail">
+      
+</section>
+
+
+
+
+
+<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0">
+  
+  <h2 class="!my-0">2022: Year Review</h2>
+  <time class="text-xs antialiased opacity-60"
+    >Dec 31, 2022</time
+  >
+  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/2022-review/">2022: Year Review</a>
+  <p class="!my-0">Dev Retro for 2022, the year that changed me from a shy to a confident developer. Grabbed opportunities for internships and made … </p>
+    
+            <img src="https://meetgor-cdn.pages.dev/2022-year-review.png" alt="Post Thumbnail" class="post-thumbnail">
+      
+</section>
+
+
+
+
+
+<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0">
+  
+  <h2 class="!my-0">Golang: File Write</h2>
+  <time class="text-xs antialiased opacity-60"
+    >Dec 18, 2022</time
+  >
+  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/golang-file-write/">Golang: File Write</a>
+  <p class="!my-0">Using system calls to write files in Golang. Performig writing, appending, deleting, replacing operations to a file </p>
+    
+            <img src="https://meetgor-cdn.pages.dev/golang-024-file-write.png" alt="Post Thumbnail" class="post-thumbnail">
+      
+</section>
+
+
+
+
+
+<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0">
+  
+  <h2 class="!my-0">Golang: JSON YAML TOML (config) File Reading.</h2>
+  <time class="text-xs antialiased opacity-60"
+    >Nov 1, 2022</time
+  >
+  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/golang-config-file-read/">Golang: JSON YAML TOML (config) File Reading.</a>
+  <p class="!my-0">Reading specific files used generally for configuration and storing data, as well as for web development. Reading file formats … </p>
+    
+            <img src="https://meetgor-cdn.pages.dev/golang-023-config-files.png" alt="Post Thumbnail" class="post-thumbnail">
+      
+</section>
+
+
+
+
+
+<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0">
+  
+  <h2 class="!my-0">Golang: File Reading</h2>
+  <time class="text-xs antialiased opacity-60"
+    >Oct 23, 2022</time
+  >
+  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/golang-file-read/">Golang: File Reading</a>
+  <p class="!my-0">Using system calls to read files in Golang. Reading files using various styles like line by line, word, character, chunk and any … </p>
+    
+            <img src="https://meetgor-cdn.pages.dev/golang-022-file-read.png" alt="Post Thumbnail" class="post-thumbnail">
+      
+</section>
+
+
+
+
+
+<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0">
+  
+  <h2 class="!my-0">Golang: Paths</h2>
+  <time class="text-xs antialiased opacity-60"
+    >Oct 2, 2022</time
+  >
+  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/golang-paths/">Golang: Paths</a>
+  <p class="!my-0">Woking with Path and Filesystems using path, filepath, io, os packages in golang. </p>
+    
+            <img src="https://meetgor-cdn.pages.dev/golang-021-paths.png" alt="Post Thumbnail" class="post-thumbnail">
+      
+</section>
+
+
+
+
+
+<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0">
+  
+  <h2 class="!my-0">Golang: Error Handling</h2>
+  <time class="text-xs antialiased opacity-60"
+    >Sep 17, 2022</time
+  >
+  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/golang-error-handling/">Golang: Error Handling</a>
+  <p class="!my-0">Understanding the concept of errors in golang. How to handle errors in funciton calls, create custom error class with interfaces </p>
+    
+            <img src="https://meetgor-cdn.pages.dev/golang-020-error-handling.png" alt="Post Thumbnail" class="post-thumbnail">
+      
+</section>
+
+
+
+
+
+<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0">
+  
+  <h2 class="!my-0">Golang: Interfaces</h2>
+  <time class="text-xs antialiased opacity-60"
+    >Sep 10, 2022</time
+  >
+  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/golang-interfaces/">Golang: Interfaces</a>
+  <p class="!my-0">Understanding the baiscs of interfaces in Golang. Exploring the concept of polymorphism in golang with the help of interfaces … </p>
+    
+            <img src="https://meetgor-cdn.pages.dev/golang-019-interfaces.png" alt="Post Thumbnail" class="post-thumbnail">
+      
+</section>
+
+
+
+
+
+<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0">
+  
+  <h2 class="!my-0">Golang: Closures</h2>
+  <time class="text-xs antialiased opacity-60"
+    >Aug 11, 2022</time
+  >
+  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/golang-closures/">Golang: Closures</a>
+  <p class="!my-0">Understanding the baiscs of closures in Golang. Creating some simple examples for exploring the concept of closures with Golang. </p>
+    
+            <img src="https://meetgor-cdn.pages.dev/golang-018-closures.png" alt="Post Thumbnail" class="post-thumbnail">
+      
+</section>
+
+
+
+
+
+<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0">
+  
+  <h2 class="!my-0">PGCLI: Postgres from the terminal</h2>
+  <time class="text-xs antialiased opacity-60"
+    >Aug 7, 2022</time
+  >
+  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/pgcli-pg-from-terminal/">PGCLI: Postgres from the terminal</a>
+  <p class="!my-0">Running SQL queries in a Postgres database with PGCLI. Exploring the python package PGCLI, that can run SQL queries for a … </p>
+    
+            <img src="https://meetgor-cdn.pages.dev/python-pkg-pgcli-postgres-from-terminal.png" alt="Post Thumbnail" class="post-thumbnail">
+      
+</section>
+
+
+
+
+
+<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0">
+  
+  <h2 class="!my-0">Django &#43; HTMX CRUD application</h2>
+  <time class="text-xs antialiased opacity-60"
+    >Jul 31, 2022</time
+  >
+  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/django-htmx-crud/">Django &#43; HTMX CRUD application</a>
+  <p class="!my-0">Creating a basic CRUD application with Django and HTMX </p>
+    
+            <img src="https://meetgor-cdn.pages.dev/django-htmx-crud.png" alt="Post Thumbnail" class="post-thumbnail">
+      
+</section>
+
+
+
+
+
+<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0">
+  
+  <h2 class="!my-0">Golang: Anonymous Functions</h2>
+  <time class="text-xs antialiased opacity-60"
+    >Jul 24, 2022</time
+  >
+  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/golang-anonymous-functions/">Golang: Anonymous Functions</a>
+  <p class="!my-0">Understanding the concept of the Anonymous functions in golang </p>
+    
+            <img src="https://meetgor-cdn.pages.dev/golang-017-anonymous-functions.png" alt="Post Thumbnail" class="post-thumbnail">
+      
+</section>
+
+
+
+
+
+<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0">
+  
+  <h2 class="!my-0">Deploying Django Project with Railway Nixpacks</h2>
+  <time class="text-xs antialiased opacity-60"
+    >Jul 16, 2022</time
+  >
+  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/django-deploy-railway-nixpacks/">Deploying Django Project with Railway Nixpacks</a>
+  <p class="!my-0">Configuring and Seting up nixpacks for deploying django project on Railway app. Interacting with the nixpacks CLI for building … </p>
+    
+            <img src="https://meetgor-cdn.pages.dev/django-deploy-railway-nixpacks.png" alt="Post Thumbnail" class="post-thumbnail">
+      
+</section>
+
+
+
+
+
+<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0">
+  
+  <h2 class="!my-0">Configure Neovim in Lua</h2>
+  <time class="text-xs antialiased opacity-60"
+    >Jul 9, 2022</time
+  >
+  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/neovim-vimscript-to-lua/">Configure Neovim in Lua</a>
+  <p class="!my-0">Setting up or Migrating to Lua in Neovim Configuration. Using Lua in Neovim for configurations and moving out of Vimscript. … </p>
+    
+            <img src="https://meetgor-cdn.pages.dev/vimtolua.png" alt="Post Thumbnail" class="post-thumbnail">
+      
+</section>
+
+
+
+
+
+<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0">
+  
+  <h2 class="!my-0">Golang: Defer</h2>
+  <time class="text-xs antialiased opacity-60"
+    >Jun 29, 2022</time
+  >
+  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/golang-defer/">Golang: Defer</a>
+  <p class="!my-0">Understanding the concpet of the defer keyword in golang </p>
+    
+            <img src="https://meetgor-cdn.pages.dev/golang-016-defer.png" alt="Post Thumbnail" class="post-thumbnail">
+      
+</section>
+
+
+
+
+
+<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0">
+  
+  <h2 class="!my-0">Golang: String Manipulation</h2>
+  <time class="text-xs antialiased opacity-60"
+    >Jun 28, 2022</time
+  >
+  <a class="absolute inset-0 text-[0]" href="http://localhost:1313/golang-strings/">Golang: String Manipulation</a>
+  <p class="!my-0">Understanding a few terms and tricks to play with Strings in Golang. </p>
+    
+            <img src="https://meetgor-cdn.pages.dev/golang-015-strings.png" alt="Post Thumbnail" class="post-thumbnail">
+      
+</section>
+
+
+
+
+<nav class="mt-14 flex">
+  
+  <a class="btn" href="/blog/">← Prev Page</a>
+  
+  
+  <a class="btn ml-auto" href="/blog/page/3/"
+    >Next Page →</a
+  >
+  
+</nav>
+
+
+
+    </main>
+
+    <footer
+  class="mx-auto flex h-[4.5rem] max-w-[--w] items-center px-8 text-xs uppercase tracking-wider opacity-60"
+>
+  <div class="mr-auto">
+  
+    &copy; 2024
+    <a class="link" href="http://localhost:1313/">Meet Rajesh Gor</a>
+  
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+
+  </body>
+</html>

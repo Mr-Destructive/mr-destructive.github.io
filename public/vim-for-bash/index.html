@@ -1,0 +1,399 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en"
+  dir="ltr"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Setting up Vim for BASH Scripting - Meet Rajesh Gor</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Vim and BASH?
+Bash Scripting is a powerful skill to have as a programmer because we find Linux almost everywhere and to get through it you must have a command over its interface which is generally the BASH shell. Vim is a great option for doing this, or probably the best out there! Because Vim is pre-installed in almost every Linux distribution. This is not an in-depth setup for BASH on Vim, it is a simple editorial on starting up BASH scripting on the Vim editor. So without wasting time on &ldquo;Vim features&rdquo; let&rsquo;s dive in with the setup for BASH in Vim." />
+  <meta name="author" content="Meet Rajesh Gor" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/twitter.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link
+    rel="icon"
+    href="http://localhost:1313/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="http://localhost:1313/apple-touch-icon.png"
+  />
+
+  
+  <meta name="generator" content="Hugo 0.136.5">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-[--w] px-8 lg:justify-center">
+  <div class="relative z-50 ltr:mr-auto rtl:ml-auto flex items-center">
+    <a class="-translate-y-[1px] text-2xl font-medium" href="http://localhost:1313/"
+      >Meet Rajesh Gor</a
+    >
+    <div
+      class="btn-dark text-[0] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 ltr:-mr-8 rtl:-ml-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse">
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/"
+        >Home</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/blog/"
+        >Blog</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/work/"
+        >Work</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 rtl:space-x-reverse dark:invert ltr:lg:ml-14 rtl:lg:mr-14 lg:mt-0 lg:items-center"
+    >
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/meetgor21"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/mr-destructive"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/meetgor"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100vh-9rem)] max-w-[--w] px-8 pb-16 pt-14 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-14">
+    <h1 class="!my-0 pb-2.5">Setting up Vim for BASH Scripting</h1>
+
+    
+    <div class="text-xs antialiased opacity-60">
+      
+      <time>Jun 10, 2021</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="vim-and-bash">Vim and BASH?</h2>
+<p>Bash Scripting is a powerful skill to have as a programmer because we find Linux almost everywhere and to get through it you must have a command over its interface which is generally the BASH shell. Vim is a great option for doing this, or probably the best out there! Because Vim is pre-installed in almost every Linux distribution. This is not an in-depth setup for BASH on Vim, it is a simple editorial on starting up BASH scripting on the Vim editor. So without wasting time on &ldquo;Vim features&rdquo; let&rsquo;s dive in with the setup for BASH in Vim.</p>
+<h2 id="boilerplate-macro">Boilerplate macro</h2>
+<p>Setting up a bash script doesn&rsquo;t require much code but still in some cases it can be a bit hassle and to avoid the repetitive task, one can easily set up a macro for the boilerplate BASH script.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#a6e22e">nnoremap</span> <span style="color:#a6e22e">bs</span> <span style="color:#a6e22e">i</span>#!<span style="color:#e6db74">/bin/</span><span style="color:#a6e22e">bash</span>/&lt;<span style="color:#a6e22e">ESC</span>&gt;<span style="color:#a6e22e">o</span>
+</span></span></code></pre></div><p>Ok that was pretty dumb but it can scale pretty quickly and it will be nice to tailor it as per needs, here&rsquo;s some snippet with function pre-loaded.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#a6e22e">nnoremap</span> <span style="color:#a6e22e">bs</span> <span style="color:#a6e22e">i</span>#!<span style="color:#e6db74">/bin/</span><span style="color:#a6e22e">bash</span>/&lt;<span style="color:#a6e22e">ESC</span>&gt;<span style="color:#a6e22e">o</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">nnoremap</span> <span style="color:#a6e22e">bs</span> <span style="color:#a6e22e">i</span>#!<span style="color:#e6db74">/bin/</span><span style="color:#a6e22e">bash</span>/&lt;<span style="color:#a6e22e">ESC</span>&gt;<span style="color:#a6e22e">o</span>&lt;<span style="color:#a6e22e">ESC</span>&gt;<span style="color:#a6e22e">ofunction</span> <span style="color:#a6e22e">main</span>(){&lt;<span style="color:#a6e22e">ESC</span>&gt;<span style="color:#a6e22e">o</span>&lt;<span style="color:#a6e22e">ESC</span>&gt;<span style="color:#a6e22e">o</span>}&lt;<span style="color:#a6e22e">ESC</span>&gt;<span style="color:#a6e22e">ki</span>&lt;<span style="color:#a6e22e">S</span>-<span style="color:#a6e22e">TAB</span>&gt;
+</span></span></code></pre></div><p><img src="https://s6.gifyu.com/images/bsclip.gif" alt="type bs to load boiler-plate code"></p>
+<p>When the key bs is typed in normal mode, you enter into insert mode as per the command macro, then we type in the required text and escape to move to the next line and continue the same stuff. This could be extended further like making some input or printing out some text and any other formatted text that you could think it as repetition.</p>
+<h2 id="sourcing-scripts">Sourcing Scripts</h2>
+<p>So, after creating the file, sourcing the script, and running it can be a bit slow for some people, as you have to go to the terminal and toggle in the permission to run the script and then run, But pull on your seatbelts as this is VIM! You can die due to slowness!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#a6e22e">nnoremap</span> <span style="color:#a6e22e">sh</span> :!<span style="color:#a6e22e">chmod</span> +<span style="color:#a6e22e">x</span> % &amp;&amp; <span style="color:#a6e22e">source</span> %
+</span></span></code></pre></div><p><img src="https://s6.gifyu.com/images/shclip.gif" alt="type sh to run script"></p>
+<p>When the sh keys are typed in the normal mode, the preceding command after ! (bang) will be executed in the terminal, the &amp;&amp; keywords will execute the second command only when the first command is successfully executed.
+That just can so fast! Imagine doing this for long scripts and especially for debugging, it will waste 2 minutes every time you leave the editor and for 10 times you do the debugging, you will carelessly was roughly 20 minutes! Improve your debugging skills surely :)</p>
+<h2 id="plugins">Plugins</h2>
+<p>There are very few plugins out there for BASH as for VIM, but it&rsquo;s quite to write scripts even without any plugins. One of the most supported and popular plugins for BASH in Vim is  <a href="https://www.vim.org/scripts/script.php?script_id=365">Bash-Support-Vim</a> for auto-completion and <a href="https://www.shellcheck.net">Shell-Check</a> for finding/correcting any bugs or error in the script .
+The mentioned plugin is quite awesome and it can greatly improve the speed of scripting for BASH, some commands such as shortcuts for writing if-else, while, for loops, commenting and other aspects in the scripting. The thorough documentation for such commands is also provided by the  <a href="https://wolfgangmehner.github.io/vim-plugins/bashsupport.html">plugin website</a>.
+This can be used for autocompleting keywords and writing nested if-else and other logical operators in BASH scripting. Again, you can do absolutely fine without plugins in Vim as it is heavily customizable to the user&rsquo;s need and can be very rewarding to set up your own configuration for BASH. You can use standard Vim(barebones) for auto-completion as well with the command CTRL+N and CTRL-P to move down and up respectively.</p>
+<h2 id="some-more-tricks">Some More Tricks</h2>
+<p>BASH in Vim can be quite versatile to use as it provides some custom addons to make the script more functional and easier to understand. Some tricks such as using autocompletion can be quite inconvenient to use at once but it can get really smooth after some runs at writing the scripts.</p>
+<ul>
+<li>In BASH Scripts there are quite a lot of brackets to play with that&rsquo;s why to jump around swiftly around such parentheses or brackets you can use <strong>% to move from the opened to closed brackets or vice versa</strong>.</li>
+<li>You can execute any terminal command from Vim, be sure to be in command mode and press ! after the command, you would like to execute. This will run the command from the terminal and you don&rsquo;t have to leave the editor, it saves a ton of time and it&rsquo;s blazingly fast.</li>
+<li>With the above trick, you kind of have a superpower within Vim to make, build, source, run the files or scripts within Vim, that is not repetition but it can run bash within bash. Ok! that&rsquo;s was pretty fast. Don&rsquo;t die of quickness now!</li>
+</ul>
+<p>Writing BASH scripts in Vim can be also boosted by using some built-in commands such as adding comments for multiple lines at once and some unexplored stuff which can be learned in the way to understanding the flow of Vim and BASH together. Happy Coding and Viming :)</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/bash"
+      >bash</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/vim"
+      >vim</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg !leading-[1.2] *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  >
+    
+    <a class="ltr:pr-3 rtl:pl-3" href="http://localhost:1313/vim-keymaps/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Vim: Keymapping Guide</span></a
+    >
+    
+    
+    <a class="ltr:ml-auto rtl:mr-auto justify-end pl-3" href="http://localhost:1313/vim-for-python/"
+      ><span>Setting up Vim for Python</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="mx-auto flex h-[4.5rem] max-w-[--w] items-center px-8 text-xs uppercase tracking-wider opacity-60"
+>
+  <div class="mr-auto">
+  
+    &copy; 2024
+    <a class="link" href="http://localhost:1313/">Meet Rajesh Gor</a>
+  
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+
+  </body>
+</html>

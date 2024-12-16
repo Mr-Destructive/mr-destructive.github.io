@@ -1,0 +1,581 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #faf8f1"
+  lang="en"
+  dir="ltr"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>NGINX Basics and Setup - Meet Rajesh Gor</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  
+  <meta name="description" content="Introduction
+NGINX is a tool that can be used as a web server, reverse proxy, load balancer, streaming media files, application gateway, content caching, and so much more. It can be said to be a Swiss army knife for optimizing and securing your web application deployment.
+The series &ldquo;NGINX Survival Guide&rdquo; will start from the basics and cover the bare minimum required for a backend developer to get going with NGINX. I will use Docker widely throughout this course as it is a great combination with NGINX to server web applications. However, you can use NGINX without docker, and spawn multiple servers." />
+  <meta name="author" content="Meet Rajesh Gor" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="http://localhost:1313/main.min.css" />
+
+  
+  
+  
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/theme.png" />
+
+  
+  
+  
+  
+  
+
+  
+  
+  <link rel="preload" as="image" href="http://localhost:1313/twitter.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="http://localhost:1313/linkedin.svg" />
+  
+  
+
+  
+  
+  <script
+    defer
+    src="http://localhost:1313/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+  
+  
+
+  
+  <link
+    rel="icon"
+    href="http://localhost:1313/favicon.ico"
+  />
+  <link
+    rel="apple-touch-icon"
+    href="http://localhost:1313/apple-touch-icon.png"
+  />
+
+  
+  <meta name="generator" content="Hugo 0.136.5">
+
+  
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-[--w] px-8 lg:justify-center">
+  <div class="relative z-50 ltr:mr-auto rtl:ml-auto flex items-center">
+    <a class="-translate-y-[1px] text-2xl font-medium" href="http://localhost:1313/"
+      >Meet Rajesh Gor</a
+    >
+    <div
+      class="btn-dark text-[0] ltr:ml-4 rtl:mr-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 ltr:-mr-8 rtl:-ml-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#faf8f1'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-10 rtl:space-x-reverse">
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/"
+        >Home</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/blog/"
+        >Blog</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/work/"
+        >Work</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 rtl:space-x-reverse dark:invert ltr:lg:ml-14 rtl:lg:mr-14 lg:mt-0 lg:items-center"
+    >
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./twitter.svg)"
+        href="https://twitter.com/meetgor21"
+        target="_blank"
+        rel="me"
+      >
+        twitter
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/mr-destructive"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-7 w-7 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/meetgor"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100vh-9rem)] max-w-[--w] px-8 pb-16 pt-14 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-14">
+    <h1 class="!my-0 pb-2.5">NGINX Basics and Setup</h1>
+
+    
+    <div class="text-xs antialiased opacity-60">
+      
+      <time>Jan 14, 2024</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="introduction">Introduction</h2>
+<p>NGINX is a tool that can be used as a web server, reverse proxy, load balancer, streaming media files, application gateway, content caching, and so much more. It can be said to be a Swiss army knife for optimizing and securing your web application deployment.</p>
+<p>The series &ldquo;NGINX Survival Guide&rdquo; will start from the basics and cover the bare minimum required for a backend developer to get going with NGINX. I will use Docker widely throughout this course as it is a great combination with NGINX to server web applications. However, you can use NGINX without docker, and spawn multiple servers.</p>
+<p>The series will cover the terminologies of NGINX, configuring NGINX servers, load balancing multiple servers, using it as a reverse proxy, and as an API gateway, there will be tiny details and some tidbits of doing certain things in a certain constrained environment which will make the learning more valuable.</p>
+<h2 id="what-is-nginx">What is NGINX</h2>
+<p>NGINX (pronounced &ldquo;engine-x&rdquo;) is not just a web server, it is a powerful and versatile open-source software that wears many hats in the internet world. At its core, it functions as a <strong>lightning-fast web server</strong>, its secret weapon lies in its <strong>event-driven architecture</strong>, where it handles requests asynchronously, allowing it to serve countless users simultaneously without breaking a sweat.</p>
+<blockquote>
+<p>NGINX is a popular choice for powering some of the <strong>biggest websites and platforms in the world</strong>, demonstrating its reliability and scalability.</p>
+</blockquote>
+<p>NGINX&rsquo;s <strong>configurable nature</strong> lets you tailor its behavior to your specific needs, whether managing traffic flow with load balancing, caching frequently accessed content for faster delivery, or even acting as a gateway for your APIs.</p>
+<p>This versatility makes NGINX a <strong>powerful tool for building efficient, secure, and scalable web applications</strong>, regardless of size or complexity. Hence the need to learn it as a developer and especially important for a backend developer.</p>
+<h3 id="why-nginx-is-must-learn-for-backend-developers">Why NGINX is must learn for backend developers</h3>
+<p>Nginx is a highly efficient and performant web server. Understanding its configuration and management allows a backend developer to optimize server performance, handle large volumes of traffic, and reduce latency.</p>
+<p>In microservices architectures, Nginx can serve as an API gateway, managing and routing requests between different services. Nginx provides caching mechanisms that enhance performance by serving cached content, reducing the load on backend servers.</p>
+<p>Having strong fundamentals in NGINX can indeed provide a competitive edge in the job market and make a backend developer more versatile in handling various aspects of backend web development.</p>
+<h3 id="who-is-using-nginx">Who is using NGINX?</h3>
+<p>Big Tech Companies are using NGINX like DropBox, Netfilx, and Cloudflare, among others. Cloudflare used NGINX before but it was not enough for them, so they developed their web server/edge proxy suited to their needs called Pingora.</p>
+<ul>
+<li>
+<p>Dropbox - <a href="https://dropbox.tech/infrastructure/optimizing-web-servers-for-high-throughput-and-low-latency">Optimizing web servers for high throughput and low latency</a></p>
+</li>
+<li>
+<p>Cloudflare - <a href="https://blog.cloudflare.com/how-we-built-pingora-the-proxy-that-connects-cloudflare-to-the-internet/">How Cloudflare outgrown NGINX and made way to Pingora</a></p>
+</li>
+<li>
+<p>Netflix - <a href="https://www.nginx.com/blog/tag/netflix/">NGINX Netflix archives</a></p>
+</li>
+</ul>
+<h2 id="installing-nginx">Installing NGINX</h2>
+<h3 id="linux">Linux</h3>
+<p>There are comprehensive guides for your specific flavor/package manager/preferences in the <a href="https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/">official documentation</a> of NGINX.</p>
+<p>A couple of common types of installation medium instructions are as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># APT</span>
+</span></span><span style="display:flex;"><span>sudo apt update
+</span></span><span style="display:flex;"><span>sudo apt install nginx
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># YUM</span>
+</span></span><span style="display:flex;"><span>sudo yum install epel-release
+</span></span><span style="display:flex;"><span>sudo yum update
+</span></span><span style="display:flex;"><span>sudo yum install nginx
+</span></span></code></pre></div><p>Check the status of the NGINX service to ensure the installation was successful or not with the command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl status nginx
+</span></span></code></pre></div><p>If this doesn&rsquo;t have any errors or fatal messages, the nginx server is up and running on port 80 i.e. on <code>127.0.0.1</code> on the system.</p>
+<h3 id="macos">MacOS</h3>
+<p>The installation on MacOS for NGINX is pretty simple with homebrew. The following <a href="https://dev.to/arjavdave/installing-nginx-on-mac-46ac">article</a> walks through the steps of the installation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>brew update
+</span></span><span style="display:flex;"><span>brew install nginx
+</span></span><span style="display:flex;"><span>nginx
+</span></span></code></pre></div><p>If you do not want to install it from homebrew, this <a href="https://gist.github.com/beatfactor/a093e872824f770a2a0174345cacf171">gist</a> can help install it from the source.</p>
+<h3 id="windows">Windows</h3>
+<p>For Windows installation, you can follow the <a href="https://nginx.org/en/docs/windows.html">guide</a> from the official documentation.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># INSTALL the https://nginx.org/en/download.html</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># A Zip file with the name nginx-version.zip will be downlaoded</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># COPY it to the desired location and use that path while unzipping</span>
+</span></span><span style="display:flex;"><span>cd c:<span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>unzip nginx-1.25.3.zip
+</span></span><span style="display:flex;"><span>cd nginx-1.25.3
+</span></span><span style="display:flex;"><span>start nginx
+</span></span></code></pre></div><p>You can check the status of NGINX if the installation was successful or not with the command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tasklist /fi <span style="color:#e6db74">&#34;imagename eq nginx.exe&#34;</span>
+</span></span></code></pre></div><p>This should be from the installation section.</p>
+<h2 id="understanding-the-default-config">Understanding the default config</h2>
+<p>When you have completed the installation of nginx, you can see the default nginx configuration in the file path as <code>/etc/nginx/nginx.conf</code> in Linux/macOS or <code>C:\nginx\conf\nginx</code> in Windows.</p>
+<p>The entire nginx config file consists of directives and contexts. The key value pairs mentioned below are as <code>key value;</code> are called <strong>directives</strong> and the named object i.e. <code>name {}</code> are called <strong>Contexts or Blocks</strong>.</p>
+<p>Block: A block directive has the same structure as a simple directive, but instead of the semicolon it ends with a set of additional instructions surrounded by braces (<code>{</code> and <code>}</code>). You can call it a group of directives.</p>
+<p>Context: If a block directive can have other directives inside braces, it is called a context. You can call it a group of blocks and directives.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#66d9ef">user</span> <span style="color:#e6db74">www-data</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">worker_processes</span> <span style="color:#e6db74">auto</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">pid</span> <span style="color:#e6db74">/run/nginx.pid</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">include</span> /etc/nginx/modules-enabled/*.conf;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">events</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">worker_connections</span> <span style="color:#ae81ff">768</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># multi_accept on;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">http</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">##
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e"># Basic Settings
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">##
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">sendfile</span> <span style="color:#66d9ef">on</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">tcp_nopush</span> <span style="color:#66d9ef">on</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">types_hash_max_size</span> <span style="color:#ae81ff">2048</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># server_tokens off;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># server_names_hash_bucket_size 64;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e"># server_name_in_redirect off;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">include</span> <span style="color:#e6db74">/etc/nginx/mime.types</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">default_type</span> <span style="color:#e6db74">application/octet-stream</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">##
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e"># SSL Settings
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">##
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">ssl_protocols</span> <span style="color:#e6db74">TLSv1</span> <span style="color:#e6db74">TLSv1.1</span> <span style="color:#e6db74">TLSv1.2</span> <span style="color:#e6db74">TLSv1.3</span>; <span style="color:#75715e"># Dropping SSLv3, ref: POODLE
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#f92672">ssl_prefer_server_ciphers</span> <span style="color:#66d9ef">on</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">##
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e"># Logging Settings
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">##
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">access_log</span> <span style="color:#e6db74">/var/log/nginx/access.log</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">error_log</span> <span style="color:#e6db74">/var/log/nginx/error.log</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">##
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e"># Gzip Settings
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">##
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">gzip</span> <span style="color:#66d9ef">on</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># gzip_vary on;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e"># gzip_proxied any;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e"># gzip_comp_level 6;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e"># gzip_buffers 16 8k;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e"># gzip_http_version 1.1;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e"># gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">##
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e"># Virtual Host Configs
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">##
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">include</span> <span style="color:#e6db74">/etc/nginx/conf.d/*.conf</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">include</span> <span style="color:#e6db74">/etc/nginx/sites-enabled/*</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#mail {
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#	# See sample authentication script at:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#	# http://wiki.nginx.org/ImapAuthenticateWithApachePhpScript
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#	# auth_http localhost/auth.php;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#	# pop3_capabilities &#34;TOP&#34; &#34;USER&#34;;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#	# imap_capabilities &#34;IMAP4rev1&#34; &#34;UIDPLUS&#34;;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#	server {
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#		listen     localhost:110;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#		protocol   pop3;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#		proxy      on;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#	}
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#	server {
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#		listen     localhost:143;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#		protocol   imap;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#		proxy      on;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#	}
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#}
+</span></span></span></code></pre></div><p>Let&rsquo;s break down what some of the directives and context mean here:</p>
+<p>There are a few contexts like the global context, the events context, the HTTP context, etc.</p>
+<ul>
+<li>
+<p><code>user</code> : The user directive is the user that NGINX will run as, it is often set to www-data.</p>
+</li>
+<li>
+<p><code>pid</code> : The pid directive defines the file where the process ID of the main process is stored.</p>
+</li>
+<li>
+<p><code>events</code> : The events block has some directives, one of them is the <code>worker_connections</code> and others, this block dictates how NGINX handles connections and events. It&rsquo;s like setting the rules for how NGINX efficiently manages traffic and resources.</p>
+</li>
+<li>
+<p><code>http</code> : The HTTP block is used for defining how NGINX handles HTTP-specific settings and behaviors. It&rsquo;s like the control panel for orchestrating web traffic and content delivery.</p>
+</li>
+</ul>
+<p>I will cover the customization and tweaking of the nginx config throughout the series, but for now, understanding the bare bones of the default config would be a good spot to be in.</p>
+<h2 id="startstoprestarting-nginx">Start/Stop/Restarting NGINX</h2>
+<p>Starting, stopping, and reloading are the key operations that should be known to a developer while developing web applications with nginx. Some of the ways to perform these operations with the command line interface are as follows:</p>
+<h3 id="start-nginx">Start NGINX</h3>
+<p>The start command for nginx is usually with the <code>systemctl</code> command as :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl start nginx
+</span></span></code></pre></div><p>This will start the nginx daemon and the default port <code>80</code> will be served with the mentioned configuration in the <code>nginx.conf</code> file.</p>
+<h3 id="stop-nginx">Stop NGINX</h3>
+<p>To stop the nginx daemon, you can simply use the <code>systemctl</code> command or with the nginx signal flag as:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl stop nginx
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># OR</span>
+</span></span><span style="display:flex;"><span>sudo nginx -s stop
+</span></span></code></pre></div><p>The nginx command can take in various signal commands such as :</p>
+<ul>
+<li>
+<p><code>stop</code> : To stop the NGINX server (quick shutdown that terminates the server in the middle of serving a connection)</p>
+</li>
+<li>
+<p><code>quit</code> : To stop the NGINX server gracefully (NGINX will finish serving the open connections before it shuts down)</p>
+</li>
+<li>
+<p><code>reload</code> : To reload the NGINX server (generally done to pick up changes in config)</p>
+</li>
+<li>
+<p><code>reopen</code> : To reopen the log files of an NGINX server (when you want to rotate the log files without stopping the NGINX server)</p>
+</li>
+</ul>
+<h3 id="reloading">Reloading</h3>
+<p>If you have changed the configuration of the nginx, you will need to restart/reload the nginx daemon for it to pick up the latest changes. This can be achieved with the <code>systemctl</code> command or with the nginx signal flag of the reload command as:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo nginx -s reload
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># OR</span>
+</span></span><span style="display:flex;"><span>sudo systemctl restart nginx
+</span></span></code></pre></div><p>These are the basic operations we need to perform while working with NGINX in web applications, we will see some specific commands in the later parts of the series.</p>
+<h2 id="using-nginx-with-docker">Using NGINX with Docker</h2>
+<p>NGINX is usually used for deploying web servers, it usually acts as a gateway to interacting with the actual web applications and services, so it makes sense to use it with docker. We can simply spawn a nginx web server with docker using the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -it --rm -d -p 8080:80 --name web nginx
+</span></span></code></pre></div><p>Then we can also mount volumes to make your project directory be loaded in the nginx web app instead of the default one with the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -it --rm -d -p 8080:80 --name web -v ~/mywebapp:/usr/share/nginx/html nginx
+</span></span></code></pre></div><p>In the above command the <code>-v your_path:default_path</code> is the flag used to mount your computer&rsquo;s path to the actual container&rsquo;s path in this case the default folder where NGINX looks for the index.html file to server the content.</p>
+<p>NGINX server with programming languages using Dockerfile -&gt; <a href="https://github.com/hoalongnatsu/Dockerfile">GitHub repo</a></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>From the first introduction of NGINX, we were able to set up NGINX in our system and be able to understand the fundamentals of interacting and operating with the NGINX server itself. In the next post of this series, we will be diving into spawning multiple web servers and making it load-balanced among them.</p>
+<p>Thank you for reading, hopefully you found this helpful. If you have any feedback, questions, or queries drop them below in the comments or reach me out directly on my social handles.</p>
+<p>Happy Coding :)</p>
+</section>
+
+  
+  
+  <footer class="mt-12 flex flex-wrap">
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/nginx"
+      >nginx</a
+    >
+     
+    <a
+      class="mb-1.5 ltr:mr-1.5 rtl:ml-1.5 rounded-lg bg-black/[3%] px-5 py-1 no-underline hover:bg-black/[6%] dark:bg-white/[8%] dark:hover:bg-white/[12%]"
+      href="http://localhost:1313/tags/web-development"
+      >web-development</a
+    >
+    
+  </footer>
+  
+
+  
+  
+  
+  
+  <nav
+    class="mt-24 flex overflow-hidden rounded-xl bg-black/[3%] text-lg !leading-[1.2] *:flex *:w-1/2 *:items-center *:p-5 *:font-medium *:no-underline dark:bg-white/[8%] [&>*:hover]:bg-black/[2%] dark:[&>*:hover]:bg-white/[3%]"
+  >
+    
+    <a class="ltr:pr-3 rtl:pl-3" href="http://localhost:1313/blog/golang-web-post-method/"
+      ><span class="ltr:mr-1.5 rtl:ml-1.5">←</span><span>Golang Web: POST Method</span></a
+    >
+    
+    
+    <a class="ltr:ml-auto rtl:mr-auto justify-end pl-3" href="http://localhost:1313/blog/neovim-sourcegraph-cody/"
+      ><span>Neovim &#43; Sourcegraph Cody Plugin Integration</span><span class="ltr:ml-1.5 rtl:mr-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="mx-auto flex h-[4.5rem] max-w-[--w] items-center px-8 text-xs uppercase tracking-wider opacity-60"
+>
+  <div class="mr-auto">
+  
+    &copy; 2024
+    <a class="link" href="http://localhost:1313/">Meet Rajesh Gor</a>
+  
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >powered by hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >hugo-paper</a
+  >
+</footer>
+
+  </body>
+</html>

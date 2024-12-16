@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vim on Meet Rajesh Gor</title>
+    <link>http://localhost:1313/tags/vim/</link>
+    <description>Recent content in Vim on Meet Rajesh Gor</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 06 Jan 2024 20:15:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Neovim &#43; Sourcegraph Cody Plugin Integration</title>
+      <link>http://localhost:1313/neovim-sourcegraph-cody/</link>
+      <pubDate>Sat, 06 Jan 2024 20:15:00 +0000</pubDate>
+      <guid>http://localhost:1313/neovim-sourcegraph-cody/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Have you ever used Sourcegraph&amp;rsquo;s Cody? It is a great tool for developers, it is not just another LLM, it is tailored specifically for developers. Cody has some good features that allow parsing of context for the prompt in a smarter way.&lt;/p&gt;&#xA;&lt;h3 id=&#34;what-is-sourcegraphs-cody&#34;&gt;What is Sourcegraph&amp;rsquo;s Cody&lt;/h3&gt;&#xA;&lt;p&gt;Cody is an AI assistant for developers that understands code context and can generate code. It goes beyond just answering questions - it can write code for you.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Configure Neovim in Lua</title>
+      <link>http://localhost:1313/neovim-vimscript-to-lua/</link>
+      <pubDate>Sat, 09 Jul 2022 20:30:00 +0000</pubDate>
+      <guid>http://localhost:1313/neovim-vimscript-to-lua/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;It has been a while since I have written a Vim article. Finally, I got some ideas after configuring my Neovim setup for Lua. I recently migrated to Ubuntu a couple of months back and it has been a cool change from Windows 7!&lt;/p&gt;&#xA;&lt;p&gt;In this article, we&amp;rsquo;ll see how you can set up neovim for Lua. Since Neovim 0.5, it supports lua out of the box, so in the recent release 0.7, it added more native support to lua making it a lot easier to configure and play with neovim. So, we will see how we can use lua to convert all the 200 liner vimscript into lua (We can even have packages and modules:) We will cover how to configure your keymaps, pull up all the plugins, vim options, and other customizations.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Comment/Uncomment Code: Vim for Programmers</title>
+      <link>http://localhost:1313/vim-un-comment-p1/</link>
+      <pubDate>Thu, 07 Oct 2021 16:45:42 +0530</pubDate>
+      <guid>http://localhost:1313/vim-un-comment-p1/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;We as programmers always fiddle with commenting out code for code testing, documenting the function of code, and most importantly debugging. So you can&amp;rsquo;t wait to comment on a large chunk of code manually, as it is quite a tedious thing to do. Let&amp;rsquo;s do it effectively in Vim.&lt;/p&gt;&#xA;&lt;p&gt;In this part of the series, I&amp;rsquo;ll cover how to comment/uncomment chunks/blocks of code effectively in Vim. We will see and use some commands, keybindings for doing so, and also we would add certain components to our vimrc file as well to design some custom key mappings.  Let&amp;rsquo;s get faster with Vim.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vim for Competitive Programming</title>
+      <link>http://localhost:1313/vim-for-cp/</link>
+      <pubDate>Mon, 13 Sep 2021 17:42:30 +0530</pubDate>
+      <guid>http://localhost:1313/vim-for-cp/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Vim is not a bad text editor when it comes to using it for Competitive Programming. It&amp;rsquo;s kind of one way or the other, you would love it or you could trash it as it can waste a tremendous amount of time to write code every time. But once you are in a decent setup including some key-bindings and plugins can improve your speed in using Vim. I personally have used it since the beginning and haven&amp;rsquo;t regretted it even a tiny bit till date. It&amp;rsquo;s a flawless and enjoyable experience. I&amp;rsquo;ve used C++ for my CP journey, C is quite similar as well, but C++ has more library support and is a bit easier to write comparatively.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Why use Vim ?</title>
+      <link>http://localhost:1313/why-use-vim/</link>
+      <pubDate>Sun, 05 Sep 2021 13:30:55 +0530</pubDate>
+      <guid>http://localhost:1313/why-use-vim/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;So, Why would one use Vim? As Vim being the most complicated Text editor when it comes to &lt;strong&gt;closing it&lt;/strong&gt;!! Also, people think it&amp;rsquo;s not worth the time or it&amp;rsquo;s just not their type of Text Editor. Well, that&amp;rsquo;s true, I am not forcing anyone to use Vim, just to tell the reasons why people use Vim. Again, it&amp;rsquo;s not to show off to anyone that I use Vim, just to appreciate the power of Vim and its community, it&amp;rsquo;s just amazing!!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vim: NERDTree</title>
+      <link>http://localhost:1313/vim-nerdtree/</link>
+      <pubDate>Tue, 31 Aug 2021 20:45:06 +0530</pubDate>
+      <guid>http://localhost:1313/vim-nerdtree/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/preservim/nerdtree&#34;&gt;NERDTree&lt;/a&gt; is a great plugin in Vim for managing and navigating Files. Some might prefer fzf, telescope, and other plugins for navigation, NERDTree is not a bad option to begin within Vim. NERDTree allows you to even create/delete/move files and folders flawlessly without much effort, so it becomes a much more viable beginner&amp;rsquo;s plugin.&lt;/p&gt;&#xA;&lt;h2 id=&#34;installing-nerdtree-plugin&#34;&gt;Installing NERDTree Plugin&lt;/h2&gt;&#xA;&lt;p&gt;So, let&amp;rsquo;s start with the Installation of the NERDTree Plugin, it&amp;rsquo;s quite straightforward and simple.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vim: Buffers</title>
+      <link>http://localhost:1313/vim-buffers/</link>
+      <pubDate>Wed, 11 Aug 2021 20:24:29 +0530</pubDate>
+      <guid>http://localhost:1313/vim-buffers/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;I have talked about Vim &lt;a href=&#34;https://mr-destructive.github.io/techstructive-blog/vim/2021/08/03/Vim-Tabs.html&#34;&gt;tabs&lt;/a&gt;,  &lt;a href=&#34;https://mr-destructive.github.io/techstructive-blog/vim/2021/08/06/Vim-Window-Splits.html&#34;&gt;window splits&lt;/a&gt;  in the previous articles, and now I am quite keen on explaining the finest unit of file that you can open using Vim and that is a buffer. Tabs are a collection of windows, Windows are the viewport on buffers (collection to view the buffers), and Buffers are the memory that holds text in the file. So let us explore buffer in detail. This article won&amp;rsquo;t cover each and every tiny detail about buffers but surely enough to make you understand what a buffer is and how to manage those.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vim: Window Splits</title>
+      <link>http://localhost:1313/vim-window-splits/</link>
+      <pubDate>Fri, 06 Aug 2021 15:40:49 +0530</pubDate>
+      <guid>http://localhost:1313/vim-window-splits/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Have you ever been stuck in Vim opening multiple files within a single window? Didn&amp;rsquo;t anyone tell you, you can create multiple windows and split them within a single tab. Definitely, the window splits will be in separate buffers. In this way you can create multiple windows inside of a single Tab, what are Tabs? You can learn some basics about it from my previous article about  &lt;a href=&#34;https://mr-destructive.github.io/techstructive-blog/vim/2021/08/03/Vim-Tabs.html&#34;&gt;Tabs in Vim&lt;/a&gt;. We can either create Vertical or Horizontal splits within the window making it flexible to work with multiple files in Vim. This article will look into the creation, navigation, closing, and rearrangement of Window Splits.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vim: Tabs</title>
+      <link>http://localhost:1313/vim-tabs/</link>
+      <pubDate>Tue, 03 Aug 2021 20:23:09 +0530</pubDate>
+      <guid>http://localhost:1313/vim-tabs/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;So, you are playing with Vim and getting good at but something pulls you off. Basically can&amp;rsquo;t get used to switching between files or windows, and that&amp;rsquo;s totally fine. Some may prefer using Window splitting, file managers, and whatnot. But let me introduce you to TABS in Vim. A simple and elegant way to open multiple files in Vim.&lt;/p&gt;&#xA;&lt;h2 id=&#34;opening-tabs&#34;&gt;Opening Tabs&lt;/h2&gt;&#xA;&lt;p&gt;To open a tab, you can press &lt;code&gt;:tabnew&lt;/code&gt;  or  &lt;code&gt;:tabedit&lt;/code&gt; to open a blank Tab with no file open in it. This basically works like the &lt;code&gt;:e&lt;/code&gt; command, which opens a buffer for you with no named file.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vim: Registers</title>
+      <link>http://localhost:1313/vim-registers/</link>
+      <pubDate>Wed, 21 Jul 2021 23:41:57 +0530</pubDate>
+      <guid>http://localhost:1313/vim-registers/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Have you ever found it difficult to manage and operate text in Vim, especially in Cut/Copy/Paste stuff. You cannot figure out how on earth am I supposed to retrieve my un-saved, un-committed changes in Vim. Then this my dear friend is an article for you. You will learn what are Vim registers and where your deletes and copied stuff resides. This won&amp;rsquo;t be a comprehensive guide but enough to let you through in performing the wizardry of registers in Vim.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vim: Enhancing Editing Speed</title>
+      <link>http://localhost:1313/vim-editing-speed/</link>
+      <pubDate>Sun, 18 Jul 2021 16:52:17 +0530</pubDate>
+      <guid>http://localhost:1313/vim-editing-speed/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Editing/ Writing is a crucial part of any text editor, the swiftness with which one can make changes in a file(s) or a structure is a bit dependent on the editor we use as well. Vim can be a bit hassle for beginners in the initial stage but it becomes second nature soon. It also depends majorly on the level of usage and the area of usage. If you are an advanced programmer, you will use these commands extensively, and might not be a big deal for you, But for a beginner, it might take some time to get used to the workflow in Vim.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vim: Terminal Integration</title>
+      <link>http://localhost:1313/vim-plus-teminal/</link>
+      <pubDate>Tue, 29 Jun 2021 15:21:11 +0530</pubDate>
+      <guid>http://localhost:1313/vim-plus-teminal/</guid>
+      <description>&lt;h2 id=&#34;vim-and-terminal&#34;&gt;Vim and Terminal!?&lt;/h2&gt;&#xA;&lt;p&gt;Vim was made to work with the command line. Many beginners do not understand what are the true capabilities of Vim, myself included:) Vim can run terminal commands without leaving the text editor, open an instance of a terminal, work with shell environments, and other things depending on the use case.&lt;/p&gt;&#xA;&lt;h2 id=&#34;running-terminal-shell-commands-from-within-vim&#34;&gt;Running Terminal/ shell commands from within Vim&lt;/h2&gt;&#xA;&lt;p&gt;You can run the commands from inside of Vim by just using &lt;code&gt;:!&lt;/code&gt; before the command, this means you have to be in command mode. Just after being in command mode, the ! or bang operator will execute the command typed after it from the terminal(Linux/ macOS) or your default shell(Windows -&amp;gt; CMD/Powershell).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vim: Enhancing Movement Speed</title>
+      <link>http://localhost:1313/vim-movement-speed/</link>
+      <pubDate>Sat, 26 Jun 2021 15:27:05 +0530</pubDate>
+      <guid>http://localhost:1313/vim-movement-speed/</guid>
+      <description>&lt;p&gt;![]({{ page.image | relative_url }})&lt;/p&gt;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;OK! Vim and movement are like bread and butter or failed brakes. To become a proficient Vim user, you need to move in Vim very effectively. You don&amp;rsquo;t have to think about doing certain things, your fingertips should automatically move without wasting time thinking about it. I am sure, it takes time and effort but OH! it is so rewarding in the end.&lt;/p&gt;&#xA;&lt;h3 id=&#34;why-h-j-k-l&#34;&gt;Why H J K L?&lt;/h3&gt;&#xA;&lt;p&gt;First things first, unmap arrow keys and make a habit of using h,j,k, and l. Yes, this would not make any sense in the initial stage but that will make no sense for not using it later.&#xA;The thing with H J K L is that they are quite flexible to work with and if you use it with numbers you would navigate much faster than arrow keys. Such as &lt;code&gt;10j&lt;/code&gt; will move you 10 lines down at a time in normal mode. These keys are used with many of the other key shortcuts and commands which just make it most important to begin learning to move around in Vim with H J K L.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Vim: Keymapping Guide</title>
+      <link>http://localhost:1313/vim-keymaps/</link>
+      <pubDate>Mon, 14 Jun 2021 15:27:44 +0530</pubDate>
+      <guid>http://localhost:1313/vim-keymaps/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Keymapping or Key binding is a process in which a user or a system can assign certain keys or commands to perform a particular task or commands. This can be quite useful in Vim as well as in other text editors to avoid some repetitive tasks and save time. In Vim this can be a great power to have for programmers as it can be really very flexible to set up for any programming language and it&amp;rsquo;s&#xA;environment.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Setting up Vim for BASH Scripting</title>
+      <link>http://localhost:1313/vim-for-bash/</link>
+      <pubDate>Thu, 10 Jun 2021 04:52:07 +0530</pubDate>
+      <guid>http://localhost:1313/vim-for-bash/</guid>
+      <description>&lt;h2 id=&#34;vim-and-bash&#34;&gt;Vim and BASH?&lt;/h2&gt;&#xA;&lt;p&gt;Bash Scripting is a powerful skill to have as a programmer because we find Linux almost everywhere and to get through it you must have a command over its interface which is generally the BASH shell. Vim is a great option for doing this, or probably the best out there! Because Vim is pre-installed in almost every Linux distribution. This is not an in-depth setup for BASH on Vim, it is a simple editorial on starting up BASH scripting on the Vim editor. So without wasting time on &amp;ldquo;Vim features&amp;rdquo; let&amp;rsquo;s dive in with the setup for BASH in Vim.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Setting up Vim for Python</title>
+      <link>http://localhost:1313/vim-for-python/</link>
+      <pubDate>Sun, 06 Jun 2021 11:35:25 +0530</pubDate>
+      <guid>http://localhost:1313/vim-for-python/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Vim is quite a powerful text editor which can add performance to the already fast typed language Python. Vim can be highly customizable and efficient to use as it has the power of &lt;strong&gt;adding custom plugins and plugins managers, key mappings&lt;/strong&gt;, and the most critical weapon of vim - Access to the terminal straight away.&#xA;This is not a full-featured guide of using vim for python, it&amp;rsquo;s just a quick setup for using python on vim blazingly fast!!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Why and How to make and use Vim as a text editor and customizable IDE</title>
+      <link>http://localhost:1313/vim-text-editor-ide/</link>
+      <pubDate>Sat, 20 Feb 2021 15:05:20 +0530</pubDate>
+      <guid>http://localhost:1313/vim-text-editor-ide/</guid>
+      <description>&lt;p&gt;We all are asked to use visual studio code and other rich looking editors as a beginners text editor or an IDE but that makes a habit of a rich and pleasing interface of running and debugging programs, and that is the reason we don&amp;rsquo;t feel good to use command line or the terminal. Terminal or Command line are quite important to learn and are powerful as well.&lt;/p&gt;&#xA;&lt;p&gt;Vim is a text editor, not any text editor but a special and one of the fastest out there if you use it wisely. Vim can be used in the terminal which means it can run terminal commands inside the editor interface. That makes it quite a great option to improve your terminal command skills and also for enhancing your Linux knowledge. You can run program files from vim itself just with a few keystrokes. This text editor is preinstalled in most Linux distributions and hence you could quickly edit some files without going anywhere.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

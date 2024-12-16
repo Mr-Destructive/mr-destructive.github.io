@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Series on Meet Rajesh Gor</title>
+    <link>http://localhost:1313/series/</link>
+    <description>Recent content in Series on Meet Rajesh Gor</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 11 Dec 2024 23:45:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/series/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Advent of Code 2024</title>
+      <link>http://localhost:1313/series/advent-of-code-2024/</link>
+      <pubDate>Wed, 11 Dec 2024 23:45:00 +0000</pubDate>
+      <guid>http://localhost:1313/series/advent-of-code-2024/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Lets-Go-With-Turso</title>
+      <link>http://localhost:1313/series/lets-go-with-turso/</link>
+      <pubDate>Thu, 31 Oct 2024 21:45:00 +0000</pubDate>
+      <guid>http://localhost:1313/series/lets-go-with-turso/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Nginx-Survival-Guide</title>
+      <link>http://localhost:1313/series/nginx-survival-guide/</link>
+      <pubDate>Sun, 21 Jul 2024 22:45:00 +0000</pubDate>
+      <guid>http://localhost:1313/series/nginx-survival-guide/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>100-Days-of-Golang</title>
+      <link>http://localhost:1313/series/100-days-of-golang/</link>
+      <pubDate>Sat, 15 Jun 2024 18:30:00 +0000</pubDate>
+      <guid>http://localhost:1313/series/100-days-of-golang/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Django-Series</title>
+      <link>http://localhost:1313/series/django-series/</link>
+      <pubDate>Sun, 05 Feb 2023 17:15:00 +0000</pubDate>
+      <guid>http://localhost:1313/series/django-series/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Django-Deployment</title>
+      <link>http://localhost:1313/series/django-deployment/</link>
+      <pubDate>Sat, 16 Jul 2022 16:15:00 +0000</pubDate>
+      <guid>http://localhost:1313/series/django-deployment/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Django-Basics</title>
+      <link>http://localhost:1313/series/django-basics/</link>
+      <pubDate>Thu, 03 Feb 2022 23:45:00 +0530</pubDate>
+      <guid>http://localhost:1313/series/django-basics/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Object Oriented Porgramming in C&#43;&#43;</title>
+      <link>http://localhost:1313/series/object-oriented-porgramming-in-c&#43;&#43;/</link>
+      <pubDate>Thu, 23 Sep 2021 19:33:52 +0530</pubDate>
+      <guid>http://localhost:1313/series/object-oriented-porgramming-in-c&#43;&#43;/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>BASH Scripting Guide</title>
+      <link>http://localhost:1313/series/bash-scripting-guide/</link>
+      <pubDate>Mon, 12 Jul 2021 23:16:13 +0530</pubDate>
+      <guid>http://localhost:1313/series/bash-scripting-guide/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
