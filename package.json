@@ -4,6 +4,7 @@
   "description": "Under Development",
   "main": "index.js",
   "scripts": {
+    "build": "tinacms build",
     "dev": "tinacms dev -c \"hugo server -D\"",
     "build": "tinacms build && hugo"
   },
