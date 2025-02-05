@@ -1,0 +1,19 @@
+{
+  "name": "mr-destructive.github.io",
+  "version": "1.0.0",
+  "description": "Under Development",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "tinacms": "^2.6.2"
+  },
+  "devDependencies": {
+    "@tinacms/cli": "^1.8.2",
+    "@types/node": "^22.13.1"
+  }
+}
