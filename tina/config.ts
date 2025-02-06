@@ -41,6 +41,50 @@ export default defineConfig({
             required: true,
           },
           {
+            type: "datetime",
+            name: "date",
+            label: "Date",
+            required: true,
+          },
+          {
+              type: "string",
+              name: "tags",
+              label: "Tags",
+              list: true,
+          },
+          {
+            type: "rich-text",
+            name: "body",
+            label: "Body",
+            isBody: true,
+          },
+        ],
+      },
+      {
+        name: "tils",
+        label: "TILs",
+        path: "content/tils",
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Title",
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: "datetime",
+            name: "date",
+            label: "Date",
+            required: true,
+          },
+          {
+              type: "string",
+              name: "slug",
+              label: "slug",
+	      required: false,
+          },
+          {
             type: "rich-text",
             name: "body",
             label: "Body",
