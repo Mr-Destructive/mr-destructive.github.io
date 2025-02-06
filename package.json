@@ -6,7 +6,6 @@
   "scripts": {
     "build": "tinacms build",
     "dev": "tinacms dev -c \"hugo server -D\"",
-    "build": "tinacms build && hugo"
   },
   "keywords": [],
   "author": "",
