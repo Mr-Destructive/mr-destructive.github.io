@@ -24,24 +24,24 @@ markup:
 
 
 permalinks:
-  blog: "/:slug/"
+  blog: ":slug/"
 
 menu:
   main:
     - name: "Home"
-      url: "/"
+      url: ""
       weight: 1
     - name: "Blog"
-      url: "/blog/"
+      url: "blog/"
       weight: 2
     - name: "About"
-      url: "/about/"
+      url: "about/"
       weight: 3
     - name: "Work"
-      url: "/work/"
+      url: "work/"
       weight: 4
     - name: "Newsletter"
-      url: "/newsletter/"
+      url: "newsletter/"
       weight: 5
 
 taxonomies:
