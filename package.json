@@ -4,7 +4,7 @@
   "description": "Under Development",
   "main": "index.js",
   "scripts": {
-    "build": "tinacms build",
+    "build": "tinacms build --skip-cloud-checks", 
     "dev": "tinacms dev -c \"hugo server -D\""
   },
   "keywords": [],
