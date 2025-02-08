@@ -1,11 +1,13 @@
 ---
-templateKey: til 
-title: "Map Vimscript Keymaps to Lua with a single function"
-description: "Takeout the vimscript keymaps into lua with a single function call in Neovim"
-date: 2022-07-11 22:30:00
+templateKey: til
+description: Takeout the vimscript keymaps into lua with a single function call in Neovim
 status: published-til
 slug: vimscript-to-lua-keymapper
-tags: ['vim', 'lua',]
+title: Map Vimscript Keymaps to Lua with a single function
+date: 2022-07-11T22:30:00.000Z
+tags:
+  - vim
+  - lua
 ---
 
 ## Introduction
@@ -70,6 +72,6 @@ The function is simply a text scrapping from lua strings. We extract the first c
 
 We iterate over the table in lua with the help of ipairs function which allows us to iterate over an ordered list of items in a table. Using the gmatch function, we find a pattern to split the string with the space as the delimiter. Thereby, we can have separate sets of strings identified as rhs and lhs. We can store them in variables as strings as the lua functions require them as strings.
 
-We simply add those variables into the [vim.keymap.set](https://neovim.io/doc/user/lua.html#:~:text=set(%7Bmode%7D%2C%20%7Blhs%7D%2C%20%7Brhs%7D%2C%20%7Bopts%7D)%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20*vim.keymap.set()*) or [vim.api.nvim_set_keymap](https://neovim.io/doc/user/api.html#nvim_set_keymap():~:text=nvim_set_keymap(%7Bmode%7D%2C%20%7Blhs%7D%2C%20%7Brhs%7D%2C%20%7B*opts%7D)%20%20%20%20%20%20%20%20%20%20%20%20%20*nvim_set_keymap()*) functions. We by default set the value of `{noremap: True}` to avoid teh recursive mapping of the keys. These option parameter is the one which needs to be a bit more dynamic in terms of wide variety of keymaps.
+We simply add those variables into the [vim.keymap.set](https://neovim.io/doc/user/lua.html#:~:text=set\(%7Bmode%7D%2C%20%7Blhs%7D%2C%20%7Brhs%7D%2C%20%7Bopts%7D\)%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20*vim.keymap.set\(\)*) or [vim.api.nvim\_set\_keymap](https://neovim.io/doc/user/api.html#nvim_set_keymap\(\):~:text=nvim_set_keymap\(%7Bmode%7D%2C%20%7Blhs%7D%2C%20%7Brhs%7D%2C%20%7B*opts%7D\)%20%20%20%20%20%20%20%20%20%20%20%20%20*nvim_set_keymap\(\)*) functions. We by default set the value of `{noremap: True}` to avoid teh recursive mapping of the keys. These option parameter is the one which needs to be a bit more dynamic in terms of wide variety of keymaps.
 
 So, this is how we can convert the vimscript keymaps to lua in Neovim. Hope you found this useful. Thanks for reading. Happy Viming :)

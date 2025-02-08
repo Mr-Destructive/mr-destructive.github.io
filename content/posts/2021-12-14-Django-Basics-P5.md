@@ -1,25 +1,31 @@
 ---
 templateKey: blog-post
-title : "Django Basics: Templates"
-subtitle: "Rendering templates/html docs in the Django project/app"
-date: 2021-12-14 16:45:00 +0530
+subtitle: Rendering templates/html docs in the Django project/app
 status: published
-tags: ['django', 'python', 'web-development']
 slug: django-basics-templates
-image_url: https://res.cloudinary.com/dgpxbrwoz/image/upload/v1639387566/blogmedia/dj5temp_zukvj7.png
-series: [ 'Django-Basics','Django-Series']
+image_url: >-
+  https://res.cloudinary.com/dgpxbrwoz/image/upload/v1639387566/blogmedia/dj5temp_zukvj7.png
+series:
+  - Django-Basics
+  - Django-Series
+title: 'Django Basics: Templates'
+date: 2021-12-14T11:15:00.000Z
+tags:
+  - django
+  - python
+  - web-development
 ---
 
 ## Introduction
 
 After learning the basics of views and URLs, we can now move on to the next concept i.e. Templates. In Django, Templates are quite an important component for the application as it acts as the `frontend` for the web application. With the help of templates and some features provided by Django, it becomes very intuitive and simple to make dynamic web content.
-In this part, we understand what are templates and what is the way to render them. 
+In this part, we understand what are templates and what is the way to render them.
 
 ## What are Templates
 
-Templates are simply a `html` document or kind of a wireframe for content to be displayed for the web app. Templates allow us to render some more relevant pieces of data rather than simple text HTTP responses as we did earlier. We can even re-use certain components of a template in other using the Django Templating Language (more on this later). 
+Templates are simply a `html` document or kind of a wireframe for content to be displayed for the web app. Templates allow us to render some more relevant pieces of data rather than simple text HTTP responses as we did earlier. We can even re-use certain components of a template in other using the Django Templating Language (more on this later).
 
-So, using HTML templates, we can write a complete Webpage. If you are unfamiliar with HTML, you can check out the basics of HTML with this [playlist](https://www.youtube.com/playlist?list=PL081AC329706B2953). 
+So, using HTML templates, we can write a complete Webpage. If you are unfamiliar with HTML, you can check out the basics of HTML with this [playlist](https://www.youtube.com/playlist?list=PL081AC329706B2953).
 
 Even If you are not familiar with HTML, this tutorial might be quite basic and not overwhelm you with all the tags.
 
@@ -45,7 +51,8 @@ Create a folder `templates` in the base folder, inside the templates folder, cre
 ```
 
 This is a simple HTML template, with the `<h1>` tags. As Django is a framework, there is a standard for storing all the templates for the project and application. There are a couple of standard of options:
-- One of which is creating a `templates` folder in the root folder as discussed earlier, also we need to modify the `project_name/settings.py` file. 
+
+* One of which is creating a `templates` folder in the root folder as discussed earlier, also we need to modify the `project_name/settings.py` file.
 
 Inside the `settings.py` file, we need to locate the `TEMPLATES` section and modify as below:
 
@@ -67,23 +74,23 @@ TEMPLATES = [
         },
     },
 ]
-```   
+```
 
-In this snippet, we have changed the `DIRS` option to search the templates in the folder `templates` in the root directory. 
+In this snippet, we have changed the `DIRS` option to search the templates in the folder `templates` in the root directory.
 
-- The other standard is creating a templates folder in each application.
+* The other standard is creating a templates folder in each application.
 
-We can create the templates folder in each application instead of a single folder. 
+We can create the templates folder in each application instead of a single folder.
 
 ## Rendering Templates
 
-After creating a template and making the required settings to make sure Django is able to pick up those templates, we need to work with views and URLs to actually render those templates. 
+After creating a template and making the required settings to make sure Django is able to pick up those templates, we need to work with views and URLs to actually render those templates.
 
 There are a couple of ways to render templates in Django and some of them are discussed below:
 
 ### Using TemplateView
 
-[TemplateView](https://docs.djangoproject.com/en/3.2/ref/class-based-views/base/#django.views.generic.base.TemplateView) is a class which is comes with `django.views.generic` library. This class allows us to render a template by providing in the name of the template, arguments or variables to be parsed, and so on. 
+[TemplateView](https://docs.djangoproject.com/en/3.2/ref/class-based-views/base/#django.views.generic.base.TemplateView) is a class which is comes with `django.views.generic` library. This class allows us to render a template by providing in the name of the template, arguments or variables to be parsed, and so on.
 
 The simplest way to render a template is by the following way:
 
@@ -99,17 +106,19 @@ urlpatterns = [
 ]
 ```
 
-We need to import the `TemplateView` from the `django.core.generic` so as to use the class for rendering the template. 
+We need to import the `TemplateView` from the `django.core.generic` so as to use the class for rendering the template.
 
-The `TemplateView` class takes in a couple of arguments, we'll use the `template_name` as an argument that takes in the name of the template. Here, we use the `index.html` as the template which we created earlier. We don't need to specify the entire path to the template as we make modifications in the `settings.py` file to pick the template from the mentioned directory. We use `as_view` function to load the class as a function/view.  
+The `TemplateView` class takes in a couple of arguments, we'll use the `template_name` as an argument that takes in the name of the template. Here, we use the `index.html` as the template which we created earlier. We don't need to specify the entire path to the template as we make modifications in the `settings.py` file to pick the template from the mentioned directory. We use `as_view` function to load the class as a function/view.
 
 Activate the virtual environment for the proper functioning of the project.
 
 After activating the virtual environment we can run the server as follows:
+
 ```terminal
 python manage.py runserver
 ```
-   We can now see the following output and thus, we are now rendering a simple HTML template in Django.
+
+We can now see the following output and thus, we are now rendering a simple HTML template in Django.
 
 ![](https://res.cloudinary.com/dgpxbrwoz/image/upload/v1639384994/blogmedia/templ1_vbwp5d.png)
 
@@ -124,7 +133,7 @@ from django.shortcuts import render
 
 def home(request):
     return render(request,'index.html')
-```   
+```
 
 And in the URLs, we'll create a different pattern like for e.g. 'home/'
 
@@ -137,11 +146,11 @@ urlpatterns=[
         ]
 ```
 
-So, after creating the View-URL map and making sure the URL of the app is loaded in the project URLs, we can see the result as a simple HTML template.   
+So, after creating the View-URL map and making sure the URL of the app is loaded in the project URLs, we can see the result as a simple HTML template.
 
 ![](https://res.cloudinary.com/dgpxbrwoz/image/upload/v1639386932/blogmedia/templ2_rgoppj.png)
-   
-## Django Templating Language 
+
+## Django Templating Language
 
 The [Django Templating Language](https://docs.djangoproject.com/en/3.2/ref/templates/language/) is Django's way of making templates more dynamic and easy to write dynamic web applications. We'll take a brief look at what we can do with this type of Templating Language in Django.
 
@@ -149,9 +158,10 @@ The [Django Templating Language](https://docs.djangoproject.com/en/3.2/ref/templ
 
 This is the most common use case for the Django Templating Language/Engine as we can use the [variables](https://docs.djangoproject.com/en/3.2/ref/templates/language/#variables) from the Backend and inject it in the template. We can parse the variable into the template by the syntax : `{{ variable_name " }}}}`
 
-To show its use cases, we can declare a variable in a view and then parse it in the Template. Though it is not dynamic right now we can later on fetch values from the database and store them in the form of variables in our views. 
+To show its use cases, we can declare a variable in a view and then parse it in the Template. Though it is not dynamic right now we can later on fetch values from the database and store them in the form of variables in our views.
 
 **templates/home.html**
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -165,8 +175,8 @@ To show its use cases, we can declare a variable in a view and then parse it in 
 </html>
 ```
 
-
 **post/views.py**
+
 ```python
 from django.shortcuts import render
 
@@ -180,6 +190,7 @@ def variable_demo(request):
 As we can see the variable in views is passed as a dictionary in python. The reference key along with a value of the variable as the name of the variable. We will use the key in the templates to parse the value of the variable.
 
 **post/urls.py**
+
 ```python
 from django.urls import path
 from post import views
@@ -192,7 +203,7 @@ urlpatterns=[
 
 ![variable demo](https://res.cloudinary.com/dgpxbrwoz/image/upload/v1639389288/blogmedia/templ3_wvhagw.png)
 
-As we can see, we were able to load the variable into the template using the Django Templating Engine. 
+As we can see, we were able to load the variable into the template using the Django Templating Engine.
 
 ### Conditional statement
 
@@ -200,7 +211,8 @@ We can even use the conditional statement in the Template using a very simple sy
 
 To create a basic if condition in the template, we can understand with the following example.
 
-**app_name/views.py**
+**app\_name/views.py**
+
 ```python
 from django.shortcuts import render
 from random import randint
@@ -212,7 +224,8 @@ def if_demo(request):
 
 Here, we have used the key name as `num` indicating we can give different names to the key which needs to be used in the template to render the values.
 
-**app_name/urls.py**
+**app\_name/urls.py**
+
 ```python
 from django.urls import path
 from post import views
@@ -222,7 +235,8 @@ urlpatterns = [
         ]
 ```
 
-**templates/if_else.html**
+**templates/if\_else.html**
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -242,18 +256,19 @@ urlpatterns = [
 </body>
 </html>
 ```
+
 ![if-else demo](https://res.cloudinary.com/dgpxbrwoz/image/upload/v1639411425/blogmedia/templ3_exj0fv.png)
 
 So, as we can see that, we can use the if-else conditions in the template and that is already powerful. This can be a bit messy as to handle mathematical operations or conditions into a single condition. This can really be used for really large datasets that can be shimmed down to really less coding and also improve readability.
 
-
 ### For loop
 
-Now, the most crucial component of the Django templating language is the loops. We can actually iterate over objects/lists in the template. This becomes a huge concept for actually making a dynamic web application. We n\might want to iterate over all the entries in a database, or any other form of data which can make the app a lot dynamic and feel real-time. 
+Now, the most crucial component of the Django templating language is the loops. We can actually iterate over objects/lists in the template. This becomes a huge concept for actually making a dynamic web application. We n\might want to iterate over all the entries in a database, or any other form of data which can make the app a lot dynamic and feel real-time.
 
 The syntax of for loop is almost similar to the if-else condition. We just replace the condition with the iterator and the list/object from the view context. `{% for i in list %}`, also end the for loop like `{% endfor %}`.
 
-**app_name/views.py**
+**app\_name/views.py**
+
 ```python
 from django.shortcuts import render
 
@@ -265,7 +280,8 @@ def for_demo(request):
 
 We have created a simple Python list called `sports` and we parse them to the template using a dictionary object, `sport_list` as the key for storing the value of the `sports` list.
 
-**app_name/urls.py**
+**app\_name/urls.py**
+
 ```python
 from django.urls import path
 from post import views
@@ -276,6 +292,7 @@ urlpatterns = [
 ```
 
 **templates/for.html**
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -295,7 +312,7 @@ urlpatterns = [
 
 ![for loop demo](https://res.cloudinary.com/dgpxbrwoz/image/upload/v1639475328/blogmedia/templ3_q8z8fr.png)
 
-We have used simple for loop in Pythonic syntax, we use an iterator in this case, `sport` acts as an iterator. We use this to store values one by one from the list `sport_list` which was earlier passed in the views as a key in the dictionary. 
+We have used simple for loop in Pythonic syntax, we use an iterator in this case, `sport` acts as an iterator. We use this to store values one by one from the list `sport_list` which was earlier passed in the views as a key in the dictionary.
 
 Hence, this is quite scalable and used to fetch the objects/entries in the database and hence making it a lot easier to make a dynamic web application faster.
 
@@ -303,12 +320,13 @@ Hence, this is quite scalable and used to fetch the objects/entries in the datab
 
 So, far we have seen that we need to create the base template again and again like all the basic HTML elements, title, and all the basic structure. But what if, we can reuse a specific template in another and extend the functionality of that template into a new one. This avoids the redundancy of writing the entire basic template or the layout of a web app over and over again.
 
-To do that, Django has the Template inheritance. We can use a template as its basic layout or a specific component in the web application. Again, similar to the for, if-else blocks the syntax for inheriting a template is quite similar. 
+To do that, Django has the Template inheritance. We can use a template as its basic layout or a specific component in the web application. Again, similar to the for, if-else blocks the syntax for inheriting a template is quite similar.
 
 Take, for example, the home.html which consisted of only a `<h1>` tag in it. We can use this kind of template in other templates to really make it the home page. For that, we first need to enclose the template in a `block`, which is what allows us to use it in other templates.
 To create a `block`, we simply need to write the following syntax before the component which we do not want in other templates:
 
 **templates/home.html**
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -325,12 +343,13 @@ To create a `block`, we simply need to write the following syntax before the com
 </body>
 </html>
 ```
+
 In this we have used the `blocks` with a name like `body` as `{% block body %}` this can be anything you like. We end the block with the similar syntax as the for/if blocks as `{% endblock %}`. Anything in between the blocks i.e `block block_name` and `endblock` is not inherited i.e it is unique to this template.
 
 We will see how we can use this template in other templates. We will actually extend this template and use the blocks to render the content in the template.
-   
 
-**templates/if_else.html**
+**templates/if\_else.html**
+
 ```html
 {% extends 'home.html' %}
 {% block body %}
@@ -344,12 +363,14 @@ We will see how we can use this template in other templates. We will actually ex
     {% endif %}
 {% endblock %}
 ```
-   So, we first say to Django to extend the `home` template i.e. the Django will load the blocks from this template only, remember it will just load and not use the blocks until we explicitly tell it to. 
 
-To use the blocks or kind of plug in the template content in the `if_else.html` or any other template, we need to again call the `blocks`. Here, we need to write the content inside the `blocks` to properly parse the blocks as this is an HTML template. The order of opening and closing elements do matter. 
-So, when we say `endblock` the last part of the base template is loaded i.e. the closing `body` and `html` tags. This is like plugging the template as it is before and after the block body. 
+So, we first say to Django to extend the `home` template i.e. the Django will load the blocks from this template only, remember it will just load and not use the blocks until we explicitly tell it to.
 
-**app_name/views.py**
+To use the blocks or kind of plug in the template content in the `if_else.html` or any other template, we need to again call the `blocks`. Here, we need to write the content inside the `blocks` to properly parse the blocks as this is an HTML template. The order of opening and closing elements do matter.
+So, when we say `endblock` the last part of the base template is loaded i.e. the closing `body` and `html` tags. This is like plugging the template as it is before and after the block body.
+
+**app\_name/views.py**
+
 ```python
 from django.shortcuts import render
 
@@ -361,9 +382,10 @@ from random import randint
 def if_demo(request):
    number = randint(1,10)
    return render(request, 'if_else.html', {'num':number})
-```   
+```
 
-**app_name/urls.py**
+**app\_name/urls.py**
+
 ```python
 from django.urls import path
 from post import views
@@ -372,13 +394,14 @@ urlpatterns = [
         path('', views.home, name="home"),
         path('if/', views.if_demo, name="ifdemo"),
         ]
-```   
+```
+
 ![](https://res.cloudinary.com/dgpxbrwoz/image/upload/v1639479714/blogmedia/tempinher2_enisls.png)
-![template inheritance demo](https://res.cloudinary.com/dgpxbrwoz/image/upload/v1639477721/blogmedia/tempinher_lk0op0.png)      
+![template inheritance demo](https://res.cloudinary.com/dgpxbrwoz/image/upload/v1639477721/blogmedia/tempinher_lk0op0.png)
 
 ![](https://res.cloudinary.com/dgpxbrwoz/image/upload/v1639479954/blogmedia/template-inh_lc8szo.gif)
 
-The above gif illustrates the example in a neat way. The block is loaded from the given template as the extended template and hence it plugs the block into the frame of the template. 
+The above gif illustrates the example in a neat way. The block is loaded from the given template as the extended template and hence it plugs the block into the frame of the template.
 
 ## Conclusion
 

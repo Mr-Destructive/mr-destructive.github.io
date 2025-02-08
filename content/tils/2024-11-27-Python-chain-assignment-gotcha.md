@@ -1,11 +1,15 @@
 ---
 templateKey: til
-title: "Gotcha with Chained Assignment in Python"
-description: "A lesson learned about Python's chained assignment with mutable objects, where all variables store references to the same object, leading to unexpected behaviour when one is modified."
+description: >-
+  A lesson learned about Python's chained assignment with mutable objects, where
+  all variables store references to the same object, leading to unexpected
+  behaviour when one is modified.
 status: published-til
 slug: python-chain-assignment-gotcha
-tags: ["python",]
-date: 2024-11-27 22:15:00
+title: Gotcha with Chained Assignment in Python
+date: 2024-11-27T22:15:00.000Z
+tags:
+  - python
 ---
 
 I was writing some Python code and wanted to initialize a few variables to an empty list. Instead of creating separate lists for each variable, I decided to use chained assignments like this:
@@ -25,11 +29,8 @@ b.append(4)
 If you didn’t know about how Python handles assignments, you might expect the variables to behave like this:
 
 * `a` should still be `[1, 2, 3]`
-    
 * `b` should be `[1, 2, 3, 4]` (since I modified b)
-    
 * `c` should remain `[1, 2, 3]`
-    
 
 ```python
 # You might think it will be this
@@ -75,28 +76,18 @@ Some of the primitive data types are:
 Mutable Types:
 
 * List
-    
 * Dictionaries
-    
 * Set
-    
 * Byte Array
-    
 
 Immutable Types:
 
 * Integer, Float, Complex
-    
 * String
-    
 * Tuple
-    
 * Bytes
-    
 * Boolean
-    
 * Frozenset
-    
 
 So, suppose you assign multiple variables with the same value of a mutable type. In that case, the change in one variable will mutate the other variables as well since the underlying object in memory is the same.
 

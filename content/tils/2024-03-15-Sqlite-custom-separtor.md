@@ -1,14 +1,15 @@
 ---
 templateKey: til
-title: "SQLite importing CSV with custom separator"
-description: "Explorng SQLite CLI with inline CSV import command with custom separator"
+description: Explorng SQLite CLI with inline CSV import command with custom separator
 status: published-til
 slug: sqlite-inline-custom-separator
-tags: ["sqlite",]
-date: 2024-03-15 22:30:00
+title: SQLite importing CSV with custom separator
+date: 2024-03-15T22:30:00.000Z
+tags:
+  - sqlite
 ---
 
-explaination about how i learned how to write a command for importing a csv 
+explaination about how i learned how to write a command for importing a csv
 into a sqlite3 db with cusotm Separator with a single command inline
 
 ## Introduction
@@ -17,9 +18,9 @@ I was exploring some Issues that I can solve given the context of the problem an
 
 I have some github repositories that I always look for to learn more. Some of them are:
 
-- [Steampipe](https://github.com/turbot/steampipe)
-- [MindsDB](https://github.com/mindsdb/mindsdb)
-- [Turso](https://github.com/tursodatabase)
+* [Steampipe](https://github.com/turbot/steampipe)
+* [MindsDB](https://github.com/mindsdb/mindsdb)
+* [Turso](https://github.com/tursodatabase)
 
 So, navigating around for a few minutes, I landed on this [issue](https://github.com/tursodatabase/turso-cli/issues/811).
 

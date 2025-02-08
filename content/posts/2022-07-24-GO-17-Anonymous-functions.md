@@ -1,13 +1,15 @@
 ---
 templateKey: blog-post
-title: "Golang: Anonymous Functions"
-description: "Understanding the concept of the Anonymous functions in golang"
-date: 2022-07-24 18:15:00
-status: published 
+description: Understanding the concept of the Anonymous functions in golang
+status: published
 slug: golang-anonymous-functions
-tags: ['go',]
-series: ['100-days-of-golang',]
-image_url: https://meetgor-cdn.pages.dev/golang-017-anonymous-functions.png
+series:
+  - 100-days-of-golang
+image_url: 'https://meetgor-cdn.pages.dev/golang-017-anonymous-functions.png'
+title: 'Golang: Anonymous Functions'
+date: 2022-07-24T18:15:00.000Z
+tags:
+  - go
 ---
 
 ## Introduction
@@ -16,11 +18,11 @@ We have looked at the defer keyword in golang in the [previous](https://www.meet
 
 ## What are Anonymous Functions
 
-Anonymous functions are quite simple to understand, we don't define a function, we declare it and call it instantly. An anonymous function doesn't have a name so hence it is called an anonymous function. As a normal function it can take in parameters and return values. With anonymous functions, we can bind the operations to a variable or a constant as a literal(value). If an anonymous function takes in a parameter, it needs to be parsed immediately after the end of the function body. We will see how we define the syntax and specifications of the anonymous functions in golang. 
+Anonymous functions are quite simple to understand, we don't define a function, we declare it and call it instantly. An anonymous function doesn't have a name so hence it is called an anonymous function. As a normal function it can take in parameters and return values. With anonymous functions, we can bind the operations to a variable or a constant as a literal(value). If an anonymous function takes in a parameter, it needs to be parsed immediately after the end of the function body. We will see how we define the syntax and specifications of the anonymous functions in golang.
 
 ## Simple Anonymous functions
 
-To create a simple anonymous function we use the same function syntax without giving it a name like `func() {}`, inside the function body i.e. `{}`, you can define the operations that need to be performed. 
+To create a simple anonymous function we use the same function syntax without giving it a name like `func() {}`, inside the function body i.e. `{}`, you can define the operations that need to be performed.
 
 Here, we have created an anonymous function that simply calls the `fmt.Println` function with a string. So, we have made things a little too much as we can even directly call the `fmt.Println` function from the main function, instead we have called an anonymous function that in turn calls the `fmt.Println` function. It might not make sense to use an anonymous function here, but it can be helpful for other complex tasks that you want to isolate the logic without creating a dedicated function for the process.
 
@@ -51,7 +53,6 @@ So, this is how we create a basic anonymous function in golang, this can be furt
 We can assign the call to the anonymous function to a variable or a constant and call the function as many times as we require. So, we can basically store the function logic in a variable and call it whenever we require the function with the `()` parenthesis as an indication to call the function.
 
 In the following example, we have used the variable `draw` to store the function call which prints `Drawing` with the help of the `fmt.Println` function. The draw variable now contains the function and not its value. So be careful here, the anonymous function which we have defined as the `draw` variable's literal value, it's like we are giving a name to this anonymous function and the name will be the variable name so we have created the function `draw` which is an anonymous function stored in a variable.
-
 
 ```go
 package main
@@ -132,7 +133,6 @@ Here, we can see that the function `call` prints the text that we have defined t
 
 We can even return values from the anonymous function if we want to instantly call the function and save the `returned` value in the variable. We can return single or multiple values as per our requirements just like any normal function in golang.
 
-
 ```go
 package main
 
@@ -198,7 +198,6 @@ false
 ```
 
 So, in the above-modified example, we have passed in the parameter instead of a callable function. This will store the returned value of the function call. So, we will store the boolean value in the `is_divisible` and we will have to pass the integer values to the function which we have parsed as `(13, 4)` to the anonymous function call.
-
 
 In the below example, we have created an anonymous function that takes in three parameters like `(string, int, string)` and returns a string. We have used `fmt.Sprintf` function to format the variable and store it in a variable, we then return the string. This anonymous function is then directly called and we store the returned value instead of the function.
 
@@ -276,9 +275,9 @@ john - 33
 george - 24
 ```
 
-Let's break down the code one by one, we will start with the main function, where we have `csv_slice` as a function literal and is an anonymous function that takes in a string and returns a slice of string. The function returns a call to the function [strings.Split](https://pkg.go.dev/strings#Split) taking in the string from the function parameter. We then call the function `get_csv` with parameters `(2, "kevin,21....", csv_slice)`, this function is defined outside the main. The function takes in three parameters as discussed and parsed from the main function and it returns a slice of type string. 
+Let's break down the code one by one, we will start with the main function, where we have `csv_slice` as a function literal and is an anonymous function that takes in a string and returns a slice of string. The function returns a call to the function [strings.Split](https://pkg.go.dev/strings#Split) taking in the string from the function parameter. We then call the function `get_csv` with parameters `(2, "kevin,21....", csv_slice)`, this function is defined outside the main. The function takes in three parameters as discussed and parsed from the main function and it returns a slice of type string.
 
-So, inside the `get_csv` function, we define `s` as the function call to `t(str)` which if you look carefully is a function call to `csv_slice` with parameter as a string. This function call returns a slice of strings separated by `,`. So that's all the logic we need to understand anonymous function from parameters. We have used a function literal to call the function from another function. In this case, the funciton is an anonymous function assigned to a variable. 
+So, inside the `get_csv` function, we define `s` as the function call to `t(str)` which if you look carefully is a function call to `csv_slice` with parameter as a string. This function call returns a slice of strings separated by `,`. So that's all the logic we need to understand anonymous function from parameters. We have used a function literal to call the function from another function. In this case, the funciton is an anonymous function assigned to a variable.
 
 ```
 "kevin,21,john,33,george,24"

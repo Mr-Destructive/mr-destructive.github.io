@@ -1,12 +1,16 @@
 ---
 templateKey: blog-post
-title : "Basics of curl command"
-subtitle: "An short simple introductory guide to the curl command"
-date: 2021-11-05 20:50:00 +0530
+subtitle: An short simple introductory guide to the curl command
 status: published
-tags: ['bash', 'linux', 'networking',]
 slug: curl-basics
-image_url: https://res.cloudinary.com/dgpxbrwoz/image/upload/v1643289075/blogmedia/bqnrrfaeaqfaj7hezxjx.png
+image_url: >-
+  https://res.cloudinary.com/dgpxbrwoz/image/upload/v1643289075/blogmedia/bqnrrfaeaqfaj7hezxjx.png
+title: Basics of curl command
+date: 2021-11-05T15:20:00.000Z
+tags:
+  - bash
+  - linux
+  - networking
 ---
 
 ## Introduction
@@ -27,7 +31,6 @@ there is a lot more to it. It is used in various embedded devices for accessing
 the network in a lightweight and accessible way. Let's see how you can use the curl
 command from the very basics.
 
-
 ## Why do we need it?
 
 Before we talk about how to use the curl command let's talk about why might we need
@@ -38,8 +41,7 @@ with curl and test some endpoints.  You might require curl for creating some
 CLI applications that require fetching/posting to an URL over the internet.
 If you are using the terminal, curl integrates really very well with the shell
 programming languages like BASH, ZSH, etc So, after making WHY out of the way,
-let's start with the actual content. 
-
+let's start with the actual content.
 
 ## Structure of curl command
 
@@ -47,7 +49,7 @@ let's start with the actual content.
 data with various protocols over the internet.** It basically serves as a
 bare-bones browser URL search bar.  You can't render those pages like the
 actual GUI, and all but you can get is the HTML source code, JSON response,
-etc.  That's still quite powerful and used in tons of applications. 
+etc.  That's still quite powerful and used in tons of applications.
 
 ```
 curl URL arguments 
@@ -59,25 +61,27 @@ structure in-depth in the next section. Firstly, let's take a simple curl comman
 ```bash
 curl "https://github.com"   
 ```
+
 From this query to `github.com`, you are literally going to `GitHub.com` and getting a response as the entire HTML source code of the page.
 If you don't want to spam the output in the terminal, you can redirect the output to a file.
 
 ```bash
 curl "https://github.com" >temp.html
 ```
-With this command, we store the output of the command in the file temp.html, it can be any other file you like. 
 
-### Arguments 
+With this command, we store the output of the command in the file temp.html, it can be any other file you like.
+
+### Arguments
 
 It turns out that you can even parse in certain arguments to the `curl` command to get some desired and modified results. Let's take a look at some of them.
 The [entire list of arguments](https://curl.se/docs/manpage.html) is quite huge
-and baffling, but this shows how customizable the command is. 
+and baffling, but this shows how customizable the command is.
 
-- `-s` (silent the progress bar)
-- `-X` (web requests `POST, GET, etc` to the URL)
-- `-o` (output to a file)
-- `-H` ( provide Header to the request)
-- `-d` (providing the data e.g. in POST request)
+* `-s` (silent the progress bar)
+* `-X` (web requests `POST, GET, etc` to the URL)
+* `-o` (output to a file)
+* `-H` ( provide Header to the request)
+* `-d` (providing the data e.g. in POST request)
 
 ```bash
 curl -s -o "https://github.com" temp.html
@@ -86,7 +90,7 @@ curl -s -o "https://github.com" temp.html
 This command doesn't load the progress bar and simply outputs the response in a
 file, making the execution process in the terminal clean.
 
-### Integration with other commands 
+### Integration with other commands
 
 As said, the `curl` command can be well integrated with the other commands using piping in shell, assigning to variables, and so on.
 
@@ -96,19 +100,23 @@ Let's see how we can convert the `JSON` response to a BASH variable.
 resp=$(curl -H "api-key: N2vDzMyEeYGTxjUTePhC8bYd" https://dev.to/api/users/me)
 
 echo $resp
-```   
-Here, we are fetching the `JSON` response from the `dev.to` [API](https://developers.forem.com/api/),The wired string `N2vDzMyEeYGTxjUTePhC8bYd` is my [dev.to API token](https://dev.to/settings/account)(don't worry I have revoked it:) ) we have provided an argument `-H` that is a Header for accepting a `Json` response. 
+```
+
+Here, we are fetching the `JSON` response from the `dev.to` [API](https://developers.forem.com/api/),The wired string `N2vDzMyEeYGTxjUTePhC8bYd` is my [dev.to API token](https://dev.to/settings/account)(don't worry I have revoked it:) ) we have provided an argument `-H` that is a Header for accepting a `Json` response.
 We can store the contents of the curl command by using the `$( )` and assigning that to the variable name of your choice.
 
 ```bash
 username=$(curl -H "api-key: N2vDzMyEeYGTxjUTePhC8bYd" https://dev.to/api/users/me | grep -o -P '(?<=username":").*(?=","name)')
 ```
+
 Here, we have stored the username from a `JSON` response to the variable username. We have piped the curl command so that we can work with that `JSON` response and modify the contents and then store the final results in a variable.
 In this case, we are using `grep` to filter out the content between the key `username` and `name`, thus we get the value we desired. To see the value you can always run the echo command as below:
+
 ```bash
 echo $username
-```   
-So, that's how the `curl` command integrates flawlessly with BASH and other shell programming languages. 
+```
+
+So, that's how the `curl` command integrates flawlessly with BASH and other shell programming languages.
 
 ## Where is it used?
 
@@ -133,7 +141,6 @@ an API if any or any website. We need to search and find the particular fields,
 classes, or ids the elements the required data might be into and then extract
 and filter using the tools like grep, sed or awk.
 
-
 ### CLI Applications
 
 We can make CLI applications like creating a terminal view of existing
@@ -148,7 +155,7 @@ that works here, but the project might look so incomplete without `curl`.
 ### References:
 
 Special Thanks to the creator of the curl command - [Magnus Daniel Stenberg](https://github.com/bagder) and the developers who are still contributing and maintaining the great project.
- 
+
 ### Conclusion
 
 So, from this article, we were able to understand the basics of the `curl` command and understand its applications in actual programming stuff. Hope you liked it. Thanks for reading and until then Happy Coding :)

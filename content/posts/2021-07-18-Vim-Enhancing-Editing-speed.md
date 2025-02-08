@@ -1,21 +1,23 @@
 ---
 templateKey: blog-post
-title: "Vim: Enhancing Editing Speed"
-subtitle: "Improving the way you edit code in Vim."
-date: 2021-07-18 16:52:17 +0530
+subtitle: Improving the way you edit code in Vim.
 status: published
-tags: ['vim',] 
 slug: vim-editing-speed
-image_url: https://cdn.hashnode.com/res/hashnode/image/upload/v1625651851743/RK-CxEtLT.png?w=1600&h=840&fit=crop&crop=entropy&auto=compress
+image_url: >-
+  https://cdn.hashnode.com/res/hashnode/image/upload/v1625651851743/RK-CxEtLT.png?w=1600&h=840&fit=crop&crop=entropy&auto=compress
+title: 'Vim: Enhancing Editing Speed'
+date: 2021-07-18T11:22:17.000Z
+tags:
+  - vim
 ---
 
-
 ## Introduction
+
 Editing/ Writing is a crucial part of any text editor, the swiftness with which one can make changes in a file(s) or a structure is a bit dependent on the editor we use as well. Vim can be a bit hassle for beginners in the initial stage but it becomes second nature soon. It also depends majorly on the level of usage and the area of usage. If you are an advanced programmer, you will use these commands extensively, and might not be a big deal for you, But for a beginner, it might take some time to get used to the workflow in Vim.
 
-This article won't be covering the basics of editing in Vim but the ways to save time on the basic level commands to improve efficiency. That being said, beginners can also read to be aware of the possibilities and tricks in Vim. 
+This article won't be covering the basics of editing in Vim but the ways to save time on the basic level commands to improve efficiency. That being said, beginners can also read to be aware of the possibilities and tricks in Vim.
 
-Below are some quick basic commands for getting started in editing and improving the overall workflow. 
+Below are some quick basic commands for getting started in editing and improving the overall workflow.
 
 ### Entering in into the Insert Mode
 
@@ -41,14 +43,13 @@ The following commands will delete some characters/words/lines and then entering
 
 `S`   -> delete the entire line under the cursor and enter into **Insert mode**.
 
-
 ## Cut Copy Paste Commands
 
 This set of commands are quite helpful as a programmer and it is used quite frequently. These commands can surely boost the time to cut-copy-paste but also they will provide more customization to the way you do these tasks.
 
 ### Cut/Delete Commands
 
-The below-mentioned commands can be used in Normal or any Visual/ Selection mode as it depends whether you have selected the text or you want to work in Normal mode itself. 
+The below-mentioned commands can be used in Normal or any Visual/ Selection mode as it depends whether you have selected the text or you want to work in Normal mode itself.
 
 `dd`  -> Delete the current entire line.
 
@@ -72,7 +73,7 @@ The following commands are used in the Normal mode as they perform the copying o
 
 `yy`  -> yank(copy) the current entire line to the unnamed register ("").
 
-You have to be in Visual/ Visual line/ Selection mode to yank the text for the next set of yanking commands. 
+You have to be in Visual/ Visual line/ Selection mode to yank the text for the next set of yanking commands.
 
 `y`  -> yank(copy) the selected text to the unnamed register ("").
 
@@ -86,14 +87,13 @@ You have to be in Visual/ Visual line/ Selection mode to yank the text for the n
 
 `"+p`  -> Paster the content of system clipboard ("+ register) to the cursor.
 
-
 ### Replacing Text
 
 Replacing is a great option for instant productivity, if you want to make some minor changes, you don't have to go into insert mode and delete and then edit the text. Instead, the replace commands such as `r` and `R` allow us to replace some characters being in Normal and Replace mode respectively. This can be used very heavily if you just want to replace it instead of adding/removing text.
 
 `r`   -> replace the character under the cursor with the following key entered from the keyboard.
 
-`R`   -> Enter into **Replace mode**( replace the character with the specified word from the keyboard). 
+`R`   -> Enter into **Replace mode**( replace the character with the specified word from the keyboard).
 
 ### Undoing and Redoing
 
@@ -104,7 +104,6 @@ We often make mistakes and want to revert to the changes we have to make and sta
 `U` -> Restore the changes in the entire line.
 
 `<C-R>`   -> Redo the last undo (un-undo -> revert back changes).
-
 
 ### Search and Replacement
 
@@ -122,7 +121,6 @@ Some of the below-mentioned commands are a great set for bulk replacement and ad
 
 You can notice that the `%` symbol here indicates the entire file. We can skip prefixing s with `%` to make changes only in the current line or any number of lines specified instead of it. This command is quite a lot customizable and powerful, I can't show each and every combination of this command. It should be used as per requirement and thus should be modified accordingly.
 
-
 ### Indenting Text
 
 Indenting is quite important in certain languages like Python, YAML, Haskell, etc. This can get really frustrating if you even miss a single indentation, you have to format everything to a proper indentation scratch. But thanks to powerful Text-editors and IDEs which have made the indentation quite easy and even auto-correct the wrong indentation. Vim has some commands to make those indentations much easier and it also has a customizable number of spaces in its config file called vimrc.
@@ -134,8 +132,8 @@ Indenting is quite important in certain languages like Python, YAML, Haskell, et
 `>`   -> Indent or shift the selected text to right. (Visual/Visual-line/VIsual-block/Select mode)
 
 `<`  -> Unindent or shift the selected text to left. (Visual/Visual-line/VIsual-block/Select mode)
- 
-If your file is saved as a particular language that supports indentation, it will automatically indent lines for you but it cannot be reliable. So, we need to [IndentLine](https://github.com/Yggdroot/indentLine), and others as well. 
+
+If your file is saved as a particular language that supports indentation, it will automatically indent lines for you but it cannot be reliable. So, we need to [IndentLine](https://github.com/Yggdroot/indentLine), and others as well.
 
 ## Miscellaneous
 
@@ -147,9 +145,6 @@ If your file is saved as a particular language that supports indentation, it wil
 
 `gU` -> Convert the selected text into Uppercase. (Visual/Select Mode)
 
-
-
 All of the above commands were somewhat basic and commonly used but if used along with other key shortcuts for movement can also improve the editing speed quite considerably. Just keep using these commands and you'll be amazed by the speed you've developed. Thanks for reading. Happy Coding :)
 
 References:  [catswhocode](https://catswhocode.com/vim-commands/)  [The valuable dev](https://thevaluable.dev/vim-advanced/) [rtorr.com](https://vim.rtorr.com/)
-                      

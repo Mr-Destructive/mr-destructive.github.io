@@ -1,13 +1,17 @@
 ---
 templateKey: blog-post
-title: "Golang: Error Handling"
-description: "Understanding the concept of errors in golang. How to handle errors in funciton calls, create custom error class with interfaces"
-date: 2022-09-17 20:15:00
+description: >-
+  Understanding the concept of errors in golang. How to handle errors in
+  funciton calls, create custom error class with interfaces
 status: published
 slug: golang-error-handling
-tags: ['go',]
-series: ['100-days-of-golang',]
-image_url: https://meetgor-cdn.pages.dev/golang-020-error-handling.png
+series:
+  - 100-days-of-golang
+image_url: 'https://meetgor-cdn.pages.dev/golang-020-error-handling.png'
+title: 'Golang: Error Handling'
+date: 2022-09-17T20:15:00.000Z
+tags:
+  - go
 ---
 
 ## Introduction
@@ -150,7 +154,6 @@ main.main()
 exit status 2
 ```
 
-
 This is how we can validate a URL handling the error if the parsed URL is invalid or does not exist.
 
 There is one more variation of the above code style, it is a bit compressed and might be just a syntactic change.
@@ -179,7 +182,6 @@ This can be used wherever you are using the `ok, err` kind of syntax, but I pref
 ### Opening or Handling of File
 
 We can even use error handling while dealing with Files or Folders. We can use the [os](https://pkg.go.dev/os) package to read the file in golang. The [Open](https://pkg.go.dev/os#Open) function will read the file if it exists or else it will return an error. We can catch the error from the comma `ok,error` syntax and do the required processing in the program.
-
 
 ```go
 package main
@@ -306,6 +308,7 @@ $ go run custom_error.go
 Invalid URL : Get "htt://meetgor.com": unsupported protocol scheme "htt"
 
 ```
+
 When the URL is invalid, we will call the custom error interface by parsing the default `err.Error` method. This will get us the error object from the main method to our custom interface. That is how we will be able to fetch additional information about the error from the interface with the `.` operator as `e.message`. So, the syntax is `Invalid_URL_Error{err.Error()}`, i.e. an object of type `Invalid_URL_Error` with the message set as the value returned from the default `Error()` function. hence we can implement the custom error message.
 
 We also need to look for the response object and close the Response Body as it is mandatory to do so and the responsibility of the caller.
@@ -313,7 +316,6 @@ We also need to look for the response object and close the Response Body as it i
 ### Creating a function that returns two values (ok,error)
 
 We can even nest the calling of this error method inside another function. This will give us a good overview of how to deal with errors more thoroughly. We will construct a function with two return values one can be any normal desirable object (which we want from the function call) and the other as an error. This will check for any cases that we can call the custom error and return that error interface and the object which was to be returned will be nil if there is an error. If there are no errors, we will return the object and set the error as nil. This way, we can use the `ok, error` syntax while calling this function and thereby make it a lot easier in case of complex programs or multiple types of errors.
-
 
 ```go
 package main

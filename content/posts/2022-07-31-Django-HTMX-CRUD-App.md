@@ -1,13 +1,17 @@
 ---
 templateKey: blog-post
-title: "Django + HTMX CRUD application"
-description: "Creating a basic CRUD application with Django and HTMX"
+description: Creating a basic CRUD application with Django and HTMX
 status: published
-tags: ['django', 'htmx', 'python']
-date: 2022-07-31 12:30:00
 slug: django-htmx-crud
-image_url: https://meetgor-cdn.pages.dev/django-htmx-crud.png
-series: ['Django-Series',]
+image_url: 'https://meetgor-cdn.pages.dev/django-htmx-crud.png'
+series:
+  - Django-Series
+title: Django + HTMX CRUD application
+date: 2022-07-31T12:30:00.000Z
+tags:
+  - django
+  - htmx
+  - python
 ---
 
 ## Introduction
@@ -15,7 +19,6 @@ series: ['Django-Series',]
 Gone are the days of writing Ajax requests with javascript, just add a few parameters to the HTML content tags and you will be ready for sending requests to your backend. So, we are going back in time and correcting the way we think of APIs and client/server-side rendering. We are referring to the [Hypermedia model](https://en.wikipedia.org/wiki/Hypermedia) for levering the server-side processing of data. Let's get our feets wet with this ancient but revolutionary methodology of development with [HTMX](https://htmx.org/).
 
 Yes, HTMX can be used for the API/server-side calls directly in the HTML. We will be exploring the basis of HTMX by creating a basic CRUD application.
-
 
 ## What is HTMX?
 
@@ -112,11 +115,11 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-So, this project will also include authentication simple registration, and login/logout routes. We will be using the default Django User model by creating an abstract user just in case we require any additional attributes. 
+So, this project will also include authentication simple registration, and login/logout routes. We will be using the default Django User model by creating an abstract user just in case we require any additional attributes.
 
 ## Setup HTMX
 
-We don't have to configure much for using HTMX as it is a javascript library, we can call it via a CDN or manually install it and link up the static javascript files. Either way, both are equally good, you may like the one I might like the other. 
+We don't have to configure much for using HTMX as it is a javascript library, we can call it via a CDN or manually install it and link up the static javascript files. Either way, both are equally good, you may like the one I might like the other.
 
 If you already have a base template, you can simply put the below script inside the head tag of the template. This will make us the htmx attributes available.
 
@@ -163,7 +166,7 @@ That is one of the ways, htmx can be injected into an HTML template, you can eve
 
 ## Defining Models
 
-We will start the tutorial by defining the model of the application we are creating. Here, we will create a simple Article model with a few parameters like `title`, `content`, `author`, etc. 
+We will start the tutorial by defining the model of the application we are creating. Here, we will create a simple Article model with a few parameters like `title`, `content`, `author`, etc.
 
 ```python
 from django.db import models
@@ -197,7 +200,6 @@ python manage.py migrate
 ```
 
 This will make migrations to the database i.e. convert the python model class into database tables and attributes. So, once the migration process is completed successfully, we can move into the crust of this article which is to actually design the views. In the next section, we will be utilizing the models in our views for representing the data on the templates.
-
 
 ## Creating Article Form
 
@@ -236,7 +238,7 @@ class ArticleForm(forms.ModelForm):
         }
 ```
 
-So, the forms are inherited from the [ModelForm] which allows us to create forms based on our model. So, we specify the model name which in our case is `Article` and further we can have `exclude` or `fields` tuples. To exclude certain fields in the actual form, just parse the tuple of those attributes and if you want to only select a few attributes, you can specify the `fields` tuple and mention the required fields for the form.
+So, the forms are inherited from the \[ModelForm] which allows us to create forms based on our model. So, we specify the model name which in our case is `Article` and further we can have `exclude` or `fields` tuples. To exclude certain fields in the actual form, just parse the tuple of those attributes and if you want to only select a few attributes, you can specify the `fields` tuple and mention the required fields for the form.
 
 So, if we have a lot of things to be included in the form, we can specify only the attributes to be excluded with the `exclude` tuple. And if we have a lot of fields to be excluded, we can use the `fields` tuple to specify which attributes to use in the form.
 
@@ -332,6 +334,7 @@ urlpatterns = [
     path('', include('article.urls'), name='home'),
 ]
 ```
+
 Feel, free to add any other URL pattern like for instance, the article app is at `/` i.e. `127.0.01.:8000/`, you can add any other name like `127.0.0.1:8000/article/` by adding `path('article/', include('article.urls'))`.
 
 ![Django HTMX Create view Form Template](https://res.cloudinary.com/techstructive-blog/image/upload/v1659252089/blog-media/django-htmx-create-view.png)
@@ -362,10 +365,9 @@ def createArticle(request):
 
 **Simple explanation**
 
-- Create a form instance of ArticleForm with the request data or empty -> `ArticleForm(request.POST or None)`
-- If it's a POST request, validate and create the article, render the article object in `detail.html` template.
-- If it's a GET request, render the empty form in `create.html`
-
+* Create a form instance of ArticleForm with the request data or empty -> `ArticleForm(request.POST or None)`
+* If it's a POST request, validate and create the article, render the article object in `detail.html` template.
+* If it's a GET request, render the empty form in `create.html`
 
 There are a few changes in the view, instead of initializing the form to empty i.e. `ArticleForm()`, we are initializing with `ArticleForm(request.POST or None)`. This basically means that if we are having something in the `request.POST` dict, we will initialize the Form with that data or else an empty form instance.
 
@@ -389,7 +391,7 @@ def detailArticle(request, pk):
 
 ```
 
-We can now bind the view to a URL and parse the required parameter `pk` to the view. 
+We can now bind the view to a URL and parse the required parameter `pk` to the view.
 
 ```python
 from django.urls import path
@@ -601,19 +603,19 @@ We can now move into the final piece of the CRUD i.e. `Update`. This will be sim
 Inside the `updateArticle` view, we will first grab the article object from the parsed primary key. We will have two kinds of requests here, one will be for fetching the `form` with the current article data, and the next request will be the `PUT` request for actually saving the changes in the article.
 
 The first request is simple as we need to parse the form data with the instance of the article object. We will call the `ArticleForm` with the instance of `article` this will load the data of the article into the form ready to render into the template. So once the `GET` request has been sent, we will render the template with the form pre-filled with the values of the article attributes.
- 
- ```python
+
+```python
 # article/views.py
 
 
 def updateArticle(request, pk):
-    article = Article.objects.get(id=pk)
-    form = ArticleForm(instance=article)
-    context = {
-        'form': form,
-        'article': article,
-    }
-    return render(request, 'articles/update.html', context)
+   article = Article.objects.get(id=pk)
+   form = ArticleForm(instance=article)
+   context = {
+       'form': form,
+       'article': article,
+   }
+   return render(request, 'articles/update.html', context)
 ```
 
 We will create a template in the `templates/articles/` folder as  `update.html` which will have a simple form for rendering the form fields and a button for sending a `PUT` request. We will render the `form` and then add a button element with the attribute `hx-put` for sending the `PUT` request to save changes to the article record. We will parse in the `article.id` for the primary key parameter to the view.

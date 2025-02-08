@@ -1,12 +1,15 @@
 ---
 templateKey: blog-post
-title: "Neovim + Sourcegraph Cody Plugin Integration"
-description: "Installing and Setting up Sourcegraph Plugin and Cody into Neovim. Enabling code generations, chat and sourcegraph search feature in Neovim."
-date: 2024-01-06 20:15:00
+description: >-
+  Installing and Setting up Sourcegraph Plugin and Cody into Neovim. Enabling
+  code generations, chat and sourcegraph search feature in Neovim.
 status: published
 slug: neovim-sourcegraph-cody
-tags: ['vim']
-image_url: https://meetgor-cdn.pages.dev/neovim-sourcegraph-cody.png
+image_url: 'https://meetgor-cdn.pages.dev/neovim-sourcegraph-cody.png'
+title: Neovim + Sourcegraph Cody Plugin Integration
+date: 2024-01-06T20:15:00.000Z
+tags:
+  - vim
 ---
 
 ## Introduction
@@ -20,9 +23,7 @@ Cody is an AI assistant for developers that understands code context and can gen
 The major features of Cody from the rest of the LLMs or Chatbots are:
 
 * Cody understands your code context - it reads your open files, repositories, etc. So it can answer questions specifically about your codebase, not just general programming questions.
-
 * Cody can explain sections of code to you in plain English. This helps ramp up on unfamiliar code bases.
-
 * Cody integrates into popular editors like VS Code, IntelliJ, Neovim, and others for frictionless use while coding.
 
 For more insights, check out the blog [all you need is Cody](https://about.sourcegraph.com/blog/all-you-need-is-cody). This is a great article about what and how Cody is tailored specifically to assist developers.
@@ -32,9 +33,7 @@ For more insights, check out the blog [all you need is Cody](https://about.sourc
 To setup sourcegraph on neovim, you will require the following setup:
 
 * Neovim 0.9 or above
-
-* Node.js &gt;= 18.17 (LTS)
-
+* Node.js >= 18.17 (LTS)
 * Cargo (Rust) (optional)
 
 To install neovim latest/nightly release, you can follow the [INSTALL](https://github.com/neovim/neovim/blob/master/INSTALL.md) or [BUILD](https://github.com/neovim/neovim/blob/master/BUILD.md) documentation of the neovim project.

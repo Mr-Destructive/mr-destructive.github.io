@@ -1,13 +1,17 @@
 ---
 templateKey: blog-post
-title: "Golang: Random Numbers"
-description: "Generating random numbers, strings, shuffling arrays with golang, using packages like math/rand, crypto/rand, math/big."
-date: 2023-05-14 14:30:00
+description: >-
+  Generating random numbers, strings, shuffling arrays with golang, using
+  packages like math/rand, crypto/rand, math/big.
 status: published
 slug: golang-random-numbers
-tags: ['go',]
-series: ['100-days-of-golang',]
-image_url: https://meetgor-cdn.pages.dev/golang-027-random-numbers.png
+series:
+  - 100-days-of-golang
+image_url: 'https://meetgor-cdn.pages.dev/golang-027-random-numbers.png'
+title: 'Golang: Random Numbers'
+date: 2023-05-14T14:30:00.000Z
+tags:
+  - go
 ---
 
 ## Introduction

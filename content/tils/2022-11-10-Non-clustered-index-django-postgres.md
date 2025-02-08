@@ -1,11 +1,17 @@
 ---
 templateKey: til
-title: "Create a Non-Clustered Index in Django with Postgres as DB"
-description: "Understanding how to add a non-clustered index in a postgres database in a django project."
+description: >-
+  Understanding how to add a non-clustered index in a postgres database in a
+  django project.
 status: published
 slug: django-non-clustered-index-pg
-tags: ["django", "python", "sql", "postgres"]
-date: 2022-11-10 22:10:00
+title: Create a Non-Clustered Index in Django with Postgres as DB
+date: 2022-11-10T22:10:00.000Z
+tags:
+  - django
+  - python
+  - sql
+  - postgres
 ---
 
 ## What is a non-clustered index?
@@ -14,7 +20,7 @@ A non-clustered index is a seperate structure than an actual table in the databa
 
 ## How to create a non-clustered index in django
 
-In django, we can use the [db_index](https://docs.djangoproject.com/en/4.1/ref/models/indexes/) property on a field(s) to create a index on the table/model. 
+In django, we can use the [db\_index](https://docs.djangoproject.com/en/4.1/ref/models/indexes/) property on a field(s) to create a index on the table/model.
 
 ### Add the property to the field in the model
 
@@ -90,6 +96,7 @@ So, after creating some records, you should have a simple database and a working
 ```sql
 SELECT * FROM blog_article;
 ```
+
 ```
 blog_test=# SELECT * FROM blog_article;
 
@@ -104,7 +111,6 @@ blog_test=# SELECT * FROM blog_article;
 ## Testing Queries
 
 We can now use SQL queries or django filters to check if we get results by a sequential or an index scan. If we have a filter of `title` we will get the results after performing an `Index Scan` which means, it will look up in the index columns rather than scanning the entire table of records. This is a way **we can test the indexes are working, efficiency is a differnet topic.** We can't get a idea of performance with this little data and just one connection. A real time database and having multiple conncurrent requests and connections is a good environment to test(don't do it in a production db :)
-
 
 ```sql
 EXPLAIN SELECT * FROM blog_article WHERE description LIKE 'test 2';
@@ -123,7 +129,7 @@ blog_test=# EXPLAIN ANALYSE SELECT * FROM blog_article WHERE description LIKE 't
 
 ```
 
-The above query selects the records whose `description` is like `test 2`, this performs a `Sequenitial Scan` in the database i.e. iterating over the records one by one of the order of the primary key / id of the records in the table. 
+The above query selects the records whose `description` is like `test 2`, this performs a `Sequenitial Scan` in the database i.e. iterating over the records one by one of the order of the primary key / id of the records in the table.
 
 ```sql
 EXPLAIN SELECT * FROM blog_article WHERE title LIKE 'test 2';
@@ -192,7 +198,7 @@ We can use `__contains` for replicating the behaviour of `LIKE` in python/django
 <QuerySet [<Article: test>, <Article: testpost>]> 
 ```
 
-BONUS: We can even get the underlying SQL with the `.query.__str__()` method. 
+BONUS: We can even get the underlying SQL with the `.query.__str__()` method.
 
 ```
 articles = Article.objects.filter(title__contains='test')
@@ -208,8 +214,8 @@ content", "blog_article"."status" FROM "blog_article" WHERE "blog_article"."titl
 
 Here, we are able to see that clearly, that the django orm used the `LIKE` clause for comparing the title.
 
-Further readings and references: 
+Further readings and references:
 
-- [Indexing in Postgres](https://medium.com/geekculture/indexing-in-postgres-db-4cf502ce1b4e)
-- [Indexing refernece Django docs](https://docs.djangoproject.com/en/4.1/ref/models/indexes/)
-- [Non-Clustered indexing](https://gudevsoc.com/what-is-non-clustered-index-in-sql-with-example/)
+* [Indexing in Postgres](https://medium.com/geekculture/indexing-in-postgres-db-4cf502ce1b4e)
+* [Indexing refernece Django docs](https://docs.djangoproject.com/en/4.1/ref/models/indexes/)
+* [Non-Clustered indexing](https://gudevsoc.com/what-is-non-clustered-index-in-sql-with-example/)

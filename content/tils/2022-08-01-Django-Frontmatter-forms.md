@@ -1,11 +1,16 @@
 ---
-templateKey: til 
-title: "Django Blog DevLog: Load Frontmatter data into Template/Model Form Fields"
-description: "Rendering frontatter from content field into the Template Form field using HTMX and frontmatter libraries"
-date: 2022-08-01 20:30:00
+templateKey: til
+description: >-
+  Rendering frontatter from content field into the Template Form field using
+  HTMX and frontmatter libraries
 status: published-til
 slug: django-form-load-frontmatter
-tags: ['django', 'htmx','python']
+title: 'Django Blog DevLog: Load Frontmatter data into Template/Model Form Fields'
+date: 2022-08-01T20:30:00.000Z
+tags:
+  - django
+  - htmx
+  - python
 ---
 
 ## Introduction
@@ -20,7 +25,7 @@ The techstructive-blog is a django project, which has a couple of applications c
 
 ### Article Model
 
-We have an `Article` model with attributes like `title`, `description`,  `author` as a Foreign Key to the user model, and a few other attributes which is not related to what we are trying to achieve right now or at least don't require an explanation. We have a model method called `get_absolute_url` for getting a URL in order to redirect the client when the model instance is created or updated from the backend. You can definitely check out the details of these small components or templates in the project repository. 
+We have an `Article` model with attributes like `title`, `description`,  `author` as a Foreign Key to the user model, and a few other attributes which is not related to what we are trying to achieve right now or at least don't require an explanation. We have a model method called `get_absolute_url` for getting a URL in order to redirect the client when the model instance is created or updated from the backend. You can definitely check out the details of these small components or templates in the project repository.
 
 ```python
 # articles/models.py
@@ -55,9 +60,9 @@ class Article(TimeStampedModel):
         return reverse('articles:article-detail', args=[str(self.id)])
 ```
 
-In the below snippet, we have the forms defined in the article application for creating or updating of article instance.  We will be using model forms as our form data should contain fields related to a model in this case the `Article` model. So when we inherit the `forms.ModelForm` in our custom `ArticleForm` we simply need to specify the model and it will take in all the attributes of that model by default, but if we specify the `fields` or `exclude` tuples, it will include only or exclude only the provided list of attributes from the model. 
+In the below snippet, we have the forms defined in the article application for creating or updating of article instance.  We will be using model forms as our form data should contain fields related to a model in this case the `Article` model. So when we inherit the `forms.ModelForm` in our custom `ArticleForm` we simply need to specify the model and it will take in all the attributes of that model by default, but if we specify the `fields` or `exclude` tuples, it will include only or exclude only the provided list of attributes from the model.
 
-We have also added the widgets for the form fields which will allow us to customize the way the fields in the template/form will render. We can specify the HTML attributes like `width`, `height`, `style`, etc.  
+We have also added the widgets for the form fields which will allow us to customize the way the fields in the template/form will render. We can specify the HTML attributes like `width`, `height`, `style`, etc.
 
 ### Article Form
 
@@ -111,29 +116,28 @@ class ArticleForm(forms.ModelForm):
 
 ```
 
-So, these are my models and form files in the article app. Using htmx and without any javascript I want to update the form so that it picks up the front matter in the content field which is a text area and fills the title, description other attributes automatically for me. 
+So, these are my models and form files in the article app. Using htmx and without any javascript I want to update the form so that it picks up the front matter in the content field which is a text area and fills the title, description other attributes automatically for me.
 
 This can be done in a lot of ways, but I will be sharing one of the ways that I recently used in my blog project. This process involves creating a class-based view and adding a `POST` method that won't post any data to the backend but will send necessary data to the view.
-
 
 Let's see the process before diving into any of the code:
 
 ## Gist of the Process
 
-- Attach a `hx-post` attribute to the form field for sending the request to a view
-- When the request is sent, the data is loaded with `request.POST`, it is cleaned and converted in python-readable format with json.
-- Once we have the data, we try to use the `frontmatter.loads` function that will load the content and if we have a frontmatter in the text, it will load it as a `frontmatter.POST` object.
-- We will extract `title`, `description`, and other data fields from the object.
-- We will initialize a Form instance of Article, with the initial data values as the extracted data from the frontmatter.
-- Now we have two options:
-    - If the article instance already exists i.e. we are updating the article
-   - Else we are creating a new article
+* Attach a `hx-post` attribute to the form field for sending the request to a view
+* When the request is sent, the data is loaded with `request.POST`, it is cleaned and converted in python-readable format with json.
+* Once we have the data, we try to use the `frontmatter.loads` function that will load the content and if we have a frontmatter in the text, it will load it as a `frontmatter.POST` object.
+* We will extract `title`, `description`, and other data fields from the object.
+* We will initialize a Form instance of Article, with the initial data values as the extracted data from the frontmatter.
+* Now we have two options:
+  * If the article instance already exists i.e. we are updating the article
+  * Else we are creating a new article
 
 Accordingly, we will load the form in the respective templates i.e. `update.html` for updating the existing articles and `article-form.html` for a new article.
 
 ## Adding HTMX Magic
 
-If you'd have seen we have a `hx-post` attribute in the `article/forms.py` file, the `content` widget has a `hx-post` attribute which sends a post request to the `article/meta/` URL route. This route we will bind to the `ArticleMetaView` which we will define in a few moments. This is usually sent once we change a certain text in the content field, so we can modify it as per your requirement with `hx-trigger` that can enable us to specify the trigger event or the type of trigger we want. Further, you can read from the [htmx docs](https://htmx.org/docs/#trigger-modifiers) about these triggers and other attributes. 
+If you'd have seen we have a `hx-post` attribute in the `article/forms.py` file, the `content` widget has a `hx-post` attribute which sends a post request to the `article/meta/` URL route. This route we will bind to the `ArticleMetaView` which we will define in a few moments. This is usually sent once we change a certain text in the content field, so we can modify it as per your requirement with `hx-trigger` that can enable us to specify the trigger event or the type of trigger we want. Further, you can read from the [htmx docs](https://htmx.org/docs/#trigger-modifiers) about these triggers and other attributes.
 
 ```python
 # article/urls.py
@@ -154,7 +158,7 @@ urlpatterns = [
 ]
 ```
 
-## Capture Frontmatter Meta-data View 
+## Capture Frontmatter Meta-data View
 
 Along with the Create, Detail/List, Update, Delete View, I will create a separate class called `ArticleMetaView` that will fetch the form fields and render the templates again but this time it will fill in the frontmatter meta-data in the fields if the content is parsed with the relvant frontmatter.
 
@@ -218,7 +222,7 @@ So, this will grab the request data as a dict, we can then extract the data from
 content_string = data['content'][0]
 ```
 
-This will give us the exact content field as a string. So, we can now move into extracting the frontmatter from the fields. 
+This will give us the exact content field as a string. So, we can now move into extracting the frontmatter from the fields.
 
 Now, we can use the [frontmatter](https://python-frontmatter.readthedocs.io/en/latest/index.html) library to parse the content into the [loads](https://python-frontmatter.readthedocs.io/en/latest/api.html#frontmatter.loads) funciton and extract the frontmatter if it is present in the content field. The frontmatter library has a `loads` function which takes in a string and can give out a [frontmatter.Post](https://python-frontmatter.readthedocs.io/en/latest/api.html#post-objects) object. The loads function is differnet from the [load](https://python-frontmatter.readthedocs.io/en/latest/api.html#frontmatter.load) function as the load frunciton is for reading data from a stream of bytes i.e. a file or othe related byte object. The differnece is subtle but it took a read at the [documentation](https://python-frontmatter.readthedocs.io/en/latest/api.html#module-frontmatter).
 
@@ -272,7 +276,6 @@ return render(request, 'articles/article_form.html', context)
 Now, we have form data along with the article instance used for rendering the form with appropriate content. So, this will work for editing an already existing article. For a new article, we have to simply parse the form to the template and it will render the title picked from the fotnmatter or leave it empty.
 
 Similarly, for the article with no frontmatter we will iterate over the article and if the article's title already exist, we will render the article data with the form else render the form with the parsed title and other meta-data in the form.
-
 
 <video width="800" height="450" controls>
   <source src="https://res.cloudinary.com/techstructive-blog/video/upload/v1659370006/blog-media/frontmatter-load-htmx.mp4" type="video/mp4">

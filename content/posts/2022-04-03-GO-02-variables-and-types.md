@@ -1,13 +1,15 @@
 ---
 templateKey: blog-post
-title: "Golang: Variables and Types"
-description: "Understanding and creating variables and their types in Golang"
-date: 2022-04-03 10:45:00
+description: Understanding and creating variables and their types in Golang
 status: published
 slug: golang-variables
-tags: ['go',]
-image_url: https://meetgor-cdn.pages.dev/golang-002-variables-types.png
-series: ['100-days-of-golang',]
+image_url: 'https://meetgor-cdn.pages.dev/golang-002-variables-types.png'
+series:
+  - 100-days-of-golang
+title: 'Golang: Variables and Types'
+date: 2022-04-03T10:45:00.000Z
+tags:
+  - go
 ---
 
 ## Introduction
@@ -16,13 +18,13 @@ In the third part of the series, we will be covering the fundamentals for learni
 
 ## Types in golang
 
-In Golang there are 3 major types : Numeric, Bool and String. Further we also have specific types for the three data types like int, float, rune, byte, etc. We will first see how to declare a simple variable and then explore the data types in Golang. 
+In Golang there are 3 major types : Numeric, Bool and String. Further we also have specific types for the three data types like int, float, rune, byte, etc. We will first see how to declare a simple variable and then explore the data types in Golang.
 
 ```go
 var name string
 ```
 
-This the variable declaration in Golang, we have the keyword `var` similar to Javascript but we optionally have to specify the type of the variable if we are not immediately assigning/defining it a value. 
+This the variable declaration in Golang, we have the keyword `var` similar to Javascript but we optionally have to specify the type of the variable if we are not immediately assigning/defining it a value.
 
 To assign variable values, we can write the datatype of the assigned value but it is optional as the go compiler will know the datatype according to the assigned value. Further you cannot change the type of that variable once it is initialized.
 
@@ -59,28 +61,28 @@ By default, the values for string is an empty string`""`, for integer and float 
 
 Each of these are valid declaration of variables in golang. Let's now dive into the data types and follow up with variable declaration in detail later.
 
-| Numeric    | String | Bool |
-|------------|--------|------|
-|            |        |      |      
-|  int       | string | bool |
-|            |        |      |
-|  float     |        |      |
-|            |        |      |
-|  complex   |        |      | 
-|            |        |      | 
-|  rune      |        |      |
-|            |        |      |  
-|  byte      |        |      | 
-   
+| Numeric | String | Bool |
+| ------- | ------ | ---- |
+|         |        |      |
+| int     | string | bool |
+|         |        |      |
+| float   |        |      |
+|         |        |      |
+| complex |        |      |
+|         |        |      |
+| rune    |        |      |
+|         |        |      |
+| byte    |        |      |
+
 ### Numeric
 
-Let's first explore the `numeric` data types in golang as you have guessed correctly, we have `int` and `float` as distinct categories but further we also have fine grained storage types for both of the types. 
+Let's first explore the `numeric` data types in golang as you have guessed correctly, we have `int` and `float` as distinct categories but further we also have fine grained storage types for both of the types.
 
 #### Integer
 
-In integers as well we have two categories `signed` and `unsigned`, we can basically store only positive integers in `unsigned` integers giving us an extra bit to play with. 
+In integers as well we have two categories `signed` and `unsigned`, we can basically store only positive integers in `unsigned` integers giving us an extra bit to play with.
 
-For Integers, we have specific data storage types depending on the bits it can store like `int8` for storing 8 bit integers, `int16` for storing 16 bit integer value, `int32` and `int64` for the given number of bits in the integer. Similarly we will have these storage based integer values for unsigned integers like `uint8`, `uint16`, `uint32` and `uint64`. We can basically store double amount of positive integers in unsigned integers as `uint` than in signed integers `int`, this is because the most significant bit is not used as a sign bit since all values in the variable are positive and hence no sign bit is required. 
+For Integers, we have specific data storage types depending on the bits it can store like `int8` for storing 8 bit integers, `int16` for storing 16 bit integer value, `int32` and `int64` for the given number of bits in the integer. Similarly we will have these storage based integer values for unsigned integers like `uint8`, `uint16`, `uint32` and `uint64`. We can basically store double amount of positive integers in unsigned integers as `uint` than in signed integers `int`, this is because the most significant bit is not used as a sign bit since all values in the variable are positive and hence no sign bit is required.
 
 ```go
 var likes int = 140
@@ -105,9 +107,9 @@ $ go run int.go
 
 This will give us an error as `140` is above the limit for `int8`. So, unless you have specific requirements as storage limitation, you should be using `int` as the default data type for storing integers.
 
-So, we need to define variables as per the limits to which we are going to use them, if you just specify `int` the type will be selected based on your operating system, if it is `32bit`, it will take `int32`, for `64bit` OSes it will take as `int64` integer. If you define a variable with let say `16` bit storage and if it exceeds the limit for `16` bit storage, it would give a `overflow limit` error. 
+So, we need to define variables as per the limits to which we are going to use them, if you just specify `int` the type will be selected based on your operating system, if it is `32bit`, it will take `int32`, for `64bit` OSes it will take as `int64` integer. If you define a variable with let say `16` bit storage and if it exceeds the limit for `16` bit storage, it would give a `overflow limit` error.
 
-Below are the limits for all the integer types in Golang: 
+Below are the limits for all the integer types in Golang:
 
 ```
 uint8 ->  0  to  255
@@ -121,12 +123,12 @@ int32 ->  -2147483648  to  2147483647
 int64 ->  -9223372036854775808  to  9223372036854775807
 ```
 
-If you want to reality check for the boundary values of this data types, you can code a program in `go` as below: 
+If you want to reality check for the boundary values of this data types, you can code a program in `go` as below:
 
-- To find the maximum value of uint, we can flip all the bits in `0` to get all the set bits in the integer thus we use `^` operator.
-- To find the maximum value for signed integers, we can right shit one bit so as to unset the sign bit.
-- The minimum value for uint is the default value `0`.
-- The minimum value for int can be calculated by subtracting one from the negative of the max limit.
+* To find the maximum value of uint, we can flip all the bits in `0` to get all the set bits in the integer thus we use `^` operator.
+* To find the maximum value for signed integers, we can right shit one bit so as to unset the sign bit.
+* The minimum value for uint is the default value `0`.
+* The minimum value for int can be calculated by subtracting one from the negative of the max limit.
 
 ```go
 package main
@@ -190,7 +192,7 @@ float32	  -->   -3.4e+38 to 3.4e+38.
 float64	  -->   -1.7e+308 to +1.7e+308.
 ```
 
-As quite logical reasons, the precision is almost double in the `float64` compared to `float32`. If we try to add(any operation) a `float64` number with a `flaot32`, we get an error as performing operations on two differently stored types can't be operated. 
+As quite logical reasons, the precision is almost double in the `float64` compared to `float32`. If we try to add(any operation) a `float64` number with a `flaot32`, we get an error as performing operations on two differently stored types can't be operated.
 
 #### Complex Numbers
 
@@ -210,15 +212,15 @@ fmt.Println(comp1 - comp2)
 (-26.192999999999998+26.192999999999998i)
 ```
 
-Golang automatically adds the `i` or iota in the complex/imaginary part for better readability. 
+Golang automatically adds the `i` or iota in the complex/imaginary part for better readability.
 
-### Strings 
+### Strings
 
-We can now move onto the `string` data type in golang. It has several data types like `byte`, `rune`, `string`. In golang, `byte` and `rune` store individual characters whereas `string` can hold multiple characters. 
+We can now move onto the `string` data type in golang. It has several data types like `byte`, `rune`, `string`. In golang, `byte` and `rune` store individual characters whereas `string` can hold multiple characters.
 
 #### Byte
 
-A byte in golang is an unsigned 8 bit integer, which means it can hold numeric data from 0 to 255. So how is this displaying characters if it stores integer. Well, because each number it stores is mapped to the ASCII character set which is used to represent characters. 
+A byte in golang is an unsigned 8 bit integer, which means it can hold numeric data from 0 to 255. So how is this displaying characters if it stores integer. Well, because each number it stores is mapped to the ASCII character set which is used to represent characters.
 
 A byte can be stored in a single quote `''`, if we use double quotes`""`, the variable is considered as string if we aren't specifying the data type.
 
@@ -260,11 +262,11 @@ fmt.Printf("Smiley Emoji --> %c", smiley_emoji)
 
 ![GO Rune Smiley Emoji](https://res.cloudinary.com/techstructive-blog/image/upload/v1648962460/blog-media/obw9ihlxsvhytbe8ito3.png)
 
-So, rune is pretty amazing type to play with characters in golang. As it is a default type assigned against byte if not provided while assignment. 
+So, rune is pretty amazing type to play with characters in golang. As it is a default type assigned against byte if not provided while assignment.
 
 #### String
 
-Strings are basically a slice(list) of bytes. Each character in a string is a byte. By default the string will be empty if you don't initialize it with a value. 
+Strings are basically a slice(list) of bytes. Each character in a string is a byte. By default the string will be empty if you don't initialize it with a value.
 
 ```go
 const language string
@@ -303,7 +305,7 @@ $ go run string.go
 2nd Character in string = A
 ```
 
-We can also declare strings using backticks/backquotes or whatever you call it (```), assigning string with this allows us to write multi line string.   
+We can also declare strings using backticks/backquotes or whatever you call it (\`\`\`), assigning string with this allows us to write multi line string.
 
 ```go
 var statement = `This is the first line
@@ -322,7 +324,7 @@ The last line
 
 Further in the loop article we will see how to loop/iterate over a string.
 
-### Boolean 
+### Boolean
 
 This type is used to store either `true` or `false` in golang. The default value of a boolean variable is `false`.
 
@@ -336,7 +338,7 @@ $ go run bool.go
 false
 ```
 
-We can assign the variable as either `true` or `false`.  
+We can assign the variable as either `true` or `false`.
 
 ```go
 const result = true
@@ -350,13 +352,13 @@ The statement is true
 
 So, using the `%t` we can print the value of a boolean value in golang in the `Printf` function.
 
-## Creating Variables 
+## Creating Variables
 
 Now, we have familiar with data types in golang, we can more expressively create, declare, initialize variables in golang.
 
 There are 3-4 primary ways to define a variable most of which we have already seen.
 
-### Declaring a Variable 
+### Declaring a Variable
 
 We can declare a variable without assigning it any value but for that we need to then provide the data type, this can be done using the following command:
 
@@ -366,7 +368,7 @@ var expereience int
 expereience = 2
 ```
 
-We can even use `const` for constant value in the given scope. 
+We can even use `const` for constant value in the given scope.
 
 Here, we can even declare multiple variables by separating each variable/constant with comma `,` which can be done as follows:
 
@@ -386,7 +388,7 @@ We can initialize a variable/constant in golang by explicitly giving it a value.
 var place string = "home"
 ```
 
-Here, there is no compulsion to provide the `datatype` as the compiler will be able to know it from the asisgned value. Though if you want to provide a non-default value you can specify the datatype. 
+Here, there is no compulsion to provide the `datatype` as the compiler will be able to know it from the asisgned value. Though if you want to provide a non-default value you can specify the datatype.
 
 ### Declaring Multiple Variables
 
@@ -471,6 +473,6 @@ Links to all code and links are visible on the [GitHub](https://github.com/Mr-De
 
 ## Conclusion
 
-So, from this part of the series, we were able to understand variables and the various data types in Golang. Though we didn't got too much in detail still we can find ourselves a bit comfortable in understanding basic go scripts. In the next section, we will looking into conditional statements and loops. This would give a good grasp on iterating over a string and even learn arrays(just the basics) we will explore Arrays and slices(remember strings?) after that. 
+So, from this part of the series, we were able to understand variables and the various data types in Golang. Though we didn't got too much in detail still we can find ourselves a bit comfortable in understanding basic go scripts. In the next section, we will looking into conditional statements and loops. This would give a good grasp on iterating over a string and even learn arrays(just the basics) we will explore Arrays and slices(remember strings?) after that.
 
 So, if you have any questions, suggestions, or feedback please let me know in the comments or on the social handles. See you next time, Happy Coding :)

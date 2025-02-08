@@ -1,12 +1,18 @@
 ---
 templateKey: blog-post
-title: "PGCLI: Postgres from the terminal"
-description: "Running SQL queries in a Postgres database with PGCLI. Exploring the python package PGCLI, that can run SQL queries for a postgres database environment from the command line."
-date: 2022-08-07 20:30:00
-status: published 
+description: >-
+  Running SQL queries in a Postgres database with PGCLI. Exploring the python
+  package PGCLI, that can run SQL queries for a postgres database environment
+  from the command line.
+status: published
 slug: pgcli-pg-from-terminal
-tags: ['postgres','python', 'DBMS']
-image_url: https://meetgor-cdn.pages.dev/python-pkg-pgcli-postgres-from-terminal.png
+image_url: 'https://meetgor-cdn.pages.dev/python-pkg-pgcli-postgres-from-terminal.png'
+title: 'PGCLI: Postgres from the terminal'
+date: 2022-08-07T20:30:00.000Z
+tags:
+  - postgres
+  - python
+  - DBMS
 ---
 
 ## Introduction
@@ -15,13 +21,13 @@ Have you ever used the Postgres database and did you know you don't have to laun
 
 If you are like CLIs and love to play with backend systems like Postgres(database) then chances are you will love this article. This article will cover the basics of using the PGCLI tool to perform simply as well as advanced options in interacting with your Postgres database.
 
-## PGCLI 
+## PGCLI
 
 PGCLi is a python package that acts as a CLI for executing SQL queries in a Postgres database. PGCLI allows us to interact with any Postgres database via the command line, it can be a remote database or a local database, you can access it right away from your terminal. The package acts as a CLI for accessing and executing any SQL queries, so we can simply provide the options/parameters to plug the database in and access the schema and its related data.
 
 ## Installation
 
-There are a lot of ways pgcli can be installed, my preferred way is with `pipx`, it just works well and you don't have to install it every time or mess up your global python packages environment. 
+There are a lot of ways pgcli can be installed, my preferred way is with `pipx`, it just works well and you don't have to install it every time or mess up your global python packages environment.
 
 ```
 pipx install pgcli
@@ -38,7 +44,6 @@ pipx run pgcli --help
 ```
 
 ![PGCLI Help](https://res.cloudinary.com/techstructive-blog/image/upload/v1659878322/blog-media/pgcli-help.png)
-
 
 If this command is working fine, it means we are ready to connect and interact with a database with pgcli.
 
@@ -64,7 +69,7 @@ To connect to an individual Postgres database we have two options, we can either
 
 ### Connect with the Postgres Connection URI
 
-We can simply pass the postgres connection URI for accessing a postgres database with pgcli. The URI has a specific pattern in the order where we need to specify the values like hostname, password, username, port, and database name. 
+We can simply pass the postgres connection URI for accessing a postgres database with pgcli. The URI has a specific pattern in the order where we need to specify the values like hostname, password, username, port, and database name.
 
 ```
 postgresql://username:password@hostname:port/database_name
@@ -106,7 +111,7 @@ So, that is how you can extract parameters from other technologies and framework
 
 ### Connect with CLI options/paramters
 
-We can parse the options like `hostname`, `password`, and `database name` manually with the CLI options that PGCLI provides. 
+We can parse the options like `hostname`, `password`, and `database name` manually with the CLI options that PGCLI provides.
 
 ```
 pipx run pgcli --username postgres --host localhost --port 5432 --dbname techstructive_blog
@@ -117,7 +122,6 @@ pipx run pgcli -u postgres -h localhost -p 5432 -d techstructive_blog
 ```
 
 ![PGCLI Connect Paramaters](https://res.cloudinary.com/techstructive-blog/image/upload/v1659879642/blog-media/pgcli-connect-paramters.png)
-
 
 You will be prompted for a password for the database, after entering the password, you will be inside the psql shell. In there, we can execute SQL queries and other specific psql or pgcli commands.
 
@@ -140,9 +144,7 @@ pipx run pgcli --username postgres --host localhost --port 5432
 
 ![PGCLI List databases in a server](https://res.cloudinary.com/techstructive-blog/image/upload/v1659879988/blog-media/pgcli-list-databases.png)
 
-
 So, that's how we would get the gist of all the databases inside the database server to which we are connected using the `\l+` command.
-
 
 ## List all tables in the database
 
@@ -206,13 +208,13 @@ export VISUAL=gedit
 
 Here, we can set `VISUAL` environment variable as the name of the editor or the path to it. The `VISUAL` environment variable is preferred first. For the details, we can check out the [editor command documentation](https://www.pgcli.com/editor).
 
-Once, we have configured the editor, we will be inside the editor after we enter the `\e` command. We can write queries inside the editor and quit after we are done, once the editor is closed, the text is read from the editor and entered in the psql shell. This will make us wait for the enter command for executing the query. 
+Once, we have configured the editor, we will be inside the editor after we enter the `\e` command. We can write queries inside the editor and quit after we are done, once the editor is closed, the text is read from the editor and entered in the psql shell. This will make us wait for the enter command for executing the query.
 
 We can even execute more than one query at a time if we use the `;` at the end of each query. Also, we can press `v` in VI-normal mode, to open the current query in the default editor.
 
 ### Save the query output to a file
 
-Let's say we have written a query inside the psql shell and we want the output to be saved in a file. We can achieve that with the `\o` command, we need to specify the filename in which the output of the queries will be saved. 
+Let's say we have written a query inside the psql shell and we want the output to be saved in a file. We can achieve that with the `\o` command, we need to specify the filename in which the output of the queries will be saved.
 
 **NOTE: Once we use the `\o` command, all the queries will start appending the results in the provided file. To stop the behavior, you can use `\o` (without any filename) to stop appending the results to a file.**
 

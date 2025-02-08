@@ -1,13 +1,17 @@
 ---
 templateKey: blog-post
-title: "Golang: Interfaces"
-description: "Understanding the baiscs of interfaces in Golang. Exploring the concept of polymorphism in golang with the help of interfaces and structs."
-date: 2022-09-10 17:30:00
+description: >-
+  Understanding the baiscs of interfaces in Golang. Exploring the concept of
+  polymorphism in golang with the help of interfaces and structs.
 status: published
 slug: golang-interfaces
-tags: ['go',]
-series: ['100-days-of-golang',]
-image_url: https://meetgor-cdn.pages.dev/golang-019-interfaces.png
+series:
+  - 100-days-of-golang
+image_url: 'https://meetgor-cdn.pages.dev/golang-019-interfaces.png'
+title: 'Golang: Interfaces'
+date: 2022-09-10T17:30:00.000Z
+tags:
+  - go
 ---
 
 ## Introduction
@@ -140,7 +144,7 @@ Zombie has attacked you! -30
 {Steve 70}
 ```
 
-As we can see, the method `intro()` is bound to both the struct depending on what struct signature is associated with the method. The method `intro` takes in the object struct associated as per the call and returns `string` as defined in the method signature. 
+As we can see, the method `intro()` is bound to both the struct depending on what struct signature is associated with the method. The method `intro` takes in the object struct associated as per the call and returns `string` as defined in the method signature.
 
 The `attack` method in the `Creature` interface is also implemented separately for the two structs. For the `Player` method, we simply take in a pointer to an integer and return an `int`. The parameter is the pointer to the mob health, and it returns the modified health. We take in a pointer to the mob or player health so as to parse in the actual value and not the copy of the value. If we modify the value, we want to reflect those changes in the actual object. So that is how we can use interfaces to construct dynamic operations on objects as well as different types of structs.
 
@@ -154,7 +158,7 @@ We will see a few examples for understanding how we can use interfaces in variou
 
 ### Type Switch Interface
 
-We can use an empty interface to check for the type of variable we have parsed. Using this empty interface we can create a kind of dynamic parameter to a function.  
+We can use an empty interface to check for the type of variable we have parsed. Using this empty interface we can create a kind of dynamic parameter to a function.
 
 ```go
 package main

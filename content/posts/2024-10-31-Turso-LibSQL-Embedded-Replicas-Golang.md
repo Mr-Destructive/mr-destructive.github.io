@@ -1,13 +1,21 @@
 ---
 templateKey: blog-post
-title: "Use Embedded Replicas of LibSQL Database hosted on Turso with a Golang Application"
-description: "Understanding and exploring how to create, connect, and query local embedded replicas of LibSQL database hosted on Turso with a Golang application."
-date: 2024-10-31 21:45:00
+description: >-
+  Understanding and exploring how to create, connect, and query local embedded
+  replicas of LibSQL database hosted on Turso with a Golang application.
 status: published
 slug: turso-libsql-embedded-replicas-golang
-tags: ['go', 'turso', 'libsql']
-series: ['lets-go-with-turso',]
-image_url: https://meetgor-cdn.pages.dev/embedded-replicas-libsql-turso-go.png
+series:
+  - lets-go-with-turso
+image_url: 'https://meetgor-cdn.pages.dev/embedded-replicas-libsql-turso-go.png'
+title: >-
+  Use Embedded Replicas of LibSQL Database hosted on Turso with a Golang
+  Application
+date: 2024-10-31T21:45:00.000Z
+tags:
+  - go
+  - turso
+  - libsql
 ---
 
 ## Introduction
@@ -25,20 +33,23 @@ If you want to check out the YouTube video, check this out:
 ## LibSQL Embedded Replicas on Turso in Golang
 
 ### Embedded Replicas
+
 The embedded replica is a native feature of the libSQL database. With embedded replicas, we can have faster writes as with the local database and global read access from the remote database.
 
 Embedded replica is like creating a copy of a primary remote database and using it for performing any operations from the applications as a local database and then it has a mechanism or standard to sync up with the primary remote database. The primary remote database serves as a single source of truth, however we can use the database locally as well. This however should be done carefully to avoid data corruption or stale data. To cope up with this stale or corruption of data, the periodic syncing can be used.
 
 Embedded replicas have a 3 fold process
-- Create a copy of the primary remote database
-- Perform any operations on the local database
-- Sync up with the primary remote database
+
+* Create a copy of the primary remote database
+* Perform any operations on the local database
+* Sync up with the primary remote database
 
 ![Embedded Replicas for LibSQL](https://meetgor-cdn.pages.dev/embedded-replicas-flow.png)
 
 There are a few things to remember here:
-- The local database can read it's newly written data, however other local replica databases can only view those changes once the sync has happened and the primary database has been updated from the local copy.
-- These would require to sync the local with the primary database first and then the other local database also needs to sync with the primary database.
+
+* The local database can read it's newly written data, however other local replica databases can only view those changes once the sync has happened and the primary database has been updated from the local copy.
+* These would require to sync the local with the primary database first and then the other local database also needs to sync with the primary database.
 
 You can read more about it [here](https://docs.turso.tech/features/embedded-replicas/introduction) on the Turso documentation.
 
@@ -107,7 +118,6 @@ func main() {
 
 The above code will simply connect to the local LibSQL database which resides as the `local.db` file. Now, to demonstrate that it is an actual sqlite-like database, we can execute queries on the connected database.
 
-
 ```go
 package main
 
@@ -145,6 +155,7 @@ func main() {
 
 }
 ```
+
 Output:
 
 ```
@@ -188,10 +199,10 @@ The same `connector` object could be used to sync with the primary database afte
 
 We can configure the syncing mechanism while creating the embedded replica with the additional parameters to the `NewEmbeddedReplicaConnector` function. There are [Options](https://pkg.go.dev/github.com/levydsa/libsql-go#Option) to include for the paramters that could be passed like:
 
-- `WithAuthToken(string)`: This will be used to authenticate with the primary database.
-- `WithSyncInterval(time.Duration)`: This will be used to specify the interval of syncing between the local and primary database.
-- `WithEncrytion(string)`: This will be used to encrypt the local database.
-- `WithReadYourWrites(bool)`: This will be used to specify if the local database can read the newly written changes or not.
+* `WithAuthToken(string)`: This will be used to authenticate with the primary database.
+* `WithSyncInterval(time.Duration)`: This will be used to specify the interval of syncing between the local and primary database.
+* `WithEncrytion(string)`: This will be used to encrypt the local database.
+* `WithReadYourWrites(bool)`: This will be used to specify if the local database can read the newly written changes or not.
 
 So, let's create a exmaple to create a embedded replica, make some changes by creating tables and then syncing the local with primary, finally appending some data to the local and reading those.
 
@@ -350,7 +361,6 @@ So, that's how we basically create a local replica from a remote LibSQL database
 That wraps the article for now.
 
 For all the code related to this article, you can check out the [Let's Go with Turso](https://github.com/mr-destructive/lets-go-with-turso) GitHub repo for all the examples and additional examples for using LibSQL with Golang.
-
 
 ## Conclusion
 

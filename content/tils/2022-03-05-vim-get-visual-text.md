@@ -1,16 +1,17 @@
 ---
 templateKey: til
-title: "Vim: Get the Text from Visual Selection"
-description: "Store the selected text in a variable in Vim Script"
-date: 2022-03-05 17:25:37
+description: Store the selected text in a variable in Vim Script
 status: published-til
 slug: vim-get-visual-text
-tags: ['vim',]
+title: 'Vim: Get the Text from Visual Selection'
+date: 2022-03-05T17:25:37.000Z
+tags:
+  - vim
 ---
 
-## Using Registers 
+## Using Registers
 
-We can get the selected text in a variable in Vim Script using registers. 
+We can get the selected text in a variable in Vim Script using registers.
 
 ```vimscript
 normal gv"xy
@@ -27,8 +28,8 @@ normal mode -> gv -> (y)ank text -> to the "x" register
             Select the previously selected text   
 ```
 
-Here, we are entering normal mode and selecting text which was previously selected and yank the contents into a register in this case we are using (x) register, it can be any register. 
-Now to get the contents of that register we can use the function `getreg("register_name")` or use `"xp"` to paste the contents of the `x` register or more generally for any register(`"<register-name>p`). 
+Here, we are entering normal mode and selecting text which was previously selected and yank the contents into a register in this case we are using (x) register, it can be any register.
+Now to get the contents of that register we can use the function `getreg("register_name")` or use `"xp"` to paste the contents of the `x` register or more generally for any register(`"<register-name>p`).
 
 Hence we can store the contents of the selected text in a variable for further processing or manipulation.
 
@@ -48,6 +49,6 @@ Select a text and press Escape, we just want the `gv` command to refresh and get
 :echo foo
 ```
 
-The echo command will simply print the text which we have selected in the file. 
+The echo command will simply print the text which we have selected in the file.
 
 ![Visual Select Text](https://res.cloudinary.com/techstructive-blog/image/upload/v1646483173/blog-media/wlrxgtmegtycilyhvyiz.gif)

@@ -1,27 +1,35 @@
 ---
 templateKey: blog-post
-title: "Django + PostgreSQL Deployment on Heroku"
-description: ""
-date: 2022-05-15 20:00:00
+description: ''
 status: published
 slug: django-deploy-heroku
-tags: ['django', 'web-development', 'python',]
-image_url: https://meetgor-cdn.pages.dev/django-deploy-heroku.png
-series: ['Django-Deployment','Django-Series']
-series_description: "Django Deployment is a series for understanding various platforms for Django project deployment with database attachment. Platforms to be covered: Heroku, Railway, Qovery, Python Anywhere, etc."
+image_url: 'https://meetgor-cdn.pages.dev/django-deploy-heroku.png'
+series:
+  - Django-Deployment
+  - Django-Series
+series_description: >-
+  Django Deployment is a series for understanding various platforms for Django
+  project deployment with database attachment. Platforms to be covered: Heroku,
+  Railway, Qovery, Python Anywhere, etc.
+title: Django + PostgreSQL Deployment on Heroku
+date: 2022-05-15T20:00:00.000Z
+tags:
+  - django
+  - web-development
+  - python
 ---
 
 ## Introduction
 
-Django projects are quite easy to build and simple to understand, you might have created a Django application and wanted to show it to the world? You can deploy a basic Django application with a database(PostgreSQL) with Heroku. It provides a decent free tier with some great features and add-ons. A free tier Heroku account has a limitation of 5 apps, limited data in the database, limited connections to the server per month, and so on.  
+Django projects are quite easy to build and simple to understand, you might have created a Django application and wanted to show it to the world? You can deploy a basic Django application with a database(PostgreSQL) with Heroku. It provides a decent free tier with some great features and add-ons. A free tier Heroku account has a limitation of 5 apps, limited data in the database, limited connections to the server per month, and so on.
 
-Though the free tier is not a great option for bigger applications, it suits really well for smaller scale and ide projects, so we will be looking into the details of how to deploy a Django application to [Heroku](https://heroku.com/) which is a Platform as Service (PaS). 
+Though the free tier is not a great option for bigger applications, it suits really well for smaller scale and ide projects, so we will be looking into the details of how to deploy a Django application to [Heroku](https://heroku.com/) which is a Platform as Service (PaS).
 
 This series will be an extension of the series [Django basics](https://techstructiveblog.hashnode.dev/series/django-basics) which covered the basics of the Django framework, we covered from basic Django fundamentals to building a CRUD API. In this series, we will be exploring some platforms for giving a better understanding of how things work and understanding a few components that were left as default while understanding the basics of Django. Let's get started with [Django Deployment](https://techstructiveblog.hashnode.dev/series/django-deployment)!
 
 ## Creating a Django Application
 
-For deploying an app, we definitely need an app, we need to create a basic Django application to deploy on the web. We'll be creating a simple blog application with a couple of views and a simple model structure. As for the database, we'll be using Postgres as Heroku has an add-on for it and it is pretty easy to configure. 
+For deploying an app, we definitely need an app, we need to create a basic Django application to deploy on the web. We'll be creating a simple blog application with a couple of views and a simple model structure. As for the database, we'll be using Postgres as Heroku has an add-on for it and it is pretty easy to configure.
 
 ### Set up a virtual environment
 
@@ -43,7 +51,6 @@ source .venv/bin/activate
 ```
 
 This will set up the project nicely for a Django project, you now install the core Django package and get started with creating a Django application.
-
 
 ```bash
 # install django
@@ -74,15 +81,16 @@ Make sure to create and activate the virtual environment for this django project
 Now, Firstly we need to specify which type and version of language we are using. Since Django is a Python-based web framework, we need to select the python version in a text file.
 
 **runtime.txt**
+
 ```
 python-3.9.5
 ```
- 
-Here, the version can be anything as per your project and the packages installed.  
+
+Here, the version can be anything as per your project and the packages installed.
 
 ### Creating requirements.txt file
 
-We'll first create a `requirements.txt` file for storing all the dependencies and packages installed in the application. This will help in installing dependencies while deploying the application. We can either use a `requirements.txt` file using `virtualenv` or a `Pipfile` using Pipenv. Both serve the same purpose but a bit differently. 
+We'll first create a `requirements.txt` file for storing all the dependencies and packages installed in the application. This will help in installing dependencies while deploying the application. We can either use a `requirements.txt` file using `virtualenv` or a `Pipfile` using Pipenv. Both serve the same purpose but a bit differently.
 
 Assuming you are in an isolated virtual environment for this Django project, you can create a requirements.txt file using the below command:
 
@@ -104,11 +112,11 @@ typing_extensions==4.0.1
 
 ![image.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1652614060461/kPTZ9R8Xp.png)
 
-This is vanilla Django without any additional dependencies but if you have integrated other functionalities like Django Rest Framework, PostgreSQL, Crispy Forms, Schedulers, etc. there might be additional dependencies that become quite crucial for the smooth working of the project.  
+This is vanilla Django without any additional dependencies but if you have integrated other functionalities like Django Rest Framework, PostgreSQL, Crispy Forms, Schedulers, etc. there might be additional dependencies that become quite crucial for the smooth working of the project.
 
 If you are using pipenv, you don't need to make any efforts to manually activate and manage virtual environment, the dependencies are installed and taken care of by the pipenv installer. You just need to make sure to install any package with `pipenv install` and not `pip install` for better and improved package tracking.
 
-So, that's all we need to take care of packages and keep a list of these integrated packages for the project. You need to update the requirements.txt file every time you install any new package or modify the dependencies for a project. Simply use the command `pip freeze > requirements.txt` in the activated virtual environment.  
+So, that's all we need to take care of packages and keep a list of these integrated packages for the project. You need to update the requirements.txt file every time you install any new package or modify the dependencies for a project. Simply use the command `pip freeze > requirements.txt` in the activated virtual environment.
 
 ### Creating a Procfile
 
@@ -117,39 +125,39 @@ Next up, we have the `Procfile`, a procfile is a special file that holds informa
 A Procfile is a simple file without any extension, make sure to write `Procfile` as it is as the name of the file in the root folder of the project. Inside the file add the following contents:
 
 **Procfile**
+
 ```Procfile
 web: gunicorn <project_name>.wsgi
 ```
 
-As we can see we have defined the `web` process using `gunicorn`, [Gunicorn](https://pypi.org/project/gunicorn/) is a python package that helps in creating WSGI HTTP Server for the UNIX operating systems. So, we need to install the package and update the package dependency list. 
+As we can see we have defined the `web` process using `gunicorn`, [Gunicorn](https://pypi.org/project/gunicorn/) is a python package that helps in creating WSGI HTTP Server for the UNIX operating systems. So, we need to install the package and update the package dependency list.
 
 ```
 pip install gunicorn
 
 pip freeze > requirements.txt
-``` 
+```
 
 That would be good to go for creating and serving up the project while deploying the project on Heroku.
 
 ## Creating a Heroku App
 
-A Heroku App is basically like your Django Project, you can create apps for deploying your django projects on Heroku. You are limited to 5 apps on the Free tier but that can be expanded on the paid plans.  
+A Heroku App is basically like your Django Project, you can create apps for deploying your django projects on Heroku. You are limited to 5 apps on the Free tier but that can be expanded on the paid plans.
 
 ![image.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1652456732519/cyOQZ3UZK.png)
 
-The name of your heroku app should be unique globally, you need to try a few combinations before a good one fits your project. This name has no significance on your django project code, though it would be the name from which you would access the web application as a name `<app-name>.herokuapp.com`.   
+The name of your heroku app should be unique globally, you need to try a few combinations before a good one fits your project. This name has no significance on your django project code, though it would be the name from which you would access the web application as a name `<app-name>.herokuapp.com`.
 
-So, choose it wisely if you are not attaching a custom domain. You can attach a custom domain, you can navigate to the `domain` section in the settings tab. 
+So, choose it wisely if you are not attaching a custom domain. You can attach a custom domain, you can navigate to the `domain` section in the settings tab.
 
-
-## Setting up the database 
+## Setting up the database
 
 To set up and configure a database in django on Heroku, we need to manually acquire and attach a PostgreSQL add-on to the heroku app.
 
-- Firstly locate to the Resources Tab in your Heroku app.
-- Search `postgres` in the Add-ons Search bar
-- Click on the `Heroku Postgres` Add-on
-- Submit the Order Form and you have the add-on enabled in the app.
+* Firstly locate to the Resources Tab in your Heroku app.
+* Search `postgres` in the Add-ons Search bar
+* Click on the `Heroku Postgres` Add-on
+* Submit the Order Form and you have the add-on enabled in the app.
 
 ![image.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1652456842273/ijeWsVdOf.png)
 
@@ -164,11 +172,11 @@ You can use the Heroku CLI which is a command-line interface for managing and cr
 ```
 heroku login
 
-``` 
+```
 
 ![image.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1652605604920/HnTr2KbTi.png)
 
-This will allow us to work with heroku commands and manage our heroku application from the command line itself. The below command will create a add-on for `heroku-postgres` for the application provided as the parameter options 
+This will allow us to work with heroku commands and manage our heroku application from the command line itself. The below command will create a add-on for `heroku-postgres` for the application provided as the parameter options
 
 ```
 heroku addons:create heroku-postgresql:hobby-dev --app <app_name>
@@ -176,15 +184,13 @@ heroku addons:create heroku-postgresql:hobby-dev --app <app_name>
 
 ![image.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1652507166978/i1IJ5EGjJ.png)
 
-This should hopefully add a fresh instance of a postgres database for your heroku app. You can now configure the database for your project, we simply need the Database URL from the heroku app dashboard. We'll see how to configure the environment variables in Django for Heroku to keep your secrets like the `SECRET_KEY`, `DATABSE_URL`, etc. 
+This should hopefully add a fresh instance of a postgres database for your heroku app. You can now configure the database for your project, we simply need the Database URL from the heroku app dashboard. We'll see how to configure the environment variables in Django for Heroku to keep your secrets like the `SECRET_KEY`, `DATABSE_URL`, etc.
 
 If you want MySQL as a database, you can check out the [ClearDB](https://devcenter.heroku.com/articles/cleardb) Add-On for Heroku to simply attach it like Postgres on your Heroku application. Also, if you wish to add [MongoDB](https://www.mongodb.com/compatibility/mongodb-and-django) into your Django application on Heroku, you can use [Object Rocket](https://devcenter.heroku.com/articles/ormongo)(OR Mongo). It is not available in the free tier though, unlike PostgreSQL and MySQL.
 
 ## Configuring Environment Variables
 
-We need to keep our secrets for the django project out of the deployed code and in a safe place, we can create environment variables and keep them in a `.env` file which will be git-ignored. We do not want this `.env` file to be open source and thus should not be committed.  
-
-
+We need to keep our secrets for the django project out of the deployed code and in a safe place, we can create environment variables and keep them in a `.env` file which will be git-ignored. We do not want this `.env` file to be open source and thus should not be committed.
 
 We first need to create a new secret key if you already have a GitHub repository, chances are you would have committed the default secret key open for the world to see, it is an insecure way of deploying django apps in production.
 
@@ -199,9 +205,10 @@ secrets.token_hex(24)
 
 ![image.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1652512239319/5AACaTGOD.png)
 
-This should generate a secret key that only you know now. So, just copy the key without the quotes and create a file `.env` in the root project folder. 
+This should generate a secret key that only you know now. So, just copy the key without the quotes and create a file `.env` in the root project folder.
 
 **.env**
+
 ```
 SECRET_KEY=76419fd6885a677f802fd1d2b5acd0188e23e001042b05a8
 ```
@@ -211,11 +218,12 @@ The `.env` file should also be added to the `.gitignore` file, so simply append 
 ```
 .env
 ```
-This file is only created to test the project locally, so we need to also make this key available on heroku. For doing that we need to add Config Variables to the heroku app. 
 
-- Locate to the Settings Tab in your Heroku Application Dashboard
-- We have the `Config Vars` section in the located tab
-= We need to reveal those variables and we will be able to see all the variables.
+This file is only created to test the project locally, so we need to also make this key available on heroku. For doing that we need to add Config Variables to the heroku app.
+
+* Locate to the Settings Tab in your Heroku Application Dashboard
+* We have the `Config Vars` section in the located tab
+  \= We need to reveal those variables and we will be able to see all the variables.
 
 ![image.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1652456988713/5VM6E29_o.png)
 
@@ -228,27 +236,30 @@ You also need to copy the `DATABSE_URL` into our local setup file(`.env` file). 
 ```env
 DATABASE_URL=postgres://sjxgipufegmgsw:78cbb568e@ec2-52-4-104-184.compute-1.amazonaws.com:5432/dbmuget
 ```
+
 The format for the postgres URL is as follows:
 
 ```
 postgresql://[user[:password]@][netloc][:port][/dbname]
 ```
 
-We have now created environment variables for our django application and also added config vars in the heroku app, we now need a way to parse these environment variables into the Django project.  
+We have now created environment variables for our django application and also added config vars in the heroku app, we now need a way to parse these environment variables into the Django project.
 
 ### Parsing Environment variables using python-dotenv
 
-We will use [python-dotenv](https://pypi.org/project/python-dotenv/) to parse variables into the django settings configurations like `SECRET_KEY` and `DATABASES`. 
+We will use [python-dotenv](https://pypi.org/project/python-dotenv/) to parse variables into the django settings configurations like `SECRET_KEY` and `DATABASES`.
 
-- Install `python-dotenv` with pip with the command :  
+* Install `python-dotenv` with pip with the command :
+
 ```
 pip install python-dotenv
 ```
+
 We need to then modify the default variables in the `settings.py` file. Firstly, we will load in the `.env` file for accessing the environment variables for the configuration of the project.
 
 Append the following code, to the top of the `settings.py` file, make sure don't override the configuration so remove unnecessary imports and configurations.
 
-``` python
+```python
 # <project_name>/settings.py
 
 import os
@@ -260,27 +271,27 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 ```
 
-We have imported the package `dotenv` basically the `python-dotenv` into the `settings.py` file and the module `os` for loading the `.env` file. The `load_dotenv` function helps in loading the `key-value` pairs which are the configuration variables that can act as actual environment variables. We provide in a file to the [load_dotenv](https://saurabh-kumar.com/python-dotenv/) function which is the `.env` file in our case, you can pick up any location for the `.env` file but make sure to change the location while parsing the file into the `load_dotenv` function. 
+We have imported the package `dotenv` basically the `python-dotenv` into the `settings.py` file and the module `os` for loading the `.env` file. The `load_dotenv` function helps in loading the `key-value` pairs which are the configuration variables that can act as actual environment variables. We provide in a file to the [load\_dotenv](https://saurabh-kumar.com/python-dotenv/) function which is the `.env` file in our case, you can pick up any location for the `.env` file but make sure to change the location while parsing the file into the `load_dotenv` function.
 
 After loading the variables into the `settings.py` file, we now need to access those variables and set the appropriate variables the configuration from the variables received from the `load_dotenv` function. The `os.getenv` function to access the environment variables. The `os.getenv` function takes a parameter as the `key` for the environment variable and returns the value of the environment variable.
 
-``` python
+```python
 SECRET_KEY = os.getenv("SECRET_KEY")
 ```
 
-We have secretly configured the `SECRET_KEY` for the django project. If you have any other variables as simple key-value pairs like `AUTH` passwords, username, etc. you can use this method to get the configuration variables. 
+We have secretly configured the `SECRET_KEY` for the django project. If you have any other variables as simple key-value pairs like `AUTH` passwords, username, etc. you can use this method to get the configuration variables.
 
 ### Loading Database configuration
 
-Databases are a bit different as compared to other simple configurations in django. We need to make a few adjustments to the default database configuration. We will install another package `dj-database-url` to configure `DATABASE_URL`. Since the databse_url has a few components we need a way to extract the details like the `hostname`, `port`, `database_name`, and `password`. Using the `dj-database-url` package we have a few functions that can serve the purpose.
+Databases are a bit different as compared to other simple configurations in django. We need to make a few adjustments to the default database configuration. We will install another package `dj-database-url` to configure `DATABASE_URL`. Since the databse\_url has a few components we need a way to extract the details like the `hostname`, `port`, `database_name`, and `password`. Using the `dj-database-url` package we have a few functions that can serve the purpose.
 
 ```
 pip install dj-database-url
 ```
 
-At the end of your `settings.py` file, append the following code. 
+At the end of your `settings.py` file, append the following code.
 
-``` python
+```python
 import dj_database_url
 
 DATABASE_URL = os.getenv("DATABASE_URL")
@@ -316,7 +327,7 @@ Make sure to update the `requirements.txt` file before pushing the project to He
 
 ## Serving Static Files
 
-Now, if you have some static files like `CSS`, `Javascript`, or `images`, you need to configure the staticfiles in order to serve them from the heroku server. We will require another config variable for collecting the static files from the selected repository. 
+Now, if you have some static files like `CSS`, `Javascript`, or `images`, you need to configure the staticfiles in order to serve them from the heroku server. We will require another config variable for collecting the static files from the selected repository.
 
 ```python
 
@@ -324,7 +335,7 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-``` 
+```
 
 Here, if you have served your static files from the `static` folder in the root directory of your django project, you can add the above code in the settings.py file. We will collect all static files in the folder along with the default static files provided by django in the `staticfiles` directory. Run the following command if you want to test whether the static files are properly collected and served.
 
@@ -517,3 +528,4 @@ It's not a simple thing to understand but to keep it simple, it might be a conta
 So, that is one of the ways we can deploy a Django application on Heroku with the PostgreSQL database. You can find the [django-blog project] on [GitHub] for following along with the deployment process.  In the next few parts of the series, we will be hopefully covering other platforms where you can deploy a Django o application.
 
 Hopefully, you liked the above tutorial, if you have any questions. feedback, or queries, you can contact me on the Social handles provided below. Thank you for reading and till the next post Happy Coding :) 
+````

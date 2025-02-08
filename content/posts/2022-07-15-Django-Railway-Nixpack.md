@@ -1,18 +1,26 @@
 ---
 templateKey: blog-post
-title: "Deploying Django Project with Railway Nixpacks"
-description: "Configuring and Seting up nixpacks for deploying django project on Railway app. Interacting with the nixpacks CLI for building and creating deployable django applications."
-date: 2022-07-16 16:15:00
+description: >-
+  Configuring and Seting up nixpacks for deploying django project on Railway
+  app. Interacting with the nixpacks CLI for building and creating deployable
+  django applications.
 status: published
 slug: django-deploy-railway-nixpacks
-tags: ['django', 'python', 'railway',]
-image_url: https://meetgor-cdn.pages.dev/django-deploy-railway-nixpacks.png
-series: ['Django-Deployment','Django-Series']
+image_url: 'https://meetgor-cdn.pages.dev/django-deploy-railway-nixpacks.png'
+series:
+  - Django-Deployment
+  - Django-Series
+title: Deploying Django Project with Railway Nixpacks
+date: 2022-07-16T16:15:00.000Z
+tags:
+  - django
+  - python
+  - railway
 ---
 
 ## Introduction
 
-We have seen how to deploy a Django application on railway app in the [previous article](https://www.meetgor.com/django-deploy-railway/) of the [series](https://www.meetgor.com/series/django-deployment/). We deployed the django project using the Heroku Buildpacks under the hood. The railway app provides a couple of options on how to build your web application. Currently, there are three options, one of which is the [heroku buildpacks](https://devcenter.heroku.com/articles/heroku-20-stack) which is the default one, second, we have the nixpacks which we will see today, and the third is the [Paketo buildpack](https://paketo.io/). 
+We have seen how to deploy a Django application on railway app in the [previous article](https://www.meetgor.com/django-deploy-railway/) of the [series](https://www.meetgor.com/series/django-deployment/). We deployed the django project using the Heroku Buildpacks under the hood. The railway app provides a couple of options on how to build your web application. Currently, there are three options, one of which is the [heroku buildpacks](https://devcenter.heroku.com/articles/heroku-20-stack) which is the default one, second, we have the nixpacks which we will see today, and the third is the [Paketo buildpack](https://paketo.io/).
 
 ## What is a Buildpack?
 
@@ -30,16 +38,16 @@ For more references on Buildpacks, you can follow up with the great article on [
 
 Nixpacks are quite cool as most of the applications require little or almost no configuration. You don't need a lot of knowledge of docker or nix technologies, everything is abstracted for you. Nixpacks uses nix packages for installing the runtime environment and the dependencies for the applications. It also caches support for detecting the core modules or packages in the runtime, so it gets a huge boost in deployment performance. Minimal deployment time, simultaneously makes it developer friendly and improves the quality of the application.
 
-- Abstracted technologies like Nix and Docker.
-- Caching of dependencies and steps to build.
-- Customizable at most of the steps.
-- Extensible and Developer friendly.
+* Abstracted technologies like Nix and Docker.
+* Caching of dependencies and steps to build.
+* Customizable at most of the steps.
+* Extensible and Developer friendly.
 
 ## Installing Nixpacks
 
 Nixpacks are the [nix packges](https://search.nixos.org/packages) which are used with the source code to create a buildpack of their own. The nix packages take in the source code of your application and convert it into a simple OCI image e.g. Docker image that can be run on various environments. It is similar to buildpacks but it's not the same instead it is better and uses a different ecosystem.
 
-Railway has a cool [CLI](https://nixpacks.com/docs/cli) tool for creating nixpacks on your local system. You can install the nixpack cli from the official documentation site. There are a couple of ways to install them on your system. 
+Railway has a cool [CLI](https://nixpacks.com/docs/cli) tool for creating nixpacks on your local system. You can install the nixpack cli from the official documentation site. There are a couple of ways to install them on your system.
 You can install the nixpack with the curl command in your terminal which is one of the simplest ways to install it.
 
 ```
@@ -74,7 +82,6 @@ pip freeze > requirements.txt
 
 This will create a `requirements.txt` file in the current folder, which will contain the list of all the dependencies with the version mentioned in. We also have other package management system like [pipenv](https://www.meetgor.com/pipenv-intro/) or [poetry](https://python-poetry.org/).
 
-
 ## Creating a Nixpack for the project
 
 Finally, we can now start creating nixpacks from the source code of the django application. So, make sure the Django project is running on your local system. Set up a virtualenv and database as per your local environment. We will be using the build command for creating the nixpack of our django project.
@@ -93,9 +100,9 @@ Similarly, there are other default options like the version of the runtime, inst
 
 ### Steps for creating Nixpacks
 
-Now, we need to understand the process of the creation of nixpacks. There were several stages that you can see in the above video. 
+Now, we need to understand the process of the creation of nixpacks. There were several stages that you can see in the above video.
 
-1. Planning 
+1. Planning
 2. Building
 
 #### Planning Phase
@@ -107,6 +114,7 @@ You would get a clear look in the nixpack cli, it gives a list of the planned in
 ```
 nixpacks plan .
 ```
+
 ![Nixpacks Plan Command](https://res.cloudinary.com/techstructive-blog/image/upload/v1657960771/blog-media/nixpacks-plan-command.gif)
 
 ![Nixpacks Plan Command Output](https://res.cloudinary.com/techstructive-blog/image/upload/v1657960816/blog-media/nixpacks-plan-cmd.png)
@@ -117,17 +125,17 @@ So, this gives a `nix` output of all the configuration needed to build and insta
 
 So the list of the following procedure is listed in the planning phase of building the application.
 
-- Packages/base runtime environment
-- Installation commands
-- Build commands
-- Commands to Start Application 
+* Packages/base runtime environment
+* Installation commands
+* Build commands
+* Commands to Start Application
 
 In the case of django, the following correspond to the planning attributes.
 
-- Python version as the application runtime.
-- Installing dependencies via pip/pipenv/poetry
-- Building the Django app (collecting static files, setting database, etc)
-- Running the Django app (gunicorn/Nginx web server to run the app)
+* Python version as the application runtime.
+* Installing dependencies via pip/pipenv/poetry
+* Building the Django app (collecting static files, setting database, etc)
+* Running the Django app (gunicorn/Nginx web server to run the app)
 
 So, hopefully, this gives you a better understanding of what is going on in the nixpack CLI. We are trying to automate the process of deployment and building the application for repeated deployments i.e. in a continuous integration/delivery system.
 
@@ -139,13 +147,12 @@ This is the phase, where actual installation, setup, and configuration takes pla
 
 For the Django application, we have several steps of the application to be followed. We can use python as the base runtime environment, install the python packages, perform other commands like setting up admin accounts, static/media files, database setup, and finally run the steps to run the application at the container level.
 
-- Installing python as a [Nix Package](https://search.nixos.org/packages?channel=22.05&show=python38&from=0&size=50&sort=relevance&type=packages&query=python)
-- Installing all python packages provided in the `requirements.txt`/`Pipfile`/`pyproject.toml` files.
-- Call commands from the environment to set up the applications like `createsuperuser`, `collectstatic`, `makemigrations`, pull data, management commands, etc. There are a lot of things that can be done here depending on the application.
-- Finally, the step to run the Django app, usually gunicorn/Nginx server is used for running the django application on a port with the host.
+* Installing python as a [Nix Package](https://search.nixos.org/packages?channel=22.05\&show=python38\&from=0\&size=50\&sort=relevance\&type=packages\&query=python)
+* Installing all python packages provided in the `requirements.txt`/`Pipfile`/`pyproject.toml` files.
+* Call commands from the environment to set up the applications like `createsuperuser`, `collectstatic`, `makemigrations`, pull data, management commands, etc. There are a lot of things that can be done here depending on the application.
+* Finally, the step to run the Django app, usually gunicorn/Nginx server is used for running the django application on a port with the host.
 
 So, this is what the build phase does, this is the whole and soul of the nixpacks. We literally do every installation setup and configuration of the application. Though the planning phase is equally important, a single missing data can ruin the build phase.
-
 
 ### Understanding the build phase for Django
 
@@ -153,7 +160,7 @@ We ran the build command for creating the nixpack build, this started with plann
 
 ![Django Application build nixpacks](https://res.cloudinary.com/techstructive-blog/image/upload/v1657961691/blog-media/nixpacks-build-process.png)
 
-So, we have used the Debian nixpack, which sets as the base runtime for the application. Railway provides a [package](https://github.com/railwayapp/nixpacks/pkgs/container/nixpacks) of the Debian image as the base runtime for our application. This is where we will run all the build processes on. This Debian image will be used for installing all types of dependencies and layers of language-specific runtime installation in the form of [nix packages](https://search.nixos.org/packages). 
+So, we have used the Debian nixpack, which sets as the base runtime for the application. Railway provides a [package](https://github.com/railwayapp/nixpacks/pkgs/container/nixpacks) of the Debian image as the base runtime for our application. This is where we will run all the build processes on. This Debian image will be used for installing all types of dependencies and layers of language-specific runtime installation in the form of [nix packages](https://search.nixos.org/packages).
 
 Now, we have the base image of debian, the nixpack build command actually starts executing the `Dockerfile`, this is an auto-generated step after the planning phase. So, with the instructions in `Dockerfile`, steps are executed one after other just as a normal Docker image build. This will generate the image for the application and after a while, because this process takes a while on the first iteration locally, after the build process has been completed, it will give a container name for you to run. This can be used to test the application locally, in production, the container is instantly created after the image has been generated.
 
@@ -205,11 +212,9 @@ nixpacks build . -o ../blog_image
 
 ![Nixpacks Build Command Output folder](https://res.cloudinary.com/techstructive-blog/image/upload/v1657962407/blog-media/nixpacks-build-output.png)
 
-
 **Dockerfile**
 
 ![Nixpacks Build command ouptut](https://res.cloudinary.com/techstructive-blog/image/upload/v1657962479/blog-media/nixpacks-build-output-folder.png)
-
 
 **environment.nix File**
 
@@ -283,7 +288,7 @@ web: python manage.py migrate && gunicorn <django_project_name>.wsgi -b :8000
 
 ```
 
-So, we use the `-b` option in the gunicorn command to bind the port in the container to the port in the local machine. Now, if we build the application and forward the port to the `8000` port in the local machine, we will see our application running 
+So, we use the `-b` option in the gunicorn command to bind the port in the container to the port in the local machine. Now, if we build the application and forward the port to the `8000` port in the local machine, we will see our application running
 
 <video width="800" height="450" controls>
   <source src="https://res.cloudinary.com/techstructive-blog/video/upload/v1657964597/blog-media/nixpacks-local-bind.mp4" type="video/mp4">
@@ -329,7 +334,7 @@ The python version can be specified with the `.python-version` file with just th
 
 ### Create and Linkup a GitHub repository for existing Django projects
 
-We can create a GitHub repository and link up the project to the Railway platform and thereby creating an automated build for every push. 
+We can create a GitHub repository and link up the project to the Railway platform and thereby creating an automated build for every push.
 
 The below video will explain how to set up the GitHub repository for the Railway app.
 
@@ -341,7 +346,7 @@ The below video will explain how to set up the GitHub repository for the Railway
   <source src="https://res.cloudinary.com/techstructive-blog/video/upload/v1657965284/blog-media/railway-platform-github.mp4" type="video/mp4">
 </video>
 
-### Setup environment variables 
+### Setup environment variables
 
 We can use `python-environ` to set up environment variables in a Django application, we will require these environment variables for attributes like `SECRET_KEY`, `DATABASE_URL`, email-stuff, etc. These are quite handy to avoid leaking sensitive information to the open source project on GitHub.
 
@@ -353,7 +358,7 @@ pip install python-environ
 
 After installing the package, we can set up the environment variable in the settings file.
 
-``` python
+```python
 # <project_name>/settings.py
 
 import os
@@ -368,7 +373,7 @@ After loading the environment variables, we can access them with `os.env("ENV_NA
 
 ### Attach a PostgreSQL database service
 
-You can add a PostgreSQL database service to your Django Railway app by attaching a service. This will add a new service along with the django application, so these two act as different entities within a railway project. 
+You can add a PostgreSQL database service to your Django Railway app by attaching a service. This will add a new service along with the django application, so these two act as different entities within a railway project.
 
 <video width="800" height="450" controls>
   <source src="https://res.cloudinary.com/techstructive-blog/video/upload/v1652963718/blog-media/django-deployment/postgres_spinup_railway_d2xkpt.mp4" type="video/mp4">
@@ -388,7 +393,6 @@ DATABASE_URL=postgres://postgres:postgres@localhost:5432/db_name
   <source src="https://res.cloudinary.com/techstructive-blog/video/upload/v1657964943/blog-media/railway-postgres-spinup.mp4" type="video/mp4">
 </video>
 
-
 This will set up the database environment variable and you can access these from the settings.py file with the `env.db` function as follows:
 
 ```python
@@ -399,7 +403,7 @@ So, we can finally use the database from the Railway app in our Django applicati
 
 ### Choose the Buildpack
 
-We can choose a buildpack for our Django application in the Railway platform, we have options like 
+We can choose a buildpack for our Django application in the Railway platform, we have options like
 
 1. Heroku Buildpack
 2. Railway Nixpacks
@@ -417,12 +421,11 @@ Railway Dashboard Choose BuildPack
 
 Now, we have seen how to set up the nixpacks, we had the Postgres database setup, and we can finally deploy our application to the railway platform with nixpacks.
 
-
 <video width="800" height="450" controls>
   <source src="https://res.cloudinary.com/techstructive-blog/video/upload/v1657965560/blog-media/railway-nixpacks-deploy.mp4" type="video/mp4">
 </video>
 
-So, we simply can configure the source code or include the `environment.nix` file into the source code for desired behavior. The nixpack selection can be done based on the source code or the presence of `environment.nix` and that's why we can rely on expected behaviors from the deployment builds. 
+So, we simply can configure the source code or include the `environment.nix` file into the source code for desired behavior. The nixpack selection can be done based on the source code or the presence of `environment.nix` and that's why we can rely on expected behaviors from the deployment builds.
 
 ## Summary
 

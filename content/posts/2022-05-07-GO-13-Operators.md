@@ -1,16 +1,20 @@
 ---
 templateKey: blog-post
-title: "Golang: Operators"
-description: "Understanding the basics of operators like arithmetic, logical, bitwise, assignment operators in Golang"
-date: 2022-05-07 20:33:38
+description: >-
+  Understanding the basics of operators like arithmetic, logical, bitwise,
+  assignment operators in Golang
 status: published
 slug: golang-operators
-tags: ['go',]
-image_url: https://meetgor-cdn.pages.dev/golang-013-operators.png
-series: ['100-days-of-golang',]
+image_url: 'https://meetgor-cdn.pages.dev/golang-013-operators.png'
+series:
+  - 100-days-of-golang
+title: 'Golang: Operators'
+date: 2022-05-07T20:33:38.000Z
+tags:
+  - go
 ---
 
-## Introduction 
+## Introduction
 
 In this 13th part of the series, we will be exploring the fundamentals of operators in Golang. We will be exploring the basics of operators and the various types like Arithmetic, Bitwise, Comparison, Assignment operators in Golang.
 
@@ -28,7 +32,7 @@ Golang has a few types of operators, each type providing particular aspect of fo
 
 ### Bitwise Operators
 
-Bitwise Operators are used in performing operations on binary numbers. We can perform operation on a bit level and hence they are known as bitwise operators. Some fundamental bitwise operators include, `AND`, `OR`, `NOT`, and `EXOR`. Using this operators, the bits in the operands can be manipulated and certain logical operations can be performed. 
+Bitwise Operators are used in performing operations on binary numbers. We can perform operation on a bit level and hence they are known as bitwise operators. Some fundamental bitwise operators include, `AND`, `OR`, `NOT`, and `EXOR`. Using this operators, the bits in the operands can be manipulated and certain logical operations can be performed.
 
 ```go
 package main
@@ -67,17 +71,17 @@ Also, the `|` (OR operator) for performing logical OR operation on two operands.
 
 Also the `^` (EXOR operator) for performing logical EXOR operation on two operands. Here we are logically EXORing `3` and `5` i.e. `011` with `101` so it becomes `110` in binary or 6 in decimal.
 
-We have a couple of more bitwise operators that allow us to shift bits in the binary representation of the number. We have two types of these shift operators, right sift and left shift operators. The main function of these operator is to shift a bit in either right or left direction. 
+We have a couple of more bitwise operators that allow us to shift bits in the binary representation of the number. We have two types of these shift operators, right sift and left shift operators. The main function of these operator is to shift a bit in either right or left direction.
 
 In the above example, we have shifted `3` i.e. `011` to right by one bit so it becomes `001`. If we would have given `x >> 2` it would have become `0` since the last bit was shifted to right and hence all bits were 0.
 
-Similarly, the left shift operator sifts the bits in the binary representation of the number to the left. So, in the example above, `5` i.e. `101` is shifted left by one bit so it becomes `1010` in binary i.e. 10 in decimal. 
+Similarly, the left shift operator sifts the bits in the binary representation of the number to the left. So, in the example above, `5` i.e. `101` is shifted left by one bit so it becomes `1010` in binary i.e. 10 in decimal.
 
 This was a basic overview of bitwise operators in Golang. We can use these basic operators to perform low level operations on numbers.
 
 ### Comparison Operators
 
-This type of operators are quite important and widely used as they form the fundamentals of comparison of variables and forming boolean expressions. The comparison operator is used to compare two values or expressions. 
+This type of operators are quite important and widely used as they form the fundamentals of comparison of variables and forming boolean expressions. The comparison operator is used to compare two values or expressions.
 
 ```go
 package main
@@ -109,7 +113,7 @@ Is A less than or equal to B ?  false
 
 We use simple comparison operators like `==` or `!=` for comparing if two values are equal or not. The expression `a == b` will evaluate to `true` if the values of both variables or operands are equal. However, the expression `a != b` will evaluate to `true` if the values of both variables or operands are not equal.
 
-Similarly, we have the `<` and `>` operators which allow us to evaluate expression by comparing if the values are less than or grater than the other operand. So, the expression `a > b` will evaluate to `true` if the value of `a` is greater than the value of `b`. Also the expression `a < b` will evaluate to `true` if the value of `a` is less than the value of `b`. 
+Similarly, we have the `<` and `>` operators which allow us to evaluate expression by comparing if the values are less than or grater than the other operand. So, the expression `a > b` will evaluate to `true` if the value of `a` is greater than the value of `b`. Also the expression `a < b` will evaluate to `true` if the value of `a` is less than the value of `b`.
 
 Finally, the operators `<=` and `>=` allow us to evaluate expression by comparing if the values are less than or equal to and greater than or equal to the other operand. So, the expression `a >= b` will evaluate to `true` if the value of `a` is greater than or if it is equal to the value of `b`, else it would evaluate to `false`. Similarly, the expression `a <= b` will evaluate to `true` if the value of `a` is less than or if it is equal to the value of `b`, else it would evaluate to `false`.
 
@@ -117,7 +121,7 @@ These was a basic overview of comparison operators in golang.
 
 ### Logical Operators
 
-Next, we move on to the logical operators in Golang which allow to perform logical operations like `AND`, `OR`, and `NOT` with conditional statements or storing boolean expressions. 
+Next, we move on to the logical operators in Golang which allow to perform logical operations like `AND`, `OR`, and `NOT` with conditional statements or storing boolean expressions.
 
 ```go
 package main
@@ -149,7 +153,7 @@ Here, we have used logical operators like `&&` for Logical AND, `||` for logical
 
 ### Arithmetic Operators
 
-Arithmetic operators are used for performing Arithmetic operations. We have few basic arithmetic operators like `+`, `-`, `*`, `/`, and `%` for adding, subtracting, multiplication, division, and modulus operation in golang. 
+Arithmetic operators are used for performing Arithmetic operations. We have few basic arithmetic operators like `+`, `-`, `*`, `/`, and `%` for adding, subtracting, multiplication, division, and modulus operation in golang.
 
 ```go
 package main
@@ -176,7 +180,7 @@ A / B =  0
 A % B =  30
 ```
 
-These are the basic mathematical operators in any programming language. We can use `+` to add two values, `-` to subtract two values, `*` to multiply to values, `/` for division of two values and finally `%` to get the remainder of a division of two values i.e. if we divide 30 by 50, the remainder is 30 and the quotient is 0. 
+These are the basic mathematical operators in any programming language. We can use `+` to add two values, `-` to subtract two values, `*` to multiply to values, `/` for division of two values and finally `%` to get the remainder of a division of two values i.e. if we divide 30 by 50, the remainder is 30 and the quotient is 0.
 
 We also have a few other operators like `++` and `--` that help in incrementing and decrementing values by a unit value. Let's say we have a variable `k` which is set to `4` and we want to increment it by one, so we can definitely use `k = k + 1` but it looks kind of too long, we have a short notation for the same `k++` to do the same.
 
@@ -265,5 +269,3 @@ That's it from this part. Reference for all the code examples and commands can b
 ## Conclusion
 
 So, from the following part of the series, we were able to learn the basics of operators in golang. Using some simple and easy to understand examples, we were able to explore different types of operators like arithmetic, logical, assignment and bitwise operators in golang. These are quite fundamental in programming in general, this lays a good foundation for working with larger and complex projects that deal with any kind of logic in it, without a doubt almost all of the applications do have a bit of logic attached to it. So, we need to know the basics of operators in golang.
-
-

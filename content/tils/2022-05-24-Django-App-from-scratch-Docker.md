@@ -1,16 +1,21 @@
 ---
-templateKey: til 
-title: "Django App from Scratch Using Docker with Debian Base Image"
-description: "Creating a django basic application with configuration for static files, templates and user authentication using docker and debian base image."
-date: 2022-05-24 22:30:00
+templateKey: til
+description: >-
+  Creating a django basic application with configuration for static files,
+  templates and user authentication using docker and debian base image.
 status: published-til
 slug: django-app-from-scratch
-tags: ['docker', 'web-development', 'django',]
+title: Django App from Scratch Using Docker with Debian Base Image
+date: 2022-05-24T22:30:00.000Z
+tags:
+  - docker
+  - web-development
+  - django
 ---
 
 ## Pull a Fresh Debian Image
 
-Create a docker container from a Debian image, the following command can be used to pull a debain 11-slim image and create a container of it, also enter into the container in a interactive environment `-it` mode. 
+Create a docker container from a Debian image, the following command can be used to pull a debain 11-slim image and create a container of it, also enter into the container in a interactive environment `-it` mode.
 
 ```
 docker run -v $(pwd):/var/www --rm -it -p 8001:80 debian:11-slim
@@ -56,7 +61,7 @@ This will generate the project in the `/var/www/` folder with the name of the pr
 
 ## Copy the contents from the docker container
 
-You can copy the contents of the folder into your local machine by entering the [cp](https://docs.docker.com/engine/reference/commandline/cp/) command in docker. 
+You can copy the contents of the folder into your local machine by entering the [cp](https://docs.docker.com/engine/reference/commandline/cp/) command in docker.
 
 ```
 docker cp <container_id>:/var/www/<project_name> /path/in_local_machine/

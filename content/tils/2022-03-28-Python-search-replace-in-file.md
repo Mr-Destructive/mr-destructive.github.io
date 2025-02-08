@@ -1,11 +1,12 @@
 ---
 templateKey: til
-title: "Python: Search and Replace in File"
-description: "Perform search-replace operation in a file using python"
-date: 2022-03-28 18:59:30
+description: Perform search-replace operation in a file using python
 status: published-til
 slug: python-search-replace-file
-tags: ['python',]
+title: 'Python: Search and Replace in File'
+date: 2022-03-28T18:59:30.000Z
+tags:
+  - python
 ---
 
 ## Searching and Replacing the text in a File
@@ -30,4 +31,3 @@ with open(file_name, "r+") as fname:
 ```
 
 ![Python Search Replace in File](https://res.cloudinary.com/techstructive-blog/image/upload/v1648479344/blog-media/cstvfdlazyfriwvnilju.png)
-

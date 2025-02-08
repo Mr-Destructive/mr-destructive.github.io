@@ -1,13 +1,18 @@
 ---
 templateKey: blog-post
-title: "NGINX Survival Guide: Serving Web Applications"
-description: "NGINX Fundamentals: Setting Up Simple HTTP Servers, Serving Custom Content, multiple upstream servers"
-date: 2024-07-21 22:45:00
+description: >-
+  NGINX Fundamentals: Setting Up Simple HTTP Servers, Serving Custom Content,
+  multiple upstream servers
 status: published
 slug: nginx-02-web-servers
-tags: ['nginx', 'web-development']
-series: ['nginx-survival-guide',]
-image_url: https://meetgor-cdn.pages.dev/nginx-survival-guide/nginx-sg-2.png
+series:
+  - nginx-survival-guide
+image_url: 'https://meetgor-cdn.pages.dev/nginx-survival-guide/nginx-sg-2.png'
+title: 'NGINX Survival Guide: Serving Web Applications'
+date: 2024-07-21T22:45:00.000Z
+tags:
+  - nginx
+  - web-development
 ---
 
 ## Introduction
@@ -97,11 +102,8 @@ http {
 In the above example, the NGINX listens to port 80 in the local system and sends the request to the localhost at port 8001. The `proxy_pass` is used to specify the URL to redirect the request to.
 
 * **listen 80:** Nginx listens for incoming requests on port 80, the standard HTTP port.
-    
 * **location /:** This directive matches all incoming requests, regardless of the path.
-    
-* **proxy\_pass**[**http://localhost:8001**](http://localhost:8001)**:** Requests are forwarded to the web application running on [localhost](http://localhost) at port 8001.
-    
+* **proxy\_pass[http://localhost:8001](http://localhost:8001):** Requests are forwarded to the web application running on [localhost](http://localhost) at port 8001.
 
 This example configuration is a basic building block for setting up more complex proxy configurations with NGINX.
 
@@ -134,26 +136,18 @@ http {
 In this configuration:
 
 * The `upstream` block defines a named group of backend servers (`myapp`).
-    
 * The `server` block listens on port 80 and proxies requests to the upstream group defined earlier.
-    
 * `upstream myapp`: This directive creates a group of backend servers named `myapp`.
-    
 * [`server backend1.example.com`](http://backend1.example.com) : These directives list the backend servers that will handle the requests. These can be specified by hostname, IP address, or combination.
-    
 * `proxy_pass` [`http://myapp`](http://myapp): This directive tells NGINX to forward incoming requests to the `myapp` upstream group.
-    
 
 ### Why Use Upstream Servers?
 
 Using upstream servers has several advantages:
 
 * Scalability: By distributing requests across multiple servers, you can handle more traffic and scale your application horizontally.
-    
 * Fault Tolerance: If one of the backend servers goes down, NGINX can continue to serve requests using the remaining servers, ensuring high availability.
-    
 * Load Distribution: Upstream servers help in balancing the load, which can improve the performance and responsiveness of your web application.
-    
 
 The below configuration sets up NGINX to act as a gateway that distributes incoming traffic to multiple upstream servers. It defines an upstream block with servers at [`localhost:8001`](http://localhost:8001) and [`localhost:8002`](http://localhost:8002), and forward requests to these servers.
 

@@ -1,11 +1,13 @@
 ---
 templateKey: til
-title: "Adding SSH Keys for Multiple Accounts in Git"
-description: "Setting up SSH config for using multiple accounts for Git repositories."
+description: Setting up SSH config for using multiple accounts for Git repositories.
 status: published-til
 slug: git-ssh-multiple-accounts
-tags: ["git", "github"]
-date: 2024-03-22 22:30:00
+title: Adding SSH Keys for Multiple Accounts in Git
+date: 2024-03-22T22:30:00.000Z
+tags:
+  - git
+  - github
 ---
 
 Let's  say you have multiple github accounts. One for your personal projects, one for your company that you work at, and one other remote repository account (let's say gitlab).
@@ -25,7 +27,6 @@ The above command will prompt you for two things
 1. The location where you want to store the key
 2. The passphrase for accessing the key
 
-
 ### Add SSH Key to Github
 
 Locate to the `ssh` folder and copy the generated `.pub` file to your `github` account.
@@ -33,7 +34,6 @@ Locate to the `ssh` folder and copy the generated `.pub` file to your `github` a
 For example, if you have created the key at `~/.ssh/your_name` then copy the contents of the file `~/.ssh/your_name.pub` to your clipbaord.
 
 Navigate to your `github` account and in the settings, `SSH and GPG keys` tab, click on `Add SSH key` and copy the contents of your clipboard to the `Key` field.
-
 
 ### Configuring the SSH keys for multiple accounts
 

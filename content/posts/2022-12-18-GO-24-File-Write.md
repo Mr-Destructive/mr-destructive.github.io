@@ -1,14 +1,17 @@
 ---
 templateKey: blog-post
-title: "Golang: File Write"
-description: "Using system calls to write files in Golang. Performig writing, appending, deleting, replacing operations to a file"
-date: 2022-12-18 15:15:00
+description: >-
+  Using system calls to write files in Golang. Performig writing, appending,
+  deleting, replacing operations to a file
 status: published
 slug: golang-file-write
-tags: ['go',]
-series: ['100-days-of-golang',]
-image_url: https://meetgor-cdn.pages.dev/golang-024-file-write.png
-
+series:
+  - 100-days-of-golang
+image_url: 'https://meetgor-cdn.pages.dev/golang-024-file-write.png'
+title: 'Golang: File Write'
+date: 2022-12-18T15:15:00.000Z
+tags:
+  - go
 ---
 
 ## Introduction
@@ -404,7 +407,7 @@ Bye
 Gophers
 ```
 
-As we can see we have replaced `Hello\nWorld` it with `Bye`. So, the \[Replace\] method in the bytes package takes in the parameters like the slice of bytes which should be the actual contents of the file, the old text to be replaced with again as a slice of bytes, and the new text to replace also as the slice of bytes, the final parameter is the number of replacements to be made. Here `-1` indicates there are no limits on how many replacements can be done, it can be `1`, `2` for replacing the first n occurrence of the old text, depending on how many times you want to replace the content in the file.
+As we can see we have replaced `Hello\nWorld` it with `Bye`. So, the \[Replace] method in the bytes package takes in the parameters like the slice of bytes which should be the actual contents of the file, the old text to be replaced with again as a slice of bytes, and the new text to replace also as the slice of bytes, the final parameter is the number of replacements to be made. Here `-1` indicates there are no limits on how many replacements can be done, it can be `1`, `2` for replacing the first n occurrence of the old text, depending on how many times you want to replace the content in the file.
 
 ## Delete Text from a File
 

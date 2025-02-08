@@ -1,13 +1,18 @@
 ---
 templateKey: blog-post
-title: "Golang: JSON YAML TOML (config) File Reading."
-description: "Reading specific files used generally for configuration and storing data, as well as for web development. Reading file formats like JSON, YAML, TOML, CSV, and XML."
-date: 2022-11-01 23:00:00
+description: >-
+  Reading specific files used generally for configuration and storing data, as
+  well as for web development. Reading file formats like JSON, YAML, TOML, CSV,
+  and XML.
 status: published
 slug: golang-config-file-read
-tags: ['go',]
-series: ['100-days-of-golang',]
-image_url: https://meetgor-cdn.pages.dev/golang-023-config-files.png
+series:
+  - 100-days-of-golang
+image_url: 'https://meetgor-cdn.pages.dev/golang-023-config-files.png'
+title: 'Golang: JSON YAML TOML (config) File Reading.'
+date: 2022-11-01T23:00:00.000Z
+tags:
+  - go
 ---
 
 ## Reading specific file types (JSON, YAML, TOML)
@@ -21,7 +26,6 @@ We will see how to read files and get individual pieces in the files. We'll use 
 Golang has built-in support for reading JSON files, but still, we can and need to have low-level controls on how to parse and extract content from the file.
 
 Let's say we have a `json` file named `blog.json`, we can use the [encoding/json](https://pkg.go.dev/encoding/json) package to convert the JSON data into a GO object (an object that is native and understandable to go). The [Unmarshal](https://pkg.go.dev/encoding/json#Unmarshal) function is used to convert the slice of bytes from the file, into a map object.
-
 
 ```json
 {
@@ -73,6 +77,7 @@ date : 22nd October 2022
 tags : [go files]
 words : 1500
 ```
+
 The file is read using the [os.ReadFile](https://pkg.go.dev/os#ReadFile) method, that takes in a string as a path to the file and returns a slice of bytes or an error if there was an issue in reading the file. The parsed slice of byte is than passed as the first argument to the `Unmarshal` method in the `encoding/json` package. The second parameter is the output reference where the parsed JSON will be stored or returned. The function does not return the parsed content instead returns an error if there arose any while parsing the JSON content.
 
 As we can see we have got a map of `string` with an `interface`. The interface is used because the value of the key can be anything. There is no fixed value like a `string`, `int`, `bool`, or a nested `map`, `slice`. Hence we have mapped the JSON object as a map of `string` with an `interface`. The type of the value is identified with the interface it has attached to it. Let's take a look what is the type of each value in the map.
@@ -94,8 +99,7 @@ words : 1500
 float64
 ```
 
-Here, we can see it has correctly identified the string type of the fields like bool in case of true or false, a string for string type of values, the fourth field however has a list interface attached to it. The default precedence for `float64` over integer is the reason the `1500` value is of type `float64`. 
-
+Here, we can see it has correctly identified the string type of the fields like bool in case of true or false, a string for string type of values, the fourth field however has a list interface attached to it. The default precedence for `float64` over integer is the reason the `1500` value is of type `float64`.
 
 ### Reading a YAML File
 
@@ -316,8 +320,8 @@ int64
 ```
 
 The above is a verbose output for the type of the values as parsed by golang, we have `string`, `bool`, `int64`, and a `slice` (list with interface{} attached with it). Only types like `string`, `bool`, `int`, `float64` can be parsed from the Unmarshal function, other than these types, the type will have an interface attached to it.
- 
- In such cases, where the type of value is not among the 4 types(string, bool, int float), we can use a pre-defined struct to parse the content from the file. Though it would require a strict structure and predictable response from the parsed file.
+
+In such cases, where the type of value is not among the 4 types(string, bool, int float), we can use a pre-defined struct to parse the content from the file. Though it would require a strict structure and predictable response from the parsed file.
 
 ### Reading CSV file
 
@@ -384,13 +388,11 @@ chris
 
 The CSV package has a [NewReader](https://pkg.go.dev/encoding/csv#NewReader) method that accepts an `io.Reader` and returns a `Reader` object. After parsing the reader, we use the [ReadAll](https://pkg.go.dev/encoding/csv#Reader.ReadAll) method to return a 2d string or an error if there exists an error while parsing the content. You can get a detailed explanation of the CSV parsing and reading in the [previous post](https://www.meetgor.com/golang-file-read/#Read%20File%20by%20a%20delimiter).
 
-
 ### Reading CSV from URL
 
-The CSV file can also be read from the URL, the content of the file is a `response.Body` in place of the file object reference, in the previous example, the [os.Open()](https://pkg.go.dev/os#Open) method returns a [os.File](https://pkg.go.dev/os#File) object. 
+The CSV file can also be read from the URL, the content of the file is a `response.Body` in place of the file object reference, in the previous example, the [os.Open()](https://pkg.go.dev/os#Open) method returns a [os.File](https://pkg.go.dev/os#File) object.
 
 We use the `http.Get(string)` method to get the response from the URL for reading the CSV file present on the web.
-
 
 ```go
 package main
@@ -445,6 +447,7 @@ Date sale price ends
 ...
 ...
 ```
+
 So, that's how we can read a CSV file from the URL. By fetching the CSV URL `https://github.com/woocommerce/woocommerce/raw/master/sample-data/sample_products.csv` from the [http.Get](https://pkg.go.dev/net/http#Client.Get) method, this will get us the [response.Body](https://pkg.go.dev/net/http#Response) that contains the actual CSV file content. The response than can be parsed to the `csv.NewReader(*Os.File).ReadAll()` i.e. [reader.ReadAll()](https://pkg.go.dev/encoding/csv#Reader.ReadAll). The function returns a multidimensional slice `[][]slice` that can be iterated and parsed as per requirement.
 
 ### Reading XML file
@@ -471,7 +474,7 @@ We will be using a local XML file called `rss.xml`, and reading the contents fro
 </channel>
 ```
 
-The above example is a short part of my blog's [rss](https://www.meetgor.com/rss) feed. I have just trimmed the unwanted part and will be just using the tags that we want to fetch. 
+The above example is a short part of my blog's [rss](https://www.meetgor.com/rss) feed. I have just trimmed the unwanted part and will be just using the tags that we want to fetch.
 
 ```go
 package main
@@ -528,14 +531,14 @@ Setting up Vim for Python
 
 The above example uses a couple of `struct` like `Channel` and `Item` that stores the tag data like `title`, `description`, `link`, etc. Unlike the JSON, YAML, and toml files, XML can't parse the content directly we need a structure to parse into. And that's fine as XML is not much dynamic in terms of config, we usually have standard tags and elements which can be pre-defined in a struct type.
 
-In this example, the RSS feed has a `Channel` tag with `title`, `description`, and `item`. 
+In this example, the RSS feed has a `Channel` tag with `title`, `description`, and `item`.
 
 **NOTE: Use Title case for the fields of the structs. It will make the fields public, I spent a few hours debugging that really :)**
 
 So, we define the `Channel` struct with fields like `Title` as a string which is a tag in the file as `xml:"title"`. This means the title in the tag of the XML will be stored in the field as a string in the attribute name as `Title`. Similarly, we have fields like `Description` and `Item[]` this is a list or multiple of `item` tags that might be present in the XML file. The `XMLName` is used for identifying the parent tag for the struct, so we use `channel` for the first struct as it is the first tag appearing of the hierarchy in the XML file.
 
 So, we create an object for the root structure as `Channel{}` (an empty object instantiated). The `xml.Unmarshal` function is parsed with the content of the file as `data` which is a slice of byte as we have seen in the previous examples. The slice of byte is then used in the `Unmarshal` method as the first parameter and the reference of an empty `Channel` object as the second parameter. The second parameter will be to store the parsed XML content from the file.
- 
+
 I have a few examples on the GitHub repository covering the reading of files from a URL for the CSV, and XML files. But, this concept in the example, can be applied to JSON, YAML, and other file formats as well.
 
 That's it from this part. Reference for all the code examples and commands can be found in the [100 days of Golang](https://github.com/Mr-Destructive/100-days-of-golang/tree/main/scripts/files/read/config_files) GitHub repository.

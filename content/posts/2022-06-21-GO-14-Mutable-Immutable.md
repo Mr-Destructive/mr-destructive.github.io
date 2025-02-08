@@ -1,16 +1,20 @@
 ---
 templateKey: blog-post
-title: "Golang: Mutable and Immutable Data Types"
-description: "Understanding and Exploring immutable and mutable data types in Golang. Learning why the variable behaves in golang as they do."
-date: 2022-06-21 21:00:00
+description: >-
+  Understanding and Exploring immutable and mutable data types in Golang.
+  Learning why the variable behaves in golang as they do.
 status: published
 slug: golang-mutable-immutable
-tags: ['go',]
-series: ['100-days-of-golang',]
-image_url: https://meetgor-cdn.pages.dev/golang-014-im-mutables.png
+series:
+  - 100-days-of-golang
+image_url: 'https://meetgor-cdn.pages.dev/golang-014-im-mutables.png'
+title: 'Golang: Mutable and Immutable Data Types'
+date: 2022-06-21T21:00:00.000Z
+tags:
+  - go
 ---
 
-## Introduction 
+## Introduction
 
 In this 14th Post of the 100 days of GOlang, we will be understanding about the mutable and immutable data types in Golang. Firstly, we will understand the concept of mutability and understand the differences in mutable and immutable data types, further we will explore which data types in Golang are Mutable and Immutable.
 
@@ -67,11 +71,11 @@ int experience = 17
 
 // If the data type is mutable, we can directly change the value in the memory address
 
-```   
+```
 
 ## Immutable Data Types
 
-Immutable data type is a data type which cannot be modified without allocating a new memory. So, the immutable data type has to reallocate memory for making changes to the value of a variable. This might be a downside if the variable is holding a large sets of values, it will require a lot of memory re-allocation for a slight change in the value. 
+Immutable data type is a data type which cannot be modified without allocating a new memory. So, the immutable data type has to reallocate memory for making changes to the value of a variable. This might be a downside if the variable is holding a large sets of values, it will require a lot of memory re-allocation for a slight change in the value.
 
 Immutable data types also mean that you cannot change the value in the memory address which the variable is pointing to, but you can make the variable point to a different memory location under the hood to change or modify the content of a variable.
 
@@ -96,10 +100,9 @@ string fruit = "orange"
 
 This is the basics of mutability and immutability, this might be a bit difficult to digest, but take your time and understand it thoroughly. This concept is critical for understanding the under the hood point of view while debugging in several occasions.
 
-
 ## Mutable data type in Golang
 
-In golang there are a few mutable data types 
+In golang there are a few mutable data types
 
 1. Slice
 2. Array
@@ -110,7 +113,7 @@ In golang there are a few mutable data types
 
 Slice and Arrays are mutable data types in golang, this means the value of the elements in slice or array can be changed after initialization without re-allocations of memory.
 
-```	go
+```go
 package main
 
 import "fmt"
@@ -174,7 +177,7 @@ a = [10 20 30]
 b = [10 40 30]
 ```
 
-   In the above example, we can see the array `a` is initialized with a fixed length and initialized values. We then create another array by assigning the array `a` to it, this creates a copy of a collection of the elements in a different memory location. So, if we change an element in the array `b`, there won't be any change in the elements of array `a` as the elements are stored in a completely different memory location.
+In the above example, we can see the array `a` is initialized with a fixed length and initialized values. We then create another array by assigning the array `a` to it, this creates a copy of a collection of the elements in a different memory location. So, if we change an element in the array `b`, there won't be any change in the elements of array `a` as the elements are stored in a completely different memory location.
 
 ### Map
 
@@ -211,16 +214,16 @@ In the above example, we can see the map `m` is a string integer map with 2 keys
 
 ## Immutable data type in Golang
 
-In golang, there are a few immutable data types as well like string, pointers, boolean, and core data types like integer, float, etc. As we discussed immutable data types, are data types that don't change the value of the variable directly into the provided memory address, it re-allocates the memory address with the new value/edited value. 
+In golang, there are a few immutable data types as well like string, pointers, boolean, and core data types like integer, float, etc. As we discussed immutable data types, are data types that don't change the value of the variable directly into the provided memory address, it re-allocates the memory address with the new value/edited value.
 
 1. Boolean, Int, Float
-3. Pointers
+2. Pointers
 3. String
 4. Interfaces
 
 ### Boolean
 
-The boolean data type on golang is an immutable data type which means it re-allocates the memory for any change in the value of the boolean variable. Boolean variables are simple as they can have two values either `true` or `false`. If we declare a boolean variable initialize it with a value, if we further wanted to change the value of the variable, it is done by reallocating the memory address which was initially holding the value. 
+The boolean data type on golang is an immutable data type which means it re-allocates the memory for any change in the value of the boolean variable. Boolean variables are simple as they can have two values either `true` or `false`. If we declare a boolean variable initialize it with a value, if we further wanted to change the value of the variable, it is done by reallocating the memory address which was initially holding the value.
 
 ```go
 package main
@@ -237,7 +240,7 @@ func main() {
 	fmt.Println("b = ", b)
 
 }
-```   
+```
 
 ```
 go run immutable.go
@@ -246,17 +249,15 @@ boolean =  true
 b =  false
 ```
 
-   In this example, we can see that the boolean variable `boolean` (I have literally named it boolean) is initialized as `true`, next we declare another variable `b` and set it to the value of `boolean` which is the value `true`. We then change the value of the variable `b` but the value of `boolean` does not change. It doesn't give much clarity on the immutability of the boolean data type. This is because it is an under an hood process and a low-level process in programming in golang.
+In this example, we can see that the boolean variable `boolean` (I have literally named it boolean) is initialized as `true`, next we declare another variable `b` and set it to the value of `boolean` which is the value `true`. We then change the value of the variable `b` but the value of `boolean` does not change. It doesn't give much clarity on the immutability of the boolean data type. This is because it is an under an hood process and a low-level process in programming in golang.
 
-Immutable doesn't mean you cannot change values, but the value is not directly changed, there happens some under-the-hood (low level) stuff to alter the value and change the memory address which is ben pointed as the location which holds the value. 
+Immutable doesn't mean you cannot change values, but the value is not directly changed, there happens some under-the-hood (low level) stuff to alter the value and change the memory address which is ben pointed as the location which holds the value.
 
 To get more clarity, you can refer to this [Stack-Overflow discussion](https://stackoverflow.com/questions/71589811/go-ints-and-strings-are-immutable-or-mutable/71590289#71590289).
-
 
 ### Pointers
 
 Pointer as well is an immutable data type in golang, we cannot change the value in this case the memory address of a variable which we are pointing to, directly but we need to re-allocate the memory for changing the value of the variable.
-
 
 ```go
 package main
@@ -289,14 +290,13 @@ ptr     =  0xc0000aa008
 ptr_new =  0xc0000aa020
 ```
 
-   Clearly, in the example, we have initially created a pointer `ptr` which points to the variable `n`, then we create another pointer `ptr_new` and assign it to the value of the pointer `ptr`. This will make both the pointers point to the same variable `n`. We then point the `ptr_new` pointer to the variable `t`, this changes the value of pointer `ptr_new` but since the pointer stores a memory address, it was not holding the actual value at the memory address. So, the change in the pointing value of `ptr_new` does not change the value of the pointer `ptr`.
+Clearly, in the example, we have initially created a pointer `ptr` which points to the variable `n`, then we create another pointer `ptr_new` and assign it to the value of the pointer `ptr`. This will make both the pointers point to the same variable `n`. We then point the `ptr_new` pointer to the variable `t`, this changes the value of pointer `ptr_new` but since the pointer stores a memory address, it was not holding the actual value at the memory address. So, the change in the pointing value of `ptr_new` does not change the value of the pointer `ptr`.
 
 Again, immutable types cannot be seen actually changing the memory location of those variables, it is just the low-level implementation that sometimes needs to be kept in mind.
 
 ### String
 
 Strings are the classical example of immutable data types in golang, this data type is quite commonly used and is quite important for creating a wide variety of applications. The value of the string variable can be changed but the process happens with/without changing the value of the memory address of the initial value, we have to change the memory address of the variable in order to change the value. This might not be evident by even using `&variable_name` as it doesn't give the actual insight about the internal working of how the memory address might be processed at run time.
-
 
 ```go
 package main
@@ -348,8 +348,8 @@ go run immutable.go
 
 immutable.go:18:2: cannot assign to s[4] (value of type byte)
 ```
-  
-   So, we can see we cannot change the value of the internal characters of the string. This is why string data type is immutable, we cannot change the value of internal elements of the variable directly but we can change the value of the variable as a whole as we saw in the previous example. 
+
+So, we can see we cannot change the value of the internal characters of the string. This is why string data type is immutable, we cannot change the value of internal elements of the variable directly but we can change the value of the variable as a whole as we saw in the previous example.
 
 So this is how the immutable data types are perceived in golang, we cannot change the value directly at the memory address, we change the internal location for any change in the value which is dependent on the decision by the garbage collector.
 

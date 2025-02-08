@@ -1,11 +1,12 @@
 ---
 templateKey: til
-title: "Read a Rss Feed with a URL in Golang"
-description: "Reading Rss Feed with a Rss XML Link/URL in golang using encoding package"
+description: Reading Rss Feed with a Rss XML Link/URL in golang using encoding package
 status: published-til
 slug: golang-read-rss-feed
-tags: ["go", ]
-date: 2022-11-11 22:45:00
+title: Read a Rss Feed with a URL in Golang
+date: 2022-11-11T22:45:00.000Z
+tags:
+  - go
 ---
 
 ## Reding Rss Feed
@@ -143,7 +144,7 @@ func main() {
 }
 ```
 
-If you would look at the [rss feed](https://meetgor.com/rss.xml), you can see it has a structure of tags and elements. The `rss` tag is the root tag, followed by `channel` and other types of nested tags speicific for the type of information to be stored like `title` for the title in the feed, `link` for the link to the feed, etc. 
+If you would look at the [rss feed](https://meetgor.com/rss.xml), you can see it has a structure of tags and elements. The `rss` tag is the root tag, followed by `channel` and other types of nested tags speicific for the type of information to be stored like `title` for the title in the feed, `link` for the link to the feed, etc.
 
 So, we create those as structure, the root structure is the `Rss` which we will create with a few attributes like `Channel` and the name of the current tag. In the `Rss` case the name of the tag/element is `rss`, so it is given the `xml.Name` as `xml:'rss'` in backticks indicating the type hint for the field. The next field is the `Channel` which is another type(custom type struct). We have defined `Channel` as a struct just after it that will hold information like the `title`, `description` of the website. We also have the `xml.Name` as `xml:"channel"` which indicates the current struct is representation of `channel` tag in the rss feed. Finally, we also have a custom type struct as `Item`. The `Item` struct has a few attributes like `Title`, `Link` and you can now start to see the pattern, you can customize it as per your requirements and speicifications.
 
@@ -231,7 +232,7 @@ The Unmarshal method takes in the slice of byte and the second paramter as point
 
 So we parse the `data` which is a slice of byte to the funciton and the reference to the `d` object which is a empty `Rss` object. This will get us the data in the `d` object. We can then iterate over the object as per the struct and use the perform operations like type casting or converting types, etc to get your required data back.
 
-In the above example, we simply iterate over the `d.Channel.Item` which is a list of elements of tag `item` in the rss feed. Inside the for loop, we can access the object and simply print or perform any sort of operations. I have simply printed the list of articles with titles. 
+In the above example, we simply iterate over the `d.Channel.Item` which is a list of elements of tag `item` in the rss feed. Inside the for loop, we can access the object and simply print or perform any sort of operations. I have simply printed the list of articles with titles.
 
 Links for the code available on the [100 days of golang](https://github.com/Mr-Destructive/100-days-of-golang/blob/main/scripts/files/read/config_files/xml/rss.go) GitHub repository.
 

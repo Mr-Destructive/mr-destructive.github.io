@@ -1,12 +1,15 @@
 ---
 templateKey: blog-post
-title: "Safely using Maps in Golang: Differences in declaration and initialization"
-description: "Walkthrough the differences and pitfalls in declaring and initializing maps in Golang"
-date: 2024-08-31 18:30:00
+description: >-
+  Walkthrough the differences and pitfalls in declaring and initializing maps in
+  Golang
 status: published
 slug: golang-safely-using-maps
-tags: ['go',]
-image_url: https://meetgor-cdn.pages.dev/golang-safe-map-usage.png
+image_url: 'https://meetgor-cdn.pages.dev/golang-safe-map-usage.png'
+title: 'Safely using Maps in Golang: Differences in declaration and initialization'
+date: 2024-08-31T18:30:00.000Z
+tags:
+  - go
 ---
 
 ## Introduction
@@ -76,7 +79,6 @@ Let's looks at the values of a map when it is declared/initialized/not initializ
 Imagine you're building a configuration manager that reads settings from a map. The map will be declared globally but initialized only when the configuration is loaded.
 
 1. Declared but not initialized
-    
 
 The below code demonstrates a map access that is not initialized.
 
@@ -114,8 +116,7 @@ $ go run main.go
 Server port: Setting not found
 ```
 
-2. Declared and Initialized at the same time
-    
+1. Declared and Initialized at the same time
 
 The below code demonstrates a map access that is initialized at the same time.
 
@@ -152,8 +153,7 @@ $ go run main.go
 Server port: 8080
 ```
 
-3. Declared and later initialized
-    
+1. Declared and later initialized
 
 The below code demonstrates a map access that is initialized later.
 
@@ -204,7 +204,6 @@ $ go run main.go
 Configuration settings initialized
 Server port: 8080
 ```
-
 
 In the above code, we declared the global map `configSettings` but didn't initialize it at that point, until we wanted to access the map. We initialize the map in the main function, this main function could be other specific parts of the code, and the global variable `configSettings` a map from another part of the code, by initializing it in the required scope, we prevent it from causing nil pointer access errors. We only initialize the map if it is `nil` i.e. it has not been initialized elsewhere in the code. This prevents overriding the map/flushing out the config set from other parts of the scope.
 

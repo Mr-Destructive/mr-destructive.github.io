@@ -1,14 +1,20 @@
 ---
 templateKey: blog-post
-title: "Connect LibSQL Database hosted on Turso in a Golang Application"
-description: "Exploring how to connect and query a LibSQL database hosted on Turso/Cloud in a Golang Application using libsql-client."
-date: 2024-09-30 23:45:00
+description: >-
+  Exploring how to connect and query a LibSQL database hosted on Turso/Cloud in
+  a Golang Application using libsql-client.
 status: published
 slug: turso-libsql-db-golang
-tags: ['go', 'turso', 'libsql']
-series: ['lets-go-with-turso',]
-series_description: "Exploring Turso's LibSQL database with Golang."
-image_url: https://meetgor-cdn.pages.dev/connect-turso-libsql-golang.png
+series:
+  - lets-go-with-turso
+series_description: Exploring Turso's LibSQL database with Golang.
+image_url: 'https://meetgor-cdn.pages.dev/connect-turso-libsql-golang.png'
+title: Connect LibSQL Database hosted on Turso in a Golang Application
+date: 2024-09-30T23:45:00.000Z
+tags:
+  - go
+  - turso
+  - libsql
 ---
 
 ## Introduction
@@ -141,7 +147,6 @@ This will prevent any write operation on the database.
 
 We can also use the `--expiration` flag that will be used to set the duration of the token. By default the value for expiry is `never`, but that could be a little too risky if you are making a serious application. You can either set it to `7d` which will make the token expire after seven days.
 
-
 Now, we can get the remote database URL and connect to the database. The URL could be obtained by running the command `db show <db-name>`
 
 ```
@@ -176,7 +181,6 @@ export TURSO_DATABASE_URL="libsql://<db-name>-<username>.turso.io"
 ```
 
 So, we have a remote database URL, and the access token configured, these are the two pieces that we will need to connect, read and write to the libsql database.
-
 
 ### Installing LibSQL Client for Golang
 
@@ -299,7 +303,6 @@ func main() {
 
 The `sql.Open` function will open the connection to the database, this will return a `sql.DB` object. The driver selected is `libsql` and the `dbURL` is the entire URL along with the authentication token.
 
-
 ```go
 type Post struct {
 	Id          int
@@ -379,6 +382,7 @@ func main() {
 
 }
 ```
+
 The output of the above code will result in all the rows present in the post table of the LibSQL database.
 
 ```bash

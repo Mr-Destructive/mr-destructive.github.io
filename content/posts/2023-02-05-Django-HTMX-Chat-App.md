@@ -1,13 +1,20 @@
 ---
 templateKey: blog-post
-title: "Creating a Chat Application with Django and HTMX"
-description: "Building a async, websocket based chat application using django, channels and htmx. With this chat application, the user can create and join rooms and send and recieve messages."
+description: >-
+  Building a async, websocket based chat application using django, channels and
+  htmx. With this chat application, the user can create and join rooms and send
+  and recieve messages.
 status: published
-date: 2023-02-05 17:15:00
-tags: ['django', 'htmx', 'python',]
-series: ['Django-Series',]
+series:
+  - Django-Series
 slug: django-htmx-chat-app
-image_url: https://meetgor-cdn.pages.dev/django-htmx-chat-cover.png
+image_url: 'https://meetgor-cdn.pages.dev/django-htmx-chat-cover.png'
+title: Creating a Chat Application with Django and HTMX
+date: 2023-02-05T17:15:00.000Z
+tags:
+  - django
+  - htmx
+  - python
 ---
 
 # Django + HTMX Chat application
@@ -27,21 +34,15 @@ Demo:
 ### Requirements:
 
 * Django
-    
 * Django-channels
-    
 * daphne
-    
 * HTMX
-    
 * SQLite or any relational database
-    
 
 Also if we want to use the application on a large and production scale:
 
 * Redis
-    
-* channels_redis
+* channels\_redis
 
 The code for this chat app is provided in the [GitHub repository](https://github.com/Mr-Destructive/django-htmx-chat).
 
@@ -428,7 +429,7 @@ CHANNEL_LAYERS = {
 
 You can either use the [InMemoryChannelLayer](https://channels.readthedocs.io/en/latest/topics/channel_layers.html) or you can use them `RedisChannelLayer` for the backend of the chat app. There are other types of backends like `Amazon SQS` services, `RabbitMQ`, `Kafka`, `Google Cloud Pub/Sub`, etc. I will be creating the app with only the `InMemoryChannelLayer` but will provide a guide for redis as well, both are quite similar and only have a few nuances.
 
-We need to install [channels_redis](https://github.com/django/channels_redis/) it for integrating redis in the Django project with channels.
+We need to install [channels\_redis](https://github.com/django/channels_redis/) it for integrating redis in the Django project with channels.
 
 ```bash
 pip install channels_redis
@@ -501,6 +502,7 @@ So, we simply have the name which will be taken from the user, and the slug whic
 We have set the `created_at` the field which will set the time when the object was created. Finally, the dunder string method is used for representing the message object as a price of the concatenation of strings of room name, username, and the message. This is useful for admin stuff as it makes it easier to read the object rather than the default id.
 
 Now, once the models are designed we can migrate the models into the database.
+
 ```
 python manage.py makemigrations
 python manage.py migrate
@@ -517,11 +519,8 @@ So, we start with the bare bones provided in the tutorial on the channel [docume
 In the following block of code, we are essentially doing the following:
 
 * Accepting connection on the requested room name
-    
 * Sending and Receiving messages on the room/group
-    
 * Closing the WebSocket connection and removing the client from the room/group
-    
 
 ```python
 # chat/consumers.py
@@ -601,9 +600,7 @@ We get the user from the scope of the consumer as we previously initialized it i
 Now, the final piece in the receive method is the `channel_layer.group_send` method, this method as the name suggests is used to send or broadcast the received message to the entire group. The method has two parameters:
 
 1. The name of the group
-    
 2. The JSON body containing the message and other details
-    
 
 The method is not directly sending the message but it has a type key in the JSON body which will be the function name to call. The function will simply call the other funciton mentioned in the type key in the dict. The following keys in the dict will be the parameters of that funciton. In this case, the funciton specified in the `type` key is `chat_message` which takes in the `event` as the parameter. This event will have all the parameters from the `group_send` method.
 
@@ -612,7 +609,6 @@ So, the `chat_message` will load in this message, username, and the room name an
 ### Adding Routers for WebSocket connections
 
 So, till this point have consumers, which are just like views in terms of channels. Now, we need some URL routes to map these consumers to a path. So, we will create a file/module called `routing.py` which will look quite similar to the `urls.py` file. It will have a list called `websocket_urlpatterns` just like `urlpatterns` with the list of `path`. These paths however are not `http` routes but will serve for the `WebSocket` path.
-
 
 ```python
 # chat / routing.py
@@ -627,7 +623,7 @@ websocket_urlpatterns = [
 ]
 ```
 
-In the above code block, we have defined a URL for the web socket with the path as `/chat/<room_slug>` where room_name will be the `slug` for the room. The path is bound with the consumer-defined in the `consumers.py` module as `ChatConsumer`. The `as_asgi` method is used for converting a view into an ASGI-compatible view for the WebSocket interface.
+In the above code block, we have defined a URL for the web socket with the path as `/chat/<room_slug>` where room\_name will be the `slug` for the room. The path is bound with the consumer-defined in the `consumers.py` module as `ChatConsumer`. The `as_asgi` method is used for converting a view into an ASGI-compatible view for the WebSocket interface.
 
 ### Setting up ASGI Application
 
@@ -678,7 +674,6 @@ Starting ASGI/Daphne version 4.0.0 development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ```
 
-
 The application is not complete yet, it might not have most components working functional yet. So, we'll now get into making the user interfaces for the application, to create, join, and view rooms in the application.
 
 ### Adding Views for Chat Rooms
@@ -725,7 +720,7 @@ def room_join(request):
 
 In the above views module, we have added 3 views namely `index` as the room page, `room_create` for the room creation page, and the `room_join` for the room join page. The index view is a simple get request to the provided slug of the room, it gets the slug from the URL from the request and fetches an object of the room associated with that slug. Then it renders the room template with the context variables like the name of the room and the slug associated with that room.
 
-The `room_create` view is a simple two-case view that either can render the room creation page or process the submitted form and create the room. Just like we used in the `register` view in the accounts app. When the user will send a `GET` request to the URL which we will map to `/create/` shortly after this, the user will be given a form. So, we will render the `create.html` template. We will create the html template shortly. 
+The `room_create` view is a simple two-case view that either can render the room creation page or process the submitted form and create the room. Just like we used in the `register` view in the accounts app. When the user will send a `GET` request to the URL which we will map to `/create/` shortly after this, the user will be given a form. So, we will render the `create.html` template. We will create the html template shortly.
 If the user has sent a `POST` request to the view via the `/create` URL, we will fetch the name field in the sent request and create a unique identifier with the name of the room. We will slugify the concatenation of the name with the uid and will set it as the slug of the room. We will then simply create the room and redirect the user to the `room` page.
 
 The `room_join` view also is a two-case view, where the user can either request the join room form or send a slug with the form submission. If the user is requesting a form, we will render the `join.html` template. If the user is submitting the form, we will fetch the room based on the slug provided and redirect the user to the `room` page.
@@ -948,11 +943,9 @@ We will be sending a fragment of HTML from the backend when the user sends a mes
 ![Chat Room Message 2 Users](https://meetgor-cdn.pages.dev/django-htmx/chat-room-msg-2.png)
 ![Chat Room Message](https://meetgor-cdn.pages.dev/django-htmx/chat-room-msg-3.png)
 
-
 In the above snippet, we are just changing the final message object to include some HTML just simple. The HTML however has home htmx attributes like [hx-swap-oob](https://htmx.org/attributes/hx-swap-oob/) which will just update the specified DOM element to the content in the div. In this case, the DOM element is `#message` which is the id message present in the room template. We basically add the username and the message into the same id by appending it to the element. That's it, it would work and it would start showing the messages from the connected clients and broadcast them as well.
 
 There are some things to keep in mind while using htmx in the long run especially when the htmx 2.0 is released, it will have `ws` as a separate extension. It will have a bit of a different syntax than above. I have tried the latest version but doesn't seem to work. I'll just leave a few snippets for your understanding of the problem.
-
 
 ```html
 # templates / chat / room.html

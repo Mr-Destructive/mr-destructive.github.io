@@ -1,11 +1,14 @@
 ---
 templateKey: til
-title: "Golang: Sort Package Introduction"
-description: "Understanding the fundamentals of the sort package in Golang. Sorting integers, slices, struct values, maps"
+description: >-
+  Understanding the fundamentals of the sort package in Golang. Sorting
+  integers, slices, struct values, maps
 status: published-til
 slug: golang-sort-package-basic
-tags: ["go",]
-date: 2024-01-15 22:30:00
+title: 'Golang: Sort Package Introduction'
+date: 2024-01-15T22:30:00.000Z
+tags:
+  - go
 ---
 
 I have been learning Golang for around 2 years now, and I have never paid attention to the sort package, can you believe that! Where was this package hiding?
@@ -34,6 +37,7 @@ $ go run main.go
 
 [1, 2, 3, 5, 6]
 ```
+
 The sort is in-place, mutating the original slice. You can customize the sort order by providing a less(i, j int) bool function.
 
 ## Sorting Struct Slices

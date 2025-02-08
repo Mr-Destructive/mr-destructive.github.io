@@ -1,11 +1,14 @@
 ---
 templateKey: til
-title: "Turn Python dictionary into a neat CSV table"
-description: "Exploring how to write python dict/key-value pairs and a table-like structure to a CSV file."
+description: >-
+  Exploring how to write python dict/key-value pairs and a table-like structure
+  to a CSV file.
 status: published-til
 slug: python-dict-to-csv-table
-tags: ["python",]
-date: 2024-03-20 22:30:00
+title: Turn Python dictionary into a neat CSV table
+date: 2024-03-20T22:30:00.000Z
+tags:
+  - python
 ---
 
 ## Populating a Python dict having a table-like structure to a CSV
@@ -68,14 +71,13 @@ Bob Johnson, Computer Science, A-, 90, 14, BJ003
 
 We can create a function `write_table` that will take in the `dictionary` as the actual data. We want to store the keys of the inner dictionary to be the header/columns of the csv file. As we can see the keys of the inner dict i.e. the value for the key `John Doe` is a dict with the keys `course`, `grade`, `attendance`, etc. which remain the same for the all the keys in the dictionary.
 
-So, we can first create a `row_keys` variable to store the keys of the actual dictionary this will be the first column rows in the csv. 
+So, we can first create a `row_keys` variable to store the keys of the actual dictionary this will be the first column rows in the csv.
 
 Further we check if the `row_keys` is a dict and then we append it with the `index_key` which will be the first column in the csv. Since all the keys remain the same for the inner-dict, we can pick the first dict and create the `header` with the inner-dict keys.
 
 So, we can write the list `header` to the csv file.
 
 Then for each key in the `row_keys` we can create a list `row` with the key and the values of the inner-dict.
-
 
 ```python
 # Function to populate a CSV with a table-like structure

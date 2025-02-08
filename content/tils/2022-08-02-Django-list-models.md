@@ -1,21 +1,25 @@
 ---
-templateKey: til 
-title: "Django: Get list of all models and associated fields in a django project"
-description: "Get the list of all the models and associated fields/attributes in a django project or an application"
-date: 2022-08-02 15:30:00
+templateKey: til
+description: >-
+  Get the list of all the models and associated fields/attributes in a django
+  project or an application
 status: published-til
 slug: django-list-models
-tags: ['django', 'python']
+title: 'Django: Get list of all models and associated fields in a django project'
+date: 2022-08-02T15:30:00.000Z
+tags:
+  - django
+  - python
 ---
 
 ## Context
 
-Let's say we want the list of all the models and associated attributes in all the applications of a django project, we can do that using the [django.apps](https://docs.djangoproject.com/en/4.0/ref/applications/) with apps method. 
+Let's say we want the list of all the models and associated attributes in all the applications of a django project, we can do that using the [django.apps](https://docs.djangoproject.com/en/4.0/ref/applications/) with apps method.
 
 ## Get all the models in a project
 
-To fetch all the models, we can use the [get_models](https://docs.djangoproject.com/en/4.0/ref/applications/#django.apps.AppConfig.get_models) methods, it will return a list of model classes in all the entire project(all applications). We can import all the models in the django project with the command:
- 
+To fetch all the models, we can use the [get\_models](https://docs.djangoproject.com/en/4.0/ref/applications/#django.apps.AppConfig.get_models) methods, it will return a list of model classes in all the entire project(all applications). We can import all the models in the django project with the command:
+
 ```python
 from django.apps import apps
 models = apps.get_models()
@@ -31,9 +35,9 @@ models = apps.get_models()
  <class 'articles.models.Series'>, <class 'articles.models.Article'>, <class 'blog.models.Blog'>]
 ```
 
-We are importing the apps and creating a list of the models in our django project. The Django app command will load all the applications in the project, and the [get_models]() method will fetch the associated models. This has resulted in a list of model class objects, we can iterate over them and fetch the required details, we want.
+We are importing the apps and creating a list of the models in our django project. The Django app command will load all the applications in the project, and the [get\_models]() method will fetch the associated models. This has resulted in a list of model class objects, we can iterate over them and fetch the required details, we want.
 
-For instance, If I am interested in the name of these models, I can use the `__name__` property to fetch the model's name. 
+For instance, If I am interested in the name of these models, I can use the `__name__` property to fetch the model's name.
 
 ```python
 from django.apps import apps
@@ -63,7 +67,7 @@ Blog
 
 ```
 
-So, from the above example, we can see we have accessed all the model names in our entire django project. 
+So, from the above example, we can see we have accessed all the model names in our entire django project.
 
 ## Access Application name associated with a model
 
@@ -96,10 +100,10 @@ articles  -> Article
 blog  -> Blog
 ```
 
-In the above example, we can see we have printed all the models with their associated application names. 
+In the above example, we can see we have printed all the models with their associated application names.
 
 ## Accessing all the attributes associated with a model
- 
+
 To access all the fields/property/attributes associated with a model, we can again use the `_meta` attribute followed by the `get_fields` method.  This method will return a list of field objects. For accessing the name of those attributes/fields, we have to iterate over the list and then further use `name` property.
 
 ```python
@@ -135,6 +139,7 @@ name
 description
 authors
 ```
+
 So, that is how we get all the associated field names in the associated models in our django projects. Also, there are a lot of attributes, we can access with the apps property. The `__dict__.keys()` can be used to get the list of all associated properties or other methods in a class instance.
 
 ```
@@ -145,7 +150,8 @@ dict_keys(['name', 'verbose_name', '_verbose_name', 'primary_key', 'max_length',
 'help_text', 'db_index', 'db_column', '_db_tablespace', 'auto_created', 'creation_counter', '_validators', '_error_messages', 
 'error_messages', 'db_collation', 'validators', 'attname', 'column', 'concrete', 'model'])
 ```
-In the above example, I am using a list of models and getting the list of all the attributes associated with a field of a model. This can be applied and other properties can be accessed. 
+
+In the above example, I am using a list of models and getting the list of all the attributes associated with a field of a model. This can be applied and other properties can be accessed.
 
 ## Get Models with a specific app
 

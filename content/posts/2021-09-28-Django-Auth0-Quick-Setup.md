@@ -1,20 +1,25 @@
 ---
 templateKey: blog-post
-title : "Django + Auth0 Quick Setup"
-subtitle: "A simple BASH script to set up a basic Django project with authentication integrated using Auth0."
-date: 2021-09-28 20:08:47 +0530
+subtitle: >-
+  A simple BASH script to set up a basic Django project with authentication
+  integrated using Auth0.
 status: published
-tags: ['django', 'bash', 'python',]
 slug: djagno-auth0-script
-image_url: https://res.cloudinary.com/dgpxbrwoz/image/upload/v1643287941/blogmedia/aggaqpjljlcysdopvoj3.png
+image_url: >-
+  https://res.cloudinary.com/dgpxbrwoz/image/upload/v1643287941/blogmedia/aggaqpjljlcysdopvoj3.png
+title: Django + Auth0 Quick Setup
+date: 2021-09-28T14:38:47.000Z
+tags:
+  - django
+  - bash
+  - python
 ---
 
 ## Introduction
 
-
 This is a guide and a walkthrough of how to quickly set up a base Django project with Auth0 as integration for authentication and authorization. I will walk you through the Django setup and how to use and integrate the functionalities of the Auth0.  I will also discuss how why you should be using Auth0 and why I love it.
 
-The script takes `2:44` minutes time to do everything from scratch. From installing virtualenv in python to integrating the Auth0 application. 
+The script takes `2:44` minutes time to do everything from scratch. From installing virtualenv in python to integrating the Auth0 application.
 
 Here's how the script works:
 
@@ -22,37 +27,38 @@ Here's how the script works:
 
 ### Contents
 
-- [What is Auth0](#what-is-auth0)
-- [Why I love Auth0](#why-i-love-auth0)
-- [Set up a Django Project](#set-up-a-django-project)
-- [Integrate Auth0 to a Django project](#integrate-auth0-to-a-django-project)
-- [Creating a BASH Script for integrating Auth0](#creating-a-bash-script-for-integrating-auth0)
-     - [Appending to a file](#appending-to-a-file)
-     - [Adding text before a particular line using `sed` ](#adding-text-before-a-particular-line-using-sed)
-     - [Appending to a line using `sed`](#appending-to-a-line-using-sed)
-- [Complete BASH Script](#complete-bash-script)
-- [Conclusion](#conclusion)
+* [What is Auth0](#what-is-auth0)
+* [Why I love Auth0](#why-i-love-auth0)
+* [Set up a Django Project](#set-up-a-django-project)
+* [Integrate Auth0 to a Django project](#integrate-auth0-to-a-django-project)
+* [Creating a BASH Script for integrating Auth0](#creating-a-bash-script-for-integrating-auth0)
+  * [Appending to a file](#appending-to-a-file)
+  * [Adding text before a particular line using `sed` ](#adding-text-before-a-particular-line-using-sed)
+  * [Appending to a line using `sed`](#appending-to-a-line-using-sed)
+* [Complete BASH Script](#complete-bash-script)
+* [Conclusion](#conclusion)
 
 ## What is Auth0
 
-Auth0 (`Auth zero`) is a platform that provides easy authentication and authorization for a number of platforms in various programming languages and frameworks. The easy-to-follow documentation, availability for almost all web frameworks across platforms make it a big bonus for developers. They actually make the Developer experience flawless and beginner-friendly. 
+Auth0 (`Auth zero`) is a platform that provides easy authentication and authorization for a number of platforms in various programming languages and frameworks. The easy-to-follow documentation, availability for almost all web frameworks across platforms make it a big bonus for developers. They actually make the Developer experience flawless and beginner-friendly.
 
 According to Auth0,
+
 > They make your login box awesome
 
 And how true is that they make things pretty convenient and wicked fast to integrate a smooth functional backend for authentication and authorization. Of course, there are more things they offer than just making authentication systems but it is by far what the world knows them for.
 
 ## Why I love Auth0
 
-Auth0 is a generous company that provides a free tier for a limited capacity of authentication and that might be more than enough for a developer getting its feet wet in the web development (backend). 
+Auth0 is a generous company that provides a free tier for a limited capacity of authentication and that might be more than enough for a developer getting its feet wet in the web development (backend).
 
-They even provide a nice user interface out of the box for login/signup and even a dashboard ready-made, which is quite a lot of heavy lifting already done for you. Also, there is a dashboard for analyzing the number of sign-in/logins into the particular app. This provides the admin/developer of the app to get a closer look at the user registered in a day/week/months, number of active users, and so on. 
+They even provide a nice user interface out of the box for login/signup and even a dashboard ready-made, which is quite a lot of heavy lifting already done for you. Also, there is a dashboard for analyzing the number of sign-in/logins into the particular app. This provides the admin/developer of the app to get a closer look at the user registered in a day/week/months, number of active users, and so on.
 
-So, who would not love it? I am willing to write and use their service for some of my projects. I already have used one for the Hashnode x Auth0 Hackathon, I made [devquotes](https://github.com/Mr-Destructive/devquotes) using the authentication of Auth0 in my Django application. 
+So, who would not love it? I am willing to write and use their service for some of my projects. I already have used one for the Hashnode x Auth0 Hackathon, I made [devquotes](https://github.com/Mr-Destructive/devquotes) using the authentication of Auth0 in my Django application.
 
 ## Set up a Django Project
 
-If you are reading this you already know how to set up a Django project, I assume. But nevertheless, I can just include a quick introduction on how to do it. I have a script to do this. 
+If you are reading this you already know how to set up a Django project, I assume. But nevertheless, I can just include a quick introduction on how to do it. I have a script to do this.
 
 ```bash
 #!/usr/bin/env bash
@@ -67,6 +73,7 @@ pip install django
 django-admin startproject $1 .
 clear
 ```
+
 You can check out  [Django Quick Setup Script](https://techstructiveblog.hashnode.dev/django-quick-setup-script)  for the details of this script and also a more in-depth guide of Django project setup.
 
 But if you want to understand the basics of the Django project setup here is a little guide about it:
@@ -76,11 +83,12 @@ Firstly, create a virtual environment, it's not mandatory but it keeps things si
 ```shell
 pip install virtualenv
 ```
+
 You can use `pip3` or `pip -m`, or however you install normal python modules. This just installs the python virtual environment, we need to create one in the current folder, so for that navigate to the folder where you want to create the project and enter the following command:
 
 ```shell
 virtualenv venv
-``` 
+```
 
 Here, `venv` can be anything like `env` just for your understanding and simplicity it's a standard name kept for the same. After this, you will see a folder of the same name i.e. `venv` or any other name you have used. This is the folder where python will keep every installation private to the local folder itself. Now, we need to activate the virtual environment, for that we can use the command :
 
@@ -93,6 +101,7 @@ source venv/bin/activate
 # for Windows:
 venv\Scripts\activate
 ```
+
 After this, your command prompt will have a `(venv)` attached to its start. This indicates you are in a virtual environment, things you do here, may it be module installation or any configuration related to python will stay in the local folder itself.
 
 After the virtual environment is set up and activated, you can install Django and get started with it. Firstly, install Django using pip:
@@ -100,48 +109,53 @@ After the virtual environment is set up and activated, you can install Django an
 ```shell
 pip install django
 ```
-After the installation is completed, you can start a Django project in the current folder using the command: 
+
+After the installation is completed, you can start a Django project in the current folder using the command:
 
 ```shell
 django-admin startproject name
 ```
-Here name can be your project name. After this, you will see one new folder and one file pop up.
-Namely, the `project named` folder and `manage.py` file. So you don't have to touch the `manage.py` file but we use it in most of the commands to use the Django functionalities. 
 
-You can now run your basic server using the command : 
+Here name can be your project name. After this, you will see one new folder and one file pop up.
+Namely, the `project named` folder and `manage.py` file. So you don't have to touch the `manage.py` file but we use it in most of the commands to use the Django functionalities.
+
+You can now run your basic server using the command :
+
 ```shell
 python manage.py runserver
 ```
-There is a base installed/setup of the Django project. Moving on in integrating the Auth0 login functionality in our webpage.
 
+There is a base installed/setup of the Django project. Moving on in integrating the Auth0 login functionality in our webpage.
 
 ## Integrate the Auth0 app in your project
 
 So, for integrating the Auth0 app for your web application, you need to have an Auth0 account, you can signup here. After this you can create an Auth0 application for any type of application, we have a couple of options:
 
-- Native Application
-- Single Page Application
-- Regular Web Application
-- Machine to Machine Application
+* Native Application
+* Single Page Application
+* Regular Web Application
+* Machine to Machine Application
 
 ![image.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1632748408741/sUeS8AgrX.png)
 
 You can choose as per your needs, but mostly it would be a Regular Web application if you have a backend like Django, Nodejs, PHP, or other types of frameworks and languages. So, moving ahead we have created an application for the Django framework as a backend. Now, we have a `Settings` tab in the application dashboard, where we have different credentials for the Auth0 app to talk to our application.
 
 The credentials needed to be stored safely are:
-- domain
-- Client ID (Key)
-- Client Secret
 
-This has to be secured for our local application which will go into production when ready. You can use several options like dotenv, environment variables, and so on when the application is being deployed but for now, let's hardcode them in our Django project. 
+* domain
+* Client ID (Key)
+* Client Secret
 
-Now, you can follow the simple straightforward procedure to copy-paste your credentials from the  [Auth0 official documentation](https://auth0.com/docs/quickstart/webapp/django/01-login#logout). It's quite straightforward to follow the steps even for a beginner. 
+This has to be secured for our local application which will go into production when ready. You can use several options like dotenv, environment variables, and so on when the application is being deployed but for now, let's hardcode them in our Django project.
+
+Now, you can follow the simple straightforward procedure to copy-paste your credentials from the  [Auth0 official documentation](https://auth0.com/docs/quickstart/webapp/django/01-login#logout). It's quite straightforward to follow the steps even for a beginner.
 
 After the Auth0 app has been configured following the procedure in the documentation, you need to integrate several files like dashboard and index templates into your custom templates.
 
 Following additional changes are also to be made if you have a user-defined app for your Django project.
 
- In the `auth0login` app, `view.py` file:
+In the `auth0login` app, `view.py` file:
+
 1. The `index` function renders the base file for your project if the user is logged in.
 2. The `dashboard` function renders the baked version of your profile/dashboard of users on your app.
 
@@ -153,7 +167,7 @@ You also need to specify the callback URLs for your application which is `/compl
 
 ## Creating a BASH Script for integrating Auth0
 
-So, we can now dive into creating the BASH Script to set up the Django x Auth0 application in minutes. The script is quite large, like 200 lines but don't worry! Its automation reduces the pain of integrating a User Authorization flawlessly. I am also thinking of adding the `cURL` command and parsing in the Client ids, keys, and secret keys, etc. 
+So, we can now dive into creating the BASH Script to set up the Django x Auth0 application in minutes. The script is quite large, like 200 lines but don't worry! Its automation reduces the pain of integrating a User Authorization flawlessly. I am also thinking of adding the `cURL` command and parsing in the Client ids, keys, and secret keys, etc.
 
 ### Appending to a file
 
@@ -165,31 +179,32 @@ text
 more text
 EOF
 ```
-Remember here EOF is just a label to stop the command and save it to the file. 
 
+Remember here EOF is just a label to stop the command and save it to the file.
 
 ![image.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1632826339707/_g_RXP3NE.png)
 
-So, we can see that we were able to append to a file, multiple lines using the cat command.  
+So, we can see that we were able to append to a file, multiple lines using the cat command.
 
 We have used this concept in adding configuration and credentials to the `settings.py` or the `urls.py` files.
 
-### Adding text before a particular line using `sed` 
+### Adding text before a particular line using `sed`
 
 `sed` is a great command, and there is nothing you can't do with it, OK there might be exceptions. We can get write to a file directly (don't display the output) and specify the line number before which we want to append the text. We can then add the text we want and followed by the filename.
 
 ```shell
 sed -i '33 i sometext here' filename
 ```
-Here, `33` is the line number in the file which we want to insert before. We have used `'"'` to add a `'` inside a `'`, this might feel a bit wired but that is how it is in BASH. 
+
+Here, `33` is the line number in the file which we want to insert before. We have used `'"'` to add a `'` inside a `'`, this might feel a bit wired but that is how it is in BASH.
 
 Let's say you want to add `print('Hello, World!')` to a particular line, we have to enclose `'` with these `"'`( double and single quotes),
 
 ```shell
 sed -i '2i print('"'Hello, World'"')' hello.py
 ```
-This will add the line `print('Hello World')` to the file `hello.py`
 
+This will add the line `print('Hello World')` to the file `hello.py`
 
 ![image.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1632824742835/Uj8AF07UG.png)
 
@@ -199,7 +214,8 @@ We can even append text to a particular line using sed, we can use some escape c
 
 ```shell
 sed -i '2i s/$/ textgoes here /' filename
-``` 
+```
+
 Here 2 is any number of line you want to add text to, next `i` a prompt for inserting text and then we have regex like `s/$/ /`, this will put the text enclosed in `/ /` to the end of the line as indicated by `$`.  We have the filename at its usual place as before.
 
 So, lets say, I want to add a comment to the second line in the previous example, I can use the following command to do it:
@@ -214,8 +230,8 @@ sed -i '2 s/$/ # another comment/' hello.py
 We have used these commands to add the `include` function in the `urls.py` in the project folder.
 
 So those were all the operations we used for doing some automated editing for the Auth0 app integration to our Django project.
- 
-Below is the entire script and is also uploaded on [GitHub](https://github.com/Mr-Destructive/django-auth0-quick-setup). 
+
+Below is the entire script and is also uploaded on [GitHub](https://github.com/Mr-Destructive/django-auth0-quick-setup).
 
 ## Complete BASH Script
 
@@ -226,7 +242,6 @@ bash script.sh mywebsite
 ```
 
 Wait for some 2-3 minutes, and the script will produce the Django application with the Auth0 app integrated. You will have to enter the credentials manually wherever applicable.
-
 
 ```bash
 #!/usr/bin/env bash
@@ -419,8 +434,9 @@ python manage.py makemigrations
 python manage.py migrate
 
 ```
+
 ## Conclusion
 
-Ok, so this was it, a quite big script but that's how automation can be. We were able to set up a Django base application with a ready app of Auth0 to extend the functionality. This was just a basic script also you can extend the functionalities like adding a curl command to fetch the credentials and make it more automated but that was not the aim of this article. 
+Ok, so this was it, a quite big script but that's how automation can be. We were able to set up a Django base application with a ready app of Auth0 to extend the functionality. This was just a basic script also you can extend the functionalities like adding a curl command to fetch the credentials and make it more automated but that was not the aim of this article.
 
 If you had any issues using the script please let me know, I'll be happy to fix those. Thanks for reading. Happy Coding :)

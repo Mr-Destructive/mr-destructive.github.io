@@ -1,12 +1,13 @@
 ---
 templateKey: blog-post
-title: "Feedparser: Python package for reading RSS feeds"
-description: "Read and extract content from RSS feeds in python using feedparser"
-date: 2022-03-26 15:45:00
+description: Read and extract content from RSS feeds in python using feedparser
 status: published
 slug: python-feedparser
-tags: ['python',]
-image_url: https://meetgor-cdn.pages.dev/python-pkg-feedparser.png
+image_url: 'https://meetgor-cdn.pages.dev/python-pkg-feedparser.png'
+title: 'Feedparser: Python package for reading RSS feeds'
+date: 2022-03-26T15:45:00.000Z
+tags:
+  - python
 ---
 
 ## Introduction
@@ -17,7 +18,7 @@ Today, we will be taking a look at the feedparser package in python and how to e
 
 ## What is feedparser
 
-Feedparser is a python package for parsing feeds of almost any type such as RSS, Atom, RDF, etc. It is a package that allows us to parse or extract information using python semantics. For example, all the latest posts from a given blog can be accessed on a list in python, further different attributes like links, images, titles, descriptions, can be accessed within a dictionary as key-value pairs. 
+Feedparser is a python package for parsing feeds of almost any type such as RSS, Atom, RDF, etc. It is a package that allows us to parse or extract information using python semantics. For example, all the latest posts from a given blog can be accessed on a list in python, further different attributes like links, images, titles, descriptions, can be accessed within a dictionary as key-value pairs.
 
 ## Installing feedparser
 
@@ -27,8 +28,7 @@ As feedparser is a python package you can install it with pip very easily.
 pip install feedparser
 ```
 
-This will install feedparser in your respective python environment, it can be a virtual environment or a global environment. 
-
+This will install feedparser in your respective python environment, it can be a virtual environment or a global environment.
 
 ## Using feedparser
 
@@ -48,7 +48,7 @@ Now, we can use the module in our application to get all of the functions or met
 
 ## Parse an RSS feed URL
 
-To parse an RSS feed link, we can simply use the `parse` function from the feedparser package. The [parse](https://feedparser.readthedocs.io/en/latest/introduction.html) function takes in a string that can be a URL or a file path. Generally, the URL seems to be more useful. So, we can look up any RSS feed on the internet like your blog's feed, publications feeds, and so on. 
+To parse an RSS feed link, we can simply use the `parse` function from the feedparser package. The [parse](https://feedparser.readthedocs.io/en/latest/introduction.html) function takes in a string that can be a URL or a file path. Generally, the URL seems to be more useful. So, we can look up any RSS feed on the internet like your blog's feed, publications feeds, and so on.
 
 ```python
 feedparser.parse("url_of_the_rss_feed")
@@ -69,7 +69,7 @@ The keys function basically gets all the keys in the dictionary in python.
 ```
 >>> feedparser.parse("https://dev.to/feed/").keys()
 dict_keys(['bozo', 'entries', 'feed', 'headers', 'etag', 'href', 'status', 'encoding', 'version', 'namespaces'])
-```   
+```
 
 This will give out a list of all the keys in the feed which we have parsed from the RSS feed previously. From this list of keys, we can extract the required information from the feed.
 
@@ -79,10 +79,9 @@ Before we extract content from the feed, we can store the dictionary that we get
 feed = feedparser.parse("url_of_the_rss_feed")
 ```
 
-
 ## Extract the contents from the feed
 
-Now, we have the dictionary of the feed, we can easily access the values from the listed keys. We can get the list of all the posts/podcasts/entries or any other form of content the feed is serving for from the `entries` key in the dictionary. 
+Now, we have the dictionary of the feed, we can easily access the values from the listed keys. We can get the list of all the posts/podcasts/entries or any other form of content the feed is serving for from the `entries` key in the dictionary.
 
 To get more information and the most possible keys in the returned dictionary, you can refer to the feedparser [reference list](https://feedparser.readthedocs.io/en/latest/reference.html)
 
@@ -128,9 +127,9 @@ This gives us the number of entries in the provided feed. This is basically the 
 
 ### Get details of the entries from the feed
 
-To get detail information about a particular article/entry in the feed, we can iterate over the `feed.entries` list and access what we require. 
+To get detail information about a particular article/entry in the feed, we can iterate over the `feed.entries` list and access what we require.
 
-So, we will iterate over the entries and simply print those entries one by one to inspect what and how we can extract them. 
+So, we will iterate over the entries and simply print those entries one by one to inspect what and how we can extract them.
 
 ```python
 for entry in feed.entries:
@@ -151,9 +150,9 @@ print(feed.entries[0].keys())
 dict_keys(['title', 'title_detail', 'authors', 'author', 'author_detail', 'published', 'published_parsed', 'links', 'link', 'id', 'guidislink', 'summary', 'summary_detail', 'tags'])
 ```
 
-Now, we have all the keys associated with the entries we can now extract the specific details like the content, like `title`, `author`, `summary_detail`(actual content in this case).  
+Now, we have all the keys associated with the entries we can now extract the specific details like the content, like `title`, `author`, `summary_detail`(actual content in this case).
 
-Though this might not be the same for all RSS feeds, it might be very similar and a matter of using the right keyword for the associated keys in the list of dictionaries.  
+Though this might not be the same for all RSS feeds, it might be very similar and a matter of using the right keyword for the associated keys in the list of dictionaries.
 
 Let's say, we want to print out the titles of all the entries in the feed, we can do that by iterating over the entries list and fetching the title from the iterator as `entry.title` if `entry` is the iterator.
 
@@ -195,7 +194,7 @@ or
 feedparser.parse("url_of_the_rss_feed").feed.keys()
 ```
 
-Using the keys like `title`, `links`, `subtitle`, we can get the information on the website/company level and not related to the specific post in the entries list. 
+Using the keys like `title`, `links`, `subtitle`, we can get the information on the website/company level and not related to the specific post in the entries list.
 
 ```python
 # get the title of the webpage/publication
@@ -206,9 +205,9 @@ feed.feed.links
 
 # get the cover-image for the webpage
 feed.feed.image
-``` 
+```
 
-You can further get information specific to your feed. 
+You can further get information specific to your feed.
 
 ## Checking for keys existence in the dictionary of feed
 
@@ -251,17 +250,15 @@ As we can see we do not have an image key in the second RSS feed which means eac
 
 ![Feedparser Cover Image Demo](https://res.cloudinary.com/techstructive-blog/image/upload/v1648373275/blog-media/fzdqie5dubigxzfhtv2x.png)
 
-
-As we can see here, the image_url will pick up the `image` key in the dictionary if it is present else we will assign it to another URL which is the website/podcast cover image. This is how we handle exceptions in providing the keys when there are multiple feeds to be extracted though they are quite similar, they will have subtle changes like this that need to be handled and taken care of.
-
+As we can see here, the image\_url will pick up the `image` key in the dictionary if it is present else we will assign it to another URL which is the website/podcast cover image. This is how we handle exceptions in providing the keys when there are multiple feeds to be extracted though they are quite similar, they will have subtle changes like this that need to be handled and taken care of.
 
 ## Conclusion
 
 From this little article, we were able to understand and use the feedparser Python package which can be used to extract information from different feeds. We saw how to extract contents for the entries, a number of entries in the feed, check for keys in the dictionary, and so on. Using Python's Feedparser package, some of the projects I have created include:
 
-- [podevcast](https://podevcast.netlify.app)
-- [dailydotdev-bookmark-cli](https://pypi.org/project/dailydotdev-bookmark-cli/)
-- [Django Newsletter](https://github.com/Mr-Destructive/newsletter)
+* [podevcast](https://podevcast.netlify.app)
+* [dailydotdev-bookmark-cli](https://pypi.org/project/dailydotdev-bookmark-cli/)
+* [Django Newsletter](https://github.com/Mr-Destructive/newsletter)
 
 For further reading, you can specifically target a feed type by getting the appropriate methods from the feedparser [documentation](https://feedparser.readthedocs.io/en/latest/)
 

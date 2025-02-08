@@ -1,16 +1,22 @@
 ---
 templateKey: blog-post
-title: "NGINX Basics and Setup"
-description: "Exploring NGINX Fundamentals: A Guide for Backend Developers, from the Importance of Learning NGINX to Installation and Server Setup"
-date: 2024-01-14 18:15:00
+description: >-
+  Exploring NGINX Fundamentals: A Guide for Backend Developers, from the
+  Importance of Learning NGINX to Installation and Server Setup
 status: published
 slug: nginx-01-basics
-tags: ['nginx', 'web-development']
-series: ['nginx-survival-guide',]
-series_description: "NGINX Survival Guide: A Guide for Backend Developers, understanding the bare minimum fundamentals to get going with NGINX."
-image_url: https://meetgor-cdn.pages.dev/nginx-survival-guide/nginx-sg-1.png
+series:
+  - nginx-survival-guide
+series_description: >-
+  NGINX Survival Guide: A Guide for Backend Developers, understanding the bare
+  minimum fundamentals to get going with NGINX.
+image_url: 'https://meetgor-cdn.pages.dev/nginx-survival-guide/nginx-sg-1.png'
+title: NGINX Basics and Setup
+date: 2024-01-14T18:15:00.000Z
+tags:
+  - nginx
+  - web-development
 ---
-
 
 ## Introduction
 
@@ -43,11 +49,8 @@ Having strong fundamentals in NGINX can indeed provide a competitive edge in the
 Big Tech Companies are using NGINX like DropBox, Netfilx, and Cloudflare, among others. Cloudflare used NGINX before but it was not enough for them, so they developed their web server/edge proxy suited to their needs called Pingora.
 
 * Dropbox - [Optimizing web servers for high throughput and low latency](https://dropbox.tech/infrastructure/optimizing-web-servers-for-high-throughput-and-low-latency)
-
 * Cloudflare - [How Cloudflare outgrown NGINX and made way to Pingora](https://blog.cloudflare.com/how-we-built-pingora-the-proxy-that-connects-cloudflare-to-the-internet/)
-
 * Netflix - [NGINX Netflix archives](https://www.nginx.com/blog/tag/netflix/)
-
 
 ## Installing NGINX
 
@@ -211,13 +214,9 @@ Let's break down what some of the directives and context mean here:
 There are a few contexts like the global context, the events context, the HTTP context, etc.
 
 * `user` : The user directive is the user that NGINX will run as, it is often set to www-data.
-
 * `pid` : The pid directive defines the file where the process ID of the main process is stored.
-
 * `events` : The events block has some directives, one of them is the `worker_connections` and others, this block dictates how NGINX handles connections and events. It's like setting the rules for how NGINX efficiently manages traffic and resources.
-
 * `http` : The HTTP block is used for defining how NGINX handles HTTP-specific settings and behaviors. It's like the control panel for orchestrating web traffic and content delivery.
-
 
 I will cover the customization and tweaking of the nginx config throughout the series, but for now, understanding the bare bones of the default config would be a good spot to be in.
 
@@ -248,13 +247,9 @@ sudo nginx -s stop
 The nginx command can take in various signal commands such as :
 
 * `stop` : To stop the NGINX server (quick shutdown that terminates the server in the middle of serving a connection)
-
 * `quit` : To stop the NGINX server gracefully (NGINX will finish serving the open connections before it shuts down)
-
 * `reload` : To reload the NGINX server (generally done to pick up changes in config)
-
 * `reopen` : To reopen the log files of an NGINX server (when you want to rotate the log files without stopping the NGINX server)
-
 
 ### Reloading
 
@@ -284,7 +279,7 @@ docker run -it --rm -d -p 8080:80 --name web -v ~/mywebapp:/usr/share/nginx/html
 
 In the above command the `-v your_path:default_path` is the flag used to mount your computer's path to the actual container's path in this case the default folder where NGINX looks for the index.html file to server the content.
 
-NGINX server with programming languages using Dockerfile -&gt; [GitHub repo](https://github.com/hoalongnatsu/Dockerfile)
+NGINX server with programming languages using Dockerfile -> [GitHub repo](https://github.com/hoalongnatsu/Dockerfile)
 
 ## Conclusion
 

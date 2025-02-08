@@ -1,13 +1,20 @@
 ---
 templateKey: blog-post
-title: "Django Project with PostgreSQL Deployment on Railway App"
-description: "Creating and Configuring a Django Application for deployment on Railway.app Platform"
-date: 2022-05-19 20:30:00
+description: >-
+  Creating and Configuring a Django Application for deployment on Railway.app
+  Platform
 status: published
 slug: django-deploy-railway
-tags: ["django", "python", "web-development"]
-image_url: https://meetgor-cdn.pages.dev/django-deploy-railway.png
-series: [ 'Django-Deployment','Django-Series']
+image_url: 'https://meetgor-cdn.pages.dev/django-deploy-railway.png'
+series:
+  - Django-Deployment
+  - Django-Series
+title: Django Project with PostgreSQL Deployment on Railway App
+date: 2022-05-19T20:30:00.000Z
+tags:
+  - django
+  - python
+  - web-development
 ---
 
 ## Introduction
@@ -15,7 +22,6 @@ series: [ 'Django-Deployment','Django-Series']
 We have already seen the process of deployment of a Django app on Heroku, now we can move to another platform which is [Railway App](https://railway.app). This allows a faster and more intuitive way to deploy a Django app(or any sort of web app). This platform has several [Starter Apps](https://railway.app/starters) for shipping your app in several clicks, definitely, it would require some configuration and tweaking a bit.
 
 We will be following similar steps from the [Django-Heroku Deployment Guide](https://mr-destructive.github.io/techstructive-blog/series/django-deployment/) for configuring and setting up our Django project for the deployment on the Railway app. We explore a few different ways to create and deploy a Django project on Railway.
-
 
 ## Creating a Project on Railway App
 
@@ -96,7 +102,6 @@ source .venv/bin/activate
 
 This will set up the project nicely for a Django project, you now install the core Django package and get started with creating a Django application.
 
-
 ```bash
 # install django
 pip install django
@@ -126,15 +131,16 @@ Make sure to create and activate the virtual environment for this django project
 Now, Firstly we need to specify which type and version of language we are using. Since Django is a Python-based web framework, we need to select the python version in a text file.
 
 **runtime.txt**
+
 ```
 python-3.9.5
 ```
- 
-Here, the version can be anything as per your project and the packages installed.  
+
+Here, the version can be anything as per your project and the packages installed.
 
 #### Creating requirements.txt file
 
-We'll first create a `requirements.txt` file for storing all the dependencies and packages installed in the application. This will help in installing dependencies while deploying the application. We can either use a `requirements.txt` file using `virtualenv` or a `Pipfile` using Pipenv. Both serve the same purpose but a bit differently. 
+We'll first create a `requirements.txt` file for storing all the dependencies and packages installed in the application. This will help in installing dependencies while deploying the application. We can either use a `requirements.txt` file using `virtualenv` or a `Pipfile` using Pipenv. Both serve the same purpose but a bit differently.
 
 Assuming you are in an isolated virtual environment for this Django project, you can create a requirements.txt file using the below command:
 
@@ -156,11 +162,11 @@ typing_extensions==4.0.1
 
 ![pip freeze command](https://res.cloudinary.com/techstructive-blog/image/upload/v1652956558/blog-media/django-deployment/railway_requirements_freeze.png)
 
-This is vanilla Django without any additional dependencies but if you have integrated other functionalities like Django Rest Framework, PostgreSQL, Crispy Forms, Schedulers, etc. there might be additional dependencies that become quite crucial for the smooth working of the project.  
+This is vanilla Django without any additional dependencies but if you have integrated other functionalities like Django Rest Framework, PostgreSQL, Crispy Forms, Schedulers, etc. there might be additional dependencies that become quite crucial for the smooth working of the project.
 
 If you are using pipenv, you don't need to make any efforts to manually activate and manage the virtual environment, the dependencies are installed and taken care of by the pipenv installer. You just need to make sure to install any package with `pipenv install` and not `pip install` for better and improved package tracking.
 
-So, that's all we need to take care of packages and keep a list of these integrated packages for the project. You need to update the requirements.txt file every time you install any new package or modify the dependencies for a project. Simply use the command `pip freeze > requirements.txt` in the activated virtual environment.  
+So, that's all we need to take care of packages and keep a list of these integrated packages for the project. You need to update the requirements.txt file every time you install any new package or modify the dependencies for a project. Simply use the command `pip freeze > requirements.txt` in the activated virtual environment.
 
 #### Creating a Procfile
 
@@ -169,6 +175,7 @@ Next up, we have the `Procfile`, a procfile is a special file that holds informa
 A Procfile is a simple file without any extension, make sure to write `Procfile` as it is the name of the file in the root folder of the project. Inside the file add the following contents:
 
 **Procfile**
+
 ```Procfile
 web: gunicorn <project_name>.wsgi
 ```
@@ -179,13 +186,13 @@ For the Procfile, Railway has a built [Procfile](https://github.com/railwayapp/s
 web: python manage.py migrate && gunicorn <project_name>.wsgi
 ```
 
-As we can see we have defined the `web` process using `gunicorn`, [Gunicorn](https://pypi.org/project/gunicorn/) is a python package that helps in creating WSGI HTTP Server for the UNIX operating systems. So, we need to install the package and update the package dependency list. 
+As we can see we have defined the `web` process using `gunicorn`, [Gunicorn](https://pypi.org/project/gunicorn/) is a python package that helps in creating WSGI HTTP Server for the UNIX operating systems. So, we need to install the package and update the package dependency list.
 
 ```
 pip install gunicorn
 
 pip freeze > requirements.txt
-``` 
+```
 
 #### Configuring Environment Variables
 
@@ -193,9 +200,10 @@ We need to keep our secrets for the django project out of the deployed code and 
 
 We first need to create a new secret key if you already have a GitHub repository, chances are you would have committed the default secret key open for the world to see, it is an insecure way of deploying django apps in production.
 
-This should generate a secret key that only you know now. So, just copy the key without the quotes and create a file `.env` in the root project folder. 
+This should generate a secret key that only you know now. So, just copy the key without the quotes and create a file `.env` in the root project folder.
 
 **.env**
+
 ```
 SECRET_KEY=76419fd6885a677f802fd1d2b5acd0188e23e001042b05a8
 ```
@@ -208,13 +216,13 @@ The `.env` file should also be added to the `.gitignore` file, so simply append 
 
 This is just one of the environment variables in our django project, further, we will also be adding a few other variables like database credentials, debug status, etc.
 
-We have now created environment variables for our django application, we now need a way to parse these environment variables into the Django project.  
+We have now created environment variables for our django application, we now need a way to parse these environment variables into the Django project.
 
 #### Parsing Environment variables using python-dotenv
 
-We will use [python-dotenv](https://pypi.org/project/python-dotenv/) to parse variables into the django settings configurations like `SECRET_KEY` and `DATABASES`. 
+We will use [python-dotenv](https://pypi.org/project/python-dotenv/) to parse variables into the django settings configurations like `SECRET_KEY` and `DATABASES`.
 
-- Install `python-dotenv` with pip with the command :  
+* Install `python-dotenv` with pip with the command :
 
 ```
 pip install python-dotenv
@@ -224,7 +232,7 @@ We need to then modify the default variables in the `settings.py` file. Firstly,
 
 Append the following code, to the top of the `settings.py` file, make sure don't override the configuration so remove unnecessary imports and configurations.
 
-``` python
+```python
 # <project_name>/settings.py
 
 import os
@@ -236,15 +244,15 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 ```
 
-We have imported the package `dotenv` basically the `python-dotenv` into the `settings.py` file and the module `os` for loading the `.env` file. The `load_dotenv` function helps in loading the `key-value` pairs which are the configuration variables that can act as actual environment variables. We provide in a file to the [load_dotenv](https://saurabh-kumar.com/python-dotenv/) function which is the `.env` file in our case, you can pick up any location for the `.env` file but make sure to change the location while parsing the file into the `load_dotenv` function. 
+We have imported the package `dotenv` basically the `python-dotenv` into the `settings.py` file and the module `os` for loading the `.env` file. The `load_dotenv` function helps in loading the `key-value` pairs which are the configuration variables that can act as actual environment variables. We provide in a file to the [load\_dotenv](https://saurabh-kumar.com/python-dotenv/) function which is the `.env` file in our case, you can pick up any location for the `.env` file but make sure to change the location while parsing the file into the `load_dotenv` function.
 
 After loading the variables into the `settings.py` file, we now need to access those variables and set the appropriate variables the configuration from the variables received from the `load_dotenv` function. The `os.getenv` function to access the environment variables. The `os.getenv` function takes a parameter as the `key` for the environment variable and returns the value of the environment variable.
 
-``` python
+```python
 SECRET_KEY = os.getenv("SECRET_KEY")
 ```
 
-We have secretly configured the `SECRET_KEY` for the django project. If you have any other variables as simple key-value pairs like `AUTH` passwords, username, etc. you can use this method to get the configuration variables. 
+We have secretly configured the `SECRET_KEY` for the django project. If you have any other variables as simple key-value pairs like `AUTH` passwords, username, etc. you can use this method to get the configuration variables.
 
 #### Add gitignore file
 
@@ -264,7 +272,7 @@ db.sqlite3
 staticfiles/
 ```
 
-If you want a full-fledged `.gitignore` for a complex django project, you can take the reference from Jose Padilla's [gitignore Template](https://github.com/jpadilla/django-project-template/blob/master/.gitignore) for a django project.  
+If you want a full-fledged `.gitignore` for a complex django project, you can take the reference from Jose Padilla's [gitignore Template](https://github.com/jpadilla/django-project-template/blob/master/.gitignore) for a django project.
 
 That would be good to go for creating and serving up the project while deploying the project on Railway App.
 
@@ -300,16 +308,15 @@ Now, since we have a django project nicely configured and setup on GitHub, we ca
 
 ![Railway Proejct from GitHub](https://res.cloudinary.com/techstructive-blog/image/upload/v1652970665/blog-media/django-deployment/railway-proejct-github.png)
 
-#### Spinning up the database 
+#### Spinning up the database
 
-We also need a database that we can attach in the django project in our Railway application. We can integrate a `PostgreSQL` database as a service running in our Railway project instance. We can do that by locating the `+New` tab on the project dashboard and attaching a `Database` in the drop-down menu. 
-
+We also need a database that we can attach in the django project in our Railway application. We can integrate a `PostgreSQL` database as a service running in our Railway project instance. We can do that by locating the `+New` tab on the project dashboard and attaching a `Database` in the drop-down menu.
 
 <video width="800" height="450" controls>
   <source src="https://res.cloudinary.com/techstructive-blog/video/upload/v1652963718/blog-media/django-deployment/postgres_spinup_railway_d2xkpt.mp4" type="video/mp4">
 </video>
 
-After creating a database service, we need the credentials of the database or the `DATABASE_URL` of the PostgreSQL in order to integrate it into the django settings. We can locate into the `Connect` of the PostgreSQL service and grab the URL of the database. This can be stored in the main django application serves as an environment variable. 
+After creating a database service, we need the credentials of the database or the `DATABASE_URL` of the PostgreSQL in order to integrate it into the django settings. We can locate into the `Connect` of the PostgreSQL service and grab the URL of the database. This can be stored in the main django application serves as an environment variable.
 
 ```
 DATABASE_URL=postgresql://postgres:SE74bEw@containers-51.railway.app:6919/railway
@@ -317,7 +324,7 @@ DATABASE_URL=postgresql://postgres:SE74bEw@containers-51.railway.app:6919/railwa
 
 ![PostgreSQL database variable config](https://res.cloudinary.com/techstructive-blog/image/upload/v1652964755/blog-media/django-deployment/postgres_database_config.png)
 
-In the Django Starter Project provided by Railway, we should have a PostgreSQL database integrated as a Service. So, we can consume the database in our django project. 
+In the Django Starter Project provided by Railway, we should have a PostgreSQL database integrated as a Service. So, we can consume the database in our django project.
 
 We will add the `DATABASE_URL` config variable into the `.env` file and also add it into the main Django project service so that it can communicate to the database. You need to copy the `DATABSE_URL` into our local setup file(`.env` file). Copy the Database URL and paste it into the `.env` file as follows:
 
@@ -333,15 +340,15 @@ postgresql://[user[:password]@][netloc][:port][/dbname]
 
 #### Loading Database configuration
 
-Databases are a bit different as compared to other simple configurations in django. We need to make a few adjustments to the default database configuration. We will install another package `dj-database-url` to configure `DATABASE_URL`. Since the databse_url has a few components we need a way to extract the details like the `hostname`, `port`, `database_name`, and `password`. Using the `dj-database-url` package we have a few functions that can serve the purpose.
+Databases are a bit different as compared to other simple configurations in django. We need to make a few adjustments to the default database configuration. We will install another package `dj-database-url` to configure `DATABASE_URL`. Since the databse\_url has a few components we need a way to extract the details like the `hostname`, `port`, `database_name`, and `password`. Using the `dj-database-url` package we have a few functions that can serve the purpose.
 
 ```
 pip install dj-database-url
 ```
 
-At the end of your `settings.py` file, append the following code. 
+At the end of your `settings.py` file, append the following code.
 
-``` python
+```python
 import dj_database_url
 
 DATABASE_URL = os.getenv("DATABASE_URL")
@@ -377,7 +384,7 @@ Make sure to update the `requirements.txt` file before pushing the project to Ra
 
 #### Serving Static Files
 
-Now, if you have some static files like `CSS`, `Javascript`, or `images`, you need to configure the static files in order to serve them from the Railway app server. We will require another config variable for collecting the static files from the selected repository. 
+Now, if you have some static files like `CSS`, `Javascript`, or `images`, you need to configure the static files in order to serve them from the Railway app server. We will require another config variable for collecting the static files from the selected repository.
 
 ```python
 
@@ -385,7 +392,7 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-``` 
+```
 
 Here, if you have served your static files from the `static` folder in the root directory of your django project, you can add the above code in the settings.py file. We will collect all static files in the folder along with the default static files provided by django in the `staticfiles` directory. Run the following command if you want to test whether the static files are properly collected and served.
 
@@ -423,7 +430,6 @@ MIDDLEWARE = [
 
 That should be enough to make the most of the deployment on Railway app. You will have to make a few adjustments as per your requirements and project.
 
-
 ## Deploy to GitHub
 
 Finally, we will have all the pieces connected, only we need to push the code to the GitHub repository in order to trigger a build on the railway app. So, we make sure we commit every critical thing that are in our django project and include every sensitiv information in the gitignore file.
@@ -435,7 +441,7 @@ pip freeze > requirements.txt
 This step is quite important because you need to make sure that all the packages are listed in the `requirements.txt` file else you will have to wait for the build to fail and redeploy.
 
 Make sure the server is running first on your local machine, remember the server will be set up from scratch but the database will already have applied migrations if you have applied migrations before after connecting the Railway database service.
- 
+
 ```
 python manage.py collectstatic
 
@@ -467,7 +473,7 @@ main   -> branch name
 
 ![Deployed Railway Project](https://res.cloudinary.com/techstructive-blog/image/upload/v1652966755/blog-media/django-deployment/railway-production-ss.png)
 
-## Railway CLI 
+## Railway CLI
 
 Railway also provides a cool CLI, it has some quite handy features like creating and managing services, local development environment, etc. We'll just dive into a few nice features of the CLI tool.
 
@@ -495,7 +501,7 @@ npx railway login
 
 This will sign you in with your railway account.
 
-We now need to link our project and execute and work around the command in that project from the railway app. To link a project from a railway account, you have to use the `link` command. The link command takes in a parameter as the project id which can be obtained from the project dashboard settings tab. 
+We now need to link our project and execute and work around the command in that project from the railway app. To link a project from a railway account, you have to use the `link` command. The link command takes in a parameter as the project id which can be obtained from the project dashboard settings tab.
 
 ```
 railway link <proejct_id>
@@ -505,9 +511,7 @@ railway link <proejct_id>
   <source src="https://res.cloudinary.com/techstructive-blog/video/upload/v1652969451/blog-media/django-deployment/railway-proejct-link.webm" type="video/mp4">
 </video>
 
-
 Now, we can explore some more commands like `run`, `up`, and so on. The `run` command is pretty solid and provides an interface to run commands for your project for instance in Django, create a superuser, manage dependencies, collectstatic files, etc. This allows us to set up and run commands into the actual production environment just from the CLI.
-
 
 ```
 # railway run (command to be executed)
@@ -523,11 +527,11 @@ railway up
 
 So, this was all about creating and deploying a django application on Railway. Here are some reference links:
 
-- [GitHub Repository](https://github.com/Mr-Destructive/django-blog/tree/railway)
-- [Live Webpage](https://django-blog-production.up.railway.app/)
+* [GitHub Repository](https://github.com/Mr-Destructive/django-blog/tree/railway)
+* [Live Webpage](https://django-blog-production.up.railway.app/)
 
 ## Conclusion
 
 So, that's how we deploy a Django project on the Railway app. We have seen two of the many ways to create and deploy a Django application on Railway. We also integrated a PostgreSQL service provided by Railway in our Django Project. Using the Railway CLI, we were able to manage and create Projects from the terminal, also interaction of the railway project was achieved along with the production build from CLI.
 
-Hopefully, you liked the above tutorial, if you have any questions. feedback, or queries, you can contact me on the Social handles provided below. Thank you for reading and till the next post Happy Coding :) 
+Hopefully, you liked the above tutorial, if you have any questions. feedback, or queries, you can contact me on the Social handles provided below. Thank you for reading and till the next post Happy Coding :)

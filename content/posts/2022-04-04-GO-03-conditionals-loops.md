@@ -1,18 +1,20 @@
 ---
 templateKey: blog-post
-title: "Golang: Conditionals and Loops"
-description: "Getting familiar with condition statements and loops in golang."
-date: 2022-04-04 09:00:00
+description: Getting familiar with condition statements and loops in golang.
 status: published
 slug: golang-conditionals-loops
-tags: ['go',]
-image_url: https://meetgor-cdn.pages.dev/golang-003-conditionals-loops.png
-series: ['100-days-of-golang',]
+image_url: 'https://meetgor-cdn.pages.dev/golang-003-conditionals-loops.png'
+series:
+  - 100-days-of-golang
+title: 'Golang: Conditionals and Loops'
+date: 2022-04-04T09:00:00.000Z
+tags:
+  - go
 ---
 
 ## Introduction
 
-Moving to the fourth part, we will be doing conditional statements and loops in golang. We will be seeing the basics of conditional statements like if-else and switch along with loops like for, while, and range-based loops. We won't be covering iterating over arrays in a loop as this requires an understanding of arrays. 
+Moving to the fourth part, we will be doing conditional statements and loops in golang. We will be seeing the basics of conditional statements like if-else and switch along with loops like for, while, and range-based loops. We won't be covering iterating over arrays in a loop as this requires an understanding of arrays.
 
 ## Conditional statements
 
@@ -50,7 +52,7 @@ $ go run if_else.go
 Teenager
 ```
 
-We can also use else if for evaluating more than one condition rather than using nested if and else. 
+We can also use else if for evaluating more than one condition rather than using nested if and else.
 
 ```go
 if condition {
@@ -87,8 +89,7 @@ Sophomore
 
 Using `else if` we can evaluate multiple conditions. This style is much better than using nested `if else` statements as it becomes harder to read for complex cases.
 
-
-### switch 
+### switch
 
 We also have switch statements in golang which allow us to write cases for a given state of a variable. We can simply add cases for a given variable, the case should be a valid value that the variable can take. If a case is matched it breaks out of the switch statement without executing any statements below the matched case.
 
@@ -131,7 +132,7 @@ $ go run switch.go
 The person is a Kid with age 11.
 ```
 
-This gives a good understanding of switch-case statements. We can give a variable to the switch statement and pick its value in the respective case statements to evaluate the result accordingly. The `default` statement is evaluated when there is no match among the given cases. 
+This gives a good understanding of switch-case statements. We can give a variable to the switch statement and pick its value in the respective case statements to evaluate the result accordingly. The `default` statement is evaluated when there is no match among the given cases.
 
 ```go
 language := ""
@@ -163,9 +164,9 @@ $ go run switch.go
 A person who codes in go is called a gopher
 ```
 
-This code will by default pick `javascript` and `developer` as the values for `language` and `devs` respectively if there is no match for the provided language or the language is left empty. 
+This code will by default pick `javascript` and `developer` as the values for `language` and `devs` respectively if there is no match for the provided language or the language is left empty.
 
-We also have `fallthrough` in the golang switch which allows evaluating more than one case if one of them is matched. This will allow the switch and check for all the cases sequentially and evaluate all the matched and satisfied cases. 
+We also have `fallthrough` in the golang switch which allows evaluating more than one case if one of them is matched. This will allow the switch and check for all the cases sequentially and evaluate all the matched and satisfied cases.
 
 ```go
 character := 't'
@@ -211,7 +212,7 @@ So, here we can see that the fallthrough hits multiple cases. This is unlike the
 
 ## Loops
 
-We can now move on to loops in golang. We only have a `for` loop so to speak but this can be used as any other looping statement like the `while` loop or range-based loop. We will first see the most fundamental loop statement in golang which is a three-component loop. 
+We can now move on to loops in golang. We only have a `for` loop so to speak but this can be used as any other looping statement like the `while` loop or range-based loop. We will first see the most fundamental loop statement in golang which is a three-component loop.
 
 ### for loop
 
@@ -225,7 +226,7 @@ for k := 0; k < 4; k++ {
 
 ### Range-based loop
 
-We can even iterate over a string, using the range keyword in golang. We need to have two variables for using a range-based for loop in golang one is the index or the 0 based position of the element and the copy of the element in the array or string. Using the range keyword, we can iterate over the string one by one. 
+We can even iterate over a string, using the range keyword in golang. We need to have two variables for using a range-based for loop in golang one is the index or the 0 based position of the element and the copy of the element in the array or string. Using the range keyword, we can iterate over the string one by one.
 
 ```go
 name := "GOLANG"
@@ -244,12 +245,11 @@ $ go run for.go
 5 -> G
 ```
 
-So, here we can see we have iterated over the string by each character. Using the range keyword in golang, The `i, s` is the index and the copy of the element at that index as discussed earlier. Using the index we get the value which we don't have to index the array for accessing it, that is already copied in the second variable while using the range loop. 
+So, here we can see we have iterated over the string by each character. Using the range keyword in golang, The `i, s` is the index and the copy of the element at that index as discussed earlier. Using the index we get the value which we don't have to index the array for accessing it, that is already copied in the second variable while using the range loop.
 
 ### while loop (Go's while is for)
 
-There are no while loops as such in golang, but the for loop can also work similarly to the while loop. We can use a condition just after the for a keyword to make it act like a while loop. 
-
+There are no while loops as such in golang, but the for loop can also work similarly to the while loop. We can use a condition just after the for a keyword to make it act like a while loop.
 
 ```go
 for condition {
@@ -275,11 +275,11 @@ $ go run while.go
 8
 ```
 
-We can see here that the condition is evaluated and the statements in the loop body are executed, if the condition evaluates to false, the flow is moved out of the loop and we exit the loop. 
+We can see here that the condition is evaluated and the statements in the loop body are executed, if the condition evaluates to false, the flow is moved out of the loop and we exit the loop.
 
 ### Infinite loop
 
-We can run an infinite loop again using a keyword. We do not have any other keywords for loops in golang. 
+We can run an infinite loop again using a keyword. We do not have any other keywords for loops in golang.
 
 ```go
 for {
@@ -298,7 +298,7 @@ for {
 
 This might be used with a base condition to exit the loop otherwise there should be a memory overflow and the program will exit with errors.
 
-### Break 
+### Break
 
 If we want to exit out of a loop unconditionally, we can use the `break` keyword. This will break the loop and help us to exit out of an infinite or a condition-bound-based loop too.
 
@@ -325,11 +325,11 @@ $ go run infinite.go
 It's time to break at 7
 ```
 
-As, we can see inside an infinite loop, we were able to break out of it by using a conditional statement and `break` keyword. This also applies to switch cases it basically is the opposite of `fallthrough` in switch-case statements. But by default(without using fallthrough), the case statement breaks the switch after a match has been found or the default case has been encountered. 
+As, we can see inside an infinite loop, we were able to break out of it by using a conditional statement and `break` keyword. This also applies to switch cases it basically is the opposite of `fallthrough` in switch-case statements. But by default(without using fallthrough), the case statement breaks the switch after a match has been found or the default case has been encountered.
 
 ### Continue
 
-We also have the opposite of `break` i.e. `continue` which halts the execution of the loop and directs back to the post statement increment(in case of for loops) or evaluation(in case of while loop). We basically are starting to iterate over the loop again after we encounter the continue but by preserving the counter/iterator state values. 
+We also have the opposite of `break` i.e. `continue` which halts the execution of the loop and directs back to the post statement increment(in case of for loops) or evaluation(in case of while loop). We basically are starting to iterate over the loop again after we encounter the continue but by preserving the counter/iterator state values.
 
 ```go
 counter := 2
@@ -347,10 +347,8 @@ $ go run infinite.go
 Missed the Continue? at counter = 4
 ```
 
-For following up with the code for this and all parts of the series, head over to the [100 days of Golang](https://github.com/mr-destructive/100-days-of-golang) GitHub repository. 
+For following up with the code for this and all parts of the series, head over to the [100 days of Golang](https://github.com/mr-destructive/100-days-of-golang) GitHub repository.
 
 ## Conclusion
 
 So, from this section, we were able to understand the basics of conditional statements and loops in golang. We covered the things which are more important for understanding the core of the language than some specific things. There are certain parts that need to be explored further like iterating over arrays and slices which we'll cover after we have understood arrays and slices. Hopefully, you have understood the basics of the conditional statements and loops in golang. Thank you for reading, if you have any questions, or feedback please let me know in the comments or social handles. Until next time, Happy Coding :)
-
-

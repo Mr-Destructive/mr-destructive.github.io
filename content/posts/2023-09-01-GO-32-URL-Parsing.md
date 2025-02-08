@@ -1,13 +1,17 @@
 ---
 templateKey: blog-post
-title: "Golang Web: URL Parsing"
-description: "Understanding the fundamentals of web development with URL parsing in Golang. Intro to the net package in golang."
-date: 2023-09-05 21:30:00
+description: >-
+  Understanding the fundamentals of web development with URL parsing in Golang.
+  Intro to the net package in golang.
 status: published
 slug: golang-web-url-parsing
-tags: ['go',]
-series: ['100-days-of-golang',]
-image_url: https://meetgor-cdn.pages.dev/100-days-of-golang/golang-032-url-parsing.png
+series:
+  - 100-days-of-golang
+image_url: 'https://meetgor-cdn.pages.dev/100-days-of-golang/golang-032-url-parsing.png'
+title: 'Golang Web: URL Parsing'
+date: 2023-09-05T21:30:00.000Z
+tags:
+  - go
 ---
 
 ## Introduction
@@ -24,14 +28,14 @@ A URL looks something like this:
 [scheme:][//[userinfo@]host][/]path[?query][#fragment]
 ```
 
-Not all the URLs are like this, majority of the URLs that the common user sees are simply the ones with the `scheme`, `host`, and `paths`. However other components are equally important and are vital in the exchanging of information over the network. 
+Not all the URLs are like this, majority of the URLs that the common user sees are simply the ones with the `scheme`, `host`, and `paths`. However other components are equally important and are vital in the exchanging of information over the network.
 
-- The `scheme` is the protocol used for accessing the resource like `http`, `https`, `ftp`, etc.
-- The `userinfo` is the username and password used to access the resource.
-- The `host` is the domain name of the resource.
-- The `path` is the path or folder to the resource.
-- The `query` is the query string of the resource. It is usually a key-value pair as a paramter to access resources.
-- The `fragment` is used as a reference within the resource.
+* The `scheme` is the protocol used for accessing the resource like `http`, `https`, `ftp`, etc.
+* The `userinfo` is the username and password used to access the resource.
+* The `host` is the domain name of the resource.
+* The `path` is the path or folder to the resource.
+* The `query` is the query string of the resource. It is usually a key-value pair as a paramter to access resources.
+* The `fragment` is used as a reference within the resource.
 
 We will see the use cases of most of them throughout this series for example, the `userinfo` is commonly used in accessing databases over the internet/cloud. The query parameters will be used in making dynamic API calls, etc.
 
@@ -62,9 +66,7 @@ $ go run main.go
 http://www.google.com
 ```
 
-
 So, what is getting parsed here, we gave the URL as a string we get the URL back, the only difference is that instead of the URL being a string, it is now a structure of components. For instance, we want the protocol the host name, the port, etc. from the URL.
-
 
 ```
 fmt.Printf("%T\n", parsedUrl)
@@ -138,7 +140,6 @@ So, now we know the downsides of manually parsing the URLs, we can use the [net/
 
 Databases have a connection URL or connection string which provides a standard way to connect to a database/database server. The format of the URL is just the `URL` with all the components from the `scheme` to the `path`. The common examples of some database connection URLs might include:
 
-
 ```
 # PostgreSQL DB Connection URL/string
 postgresql://username:password@hostname:port/database_name
@@ -195,17 +196,16 @@ DB Name =  mydb
 
 In the above code, we have given the string `postgres://admin:pass1234@localhost:5432/mydb`, and we have parsed the URL using the `net/url` package. The result is we have a `parsedUrl` object which has all the components that can be accessed as either fields or methods. Let's break down each field/method we used in the above example:
 
-- The `Scheme` is simply a string representing the protocol of the resource(URL).
-- The `User` is the [UserInfo](https://pkg.go.dev/net/url#Userinfo) object having immutable username and password fields.
-- The `Username` is the method on [UserInfo](https://pkg.go.dev/net/url#Userinfo.Username) that returns the string representing the username of the URL.
-- The `Password` is the method on [UserInfo](https://pkg.go.dev/net/url#Userinfo.Password) that returns the string representing the password of the URL.
-- The `Host` is the field on `URL` as a string representing the host:port of the URL.
-- The `Hostname` is the method on [URL](https://pkg.go.dev/net/url#URL.Hostname) that returns the string representing the hostname of the URL.
-- The `Port` is the method on [URL](https://pkg.go.dev/net/url#URL.Port) that returns the string representing the port of the URL.
-- The `Path` is the field as the string representing the path of the URL.
+* The `Scheme` is simply a string representing the protocol of the resource(URL).
+* The `User` is the [UserInfo](https://pkg.go.dev/net/url#Userinfo) object having immutable username and password fields.
+* The `Username` is the method on [UserInfo](https://pkg.go.dev/net/url#Userinfo.Username) that returns the string representing the username of the URL.
+* The `Password` is the method on [UserInfo](https://pkg.go.dev/net/url#Userinfo.Password) that returns the string representing the password of the URL.
+* The `Host` is the field on `URL` as a string representing the host:port of the URL.
+* The `Hostname` is the method on [URL](https://pkg.go.dev/net/url#URL.Hostname) that returns the string representing the hostname of the URL.
+* The `Port` is the method on [URL](https://pkg.go.dev/net/url#URL.Port) that returns the string representing the port of the URL.
+* The `Path` is the field as the string representing the path of the URL.
 
 So, this is how we can get almost every detail like `db protocol`, `username`, `password`, `hostname`, `port`, and the `database name` from the database connection string URL.
-
 
 ## Parsing Query Parameters
 
@@ -254,11 +254,12 @@ We have taken a bit of a complex example that might cover many use cases of the 
 ### Checking Values in Query Parameters
 
 We can even check the values in the query parameters without requiring the construction of for loops to find a particular value in a key. The [Values](https://pkg.go.dev/net/url#Values) is a type that stores the map as a return value from the `Query` method. It has a few handy methods like:
-- [Has](https://pkg.go.dev/net/url#Values.Has) to check if the key exists in the map (paramter as key `string` and returns a `bool`).
-- [Get](https://pkg.go.dev/net/url#Values.Get) to fetch the first value of the given key as a string or if not present then returns an empty string (paramter as key `string` and returns `string`).
-- [Add](https://pkg.go.dev/net/url#Values.Add) method is used to append the value for a given key (paramter as key `string` and value to be added as `string`).
-- [Set](https://pkg.go.dev/net/url#Values.Set) method is used to replace the value for a given key if already exists (paramter as key `string` and value as `string`).
-- [Del](https://pkg.go.dev/net/url#Values.Del) method is used to delete the value for a given key (paramter as key `string`).
+
+* [Has](https://pkg.go.dev/net/url#Values.Has) to check if the key exists in the map (paramter as key `string` and returns a `bool`).
+* [Get](https://pkg.go.dev/net/url#Values.Get) to fetch the first value of the given key as a string or if not present then returns an empty string (paramter as key `string` and returns `string`).
+* [Add](https://pkg.go.dev/net/url#Values.Add) method is used to append the value for a given key (paramter as key `string` and value to be added as `string`).
+* [Set](https://pkg.go.dev/net/url#Values.Set) method is used to replace the value for a given key if already exists (paramter as key `string` and value as `string`).
+* [Del](https://pkg.go.dev/net/url#Values.Del) method is used to delete the value for a given key (paramter as key `string`).
 
 ```go
 package main

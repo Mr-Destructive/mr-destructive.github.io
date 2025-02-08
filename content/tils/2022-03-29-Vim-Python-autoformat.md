@@ -1,11 +1,15 @@
 ---
-templateKey: til 
-title: "Autoformat Python file with Black after saving in Vim"
-description: "Automatically format python code in the current file after saving the file in Vim."
-date: 2022-03-29 20:40:53
+templateKey: til
+description: >-
+  Automatically format python code in the current file after saving the file in
+  Vim.
 status: published-til
 slug: vim-python-black-autoformat
-tags: ['vim','python',]
+title: Autoformat Python file with Black after saving in Vim
+date: 2022-03-29T20:40:53.000Z
+tags:
+  - vim
+  - python
 ---
 
 If you are like me who writes Python very badly, it has empty lines with whitespaces, no proper format in assigning variables, not formatted according to [PEP 8](https://peps.python.org/pep-0008/) standards, and you use Vim as your text editor then my friend you need a autocmd badly for it.
@@ -28,7 +32,7 @@ For a detailed guide about running packages with pipx head toward my article on 
 
 ## Set up Autocmd in Vim
 
-We can set up a autocmd. What is a autocmd? It is about running commands when certain events occur like running a command when a file is saved, a buffer is opened or closed, and so on. What we want is to run the black command from the shell when the current file is saved. 
+We can set up a autocmd. What is a autocmd? It is about running commands when certain events occur like running a command when a file is saved, a buffer is opened or closed, and so on. What we want is to run the black command from the shell when the current file is saved.
 
 So, we can create a autocmd as follows:
 
@@ -48,9 +52,9 @@ This works, but it gives a prompt after the command has been executed, to run th
 autocmd BufWritePost *.py silent !black %
 ```
 
-This looks perfect! 
+This looks perfect!
 
-But still, we need to add a auto-group(`augroup`) that groups the autocmds and by adding `autocmd!` it will clear all the commands from the group. 
+But still, we need to add a auto-group(`augroup`) that groups the autocmds and by adding `autocmd!` it will clear all the commands from the group.
 
 ```vimscript
 augroup python_format
@@ -58,16 +62,17 @@ augroup python_format
     autocmd BufWritePost *.py silent !black %
 augroup end
 ```
+
 We can now add it to the vimrc to work all the time.
 
-## Using pipx 
+## Using pipx
 
-If you have used pipx to install black, you need to setup the autocmd a bit differently. 
+If you have used pipx to install black, you need to setup the autocmd a bit differently.
 
 ```vimscript
 autocmd BufWritePost *.py silent !pipx run black %
 ```
 
-It might be a bit slower than running with global installation, but it is a neat way to run python package. 
+It might be a bit slower than running with global installation, but it is a neat way to run python package.
 
 So, that's it we can now write clean and safe python code without breaking a sweat in Vim. Happy Coding :)

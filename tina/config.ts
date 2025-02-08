@@ -80,9 +80,9 @@ export default defineConfig({
           },
           {
               type: "string",
-              name: "slug",
-              label: "slug",
-	      required: false,
+              name: "tags",
+              label: "Tags",
+              list: true,
           },
           {
             type: "rich-text",

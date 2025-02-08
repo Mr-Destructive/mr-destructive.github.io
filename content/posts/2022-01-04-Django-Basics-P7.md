@@ -1,24 +1,30 @@
 ---
 templateKey: blog-post
-title : "Django Basics: Creating Models"
-subtitle: "Understanding and Structuring a Database Schema with Models in Django"
-date: 2022-01-04 22:15:00 +0530
+subtitle: Understanding and Structuring a Database Schema with Models in Django
 status: published
-tags: ['django', 'python', 'web-development',]
 slug: django-basics-models
-image_url: https://res.cloudinary.com/dgpxbrwoz/image/upload/v1641315473/blogmedia/dj-7_ixfkka.png
-series: ['Django-Basics','Django-Series']
+image_url: >-
+  https://res.cloudinary.com/dgpxbrwoz/image/upload/v1641315473/blogmedia/dj-7_ixfkka.png
+series:
+  - Django-Basics
+  - Django-Series
+title: 'Django Basics: Creating Models'
+date: 2022-01-04T16:45:00.000Z
+tags:
+  - django
+  - python
+  - web-development
 ---
 
 ## Introduction
 
-We have seen the basics of Django templating in the previous parts of the series. Now, we can move on to the more backend stuff in Django which deals with the Databases, queries, admin section, and so on. In this particular part, we'll cover the fundamental part of any application in Django i.e the `Model`. We'll understand what the model is, how to structure one, how to create relationships and add constraints on the fields, etc. 
+We have seen the basics of Django templating in the previous parts of the series. Now, we can move on to the more backend stuff in Django which deals with the Databases, queries, admin section, and so on. In this particular part, we'll cover the fundamental part of any application in Django i.e the `Model`. We'll understand what the model is, how to structure one, how to create relationships and add constraints on the fields, etc.
 
 ## What ate Models?
 
-A model is a Django-way(Pythonic) to structure a database for a given application. It is technically a class that can act as a table in a database generally and inside of the class, the properties of it act as the attributes of that database. It's that simple. Just a blueprint to create a table in a database, don't worry about what and where is our database. We will explore the database and its configuration in the next part. 
+A model is a Django-way(Pythonic) to structure a database for a given application. It is technically a class that can act as a table in a database generally and inside of the class, the properties of it act as the attributes of that database. It's that simple. Just a blueprint to create a table in a database, don't worry about what and where is our database. We will explore the database and its configuration in the next part.
 
-By creating a model, you don't have to write all the basic SQL queries like 
+By creating a model, you don't have to write all the basic SQL queries like
 
 ```sql
 CREATE TABLE NAME(
@@ -50,10 +56,10 @@ class Article(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Article')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-```   
+```
 
 Ignore the `from django.db import models` as it is already in the file created by Django. If not, please uncomment the line and that should be good to go.
-This is a basic model you might wanna play with but don't dump it anywhere. 
+This is a basic model you might wanna play with but don't dump it anywhere.
 
 We define or create our models in the application inside the project. Inside the application there is already a file called `models.py` just **append** the above code into it. The application can be any application which makes the most sense to you or better create a app if not already created and name it as `article` or `post` or anything you like.
 
@@ -91,14 +97,14 @@ class Notes(models.Model):
 
 class Book():
     name = models.CharField(max_length = 1024)
-```   
+```
 
-   These are just dummies and are not recommended to use anywhere especially in a serious project. 
+These are just dummies and are not recommended to use anywhere especially in a serious project.
 So, we have seen a model, but what are these fields and the constraints like `on_delete`, `max_length`, and others in the upcoming section on fields.
 
 ## Fields in Django
 
-Fields are technically the attributes of the class which here is the model, but they are further treated as a attribute in a table of a database. So the model becomes a list of attributes which will be then parsed into an actual database. 
+Fields are technically the attributes of the class which here is the model, but they are further treated as a attribute in a table of a database. So the model becomes a list of attributes which will be then parsed into an actual database.
 
 By creating attributes inside a class we are defining the structure for a table. We have several types of fields defined already by django for the ease of validating and making a constrained setup for the database schema.
 
@@ -106,42 +112,42 @@ Let's look at some of the types of fields in Django Models.
 
 ### Types of Fields
 
-Django has a lot of fields defined in the models class. If you want to go through all the fields, you read through the django docs [field references](https://docs.djangoproject.com/en/4.0/ref/models/fields/#model-field-types). We can access the fields from the `models` module like `name = models.CharField(max_length=10)`, this is a example of defining a attributes `name` which is a CharField. We can set the max_length which acts a constraint to the attribute as we do not want the name field to be greater than 10 and hence parsing the parameter `max_length` to 10. 
+Django has a lot of fields defined in the models class. If you want to go through all the fields, you read through the django docs [field references](https://docs.djangoproject.com/en/4.0/ref/models/fields/#model-field-types). We can access the fields from the `models` module like `name = models.CharField(max_length=10)`, this is a example of defining a attributes `name` which is a CharField. We can set the max\_length which acts a constraint to the attribute as we do not want the name field to be greater than 10 and hence parsing the parameter `max_length` to 10.
 
 We have other field types like:
 
-- `IntegerField` -> for an integer value.
-- `TextField` -> for long input of text (like text area in html).
-- `EmailField` -> for an single valid email field.
-- `DateField` -> for inputting in a date format. 
-- `URLField` -> for input a URL field.
-- `BooleanField` -> for a boolean value input.
+* `IntegerField` -> for an integer value.
+* `TextField` -> for long input of text (like text area in html).
+* `EmailField` -> for an single valid email field.
+* `DateField` -> for inputting in a date format.
+* `URLField` -> for input a URL field.
+* `BooleanField` -> for a boolean value input.
 
 And there are other fields as well which can be used as per requirements.
 
 We also have some other fields which are not directly fields so to speak but are kind of relationship defining fields like:
 
-- `ForeignKey` -> Define a many-to-one relationship to another model/class. 
-- `ManyToManyField` -> define a many-to-many relationship to another model/class.
-- `OneToOneField` -> define a one to one relationship between different tables/model/class.
+* `ForeignKey` -> Define a many-to-one relationship to another model/class.
+* `ManyToManyField` -> define a many-to-many relationship to another model/class.
+* `OneToOneField` -> define a one to one relationship between different tables/model/class.
 
-So, that's about the field types for just a feel of how to structure or design a database table using a model with some types of attributes. We also need to talk about constraints which needs to added to the fields inside the models. 
+So, that's about the field types for just a feel of how to structure or design a database table using a model with some types of attributes. We also need to talk about constraints which needs to added to the fields inside the models.
 
 ### Field Options/Arguments
 
-We can add constraints and pass arguments to the fields in the models. We can add arguments like `null`, `blank`, `defualt`, `choices`, etc. 
+We can add constraints and pass arguments to the fields in the models. We can add arguments like `null`, `blank`, `defualt`, `choices`, etc.
 
-- `null=True/False` -> Set a check for the entry in the table as not null in the database.
-- `blank=True/False` -> Set a check for the input validation to empty or not.
-- `unique=True/False` -> Set a constraint to make the entry unique throughout the table.
-- `defualt=anyvalue` -> Set a default value for the field.
-- `choices=list` -> Set a list of defined choices to select in the field (a list of two valued tuple).
+* `null=True/False` -> Set a check for the entry in the table as not null in the database.
+* `blank=True/False` -> Set a check for the input validation to empty or not.
+* `unique=True/False` -> Set a constraint to make the entry unique throughout the table.
+* `defualt=anyvalue` -> Set a default value for the field.
+* `choices=list` -> Set a list of defined choices to select in the field (a list of two valued tuple).
 
 We also have another constraint specific to the fields like `max_length` for `CharField`, `on_delete` for ForeignKey which can be used as a controller for the model when the related model is deleted, `verbose_name` to set a different name for referencing the entry in the table/model from the admin section compared to the default name of the model, `verbose_name_plural` similar to the `verbose_name` but for referencing the entire table/model. Also `auto_now_add` and `auto_now` for `DateTimeField` so as to set the current date-time by default.
 
 More options and arguments that can be passed to the fields in models are given in the django docs [field options](https://docs.djangoproject.com/en/4.0/topics/db/models/#field-options)
 
-These are some of the options or arguments that we can or need to pass to the fields to set up a constrained schema for our database. 
+These are some of the options or arguments that we can or need to pass to the fields to set up a constrained schema for our database.
 
 ### Meta class
 
@@ -157,14 +163,15 @@ Also, you can define the custom functions that can be used as to help the attrib
 
 ## Django ORM
 
-Django has an Object Relational Mapper is the core concept in Django or the component in Django that allows us to interact with the database without the programmer writing SQL/DB queries. It is like a Pythonic way to write and execute sql queries, it basically abstracts away the layer to manually write SQL queries. 
+Django has an Object Relational Mapper is the core concept in Django or the component in Django that allows us to interact with the database without the programmer writing SQL/DB queries. It is like a Pythonic way to write and execute sql queries, it basically abstracts away the layer to manually write SQL queries.
 
 We'll explore the details of how the ORM works under the hood but it's really interesting and fascinating for a Beginner to make web applications without learning SQL(not recommended though personally). For now, its just magical to see Django handling the DB operations for you. You can get the references for learning about the Queryset in ORM from the [docs](https://docs.djangoproject.com/en/4.0/ref/models/querysets/)
 
 ## Example Model
-Let us set up a model from what we have learned so far. 
 
-We'll create a model for a Blog Post again but with more robust fields and structure. 
+Let us set up a model from what we have learned so far.
+
+We'll create a model for a Blog Post again but with more robust fields and structure.
 
 ```python
 #from django.db import models
@@ -193,18 +200,18 @@ class Article(models.Model):
       
 ```
 
-   We can see in the above model that we have defined the Meta class which is optional and is generally written to modify how to entries inside the table appear or order with other functionalities as well. We have also added the choices option in the status field which has two choices `Draft` and `Publish` one which is seen by the django interface and the other to the end-users. We have also added certain fields like slug that will create the URL for the blog post, also certain options like `unique` has been set to restrict duplicate entries being posted to the database. The `related_name` in the `ForeignKey` refers to the name given to the relation from the Article model to the User model in this case. 
+We can see in the above model that we have defined the Meta class which is optional and is generally written to modify how to entries inside the table appear or order with other functionalities as well. We have also added the choices option in the status field which has two choices `Draft` and `Publish` one which is seen by the django interface and the other to the end-users. We have also added certain fields like slug that will create the URL for the blog post, also certain options like `unique` has been set to restrict duplicate entries being posted to the database. The `related_name` in the `ForeignKey` refers to the name given to the relation from the Article model to the User model in this case.
 
-   So, we can see that Django allows us to structure the schema of a database. Though nothing is seen as an end result, when we configure and migrate the model to our database we will see the results of the hard work spent in creating and designing the model. 
+So, we can see that Django allows us to structure the schema of a database. Though nothing is seen as an end result, when we configure and migrate the model to our database we will see the results of the hard work spent in creating and designing the model.
 
 ## Database Specific fields
 
-By this time, you will have gotten a feel of what a database might be. Most of the projects are designed around SQL databases but No-SQL databases and others are also used in cases which suite them the most. We have tools to manage this database in SQL we call it the Database Management System (DBMS). It's just a tool to manage data, but there is not just a single Database management tool out there, there are gazillions and bazillions of them. Most  popular include `MySQL`, `PostgreSQL`, `SQLite`, `Oracle`, `Microsoft Access`, `Maria DB`, and tons of others. 
+By this time, you will have gotten a feel of what a database might be. Most of the projects are designed around SQL databases but No-SQL databases and others are also used in cases which suite them the most. We have tools to manage this database in SQL we call it the Database Management System (DBMS). It's just a tool to manage data, but there is not just a single Database management tool out there, there are gazillions and bazillions of them. Most  popular include `MySQL`, `PostgreSQL`, `SQLite`, `Oracle`, `Microsoft Access`, `Maria DB`, and tons of others.
 
 Well, these different DBMS tools are almost similar with a few hiccups here and there. So, different Database tools might have different fields they provide. For Example, in Database `PostgreSQL` provides the ListField which `SQLite` doesn't that can be the decision to be taken before creating any project. There might be some fields that some DBMS provide and other doesn't.
 
 ## Conclusion
 
-We understood the basics of creating a model. We didn't touch on the database yet but the next part is all about configuration and migration so we'll get hands-on with the databases. We covered how to structure our database, how to write fields in the model, add constraints and logic to them and explore the terminologies in Django like ORM, Database Types, etc. 
+We understood the basics of creating a model. We didn't touch on the database yet but the next part is all about configuration and migration so we'll get hands-on with the databases. We covered how to structure our database, how to write fields in the model, add constraints and logic to them and explore the terminologies in Django like ORM, Database Types, etc.
 
 Thank you for reading the article, if you have any feedback kindly let me know, and until then Happy Coding :)

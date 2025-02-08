@@ -1,25 +1,30 @@
 ---
 templateKey: blog-post
-title: "Golang: File Reading"
-description: "Using system calls to read files in Golang. Reading files using various styles like line by line, word, character, chunk and any other specifc delimiter. Using os, bufio, io, encoding packages for helper funcitons making system calls."
-date: 2022-10-23 23:15:00
+description: >-
+  Using system calls to read files in Golang. Reading files using various styles
+  like line by line, word, character, chunk and any other specifc delimiter.
+  Using os, bufio, io, encoding packages for helper funcitons making system
+  calls.
 status: published
 slug: golang-file-read
-tags: ['go',]
-series: ['100-days-of-golang',]
-image_url: https://meetgor-cdn.pages.dev/golang-022-file-read.png
+series:
+  - 100-days-of-golang
+image_url: 'https://meetgor-cdn.pages.dev/golang-022-file-read.png'
+title: 'Golang: File Reading'
+date: 2022-10-23T23:15:00.000Z
+tags:
+  - go
 ---
 
 ## Introduction
 
-In the 22nd post of the series, we will be looking into the file-handling process in golang, in the next few posts, we will cover the operations on file using golang. In this first entry of the file handling sub-series, we will understand the `READ` operation with files. We will see different ways to read a file, it can be word by word, line by line, or even custom chink by chunk. 
+In the 22nd post of the series, we will be looking into the file-handling process in golang, in the next few posts, we will cover the operations on file using golang. In this first entry of the file handling sub-series, we will understand the `READ` operation with files. We will see different ways to read a file, it can be word by word, line by line, or even custom chink by chunk.
 
 While dealing with files, we will also use standard library packages such as `os`, `bufio`, etc. We'll also touch on how we can read files from a remote location. Using golang, we will have a low-level interaction with file management but golang also abstracts the most of heavy lifting and management of files for us, so it becomes quite easy to work with files.
 
-
 ## Read the file as a single string (using os.ReadFile)
 
-We can use the [os](https://pkg.go.dev/os) package in golang, in which we have access to the [ReadFile](https://pkg.go.dev/os#ReadFile) funciton. The `ReadFile` function takes in a parameter as a string which should be a file name, it returns a slice of bytes or an error. We have discussed the error handling in the previous part of the series. So, we have to use the comma ok error syntax to get the appropriate return value from the funciton. We can grab the slice of bytes as the text we want or an error if there are errors like a file doesn't exist, it's a folder, etc. 
+We can use the [os](https://pkg.go.dev/os) package in golang, in which we have access to the [ReadFile](https://pkg.go.dev/os#ReadFile) funciton. The `ReadFile` function takes in a parameter as a string which should be a file name, it returns a slice of bytes or an error. We have discussed the error handling in the previous part of the series. So, we have to use the comma ok error syntax to get the appropriate return value from the funciton. We can grab the slice of bytes as the text we want or an error if there are errors like a file doesn't exist, it's a folder, etc.
 
 ```go
 package main
@@ -50,10 +55,9 @@ type:static
 
 So, under the hood here, we have text as a slice of bytes. We can iterate over the text as a slice and get the character by character-in the content of the file. Though we don't directly interact with the file content, we are storing it in a variable. In technical words, the file is directly loaded into the memory at once. We thereby return a single string object containing the content of the file.
 
+## Read file line by line
 
-## Read file line by line 
-
-We can even read a file line by line. Using the [bufio.NewScanner()](https://pkg.go.dev/bufio#NewScanner), the function takes in a [Reader](https://pkg.go.dev/io#Reader) object in our case it will be a file object. The function returns a scanner object that can be used to read the text with a particular scanner method. The returned object can be used in the loop to iterate over the content, in our case, we use the [Scan](https://pkg.go.dev/bufio#Scanner.Scan) method to split the file into lines. But we can use other methods like [ScanWords](https://pkg.go.dev/bufio#ScanWords) for scanning words, [ScanRunes](https://pkg.go.dev/bufio#ScanRunes) for scanning character by character, [ScanBytes](https://pkg.go.dev/bufio#ScanBytes) for scanning byte by byte. 
+We can even read a file line by line. Using the [bufio.NewScanner()](https://pkg.go.dev/bufio#NewScanner), the function takes in a [Reader](https://pkg.go.dev/io#Reader) object in our case it will be a file object. The function returns a scanner object that can be used to read the text with a particular scanner method. The returned object can be used in the loop to iterate over the content, in our case, we use the [Scan](https://pkg.go.dev/bufio#Scanner.Scan) method to split the file into lines. But we can use other methods like [ScanWords](https://pkg.go.dev/bufio#ScanWords) for scanning words, [ScanRunes](https://pkg.go.dev/bufio#ScanRunes) for scanning character by character, [ScanBytes](https://pkg.go.dev/bufio#ScanBytes) for scanning byte by byte.
 
 ```go
 package main
@@ -149,10 +153,9 @@ $ go run delimiter.go
 
 In the above example, the delimiter is set as `:` so by using the `Comma` attribute we can set the delimiter. By using the `NewReader` function, we fetch the reader object and by using the `ReadAll` function associated to the reader object, we read the contents. The content is fetched as a slice of strings which will be separated by the delimiter.
 
-
 ### Reading File word by word
 
-We can even use [ScanWords](https://pkg.go.dev/bufio#ScanWords) to read a file word by word. A word can be a collection of characters that are separated by space. Instead of reading it line by line, this function reads the file content after a space. 
+We can even use [ScanWords](https://pkg.go.dev/bufio#ScanWords) to read a file word by word. A word can be a collection of characters that are separated by space. Instead of reading it line by line, this function reads the file content after a space.
 
 ```go
 package main
@@ -263,7 +266,6 @@ created: 2007
 
 In the above example, we have opened the file and loaded the content into the `f` variable. the contents are read with the help of the `NewReader` function which returns a reader object which further can be used to read contents into chunks of bytes. The `chunk_size` defines the size we want to use for reading the content, `chunk_list` as a slice of strings which will hold the slice of chunks/bytes as a type caste into a slice of strings. With the `Read` function, the bytes are read into the function, and the buffer is split as per the chunk size obtained in the `Read` function. We append the slice of bytes into the sliced array and thereby we obtain the slice of strings.
 
-
 ### Read file character by character
 
 We can even read file each character at a time, using the [ScanRunes](https://pkg.go.dev/bufio#ScanRunes) function, this function scans a single rune/byte at a time. So, we can scan these runes one at a time and store them as a slice of bytes. Thereby we will have the content of the file stored as a slice of bytes.
@@ -313,6 +315,6 @@ That's it from this part. Reference for all the code examples and commands can b
 
 ## Conclusion
 
-In this section, we explored the functions and packages related to file reading. We saw how we can use packages like `os`, `bufio`, `encoding`, etc. to read files in a different way. We saw how to read files as a single string, line by line, word by word, character by character, in chunks, and also with a custom delimiter. Hopefully, the basics of file reading will have been cleared and with the examples, the syntactical construct was understood. 
+In this section, we explored the functions and packages related to file reading. We saw how we can use packages like `os`, `bufio`, `encoding`, etc. to read files in a different way. We saw how to read files as a single string, line by line, word by word, character by character, in chunks, and also with a custom delimiter. Hopefully, the basics of file reading will have been cleared and with the examples, the syntactical construct was understood.
 
 Thank you for reading. If you have any queries, questions, or feedback, you can let me know in the discussion below or on my social handles. Happy Coding :)
