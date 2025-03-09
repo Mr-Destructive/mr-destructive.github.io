@@ -54,6 +54,7 @@ jobs:
           HUGO_ENVIRONMENT: production
           TZ: America/Los_Angeles
         run: |
+          echo "${{ steps.pages.outputs.base_url }}" && \
           hugo \
             --gc \
             --minify \
