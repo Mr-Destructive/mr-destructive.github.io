@@ -11,6 +11,7 @@ import (
 	"os"
 	"path/filepath"
 	"reflect"
+	"slices"
 	"sort"
 	"strings"
 	"time"
@@ -324,6 +325,21 @@ func (c *RenderTemplatesPlugin) Name() string {
 	return c.PluginName
 }
 
+func SortPosts(posts []models.Post) []models.Post {
+	sort.Slice(posts, func(i, j int) bool {
+		date1, err1 := time.Parse("2006-01-02", posts[i].Frontmatter.Date[:10])
+		if err1 != nil {
+			log.Fatal(err1)
+		}
+		date2, err2 := time.Parse("2006-01-02", posts[j].Frontmatter.Date[:10])
+		if err2 != nil {
+			log.Fatal(err2)
+		}
+		return date1.After(date2)
+	})
+	return posts
+}
+
 func (c *RenderTemplatesPlugin) Execute(ssg *models.SSG) {
 	config := &ssg.Config
 	templateFS := os.DirFS(config.Blog.TemplatesDir)
@@ -345,12 +361,17 @@ func (c *RenderTemplatesPlugin) Execute(ssg *models.SSG) {
 		log.Fatal(err)
 	}
 	feedPosts := make(map[string][]models.Post)
-	fmt.Println("Posts:", len(ssg.Posts))
+	postsCopy := slices.Clone(ssg.Posts)
+	SortPosts(postsCopy)
+	ssg.Posts = postsCopy
 
 	for _, post := range ssg.Posts {
 		fmt.Println("Post:", post.Frontmatter.Title, post.Frontmatter.Type)
 		if post.Frontmatter.Status == "draft" {
 			continue
+		}
+		if post.Frontmatter.Date == "" {
+			post.Frontmatter.Date = time.Now().Format("2006-01-02")
 		}
 		postType := post.Frontmatter.Type
 		if postType == "" {
@@ -373,24 +394,6 @@ func (c *RenderTemplatesPlugin) Execute(ssg *models.SSG) {
 			log.Fatal(err)
 		}
 		outputPostPath := filepath.Join(postPath, "index.html")
-		//sort post by date
-		sort.Slice(ssg.Posts, func(i, j int) bool {
-			// Ensure correct parsing and handle errors
-			date1, err1 := time.Parse("2006-01-02", ssg.Posts[i].Frontmatter.Date)
-			date2, err2 := time.Parse("2006-01-02", ssg.Posts[j].Frontmatter.Date)
-
-			if err1 != nil {
-				date1 = time.Time{}
-				return true
-			}
-			if err2 != nil {
-				date2 = time.Time{}
-				return false
-			}
-
-			return date1.Before(date2)
-		})
-
 		for i := range ssg.Posts {
 			ssg.Posts[i].Frontmatter.Date = ssg.Posts[i].Frontmatter.Date[:10] // Truncate in case of time component
 		}
@@ -420,6 +423,9 @@ func (c *RenderTemplatesPlugin) Execute(ssg *models.SSG) {
 	}
 	feedPostLists := []models.Feed{}
 	for postType, posts := range feedPosts {
+		postsCopy = slices.Clone(posts)
+		SortPosts(postsCopy)
+		posts = postsCopy
 		fmt.Println(config.Blog.PagesConfig[postType].Emoji)
 		feed := models.Feed{
 			Title: strings.ToTitle(postType) + " " + config.Blog.PagesConfig[postType].Emoji,

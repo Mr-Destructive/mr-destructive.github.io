@@ -3,6 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <link id="syntax-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll("pre code").forEach((block) => {
+            hljs.highlightElement(block);
+        });
+    });
+    </script>
     <title>{{ .Config.Blog.Name }} | {{ .Post.Frontmatter.Title }}</title>
     <style>
             :root {
@@ -225,35 +236,151 @@ p code {
 .secondary-theme .Hljs-number { color: var(--code-number-color, #b5cea8); }
 .secondary-theme .Hljs-variable { color: var(--code-variable-color, #9cdcfe); }
 .secondary-theme .Hljs-function { color: var(--code-function-color, #dcdcaa); }
+
+pre {
+    background: var(--code-bg-color, #1e1e1e);
+    border: 1px solid var(--code-border-color, #3c3c3c);
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+
+/* Code text colors */
+code {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 0.9em;
+    color: var(--code-text-color, #ffffff);
+}
+
+/* Inline code styling */
+p code {
+    background-color: var(--code-bg-color, #333);
+    color: var(--code-text-color, #ffcb6b);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+/* Syntax highlighting */
+.Hljs-comment { color: var(--code-comment-color, #6a737d); font-style: italic; }
+.Hljs-keyword { color: var(--code-keyword-color, #c678dd); font-weight: bold; }
+.Hljs-string { color: var(--code-string-color, #98c379); }
+.Hljs-number { color: var(--code-number-color, #d19a66); }
+.Hljs-variable { color: var(--code-variable-color, #e06c75); }
+.Hljs-function { color: var(--code-function-color, #61afef); }
+
+/* Copy button */
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.copy-btn:hover {
+    background: #45a049;
+}
+
+.copy-btn.copied {
+    background: #ffa500;
+}
+
+blockquote {
+    border-left: 4px solid var(--quote-color);
+    background-color: rgba(255, 255, 255, 0.05); /* Light background */
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: var(--secondary-text-color);
+    border-radius: 6px;
+    position: relative;
+}
+
+blockquote::before {
+    content: "“"; /* Left quotation mark */
+    font-size: 2rem;
+    color: var(--quote-color);
+    position: absolute;
+    top: 0;
+    left: 10px;
+}
+
+blockquote::after {
+    content: "”"; /* Right quotation mark */
+    font-size: 2rem;
+    color: var(--quote-color);
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}
+
+/* If the quote contains a citation */
+blockquote cite {
+    display: block;
+    text-align: right;
+    font-size: 0.9em;
+    margin-top: 0.5rem;
+    color: var(--secondary-text-color);
+    font-style: normal;
+}
     </style>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const themeToggle = document.getElementById('theme-toggle');
-            const body = document.body;
+    document.addEventListener("DOMContentLoaded", () => {
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const stylesheet = document.getElementById("syntax-theme");
 
-            const currentTheme = localStorage.getItem('theme') || 'light';
+        // Get stored theme from localStorage
+        const currentTheme = localStorage.getItem("theme") || "light";
 
-            if (currentTheme === 'secondary') {
-                body.classList.add('secondary-theme');
+        // Function to set the syntax highlighting theme
+        function setSyntaxTheme(theme) {
+            if (theme === "secondary") {
+                stylesheet.href = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/dracula.min.css";
+            } else {
+                stylesheet.href = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css";
             }
+        }
 
-            themeToggle.addEventListener('click', () => {
-                if (body.classList.contains('secondary-theme')) {
-                    body.classList.remove('secondary-theme');
-                    localStorage.setItem('theme', 'light');
-                } else {
-                    body.classList.add('secondary-theme');
-                    localStorage.setItem('theme', 'secondary');
-                }
-            });
+        // Apply stored theme
+        if (currentTheme === "secondary") {
+            body.classList.add("secondary-theme");
+            setSyntaxTheme("secondary");
+        } else {
+            setSyntaxTheme("light");
+        }
+
+        // Toggle theme on button click
+        themeToggle.addEventListener("click", () => {
+            if (body.classList.contains("secondary-theme")) {
+                body.classList.remove("secondary-theme");
+                localStorage.setItem("theme", "light");
+                setSyntaxTheme("light");
+            } else {
+                body.classList.add("secondary-theme");
+                localStorage.setItem("theme", "secondary");
+                setSyntaxTheme("secondary");
+            }
         });
+    });
 
         document.addEventListener("DOMContentLoaded", () => {
             document.querySelectorAll("pre").forEach((pre) => {
                 const button = document.createElement("button");
                 button.classList.add("copy-btn");
                 button.textContent = "Copy";
-                
+
                 button.addEventListener("click", () => {
                     const code = pre.querySelector("code");
                     if (!code) return;

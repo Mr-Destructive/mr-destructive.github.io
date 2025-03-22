@@ -681,8 +681,8 @@ Roles: read
 
 ### References:
 
-* https://en.wikipedia.org/wiki/HTTP#Request\_methods
+* [Wikipedia: HTTP Request Methods](https://en.wikipedia.org/wiki/HTTP#Request\_methods)
     
-* https://rubyonrails.org/2012/2/26/edge-rails-patch-is-the-new-primary-http-method-for-updates
+* [Ruby on Rails: Patch is the new primary HTTP method for updates](https://rubyonrails.org/2012/2/26/edge-rails-patch-is-the-new-primary-http-method-for-updates)
     
-* https://datatracker.ietf.org/doc/html/rfc5789
+* [RFC 5789](https://datatracker.ietf.org/doc/html/rfc5789)

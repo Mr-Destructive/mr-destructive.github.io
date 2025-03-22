@@ -2,7 +2,7 @@
   "type": "posts",
   "title": "What is BASH?",
   "subtitle": "A guide to performing wizardry in the terminal",
-  "date": "2021-06-18 02:12:07 +0530",
+  "date": "2021-06-18 02:12:07",
   "status": "published",
   "tags": [
     "bash"

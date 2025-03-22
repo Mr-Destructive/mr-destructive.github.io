@@ -2,7 +2,7 @@
     "type": "posts",
     "title": "Golang Web: DELETE Method",
     "description": "Exploring the fundamentals of a DELETE method in golang. How to request a resource, parse body, headers, etc. in a HTTP DELETE request.",
-    "date": "2025-01-12",
+    "date": "2025-01-12 20:30:00",
     "status": "published",
     "slug": "golang-web-delete-method",
     "tags": ["go"],

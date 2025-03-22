@@ -3,6 +3,7 @@
 
 <head>
     <title>Techstructive Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="style.css">
     <style>
             :root {
@@ -48,9 +49,17 @@
             color: var(--text-color);
             font-family: 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
             line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
+            max-width: 750px; /* Limit width for readability */
+            margin: 0 auto; /* Centers content */
             padding: 2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                max-width: 100%;
+                padding: 1rem;
+            }
         }
 
         header {
@@ -216,7 +225,6 @@
         });
     </script>
 </head>
-
 <body>
     <h1>Techstructive Blog</h1>
     <button id="theme-toggle" aria-label="Theme">Theme</button>
