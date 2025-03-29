@@ -4,7 +4,17 @@
 <head>
     <title>Techstructive Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:url" content="https://dev.meetgor.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ .Config.Blog.Name }}">
+    <meta property="og:description" content="{{ .Config.Blog.Description }}">
+    <meta property="og:image" content="tbicon.png">
+    <meta property="twitter:domain" content="dev.meetgor.com">
+    <meta property="twitter:url" content="https://dev.meetgor.com/">
+    <meta name="twitter:title" content="{{ .Config.Blog.Name }}">
+    <meta name="twitter:description" content="{{ .Config.Blog.Description }}">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="icon" href="tbicon.png" type="image/png">
     <style>
             :root {
                 --bg-color: {{ .Themes.Default.Bg }};
@@ -202,6 +212,22 @@
         #editor i {
             margin-right: 5px; /* Space between icon and text */
         }
+        footer{
+        }
+        .social{
+            display: flex;
+            list-style-type: none;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .svg-icon {
+            width: 16px;
+            height: 16px;
+            display: inline-flex;
+            fill: #ffffff;
+            padding-right: 5px;
+            vertical-align: text-top; }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -225,6 +251,11 @@
             });
         });
     </script>
+    <script async 
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4627844420729409"
+        crossorigin="anonymous">
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EET2ZX4QY1"></script>
 </head>
 <body>
     <h1>Techstructive Blog</h1>
@@ -245,6 +276,51 @@
         </li>
         {{ end }}
     </ul>
+    <footer>
+        {{ .Config.Blog.Name }} - {{ .Config.Blog.Description }} @ {{ .Config.Blog.BaseUrl }}
+        <br/>
+        <span>Socials</span>
+        <ul class='social'>
+            <li>
+                <a href="https://twitter.com/MeetGor21">Twitter
+                    <svg class="svg-icon grey">
+                        <use xlink:href="social-icons.svg#twitter"></use>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.linkedin.com/in/meetgor/">LinkedIn
+                    <svg class="svg-icon grey">
+                        <use xlink:href="social-icons.svg#linkedin"></use>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="https://github.com/Mr-Destructive">GitHub
+                    <svg class="svg-icon grey">
+                        <use xlink:href="social-icons.svg#github"></use>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="https://dev.to/mr_destructive">Dev.to
+                    <svg class="svg-icon grey">
+                        <use xlink:href="social-icons.svg#devto"></use>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/rss.xml">RSS
+                    <svg class="svg-icon orange">
+                        <use xlink:href="social-icons.svg#rss"></use>
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a class="u-email" href="mailto:gormeet711@gmail.com">Email</a>
+            </li>
+        </ul>
+</footer>
 </body>
 
 </html>

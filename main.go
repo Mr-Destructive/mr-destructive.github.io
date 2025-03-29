@@ -68,7 +68,7 @@ func ReadPosts(files []string) ([]models.Post, error) {
 		var success bool
 		var frontmatterObj models.FrontMatter
 		var contentBytes []byte
-		var requiredFields []string = []string{"title", "description", "status", "type", "date", "slug", "tags"}
+		var requiredFields []string = []string{"title", "description", "status", "type", "date", "slug", "tags", "image_url"}
 
 		// Attempt to detect JSON front matter
 		jsonSeparator := []byte("}\n\n")

@@ -1,6 +1,7 @@
 {
     "blog": {
         "name": "Techstructive Blog",
+        "description": "Tech blog by Meet Gor",
         "base_url": "dev.meetgor.com",
         "posts_dir": "posts",
         "templates_dir": "templates",

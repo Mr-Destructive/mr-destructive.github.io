@@ -79,6 +79,7 @@ type FrontMatter struct {
 	Date        string                 `json:"date" yaml:"date"`
 	Slug        string                 `json:"slug" yaml:"slug"`
 	Tags        []string               `json:"tags" yaml:"tags"`
+    ImageUrl    string                 `json:"image_url" yaml:"image_url"`
 	Extras      map[string]interface{} `json:",inline" yaml:",inline"`
 }
 
