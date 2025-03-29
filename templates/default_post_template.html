@@ -334,6 +334,22 @@ blockquote cite {
     color: var(--secondary-text-color);
     font-style: normal;
 }
+        #editor {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #editor i {
+            margin-right: 5px; /* Space between icon and text */
+        }
     </style>
     <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -434,6 +450,16 @@ blockquote cite {
                 <span class="series-label">series</span>
             </div>
             {{ end }}
+            <div class="post-meta">
+                {{ if $.Config.AdminMode }}
+                    <button id="editor" onclick="location.href='/{{.Config.Blog.PrefixURL}}editor/?slug={{ .Post.Frontmatter.Slug }}&method=edit'">
+                        <i class="fas fa-edit"></i>Edit
+                    </button>
+                    <button id="editor" onclick="location.href='/{{.Config.Blog.PrefixURL}}editor/?slug={{ .Post.Frontmatter.Slug }}&method=delete'">
+                        <i class="fas fa-edit"></i>Delete
+                    </button>
+                {{ end }}
+            </div>
             <hr>
             <div class="post-content">
                 {{ .Post.Content }}

@@ -52,6 +52,7 @@ type BlogConfig struct {
 	TemplatesDir        string                `json:"templates_dir"`
 	StaticDir           string                `json:"static_dir"`
 	OutputDir           string                `json:"output_dir"`
+	AdminDir            string                `json:"admin_dir"`
 	DefaultFeedTemplate string                `json:"default_feed_template"`
 	DefaultPostTemplate string                `json:"default_post_template"`
 	PrefixURL           string                `json:"prefix_url"`
@@ -62,9 +63,10 @@ type BlogConfig struct {
 }
 
 type SSG_CONFIG struct {
-	Blog    BlogConfig `json:"blog"`
-	Authors []Author   `json:"authors"`
-	Plugins []string   `json:"plugins"`
+	Blog      BlogConfig `json:"blog"`
+	Authors   []Author   `json:"authors"`
+	Plugins   []string   `json:"plugins"`
+	AdminMode bool
 }
 
 var config *SSG_CONFIG

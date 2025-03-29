@@ -6,6 +6,7 @@
         "templates_dir": "templates",
         "static_dir": "static",
         "output_dir": "public",
+        "admin_dir": "admin",
         "default_feed_template": "default_feed_template.html",
         "default_post_template": "default_post_template.html",
         "prefix_url": "",
@@ -113,6 +114,7 @@
         "Sitemap",
         "RSS",
         "index",
+        "admin",
         "server"
     ]
 }

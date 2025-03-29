@@ -9,8 +9,10 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path"
 	"path/filepath"
 	"reflect"
+	"regexp"
 	"slices"
 	"sort"
 	"strings"
@@ -186,6 +188,51 @@ func Copy(src string, dst string) error {
 	return nil
 }
 
+func CopyCustom(src string, dst string) error {
+	srcFiles, err := WalkAndListFiles(src)
+	if err != nil {
+		return err
+	}
+	fmt.Println("srcFiles:", len(srcFiles))
+
+	for _, srcFileName := range srcFiles {
+		relPath, err := filepath.Rel(src, srcFileName)
+		if err != nil {
+			return err
+		}
+
+		// Skip copying anything inside "admin"
+		if strings.HasPrefix(relPath, "admin") {
+			continue
+		}
+
+		srcFile, err := os.Open(srcFileName)
+		if err != nil {
+			return err
+		}
+		defer srcFile.Close()
+
+		dstPath := filepath.Join(dst, relPath)
+		err = os.MkdirAll(filepath.Dir(dstPath), os.ModePerm)
+		if err != nil {
+			return err
+		}
+
+		dstFile, err := os.Create(dstPath)
+		if err != nil {
+			return err
+		}
+		defer dstFile.Close()
+
+		_, err = io.Copy(dstFile, srcFile)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+
+	return nil
+}
+
 func GeneratePages(config models.SSG_CONFIG) error {
 	src := config.Blog.StaticDir
 	templateFS := os.DirFS(config.Blog.TemplatesDir)
@@ -340,6 +387,56 @@ func SortPosts(posts []models.Post) []models.Post {
 	return posts
 }
 
+type oEmbedResponse struct {
+	HTML string `json:"html"`
+}
+
+func getTwitterEmbed(url string) string {
+	apiURL := "https://publish.twitter.com/oembed?url=" + url
+	resp, err := http.Get(apiURL)
+	if err != nil {
+		fmt.Println("Error fetching Twitter embed:", err)
+		return fmt.Sprintf(`<div class="embed-container"><a href="%s" target="_blank">%s</a></div>`, url, url)
+	}
+	defer resp.Body.Close()
+
+	body, _ := io.ReadAll(resp.Body)
+	var oembed oEmbedResponse
+	if err := json.Unmarshal(body, &oembed); err != nil {
+		fmt.Println("Error parsing Twitter embed response:", err)
+		return fmt.Sprintf(`<div class="embed-container"><a href="%s" target="_blank">%s</a></div>`, url, url)
+	}
+
+	return fmt.Sprintf(`<div class="embed-container">%s</div>`, oembed.HTML)
+}
+
+func generateEmbed(postContent string) string {
+	re := regexp.MustCompile(`{%\s*embed\s*(https?://[^\s]+)\s*%}`)
+	replacedContent := re.ReplaceAllStringFunc(postContent, func(match string) string {
+		url := re.FindStringSubmatch(match)[1]
+
+		if strings.Contains(url, "x.com") || strings.Contains(url, "twitter.com") {
+			return getTwitterEmbed(url)
+		}
+		if strings.Contains(url, "youtube.com") || strings.Contains(url, "youtu.be") {
+			videoID := extractYouTubeID(url)
+			return fmt.Sprintf(`<iframe width="560" height="315" src="https://www.youtube.com/embed/%s" frameborder="0" allowfullscreen></iframe>`, videoID)
+		}
+		return fmt.Sprintf(`<iframe src="%s" width="600" height="400" frameborder="0"></iframe>`, url)
+	})
+	return replacedContent
+}
+
+func extractYouTubeID(url string) string {
+	if strings.Contains(url, "youtube.com/watch?v=") {
+		return strings.Split(strings.TrimPrefix(url, "https://www.youtube.com/watch?v="), "&")[0]
+	}
+	if strings.Contains(url, "youtu.be/") {
+		return strings.Split(strings.TrimPrefix(url, "https://youtu.be/"), "?")[0]
+	}
+	return ""
+}
+
 func (c *RenderTemplatesPlugin) Execute(ssg *models.SSG) {
 	config := &ssg.Config
 	templateFS := os.DirFS(config.Blog.TemplatesDir)
@@ -397,6 +494,7 @@ func (c *RenderTemplatesPlugin) Execute(ssg *models.SSG) {
 		for i := range ssg.Posts {
 			ssg.Posts[i].Frontmatter.Date = ssg.Posts[i].Frontmatter.Date[:10] // Truncate in case of time component
 		}
+		post.Content = template.HTML(generateEmbed(string(post.Content)))
 		context := models.TemplateContext{
 			Post: post,
 			Themes: models.ThemeCombo{
@@ -404,7 +502,8 @@ func (c *RenderTemplatesPlugin) Execute(ssg *models.SSG) {
 				Secondary: config.Blog.Themes["secondary"],
 			},
 			Config: models.SSG_CONFIG{
-				Blog: config.Blog,
+				Blog:      config.Blog,
+				AdminMode: config.AdminMode,
 			},
 		}
 		err := t.ExecuteTemplate(&buffer, templatePath, context)
@@ -465,7 +564,8 @@ func (c *CreateFeedsPlugin) Execute(ssg *models.SSG) {
 			},
 			FeedInfo: feed,
 			Config: models.SSG_CONFIG{
-				Blog: config.Blog,
+				Blog:      config.Blog,
+				AdminMode: config.AdminMode,
 			},
 		}
 		fmt.Println("Post:", feed.Title, len(feed.Posts))
@@ -522,7 +622,8 @@ func (c *IndexPlugin) Execute(ssg *models.SSG) {
 			Secondary: config.Blog.Themes["secondary"],
 		},
 		Config: models.SSG_CONFIG{
-			Blog: config.Blog,
+			Blog:      config.Blog,
+			AdminMode: config.AdminMode,
 		},
 		FeedPosts: ssg.FeedPosts,
 	}
@@ -534,6 +635,18 @@ func (c *IndexPlugin) Execute(ssg *models.SSG) {
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+// admin
+type AdminPlugin struct {
+	PluginName string
+}
+
+func (c *AdminPlugin) Name() string {
+	return c.PluginName
+}
+
+func (c *AdminPlugin) Execute(ssg *models.SSG) {
 }
 
 // "server"
@@ -616,6 +729,45 @@ func main() {
 		}
 	}
 	pluginManager.ExecuteAll(&ssg)
+	pluginManager = PluginManager{}
+	originalOutputDir := ssg.Config.Blog.OutputDir
+	ssg.Config.AdminMode = true
+	ssg.Config.Blog.OutputDir = path.Join(ssg.Config.Blog.OutputDir, ssg.Config.Blog.AdminDir)
+	for _, plugin := range config.Plugins {
+		switch plugin {
+		case "readPosts":
+			pluginManager.Register(&PostReaderPlugin{PluginName: "readPosts"})
+		case "renderTemplates":
+			pluginManager.Register(&RenderTemplatesPlugin{PluginName: "renderTemplates"})
+		case "createFeeds":
+			pluginManager.Register(&CreateFeedsPlugin{PluginName: "createFeeds"})
+		case "copyStaticFiles":
+			pluginManager.Register(&CopyStaticFilesPlugin{PluginName: "copyStaticFiles"})
+		case "index":
+			pluginManager.Register(&IndexPlugin{PluginName: "index"})
+		default:
+
+			//userPlugin := plugins.UserPlugin{PluginName: plugin}
+			//pluginManager.Register(&userPlugin)
+
+			if plugin != "server" {
+				pluginStruct, err := LoadPlugin(plugin)
+				if err != nil {
+					log.Printf("Error loading plugin %s: %v", plugin, err)
+					continue
+				}
+				fmt.Println("Load", plugin, pluginStruct)
+				pluginManager.Register(pluginStruct)
+			} else {
+				continue
+			}
+		}
+	}
+	pluginManager.ExecuteAll(&ssg)
+	pluginManager = PluginManager{}
+	pluginManager.Register(&AdminPlugin{PluginName: "admin"})
+	pluginManager.ExecuteAll(&ssg)
+	ssg.Config.Blog.OutputDir = originalOutputDir
 	pluginManager = PluginManager{}
 	if devEnv {
 		pluginManager.Register(&ServerPlugin{PluginName: "server"})

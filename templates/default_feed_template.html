@@ -208,7 +208,11 @@
         <ul>
             {{ range .FeedInfo.Posts }}
             <li>
-                <a href="/{{ .Frontmatter.Slug }}">{{ .Frontmatter.Title }}</a>
+                {{ if $.Config.AdminMode }}
+                    <a href="/{{ $.Config.Blog.AdminDir }}/{{ .Frontmatter.Slug }}">{{ .Frontmatter.Title }}</a>
+                {{ else }}
+                    <a href="/{{ .Frontmatter.Slug }}">{{ .Frontmatter.Title }}</a>
+                {{ end }}
             </li>
             {{ end }}
         </ul>
