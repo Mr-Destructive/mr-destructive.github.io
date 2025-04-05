@@ -59,7 +59,7 @@ func (p *DbPlugin) Execute(ssg *models.SSG) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	dbURL := os.Getenv("TURSO_DATABASE_URL")
+	dbURL := os.Getenv("TURSO_DATABASE_NAME")
 	dbAuthToken := os.Getenv("TURSO_DATABASE_AUTH_TOKEN")
 	dbUrl := fmt.Sprintf("%s?authToken=%s", dbURL, dbAuthToken)
 
