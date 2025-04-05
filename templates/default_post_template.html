@@ -7,6 +7,8 @@
     <link id="syntax-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:url" content="https://dev.meetgor.com/{{ .Post.Frontmatter.Slug }}">
     <meta property="og:type" content="website">
@@ -353,7 +355,7 @@ blockquote cite {
     color: var(--secondary-text-color);
     font-style: normal;
 }
-        #editor {
+        #editor, #editor-edit {
             background-color: #4CAF50; /* Green */
             color: white;
             border: none;
@@ -367,6 +369,9 @@ blockquote cite {
             border-radius: 5px;
         }
         #editor i {
+            margin-right: 5px; /* Space between icon and text */
+        }
+        #editor-edit i {
             margin-right: 5px; /* Space between icon and text */
         }
     </style>
@@ -480,11 +485,10 @@ blockquote cite {
             {{ end }}
             <div class="post-meta">
                 {{ if $.Config.AdminMode }}
-                    <button id="editor" onclick="location.href='/{{.Config.Blog.PrefixURL}}editor/?slug={{ .Post.Frontmatter.Slug }}&method=edit'">
-                        <i class="fas fa-edit"></i>Edit
-                    </button>
-                    <button id="editor" onclick="location.href='/{{.Config.Blog.PrefixURL}}editor/?slug={{ .Post.Frontmatter.Slug }}&method=delete'">
-                        <i class="fas fa-edit"></i>Delete
+                    <button id="editor-edit">Edit</button>
+                    <button id="editor-delete" 
+                            onclick="location.href='/{{.Config.Blog.PrefixURL}}editor/?slug={{ .Post.Frontmatter.Slug }}&method=delete'">
+                        <i class="fas fa-trash"></i>Delete
                     </button>
                 {{ end }}
             </div>
@@ -503,6 +507,33 @@ blockquote cite {
 
 
     <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const editBtn = document.getElementById('editor-edit');
+
+        if (editBtn) {
+            editBtn.addEventListener('click', async function () {
+                const slug = "{{ .Post.Frontmatter.Slug }}";
+                const type = "{{ .Post.Frontmatter.Type }}";
+                console.log("Editing post:", slug, type);
+                const url = "{{ .Config.Blog.CloudFunction.base_url }}/.netlify/functions/api?slug=" + slug + "&method=edit&type=" + type;
+
+                try {
+                    const res = await fetch(url);
+
+                    if (!res.ok) throw new Error("Failed to fetch edit content");
+                    console.log(res);
+
+                    const html = await res.text();
+                    console.log(html);
+
+                    document.querySelector('.post-content').innerHTML = html;
+                } catch (err) {
+                    console.error(err);
+                    alert("Error loading editor content");
+                }
+            });
+        }
+    });
     </script>
 </body>
 </html>

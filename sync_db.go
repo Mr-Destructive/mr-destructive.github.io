@@ -16,6 +16,13 @@ func main() {
 	dbURL := os.Getenv("TURSO_DATABASE_NAME")
 	dbAuthToken := os.Getenv("TURSO_DATABASE_AUTH_TOKEN")
 	dbUrl := fmt.Sprintf("%s?authToken=%s", dbURL, dbAuthToken)
+	args := os.Args
+	sync_post := false
+	if len(args) > 1 {
+		if args[1] == "sync_post" {
+			sync_post = true
+		}
+	}
 
 	db, err := sql.Open("libsql", dbUrl)
 	if err != nil {
@@ -23,9 +30,13 @@ func main() {
 		os.Exit(1)
 	}
 	defer db.Close()
-	onehourBackTime := time.Now().Add(time.Hour * -1).Format("2006-01-02 15:04:05")
-
-	query := fmt.Sprintf("SELECT * FROM posts WHERE created_at > '%s';", onehourBackTime)
+	var query string
+	if sync_post {
+		query = "SELECT * FROM posts;"
+	} else {
+		onehourBackTime := time.Now().Add(time.Hour * -1).Format("2006-01-02 15:04:05")
+		query = fmt.Sprintf("SELECT * FROM posts WHERE created_at > '%s';", onehourBackTime)
+	}
 
 	rows, err := db.Query(query)
 	if err != nil {
@@ -42,7 +53,8 @@ func main() {
 		var updated string
 		var metadata string
 		var authorId int64
-		err := rows.Scan(&id, &title, &slug, &body, &metadata, &created, &updated, &authorId)
+		var deleted bool
+		err := rows.Scan(&id, &title, &slug, &body, &metadata, &created, &updated, &authorId, &deleted)
 		if err != nil {
 			fmt.Println(err)
 		}

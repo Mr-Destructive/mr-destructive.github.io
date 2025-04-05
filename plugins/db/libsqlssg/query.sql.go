@@ -64,6 +64,43 @@ func (q *Queries) CreatePost(ctx context.Context, arg CreatePostParams) (Post, e
 	return i, err
 }
 
+const getAllPosts = `-- name: GetAllPosts :many
+SELECT id, title, slug, body, metadata, deleted, created_at, updated_at, author_id FROM posts WHERE deleted = 0
+`
+
+func (q *Queries) GetAllPosts(ctx context.Context) ([]Post, error) {
+	rows, err := q.db.QueryContext(ctx, getAllPosts)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Post
+	for rows.Next() {
+		var i Post
+		if err := rows.Scan(
+			&i.ID,
+			&i.Title,
+			&i.Slug,
+			&i.Body,
+			&i.Metadata,
+			&i.Deleted,
+			&i.CreatedAt,
+			&i.UpdatedAt,
+			&i.AuthorID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const getAuthorByID = `-- name: GetAuthorByID :one
 SELECT id, username, name, password, is_admin FROM authors WHERE id = ?
 `

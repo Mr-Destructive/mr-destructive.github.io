@@ -33,14 +33,14 @@ func (p *DbPlugin) Name() string {
 }
 
 func (p *DbPlugin) Execute(ssg *models.SSG) {
-	// create a editor template
+	log.Println("------Executing DB plugin")
 
 	buffer := bytes.Buffer{}
 	templates, err := template.New("base").ParseFS(ssg.FS, "*.html")
 	if err != nil {
 		log.Fatal(err)
 	}
-	context := models.TemplateContext{
+	postContext := models.TemplateContext{
 		Themes: models.ThemeCombo{
 			Default:   ssg.Config.Blog.Themes["default"],
 			Secondary: ssg.Config.Blog.Themes["secondary"],
@@ -49,7 +49,7 @@ func (p *DbPlugin) Execute(ssg *models.SSG) {
 			Blog: ssg.Config.Blog,
 		},
 	}
-	err = templates.ExecuteTemplate(&buffer, "editor_template.html", context)
+	err = templates.ExecuteTemplate(&buffer, "editor_template.html", postContext)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -59,7 +59,71 @@ func (p *DbPlugin) Execute(ssg *models.SSG) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	dbURL := os.Getenv("TURSO_DATABASE_URL")
+	dbAuthToken := os.Getenv("TURSO_DATABASE_AUTH_TOKEN")
+	dbUrl := fmt.Sprintf("%s?authToken=%s", dbURL, dbAuthToken)
 
+	db, err := sql.Open("libsql", dbUrl)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "failed to open db %s: %s", dbUrl, err)
+		os.Exit(1)
+	}
+	ctx := context.Background()
+	if s, err := db.ExecContext(ctx, DDL); err != nil {
+		log.Println(s)
+	}
+	defer db.Close()
+	queries := libsqlssg.New(db)
+	dbPosts, err := queries.GetAllPosts(ctx)
+	log.Printf("Found %d posts in DB", len(dbPosts))
+	postsToCreate := []libsqlssg.CreatePostParams{}
+	var authorId int64
+	for _, post := range ssg.Posts {
+		slug := post.Frontmatter.Slug
+		postExists := false
+		for _, dbPost := range dbPosts {
+			authorId = dbPost.AuthorID
+			if dbPost.Slug == slug {
+				postExists = true
+				continue
+			} else {
+			}
+		}
+		var metadata []byte
+		if postExists {
+			continue
+		}
+		metadata, err = json.Marshal(post.Frontmatter.Extras)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		postParams := libsqlssg.CreatePostParams{
+			Slug:     slug,
+			Title:    post.Frontmatter.Title,
+			Body:     string(post.Content),
+			Metadata: string(metadata),
+			AuthorID: int64(authorId),
+		}
+		postsToCreate = append(postsToCreate, postParams)
+	}
+	createdPosts := []libsqlssg.Post{}
+	for _, post := range postsToCreate {
+		createdPost, err := queries.CreatePost(ctx, post)
+		if err != nil {
+			log.Fatal(err)
+		}
+		createdPosts = append(createdPosts, createdPost)
+	}
+	log.Printf("Created %d posts", len(createdPosts))
+}
+
+func GetAllPostsSlug(posts []models.Post) []string {
+	slugs := []string{}
+	for _, post := range posts {
+		slugs = append(slugs, post.Frontmatter.Slug)
+	}
+	return slugs
 }
 
 type Payload struct {
