@@ -4,11 +4,13 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
-	_ "github.com/tursodatabase/libsql-client-go/libsql"
 	"os"
 	"regexp"
 	"strings"
 	"time"
+
+	htmltomarkdown "github.com/JohannesKaufmann/html-to-markdown/v2"
+	_ "github.com/tursodatabase/libsql-client-go/libsql"
 )
 
 func main() {
@@ -58,8 +60,9 @@ func main() {
 		if err != nil {
 			fmt.Println(err)
 		}
+		bodyMd := htmltomarkdown.ConvertString(body)
 		fmt.Println(id, title, slug, body, created, updated, metadata, authorId)
-		writePostFile(title, slug, body, metadata, created, updated)
+		writePostFile(title, slug, bodyMd, metadata, created, updated)
 	}
 }
 

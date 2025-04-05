@@ -126,7 +126,8 @@ func ReadPosts(files []string) ([]models.Post, error) {
 					continue
 				}
 			} else {
-				log.Printf("No valid front matter found in file")
+				log.Printf("No valid front matter found in file", frontmatterObj)
+				log.Println(string(fileBytes))
 				continue
 			}
 		}
@@ -374,13 +375,19 @@ func (c *RenderTemplatesPlugin) Name() string {
 
 func SortPosts(posts []models.Post) []models.Post {
 	sort.Slice(posts, func(i, j int) bool {
+		if posts[i].Frontmatter.Date == "" {
+			return false
+		}
+		if posts[j].Frontmatter.Date == "" {
+			return true
+		}
 		date1, err1 := time.Parse("2006-01-02", posts[i].Frontmatter.Date[:10])
 		if err1 != nil {
-			log.Fatal(err1)
+			return false
 		}
 		date2, err2 := time.Parse("2006-01-02", posts[j].Frontmatter.Date[:10])
 		if err2 != nil {
-			log.Fatal(err2)
+			return false
 		}
 		return date1.After(date2)
 	})
@@ -468,7 +475,7 @@ func (c *RenderTemplatesPlugin) Execute(ssg *models.SSG) {
 			continue
 		}
 		if post.Frontmatter.Date == "" {
-			post.Frontmatter.Date = time.Now().Format("2006-01-02")
+			continue
 		}
 		postType := post.Frontmatter.Type
 		if postType == "" {
@@ -492,6 +499,9 @@ func (c *RenderTemplatesPlugin) Execute(ssg *models.SSG) {
 		}
 		outputPostPath := filepath.Join(postPath, "index.html")
 		for i := range ssg.Posts {
+			if ssg.Posts[i].Frontmatter.Date == "" {
+				continue
+			}
 			ssg.Posts[i].Frontmatter.Date = ssg.Posts[i].Frontmatter.Date[:10] // Truncate in case of time component
 		}
 		post.Content = template.HTML(generateEmbed(string(post.Content)))
