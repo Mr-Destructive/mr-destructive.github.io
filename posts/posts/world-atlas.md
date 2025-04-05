@@ -1,0 +1,17 @@
+{"cover_image":"https://github.com/Mr-Destructive/WorldAtlas/raw/master/webpage/img/W.png","github_link":"https://github.com/Mr-Destructive/world-atlas-dj/","live_link":"https://mr-destructive.github.io/WorldAtlas/webpage/index.html"}
+
+<p>A simple word game using some django in the backend and javascript for frontend.</p>
+<p>Tech stack:</p>
+<ol>
+<li>Django</li>
+<li>Django-Rest-Framework</li>
+<li>Javascript</li>
+</ol>
+<p>Django rest framework as an api for most of the operations in the game like:</p>
+<ol>
+<li>Validating a user input place from database</li>
+<li>Listing out all places from a given letter</li>
+<li>Get a random place from a given letter</li>
+<li>CRUD endpoint for the places in the database.</li>
+</ol>
+<p>API Link: https://djangonaut.pythonanywhere.com/world-atlas/api/</p>
