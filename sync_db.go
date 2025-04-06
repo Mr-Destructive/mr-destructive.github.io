@@ -60,7 +60,10 @@ func main() {
 		if err != nil {
 			fmt.Println(err)
 		}
-		bodyMd := htmltomarkdown.ConvertString(body)
+		bodyMd, err := htmltomarkdown.ConvertString(body)
+		if err != nil {
+			fmt.Println(err)
+		}
 		fmt.Println(id, title, slug, body, created, updated, metadata, authorId)
 		writePostFile(title, slug, bodyMd, metadata, created, updated)
 	}
