@@ -32,7 +32,7 @@ func handler(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse,
 	dbToken := os.Getenv("TURSO_DATABASE_READ_TOKEN")
 
 	var err error
-	dbString := fmt.Sprintf("libsql://%s?authToken=%s", dbName, dbToken)
+	dbString := fmt.Sprintf("%s?authToken=%s", dbName, dbToken)
 	db, err := sql.Open("libsql", dbString)
 	if err != nil {
 		return errorResponse(http.StatusInternalServerError, "Database connection failed"), nil
