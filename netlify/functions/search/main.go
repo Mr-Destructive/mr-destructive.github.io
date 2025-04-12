@@ -45,7 +45,7 @@ func handler(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse,
 		return errorResponse(http.StatusBadRequest, "Invalid request body"), nil
 	}
 
-	rows, err := db.QueryContext(ctx, queryBody.Query, queryBody.Limit, queryBody.Offset)
+	rows, err := db.QueryContext(ctx, queryBody.Query)
 	if err != nil {
 		return errorResponse(http.StatusInternalServerError, "Database query failed"), nil
 	}
