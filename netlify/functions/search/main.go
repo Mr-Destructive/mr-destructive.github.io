@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 
@@ -38,14 +39,17 @@ func handler(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse,
 	}
 	defer db.Close()
 	body := req.Body
+	log.Printf("Body: %s", body)
 
 	var queryBody QueryBody
 	err = json.Unmarshal([]byte(body), &queryBody)
 	if err != nil {
 		return errorResponse(http.StatusBadRequest, "Invalid request body"), nil
 	}
+	log.Printf("Query: %s", queryBody.Query)
 
 	rows, err := db.QueryContext(ctx, queryBody.Query)
+	log.Printf("Error: %s", err.Error())
 	if err != nil {
 		return errorResponse(http.StatusInternalServerError, "Database query failed"), nil
 	}
