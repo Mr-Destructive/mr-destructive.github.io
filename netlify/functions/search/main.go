@@ -49,23 +49,27 @@ func handler(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse,
 	log.Printf("Query: %s", queryBody.Query)
 
 	rows, err := db.QueryContext(ctx, queryBody.Query)
-	log.Printf("Error: %s", err.Error())
+	columns, err := rows.Columns()
 	if err != nil {
 		return errorResponse(http.StatusInternalServerError, "Database query failed"), nil
 	}
-	defer rows.Close()
+	results := map[string]interface{}{}
 
-	var posts []models.DBPost
 	for rows.Next() {
-		var post models.DBPost
-		err := rows.Scan(&post.ID, &post.Title, &post.Slug, &post.Body, &post.Metadata, &post.Deleted, &post.CreatedAt, &post.UpdatedAt, &post.AuthorID)
+		values := make([]interface{}, len(columns))
+		valuePtrs := make([]interface{}, len(columns))
+		for i := range columns {
+			valuePtrs[i] = &values[i]
+		}
+		err := rows.Scan(valuePtrs...)
 		if err != nil {
 			return errorResponse(http.StatusInternalServerError, "Database query failed"), nil
 		}
-		posts = append(posts, post)
+		for i, col := range columns {
+			results[col] = values[i]
+		}
 	}
-
-	return jsonResponse(http.StatusOK, posts), nil
+	return jsonResponse(http.StatusOK, results), nil
 }
 
 func jsonResponse(statusCode int, data interface{}) events.APIGatewayProxyResponse {
