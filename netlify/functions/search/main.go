@@ -25,18 +25,18 @@ type QueryBody struct {
 }
 
 func handler(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-
 	ctx := context.Background()
+
 	dbName := os.Getenv("TURSO_DATABASE_NAME")
 	dbToken := os.Getenv("TURSO_DATABASE_READ_TOKEN")
-
-	var err error
 	dbString := fmt.Sprintf("%s?authToken=%s", dbName, dbToken)
+
 	db, err := sql.Open("libsql", dbString)
 	if err != nil {
 		return errorResponse(http.StatusInternalServerError, "Database connection failed"), nil
 	}
 	defer db.Close()
+
 	body := req.Body
 	log.Printf("Body: %s", body)
 
@@ -48,11 +48,18 @@ func handler(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse,
 	log.Printf("Query: %s", queryBody.Query)
 
 	rows, err := db.QueryContext(ctx, queryBody.Query)
-	columns, err := rows.Columns()
 	if err != nil {
 		return errorResponse(http.StatusInternalServerError, "Database query failed"), nil
 	}
-	results := map[string]interface{}{}
+	defer rows.Close()
+
+	columns, err := rows.Columns()
+	if err != nil {
+		return errorResponse(http.StatusInternalServerError, "Failed to get columns"), nil
+	}
+	log.Printf("Columns: %v", columns)
+
+	results := []map[string]interface{}{}
 
 	for rows.Next() {
 		values := make([]interface{}, len(columns))
@@ -60,14 +67,26 @@ func handler(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse,
 		for i := range columns {
 			valuePtrs[i] = &values[i]
 		}
+
 		err := rows.Scan(valuePtrs...)
 		if err != nil {
-			return errorResponse(http.StatusInternalServerError, "Database query failed"), nil
+			return errorResponse(http.StatusInternalServerError, "Database row scan failed"), nil
 		}
+
+		rowMap := make(map[string]interface{})
 		for i, col := range columns {
-			results[col] = values[i]
+			val := values[i]
+			if b, ok := val.([]byte); ok {
+				rowMap[col] = string(b)
+			} else {
+				rowMap[col] = val
+			}
 		}
+
+		results = append(results, rowMap)
 	}
+
+	log.Printf("Results: %+v", results)
 	return jsonResponse(http.StatusOK, results), nil
 }
 
