@@ -13,7 +13,7 @@ import (
 	"os"
 	"strings"
 
-	html2markdown "github.com/JohannesKaufmann/html-to-markdown"
+	htmltomarkdown "github.com/JohannesKaufmann/html-to-markdown/v2"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/mr-destructive/burrow/plugins"
@@ -31,12 +31,12 @@ var editForm string = `
 
     <div class="mb-4">
         <label for="metadata" class="block text-lg font-medium">Metadata (JSON):</label>
-        <textarea name="metadata" value="{{ .Metadata }}" id="metadata" rows="4" class="w-full p-2 border rounded-md shadow-sm" placeholder='{"key": "value"}'></textarea>
+        <textarea name="metadata" id="metadata" rows="4" class="w-full p-2 border rounded-md shadow-sm" placeholder='{"key": "value"}'> {{ .Metadata }}</textarea>
     </div>
 
     <div class="mb-4">
         <label for="content" class="block text-lg font-medium">Body (Markdown):</label>
-        <textarea name="content" id="content" rows="6" class="w-full p-2 border rounded-md shadow-sm" value="{{ .Content }}">{{ .Post }}</textarea>
+        <textarea name="content" id="content" rows="6" class="w-full p-2 border rounded-md shadow-sm">{{ .Post }}</textarea>
     </div>
 
     <div class="mb-4">
@@ -106,7 +106,9 @@ func handler(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse,
 			postsBySlug, err := queries.GetPostsBySlugType(ctx, slug)
 			postType := queryParams["type"]
 			if len(postsBySlug) == 0 {
+				slug = strings.TrimPrefix(queryParams["slug"], "/")
 				slug = strings.TrimPrefix(slug, postType)
+				slug = strings.TrimPrefix(slug, "/")
 				postsBySlug, err = queries.GetPostsBySlugType(ctx, slug)
 				log.Printf("Slug: %s", slug)
 			}
@@ -114,13 +116,13 @@ func handler(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse,
 				metadataObj := make(map[string]interface{})
 				err = json.Unmarshal([]byte(post.Metadata), &metadataObj)
 				log.Printf("Metadata: %v", metadataObj)
-				log.Printf("Error: %s", err)
+				log.Printf("Error: %v", err)
 				if err != nil {
 					return errorResponse(http.StatusInternalServerError, "Invalid metadata Payload"), nil
 				}
-				markdown, err := html2markdown.ConvertString(post.Body)
-				log.Printf("Markdown: %s", markdown)
-				log.Printf("Error: %s", err)
+				markdown, err := htmltomarkdown.ConvertString(post.Body)
+				log.Printf("Markdown: %v", markdown)
+				log.Printf("Error: %v", err)
 				if err != nil {
 					return errorResponse(http.StatusInternalServerError, "Invalid metadata Payload"), nil
 				}
@@ -130,7 +132,6 @@ func handler(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse,
 					Metadata: metadataObj,
 					Post:     markdown,
 				}
-				log.Printf("Payload: %v", payload)
 				templ := template.Must(template.New("editForm").Parse(editForm))
 				buffer := new(bytes.Buffer)
 				templ.Execute(buffer, payload)
