@@ -28,7 +28,7 @@ func handler(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse,
 
 	ctx := context.Background()
 	dbName := os.Getenv("TURSO_DATABASE_NAME")
-	dbToken := os.Getenv("TURSO_DATABASE_AUTH_TOKEN")
+	dbToken := os.Getenv("TURSO_DATABASE_READ_TOKEN")
 
 	var err error
 	dbString := fmt.Sprintf("libsql://%s?authToken=%s", dbName, dbToken)
