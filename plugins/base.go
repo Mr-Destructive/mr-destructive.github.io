@@ -3,7 +3,7 @@ package plugins
 import (
 	//"reflect"
 
-	"github.com/mr-destructive/burrow/models"
+	"github.com/mr-destructive/mr-destructive.github.io/models"
 )
 
 type BasePlugin struct {

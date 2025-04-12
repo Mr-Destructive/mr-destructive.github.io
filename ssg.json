@@ -92,7 +92,7 @@
             "branch": "gh-pages"
         },
         "cloud_function": {
-            "base_url": "https://burrow-cms-dev.netlify.app"
+            "base_url": "https://devmeetgor.netlify.app"
         }
     },
     "authors": [

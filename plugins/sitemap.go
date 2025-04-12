@@ -9,7 +9,7 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/mr-destructive/burrow/models"
+	"github.com/mr-destructive/mr-destructive.github.io/models"
 )
 
 type URL struct {

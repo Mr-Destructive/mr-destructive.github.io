@@ -18,8 +18,8 @@ import (
 	"strings"
 	"time"
 
-	models "github.com/mr-destructive/burrow/models"
-	"github.com/mr-destructive/burrow/plugins"
+	models "github.com/mr-destructive/mr-destructive.github.io/models"
+	"github.com/mr-destructive/mr-destructive.github.io/plugins"
 	"gopkg.in/yaml.v3"
 
 	"github.com/yuin/goldmark"

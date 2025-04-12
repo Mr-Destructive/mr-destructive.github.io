@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"reflect"
 
-	"github.com/mr-destructive/burrow/models"
+	"github.com/mr-destructive/mr-destructive.github.io/models"
 )
 
 type SeriesPlugin struct {

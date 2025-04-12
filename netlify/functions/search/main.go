@@ -10,7 +10,7 @@ import (
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
-	"github.com/mr-destructive/burrow/models"
+	"github.com/mr-destructive/mr-destructive.github.io/models"
 	_ "github.com/tursodatabase/libsql-client-go/libsql"
 )
 
