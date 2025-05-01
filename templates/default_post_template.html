@@ -24,7 +24,10 @@
     {{ else }}
         <meta property="og:image" content="tbicon.png">
         <meta name="twitter:image" content="tbicon.png">
+        <meta name="twitter:image" content="../tbicon.png">
     {{ end }}
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="icon" href="../tbicon.png" type="image/png">
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="icon" href="tbicon.png" type="image/png">
 
@@ -81,7 +84,7 @@
             color: var(--text-color);
             font-family: 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
             line-height: 1.6;
-            max-width: 800px;
+            max-width: 750px;
             margin: 0 auto;
             padding: 2rem;
         }
@@ -96,18 +99,18 @@
             color: var(--secondary-text-color);
         }
 
-        .Site-title {
+        .site-title {
             font-size: 1.8rem;
             margin: 0;
         }
 
-        .Site-title a {
+        .site-title a {
             color: var(--accent-color);
             text-decoration: none;
             transition: color 0.2s ease;
         }
 
-        .Site-title a:hover {
+        .site-title a:hover {
             color: var(--hover-color);
         }
 
@@ -192,21 +195,6 @@
                 margin: 1rem -1rem;
                 border-radius: 0;
             }
-        }
-        #theme-toggle {
-            background-color: var(--link-normal);
-            border: none;
-            border-radius: 6px;
-            color: var(--bg-color);
-            cursor: pointer;
-            font-family: inherit;
-            font-size: 1rem;
-            padding: 0.5rem 1.5rem;
-            transition: background-color 0.2s ease;
-        }
-
-        #theme-toggle:hover {
-            background-color: var(--link-hover);
         }
 
         code {
@@ -449,12 +437,17 @@ blockquote cite {
 
       gtag('config', 'G-JX3T4E0964');
     </script>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" type="text/css" href="../../style.css">
     <link rel="icon" href="../../tbicon.png" type="image/png">
 </head>
 <body>
-    <header>
-        <h1 class="site-title"><a href="/{{ .Config.Blog.PrefixURL }}">{{ .Config.Blog.Name }}</a></h1>
-        <button id="theme-toggle" aria-label="Theme">Theme</button>
+    <header class="header">
+        <h1 class="site-title animated-gradient-text"><a href="/{{ .Config.Blog.PrefixURL }}">{{ .Config.Blog.Name }}</a></h1>
+        <div class="theme-switch">
+          <input type="checkbox" id="theme-toggle" aria-label="Toggle Theme">
+          <label for="theme-toggle"></label>
+        </div>
     </header>
 
     <main class="container">
@@ -475,11 +468,11 @@ blockquote cite {
             {{ if index .Post.Frontmatter.Extras "series" }}
             <div class="post-series">
                 <span class="series-label">Part of the
-                <div class="series-list">
+                <span class="series-list">
                     {{ range index .Post.Frontmatter.Extras "series" }}
                     <a href="/{{ $.Config.Blog.PrefixURL }}series/{{ . }}" class="series-link">📖 {{ . }}</a>
                     {{ end }}
-                </div></span>
+                </span></span>
                 <span class="series-label">series</span>
             </div>
             {{ end }}
@@ -498,6 +491,24 @@ blockquote cite {
             </div>
         </article>
     </main>
+      <div id="comments">
+        <script src="https://giscus.app/client.js"
+            data-repo="Mr-Destructive/mr-destructive.github.io"
+            data-repo-id="R_kgDOHZ6V_g"
+            data-category="Q&A"
+            data-category-id="DIC_kwDOHZ6V_s4CRfn4"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-theme="dark_high_contrast"
+            data-lang="en"
+            crossorigin="anonymous"
+            async
+        >
+        </script>
+      </div>
     
     <footer class="site-footer">
         <div class="container">

@@ -144,4 +144,89 @@ button.copy:hover {
     opacity: 0;
 }
 
+.unord-list{
+    list-style-type: disc;
+    color: var(--secondary-text);
+    margin-left: 2rem;
+}
+header.header {
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.theme-switch {
+    position: relative;
+    width: 50px;
+    height: 26px;
+}
 
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.theme-switch label {
+    position: absolute;
+    cursor: pointer;
+    background-color: var(--link-normal);
+    border-radius: 34px;
+    width: 100%;
+    height: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.theme-switch label::before {
+    content: "";
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background-color: var(--bg-color);
+    transition: transform 0.3s ease;
+    border-radius: 50%;
+}
+
+.theme-switch input:checked + label::before {
+    transform: translateX(24px);
+}
+
+.theme-switch input:checked + label {
+    background-color: var(--link-hover);
+}
+
+.post-series {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+.series-label {
+    color: var(--secondary-text-color);
+}
+
+.series-link {
+    color: var(--link-normal);
+    text-decoration: none;
+}
+
+.series-link:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+}
+
+.animated-gradient-text {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+    line-height: 1.6;
+    background-size: 800% 800%;
+    background-clip: text;
+}

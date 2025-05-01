@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Techstructive Blog</title>
+    <title>Meet Gor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:url" content="https://dev.meetgor.com/">
     <meta property="og:type" content="website">
@@ -72,28 +72,23 @@
             }
         }
 
-        header {
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-        }
 
         h1, h2, h3 {
             color: var(--secondary-text-color);
         }
 
-        .Site-title {
+        .site-title {
             font-size: 1.8rem;
             margin: 0;
         }
 
-        .Site-title a {
+        .site-title a {
             color: var(--accent-color);
             text-decoration: none;
             transition: color 0.2s ease;
         }
 
-        .Site-title a:hover {
+        .site-title a:hover {
             color: var(--hover-color);
         }
 
@@ -227,7 +222,87 @@
             display: inline-flex;
             fill: #ffffff;
             padding-right: 5px;
-            vertical-align: text-top; }
+            vertical-align: text-top; 
+        }
+        .unord-list{
+            list-style-type: disc;
+            color: var(--secondary-text);
+            margin-left: 2rem;
+        }
+        header {
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+        }
+        .Site-title {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+        .Site-title a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        header.header {
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .theme-switch {
+            position: relative;
+            width: 50px;
+            height: 26px;
+        }
+
+        .theme-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .theme-switch label {
+            position: absolute;
+            cursor: pointer;
+            background-color: var(--link-normal);
+            border-radius: 34px;
+            width: 100%;
+            height: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .theme-switch label::before {
+            content: "";
+            position: absolute;
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: var(--bg-color);
+            transition: transform 0.3s ease;
+            border-radius: 50%;
+        }
+
+        .theme-switch input:checked + label::before {
+            transform: translateX(24px);
+        }
+
+        .theme-switch input:checked + label {
+            background-color: var(--link-hover);
+        }
+
+.animated-gradient-text {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+    line-height: 1.6;
+    background-size: 800% 800%;
+    background-clip: text;
+}
+
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -261,69 +336,48 @@
     </script>
 </head>
 <body>
-    <h1>Techstructive Blog</h1>
-    <button id="theme-toggle" aria-label="Theme">Theme</button>
-    {{ if .Config.AdminMode }}
-        <button id="editor" onclick="location.href='/{{.Config.Blog.PrefixURL}}editor'">
-            <i class="fas fa-edit"></i> Editor
-        </button>
-    {{ end }}
-    <ul>
-        {{ range .FeedPosts }}
-        <li>
-            {{ if $.Config.AdminMode }}
-                <a href="/{{ $.Config.Blog.AdminDir }}/{{ .Slug }}">{{ .Title }}</a>
-            {{ else }}
-                <a href="/{{ .Slug }}">{{ .Title }}</a>
-            {{ end }}
-        </li>
+    <header class="header">
+        <h1 class="site-title animated-gradient-text">Meet Gor</h1>
+        <div class="theme-switch">
+          <input type="checkbox" id="theme-toggle" aria-label="Toggle Theme">
+          <label for="theme-toggle"></label>
+        </div>
+        {{ if .Config.AdminMode }}
+            <button id="editor" onclick="location.href='/{{.Config.Blog.PrefixURL}}editor'">
+                <i class="fas fa-edit"></i> Editor
+            </button>
         {{ end }}
-    </ul>
-    <footer>
-        {{ .Config.Blog.Name }} - {{ .Config.Blog.Description }} @ {{ .Config.Blog.BaseUrl }}
-        <br/>
-        <span>Socials</span>
-        <ul class='social'>
-            <li>
-                <a href="https://twitter.com/MeetGor21">Twitter
-                    <svg class="svg-icon grey">
-                        <use xlink:href="social-icons.svg#twitter"></use>
-                    </svg>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.linkedin.com/in/meetgor/">LinkedIn
-                    <svg class="svg-icon grey">
-                        <use xlink:href="social-icons.svg#linkedin"></use>
-                    </svg>
-                </a>
-            </li>
-            <li>
-                <a href="https://github.com/Mr-Destructive">GitHub
-                    <svg class="svg-icon grey">
-                        <use xlink:href="social-icons.svg#github"></use>
-                    </svg>
-                </a>
-            </li>
-            <li>
-                <a href="https://dev.to/mr_destructive">Dev.to
-                    <svg class="svg-icon grey">
-                        <use xlink:href="social-icons.svg#devto"></use>
-                    </svg>
-                </a>
-            </li>
-            <li>
-                <a href="/rss.xml">RSS
-                    <svg class="svg-icon orange">
-                        <use xlink:href="social-icons.svg#rss"></use>
-                    </svg>
-                </a>
-            </li>
-            <li>
-                <a class="u-email" href="mailto:gormeet711@gmail.com">Email</a>
-            </li>
-        </ul>
-</footer>
-</body>
+    </header>
 
+    <main class="intro-section">
+        <h2>Welcome</h2>
+        <p>
+            Hi, I’m Meet. I write about building things with programming (mostly go and python), figuring stuff out in public, and staying consistent.
+            Sometimes it’s a deep dive. Sometimes it’s a single thought.
+        </p>
+
+        <section class="post-list">
+            <h3>All Feeds</h3>
+            <ul class="unord-list">
+                {{ range .FeedPosts }}
+                    <li>
+                        {{ if $.Config.AdminMode }}
+                            <a href="/{{ $.Config.Blog.AdminDir }}/{{ .Slug }}">{{ .Title }}</a>
+                        {{ else }}
+                            <a href="/{{ .Slug }}">{{ .Title }}</a>
+                        {{ end }}
+                    </li>
+                {{ end }}
+            </ul>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>{{ .Config.Blog.Name }} — {{ .Config.Blog.Description }} @ {{ .Config.Blog.BaseUrl }}</p>
+
+        <section class="social-links">
+            <h4><a href="/contact">Connect with me</a></h4>
+        </section>
+    </footer>
+</body>
 </html>

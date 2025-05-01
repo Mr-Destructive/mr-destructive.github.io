@@ -1,6 +1,6 @@
 {
     "blog": {
-        "name": "Techstructive Blog",
+        "name": "Meet Gor",
         "description": "Tech blog by Meet Gor",
         "base_url": "dev.meetgor.com",
         "posts_dir": "posts",
@@ -40,7 +40,7 @@
             "default": {
                 "bg": "#ffffff",
                 "text": "#333333",
-                "secondary_text": "#666666",
+                "secondary_text": "#00ffff",
                 "link": {
                   "normal": "#007bff",
                   "hover": "#0056b3",
@@ -64,7 +64,7 @@
             "secondary": {
               "bg": "#121212",
               "text": "#ffffff",
-              "secondary-text": "#ff6600",
+              "secondary-text": "#00ffff",
               "link": {
                 "normal": "#ff6600",
                 "hover": "#4682b4",

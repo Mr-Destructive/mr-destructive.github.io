@@ -588,6 +588,39 @@ func (c *CreateFeedsPlugin) Execute(ssg *models.SSG) {
 		outputFeedPath := fmt.Sprintf("%s/index.html", feedPath)
 		err = os.WriteFile(outputFeedPath, buffer.Bytes(), 0660)
 	}
+	// create a folder for post if the post type is "post"
+	// as this should be the /posts/<slug> as well as /<slug>
+	for _, post := range ssg.Posts {
+		if post.Frontmatter.Type == "posts" {
+			postPath := filepath.Join(".", config.Blog.OutputDir, post.Frontmatter.Slug)
+			err := os.MkdirAll(postPath, os.ModePerm)
+			if err != nil {
+				log.Fatal(err)
+			}
+			buffer := bytes.Buffer{}
+			context := models.TemplateContext{
+				Post: post,
+				Themes: models.ThemeCombo{
+					Default:   config.Blog.Themes["default"],
+					Secondary: config.Blog.Themes["secondary"],
+				},
+				Config: models.SSG_CONFIG{
+					Blog:      config.Blog,
+					AdminMode: config.AdminMode,
+				},
+			}
+			err = ssg.TemplateFS.ExecuteTemplate(&buffer, config.Blog.DefaultPostTemplate, context)
+			if err != nil {
+				log.Fatal(err)
+			}
+			outputPostPath := fmt.Sprintf("%s/index.html", postPath)
+			err = os.WriteFile(outputPostPath, buffer.Bytes(), 0660)
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
+	}
+
 }
 
 // "createFeeds",
