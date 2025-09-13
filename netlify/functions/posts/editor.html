@@ -1,0 +1,483 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Editor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: {{ .Themes.Default.Bg }};
+            --text-color: {{ .Themes.Default.Text }};
+            --secondary-text-color: {{ .Themes.Default.SecondaryText }};
+            --link-normal: {{ .Themes.Default.Link.Normal }};
+            --link-hover: {{ .Themes.Default.Link.Hover }};
+            --link-active: {{ .Themes.Default.Link.Active }};
+            --quote-color: {{ .Themes.Default.Quotes }};
+            --code-bg-color: {{ .Themes.Default.CodeBlocks.Bg }};
+            --code-border-color: {{ .Themes.Default.CodeBlocks.Border }};
+            --code-text-color: {{ .Themes.Default.Code.Text }};
+            --code-comment-color: {{ .Themes.Default.Code.Comment }};
+            --code-keyword-color: {{ .Themes.Default.Code.Keyword }};
+            --code-string-color: {{ .Themes.Default.Code.String }};
+            --code-number-color: {{ .Themes.Default.Code.Number }};
+            --code-variable-color: {{ .Themes.Default.Code.Variable }};
+            --code-function-color: {{ .Themes.Default.Code.Function }};
+        }
+
+        .secondary-theme {
+            --bg-color: {{ .Themes.Secondary.Bg }};
+            --text-color: {{ .Themes.Secondary.Text }};
+            --secondary-text-color: {{ .Themes.Secondary.SecondaryText }};
+            --link-normal: {{ .Themes.Secondary.Link.Normal }};
+            --link-hover: {{ .Themes.Secondary.Link.Hover }};
+            --link-active: {{ .Themes.Secondary.Link.Active }};
+            --quote-color: {{ .Themes.Secondary.Quotes }};
+            --code-bg-color: {{ .Themes.Secondary.CodeBlocks.Bg }};
+            --code-border-color: {{ .Themes.Secondary.CodeBlocks.Border }};
+            --code-text-color: {{ .Themes.Secondary.Code.Text }};
+            --code-comment-color: {{ .Themes.Secondary.Code.Comment }};
+            --code-keyword-color: {{ .Themes.Secondary.Code.Keyword }};
+            --code-string-color: {{ .Themes.Secondary.Code.String }};
+            --code-number-color: {{ .Themes.Secondary.Code.Number }};
+            --code-variable-color: {{ .Themes.Secondary.Code.Variable }};
+            --code-function-color: {{ .Themes.Secondary.Code.Function }};
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+        }
+
+        .editor-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .editor-header {
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem;
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .editor-main {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .editor-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            border-right: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+
+        .editor-section:last-child {
+            border-right: none;
+        }
+
+        .editor-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .editor-textarea {
+            flex: 1;
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.375rem;
+            resize: none;
+            font-family: 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            overflow: auto;
+        }
+
+        .preview-content {
+            flex: 1;
+            padding: 1rem;
+            overflow: auto;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.375rem;
+        }
+
+        .metadata-form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .metadata-field {
+            margin-bottom: 1rem;
+        }
+
+        .metadata-field label {
+            display: block;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+        }
+
+        .metadata-field input,
+        .metadata-field select,
+        .metadata-field textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.375rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+
+        .btn-secondary {
+            background-color: #64748b;
+            color: white;
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: #475569;
+        }
+
+        .btn-danger {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+        }
+
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .toolbar-btn {
+            padding: 0.25rem 0.5rem;
+            background-color: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        .toolbar-btn:hover {
+            background-color: #e2e8f0;
+        }
+
+        @media (max-width: 768px) {
+            .editor-main {
+                flex-direction: column;
+            }
+            
+            .editor-section {
+                border-right: none;
+                border-bottom: 1px solid #e2e8f0;
+            }
+            
+            .metadata-form {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="">
+    <div class="editor-container">
+        <div class="editor-header">
+            <div class="container mx-auto flex justify-between items-center">
+                <h1 class="text-xl font-bold">
+                    <i class="fas fa-pen-alt mr-2"></i>
+                    Blog Editor
+                </h1>
+                <div>
+                    <button id="theme-toggle" class="btn btn-secondary mr-2">
+                        <i class="fas fa-moon"></i> Toggle Theme
+                    </button>
+                    <a href="/{{ .Config.Blog.PrefixURL }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left mr-1"></i> Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mx-auto p-4 flex-1">
+            <form id="postForm">
+                <div class="metadata-form">
+                    <div class="metadata-field">
+                        <label for="title">Title</label>
+                        <input type="text" name="title" id="title" class="w-full p-2 border rounded-md shadow-sm" required>
+                    </div>
+
+                    <div class="metadata-field">
+                        <label for="slug">Slug</label>
+                        <input type="text" name="slug" id="slug" class="w-full p-2 border rounded-md shadow-sm" required>
+                    </div>
+
+                    <div class="metadata-field">
+                        <label for="type">Post Type</label>
+                        <select name="type" id="type" class="w-full p-2 border rounded-md shadow-sm">
+                            <option value="posts">Post</option>
+                            <option value="newsletter">Newsletter</option>
+                            <option value="thoughts">Thoughts</option>
+                            <option value="projects">Projects</option>
+                            <option value="til">Today I Learned</option>
+                            <option value="work">Work</option>
+                        </select>
+                    </div>
+
+                    <div class="metadata-field">
+                        <label for="status">Status</label>
+                        <select name="status" id="status" class="w-full p-2 border rounded-md shadow-sm">
+                            <option value="published">Published</option>
+                            <option value="draft">Draft</option>
+                        </select>
+                    </div>
+
+                    <div class="metadata-field">
+                        <label for="author">Author</label>
+                        <input type="text" name="author" id="author" class="w-full p-2 border rounded-md shadow-sm" value="Meet Gor" readonly>
+                    </div>
+
+                    <div class="metadata-field">
+                        <label for="date">Date</label>
+                        <input type="date" name="date" id="date" class="w-full p-2 border rounded-md shadow-sm" required>
+                    </div>
+
+                    <div class="metadata-field col-span-2">
+                        <label for="tags">Tags (comma separated)</label>
+                        <input type="text" name="tags" id="tags" class="w-full p-2 border rounded-md shadow-sm" placeholder="tag1, tag2, tag3">
+                    </div>
+                </div>
+
+                <div class="editor-main">
+                    <div class="editor-section">
+                        <div class="editor-section-header">
+                            <h2 class="text-lg font-semibold">Editor</h2>
+                            <div class="toolbar">
+                                <button type="button" class="toolbar-btn" data-command="bold" title="Bold"><i class="fas fa-bold"></i></button>
+                                <button type="button" class="toolbar-btn" data-command="italic" title="Italic"><i class="fas fa-italic"></i></button>
+                                <button type="button" class="toolbar-btn" data-command="heading" title="Heading"><i class="fas fa-heading"></i></button>
+                                <button type="button" class="toolbar-btn" data-command="link" title="Link"><i class="fas fa-link"></i></button>
+                                <button type="button" class="toolbar-btn" data-command="image" title="Image"><i class="fas fa-image"></i></button>
+                                <button type="button" class="toolbar-btn" data-command="code" title="Code"><i class="fas fa-code"></i></button>
+                                <button type="button" class="toolbar-btn" data-command="quote" title="Quote"><i class="fas fa-quote-right"></i></button>
+                                <button type="button" class="toolbar-btn" data-command="list-ul" title="Unordered List"><i class="fas fa-list-ul"></i></button>
+                                <button type="button" class="toolbar-btn" data-command="list-ol" title="Ordered List"><i class="fas fa-list-ol"></i></button>
+                            </div>
+                        </div>
+                        <textarea name="content" id="content" class="editor-textarea" rows="20" placeholder="Write your post content here using Markdown syntax..."></textarea>
+                    </div>
+
+                    <div class="editor-section">
+                        <div class="editor-section-header">
+                            <h2 class="text-lg font-semibold">Preview</h2>
+                        </div>
+                        <div id="preview" class="preview-content"></div>
+                    </div>
+                </div>
+
+                <div class="mt-4 flex justify-end gap-2">
+                    <button type="button" id="saveDraft" class="btn btn-secondary">
+                        <i class="fas fa-save mr-1"></i> Save Draft
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane mr-1"></i> Publish
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Set current date as default
+        document.getElementById('date').valueAsDate = new Date();
+
+        // Auto-generate slug from title
+        document.getElementById('title').addEventListener('input', function() {
+            const title = this.value;
+            const slug = title.toLowerCase()
+                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-')
+                .trim('-');
+            document.getElementById('slug').value = slug;
+        });
+
+        // Markdown preview
+        const contentTextarea = document.getElementById('content');
+        const previewDiv = document.getElementById('preview');
+
+        function updatePreview() {
+            const markdown = contentTextarea.value;
+            previewDiv.innerHTML = marked.parse(markdown);
+        }
+
+        contentTextarea.addEventListener('input', updatePreview);
+
+        // Toolbar functionality
+        document.querySelectorAll('.toolbar-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const command = this.getAttribute('data-command');
+                insertMarkdown(command);
+            });
+        });
+
+        function insertMarkdown(command) {
+            const textarea = document.getElementById('content');
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const selectedText = textarea.value.substring(start, end);
+            let newText = '';
+            let cursorPosition = start;
+
+            switch(command) {
+                case 'bold':
+                    newText = `**${selectedText}**`;
+                    cursorPosition = start + 2;
+                    break;
+                case 'italic':
+                    newText = `*${selectedText}*`;
+                    cursorPosition = start + 1;
+                    break;
+                case 'heading':
+                    newText = `# ${selectedText}`;
+                    cursorPosition = start + 2;
+                    break;
+                case 'link':
+                    newText = `[${selectedText}](url)`;
+                    cursorPosition = start + selectedText.length + 3;
+                    break;
+                case 'image':
+                    newText = `![${selectedText}](image-url)`;
+                    cursorPosition = start + selectedText.length + 3;
+                    break;
+                case 'code':
+                    newText = `${selectedText}`;
+                    cursorPosition = start + 1;
+                    break;
+                case 'quote':
+                    newText = `> ${selectedText}`;
+                    cursorPosition = start + 2;
+                    break;
+                case 'list-ul':
+                    newText = `- ${selectedText}`;
+                    cursorPosition = start + 2;
+                    break;
+                case 'list-ol':
+                    newText = `1. ${selectedText}`;
+                    cursorPosition = start + 3;
+                    break;
+            }
+
+            textarea.value = textarea.value.substring(0, start) + newText + textarea.value.substring(end);
+            textarea.focus();
+            textarea.setSelectionRange(cursorPosition, cursorPosition);
+            updatePreview();
+        }
+
+        // Form submission
+        document.getElementById('postForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            // Collect form data
+            const formData = {
+                title: document.getElementById('title').value,
+                slug: document.getElementById('slug').value,
+                body: document.getElementById('content').value,
+                author_id: 1, // Default author ID
+                metadata: JSON.stringify({
+                    title: document.getElementById('title').value,
+                    slug: document.getElementById('slug').value,
+                    type: document.getElementById('type').value,
+                    status: document.getElementById('status').value,
+                    author: document.getElementById('author').value,
+                    date: document.getElementById('date').value,
+                    tags: document.getElementById('tags').value.split(',').map(tag => tag.trim()).filter(tag => tag),
+                })
+            };
+
+            try {
+                const response = await fetch('/.netlify/functions/posts', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                console.log('Success:', result);
+                alert('Post published successfully!');
+                // Redirect to the post or posts list
+                window.location.href = '/posts';
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to publish post. Check console for details.');
+            }
+        });
+
+        // Save draft functionality
+        document.getElementById('saveDraft').addEventListener('click', async function() {
+            // Set status to draft
+            document.getElementById('status').value = 'draft';
+            // Submit form
+            document.getElementById('postForm').dispatchEvent(new Event('submit'));
+        });
+
+        // Theme toggle
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+            document.body.classList.toggle('secondary-theme');
+            const icon = this.querySelector('i');
+            if (document.body.classList.contains('secondary-theme')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+
+        // Initialize preview
+        updatePreview();
+    </script>
+</body>
+</html>

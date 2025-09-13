@@ -1,4 +1,5 @@
-{"author":"meet","date":"2025-03-21","post_dir":"til","published":"published","title":"Format JSON in Vim with JQ","type":"til"}
+{"title":"Format JSON in Vim with JQ","description":"","status":"published","type":"til","date":"2025-03-21","slug":"format-json-in-vim-with-jq","tags":[],"image_url":"","Extras":null}
+
 
 We can use 
  ```

@@ -19,6 +19,7 @@ require (
 	github.com/coder/websocket v1.8.12 // indirect
 	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
+	github.com/mattn/go-sqlite3 v1.14.32 // indirect
 	golang.org/x/exp v0.0.0-20240325151524-a685a6edb6d8 // indirect
 	golang.org/x/net v0.35.0 // indirect
 )

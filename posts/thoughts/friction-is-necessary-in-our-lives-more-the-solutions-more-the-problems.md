@@ -1,11 +1,5 @@
-{
-    "author":"meet",
-    "date":"2025-03-22",
-    "post_dir":"thoughts",
-    "status":"published",
-    "title":"Friction is necessary in our lives, more the solutions, more the problems.",
-    "type":"thoughts"
-}
+{"title":"Friction is necessary in our lives, more the solutions, more the problems.","description":"","status":"published","type":"thoughts","date":"2025-03-22","slug":"friction-is-necessary-in-our-lives-more-the-solutions-more-the-problems","tags":[],"image_url":"","Extras":null}
+
 
  
  LINK: [https://cassidoo.co/post/introduce-friction](https://cassidoo.co/post/introduce-friction/)

@@ -1,9 +1,5 @@
-{
-    "date": "2025-03-09",
-    "status": "published",
-    "title": "youre screwed unless you take action",
-    "type": "thoughts"
-}
+{"title":"youre screwed unless you take action","description":"","status":"published","type":"thoughts","date":"2025-03-09","slug":"youre-screwed-unless-you-take-action","tags":[],"image_url":"","Extras":null}
+
 
 
 Interesting read,

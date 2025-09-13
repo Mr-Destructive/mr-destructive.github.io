@@ -1,11 +1,5 @@
-{
-    "author":"meet",
-    "post_dir":"thoughts",
-    "type":"thoughts",
-    "status":"published",
-    "date":"2025-03-28",
-    "title":"Robots Generate,Humans Manifest"
-}
+{"title":"Robots Generate,Humans Manifest","description":"","status":"published","type":"thoughts","date":"2025-03-28","slug":"robots-generate-humans-manifest","tags":[],"image_url":"","Extras":null}
+
 
  
  To,

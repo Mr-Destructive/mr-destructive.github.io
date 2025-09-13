@@ -1,4 +1,5 @@
-{"author":"meet","date":"2025-03-21","post_dir":"newsletter","status":"published","title":"Techstructive Weekly #34","type":"newsletter"}
+{"title":"Techstructive Weekly #34","description":"","status":"published","type":"newsletter","date":"2025-03-21","slug":"techstructive-weekly-34","tags":[],"image_url":"","Extras":null}
+
 
  
 ## Week #34

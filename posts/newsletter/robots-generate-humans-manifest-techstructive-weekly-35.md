@@ -1,4 +1,5 @@
-{"author":"meet","date":"2025-03-28","post_dir":"newsletter","status":"published","title": "Robots Generate, Humans Manifest: Techstructive Weekly #35","type":"newsletter"}
+{"title":"Robots Generate, Humans Manifest: Techstructive Weekly #35","description":"","status":"published","type":"newsletter","date":"2025-03-28","slug":"robots-generate-humans-manifest-techstructive-weekly-35","tags":[],"image_url":"","Extras":null}
+
 
  
 ## Week #35
