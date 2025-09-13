@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <link id="syntax-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:url" content="https://dev.meetgor.com/sqlog/sqlite-generated-column-constraint">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Meet Gor | SQLite SQL: GENERATED column constraint">
+    <meta property="og:description" content="">
+    <meta property="twitter:domain" content="dev.meetgor.com">
+    <meta property="twitter:url" content="https://dev.meetgor.com/sqlog/sqlite-generated-column-constraint">
+    <meta name="twitter:title" content="SQLite SQL: GENERATED column constraint">
+    <meta name="twitter:description" content="">
+    
+        <meta property="og:image" content="tbicon.png">
+        <meta name="twitter:image" content="tbicon.png">
+        <meta name="twitter:image" content="../tbicon.png">
+    
+    <link rel="icon" href="../tbicon.png" type="image/png">
+    <link rel="icon" href="tbicon.png" type="image/png">
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll("pre code").forEach((block) => {
+            hljs.highlightElement(block);
+        });
+    });
+    </script>
+    <title>Meet Gor | SQLite SQL: GENERATED column constraint</title>
+    <style>
+            :root {
+                --bg-color: #ffffff;
+                --text-color: #333333;
+                --secondary-text-color: ;
+                --link-normal: #007bff;
+                --link-hover: #0056b3;
+                --link-active: #003a75;
+                --quote-color: #999999;
+                --code-bg-color: #dddddd;
+                --code-border-color: #ced4da;
+                --code-text-color: #444444;
+                --code-comment-color: #808080;
+                --code-keyword-color: #008000;
+                --code-string-color: #000080;
+                --code-number-color: #000000;
+                --code-variable-color: #000000;
+                --code-function-color: #000000;
+            }
+
+             
+            .secondary-theme {
+                --bg-color: #121212;
+                --text-color: #ffffff;
+                --secondary-text-color: #00ffff;
+                --link-normal: #ff6600;
+                --link-hover: #4682b4;
+                --link-active: #00008b;
+                --quote-color: #a9a9a9;
+                --code-bg-color: #333333;
+                --code-border-color: #444444;
+                --code-text-color: #ffffff;
+                --code-comment-color: #b0b0b0;
+                --code-keyword-color: #32cd32;
+                --code-string-color: #ff6347;
+                --code-number-color: #d3d3d3;
+                --code-variable-color: #b0e0e6;
+                --code-function-color: #ff4500;
+            }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            line-height: 1.6;
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--secondary-text-color);
+        }
+
+        .site-title {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        .site-title a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .site-title a:hover {
+            color: var(--hover-color);
+        }
+
+        .Post-meta {
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+
+        article {
+            margin: 2rem 0;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        code {
+            font-family: 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        p code {
+            background-color: var(--inline-code-bg);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+        }
+
+        blockquote {
+            border-left: 3px solid var(--accent-color);
+            margin: 1.5rem 0;
+            padding-left: 1rem;
+            color: var(--secondary-text);
+        }
+
+        a {
+            color: var(--link-normal);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--hover-color);
+        }
+
+        .Hljs-comment { color: var(--code-comment); } 
+        .Hljs-keyword { color: var(--code-keyword); }
+        .Hljs-string { color: var(--code-string); }
+        .Hljs-number { color: var(--code-number); }
+        .Hljs-function { color: var(--code-function); }
+        .Hljs-variable { color: var(--code-variable); }
+
+        button, .Button {
+            background-color: var(--accent-color);
+            border: none;
+            border-radius: 6px;
+            color: var(--bg-color);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover, .Button:hover {
+            background-color: var(--hover-color);
+        }
+
+
+         
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            pre {
+                margin: 1rem -1rem;
+                border-radius: 0;
+            }
+        }
+
+        code {
+          font-family: monospace;
+          padding: 2px 4px;
+          border-radius: 4px;
+        }
+
+pre {
+    background-color: var(--code-bg-color, #f5f5f5);
+    border: 1px solid var(--code-border-color, #d1d1d1);
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+
+code {
+    font-family: 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    font-size: 0.9em;
+    color: var(--code-text-color, #fff);
+}
+
+p code {
+    color: var(--code-text-color, #000);
+    background-color: var(--code-bg-color, #444444);
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+}
+
+ 
+.Hljs-comment { color: var(--code-comment-color, #7d7d7d); }
+.Hljs-keyword { color: var(--code-keyword-color, #005cc5); }
+.Hljs-string { color: var(--code-string-color, #d73a49); }
+.Hljs-number { color: var(--code-number-color, #e36209); }
+.Hljs-variable { color: var(--code-variable-color, #6f42c1); }
+.Hljs-function { color: var(--code-function-color, #005cc5); }
+
+ 
+.secondary-theme pre {
+    background-color: var(--code-bg-color, #1e1e1e);
+    border: 1px solid var(--code-border-color, #3c3c3c);
+}
+
+.secondary-theme .Hljs-comment { color: var(--code-comment-color, #6a737d); }
+.secondary-theme .Hljs-keyword { color: var(--code-keyword-color, #569cd6); }
+.secondary-theme .Hljs-string { color: var(--code-string-color, #ce9178); }
+.secondary-theme .Hljs-number { color: var(--code-number-color, #b5cea8); }
+.secondary-theme .Hljs-variable { color: var(--code-variable-color, #9cdcfe); }
+.secondary-theme .Hljs-function { color: var(--code-function-color, #dcdcaa); }
+
+pre {
+    background: var(--code-bg-color, #1e1e1e);
+    border: 1px solid var(--code-border-color, #3c3c3c);
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+
+ 
+code {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 0.9em;
+    color: var(--code-text-color, #ffffff);
+}
+
+ 
+p code {
+    background-color: var(--code-bg-color, #333);
+    color: var(--code-text-color, #ffcb6b);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+ 
+.Hljs-comment { color: var(--code-comment-color, #6a737d); font-style: italic; }
+.Hljs-keyword { color: var(--code-keyword-color, #c678dd); font-weight: bold; }
+.Hljs-string { color: var(--code-string-color, #98c379); }
+.Hljs-number { color: var(--code-number-color, #d19a66); }
+.Hljs-variable { color: var(--code-variable-color, #e06c75); }
+.Hljs-function { color: var(--code-function-color, #61afef); }
+
+ 
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.copy-btn:hover {
+    background: #45a049;
+}
+
+.copy-btn.copied {
+    background: #ffa500;
+}
+
+blockquote {
+    border-left: 4px solid var(--quote-color);
+    background-color: rgba(255, 255, 255, 0.05);  
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: var(--secondary-text-color);
+    border-radius: 6px;
+    position: relative;
+}
+
+blockquote::before {
+    content: "“";  
+    font-size: 2rem;
+    color: var(--quote-color);
+    position: absolute;
+    top: 0;
+    left: 10px;
+}
+
+blockquote::after {
+    content: "”";  
+    font-size: 2rem;
+    color: var(--quote-color);
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}
+
+ 
+blockquote cite {
+    display: block;
+    text-align: right;
+    font-size: 0.9em;
+    margin-top: 0.5rem;
+    color: var(--secondary-text-color);
+    font-style: normal;
+}
+        #editor, #editor-edit {
+            background-color: #4CAF50;  
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #editor i {
+            margin-right: 5px;  
+        }
+        #editor-edit i {
+            margin-right: 5px;  
+        }
+    </style>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const stylesheet = document.getElementById("syntax-theme");
+
+        
+        const currentTheme = localStorage.getItem("theme") || "light";
+
+        
+        function setSyntaxTheme(theme) {
+            if (theme === "secondary") {
+                stylesheet.href = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/dracula.min.css";
+            } else {
+                stylesheet.href = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css";
+            }
+        }
+
+        
+        if (currentTheme === "secondary") {
+            body.classList.add("secondary-theme");
+            setSyntaxTheme("secondary");
+        } else {
+            setSyntaxTheme("light");
+        }
+
+        
+        themeToggle.addEventListener("click", () => {
+            if (body.classList.contains("secondary-theme")) {
+                body.classList.remove("secondary-theme");
+                localStorage.setItem("theme", "light");
+                setSyntaxTheme("light");
+            } else {
+                body.classList.add("secondary-theme");
+                localStorage.setItem("theme", "secondary");
+                setSyntaxTheme("secondary");
+            }
+        });
+    });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll("pre").forEach((pre) => {
+                const button = document.createElement("button");
+                button.classList.add("copy-btn");
+                button.textContent = "Copy";
+
+                button.addEventListener("click", () => {
+                    const code = pre.querySelector("code");
+                    if (!code) return;
+
+                    const textToCopy = code.innerText || code.textContent;
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        button.textContent = "Copied!";
+                        button.classList.add("copied");
+
+                        setTimeout(() => {
+                            button.textContent = "Copy";
+                            button.classList.remove("copied");
+                        }, 1500);
+                    });
+                });
+
+                pre.appendChild(button);
+            });
+        });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JX3T4E0964"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-JX3T4E0964');
+    </script>
+    
+    <link rel="icon" href="../../tbicon.png" type="image/png">
+</head>
+<body>
+    <header class="header">
+        <h1 class="site-title animated-gradient-text"><a href="/">Meet Gor</a></h1>
+        <div class="theme-switch">
+          <input type="checkbox" id="theme-toggle" aria-label="Toggle Theme">
+          <label for="theme-toggle"></label>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h1>SQLite SQL: GENERATED column constraint</h1>
+            <div class="post-meta">
+                Published on 📅 <time datetime="2025-09-11">2025-09-11</time>
+            </div>
+            <div class="post-meta">
+                Type: <a href="/sqlog">sqlog</a>
+            </div>
+            <div class="post-meta">
+                <span class="post-series-label"> 🏷️ Tags:</span>
+                
+                <a href="/tags/sqlite">#sqlite</a>
+                
+                <a href="/tags/sql">#sql</a>
+                
+            </div>
+            
+            <div class="post-meta">
+                
+            </div>
+            <hr>
+            <div class="post-content">
+                <h2>The GENERATED column constraint</h2>
+<p>We saw certain limitations of the <code>DEFAULT</code> column constraint clause, that it can't generate dynamic values based on other columns or some other dynamic popularities. For overcomming those kind of constraints, there is one more specific constraint, the <a href="https://sqlite.org/gencol.html">GENERATED</a> column constraint.</p>
+<p>You can think of it as a <code>DEFAULT</code> but having more than static values, it is evaluated and computed each time a new row is inserted. However they come with one catch, you can't later update the values, you need to update the values of the dependent columns first, so it will generate <strong>ALWAYS</strong> a update is made to the row(relevant columns in that row).</p>
+<p>Let's create a simple table to understand the <code>GENERATED</code> column constraint:</p>
+<pre><code class="language-sql">CREATE TABLE posts (
+    id INTEGER PRIMARY KEY,
+    content TEXT,
+    word_count INTEGER GENERATED ALWAYS AS (length(content) - length(replace(content, ' ', '')) + 1),
+    read_time_minutes INTEGER GENERATED ALWAYS AS (ceil(word_count / 200.0))
+);
+</code></pre>
+<p>The syntax of the <code>GENERATED</code> constraint is</p>
+<pre><code>column_name &lt;type&gt; GENERATED ALWAYS AS &lt;expression&gt;
+</code></pre>
+<p>Nothing fancy, just a content field as a text, then based on that value, the <code>word_count</code> and <code>read_time_minutes</code> is always calculated/generated based on the value of the <code>content</code> and the <code>read_time_minutes</code> is inturn dependent on the <code>word_count</code> value. So, the change in <code>content</code> will make a update on the <code>word_count</code> that will inturn update the <code>read_time_minutes</code>, like a chain reaction of sorts.</p>
+<p>Let's insert a sample post, note, we can't insert a generated value.</p>
+<pre><code class="language-sql">INSERT INTO posts(content) VALUES('A sample post');
+</code></pre>
+<p>This will create a record with the <code>id</code> as 1, the <code>content</code> as <code>A sample post</code>, and the <code>word_count</code> will be generated/calculated as the <code>(length(content) - length(replace(content, ' ', ''))+1)</code> as the number of spaces + 1. The <code>read_time_minutes</code> is generated with the <code>word_count</code> divided by 200 which is the average word read in a minute by a human (let's not go into the nity-grity) but you can get the point of this. These are just mathematical values, and those are dependent on the value of the other columns of the same record/row.</p>
+<pre><code class="language-sql">SELECT * FROM posts;
+</code></pre>
+<p>As, you can see here, the value of <code>word_count</code> is <code>3</code> and the value of <code>read_time_minutes</code> is <code>1</code>.</p>
+<p>Let's insert a few more values and check how these generated values behave.</p>
+<p>Let's insert a bit longer text.</p>
+<pre><code class="language-sql">INSERT INTO posts(content) VALUES('A SQLITE Post for the generated column constraint.');
+</code></pre>
+<pre><code class="language-sql">SELECT * FROM posts;
+</code></pre>
+<p>As, you can see the value of the <code>word_count</code> is <code>8</code> and the value of <code>read_time_minutes</code> is <code>1</code>.</p>
+<p>Let's update the <code>content</code> and check if the <code>word_count</code> and the <code>read_time_minutes</code> are updated.</p>
+<pre><code class="language-sql">UPDATE posts SET content = content || 'New content
+some more content' where id = 2;
+
+SELECT * FROM posts;
+</code></pre>
+<p>As you can see the value of the <code>word_count</code> is <code>11</code> and the value of <code>read_time_minutes</code> is <code>1</code> still. That is because, until we write <code>200</code> words it will ceil off to 1.</p>
+<p>Let's add a record with more than <code>200</code> words, and check if the <code>read_time_minutes</code> is updated.</p>
+<pre><code class="language-sql">INSERT INTO posts(content) VALUES('New post');
+SELECT * FROM posts;
+</code></pre>
+<p>The current value of the <code>word_count</code> is <code>2</code> and the <code>read_time_minutes</code> is <code>1</code>, let's update it by adding the value of <code>Adding some extra words here.</code>.</p>
+<pre><code class="language-sql">UPDATE posts 
+    SET content = content || replace(
+        printf('%200c', ' '),
+        ' ',
+        ' Adding some extra words here.'
+    )
+WHERE id = 3;
+</code></pre>
+<p>Ok, this might be too much, but let's break it down:</p>
+<ul>
+<li>First, we are updating the <code>content</code> by adding the value of <code>Adding some extra words here.</code> to the end of the existing value of <code>content</code>.</li>
+<li>In the replace function, the parameters are original string, the value to replace, and the value to replace it with.</li>
+<li>So in this case, we are taking the string <code>printf('%200c', ' ')</code>, which is a string of 200 spaces, basically adding a single space character, but it will be right-justified within a field of 200 characters.</li>
+<li>The second parameter is the character to replace, in this case it is single white space or <code>' '</code> character.</li>
+<li>The third parameter is the text to replace that <code>' '</code> space character with, here it is <code> Adding some extra words here</code>.</li>
+<li>So, essentially we are taking <code>200</code> white spaces and adding <code> Adding some extra words here.</code> for each space to the end of the existing value of <code>content</code>.</li>
+</ul>
+<p>Hence we will have around ~<code>200 * 5</code> words i.e. 1000 words, this way we can check the value of the <code>read_time_minutes</code> is updated.</p>
+<pre><code class="language-sql">SELECT * FROM posts;
+</code></pre>
+<p>As you can see the value of the <code>word_count</code> is <code>1002</code> and the value of <code>read_time_minutes</code> is <code>6</code>. That is perfect. And it is getting updated for each updation to the <code>content</code> column.</p>
+<p>Here's a step by step output log: Its a SQLog :)</p>
+<pre><code>sqlite&gt; CREATE TABLE posts (
+   id INTEGER PRIMARY KEY,
+   content TEXT,
+   word_count INTEGER GENERATED ALWAYS AS (length(content) - length(replace(content, ' ', '')) + 1),
+   read_time_minutes INTEGER GENERATED ALWAYS AS (ceil(word_count / 200.0))
+);
+sqlite&gt; .mode table
+
+sqlite&gt; INSERT INTO posts(content) VALUES('A sample post');
+
+sqlite&gt; SELECT * FROM posts;
++----+---------------+------------+-------------------+
+| id |    content    | word_count | read_time_minutes |
++----+---------------+------------+-------------------+
+| 1  | A sample post | 3          | 1                 |
++----+---------------+------------+-------------------+
+sqlite&gt; INSERT INTO posts(content) VALUES('A SQLITE Post for the generated column constraint.');
+
+sqlite&gt; SELECT * FROM posts;
++----+----------------------------------------------------+------------+-------------------+
+| id |                      content                       | word_count | read_time_minutes |
++----+----------------------------------------------------+------------+-------------------+
+| 1  | A sample post                                      | 3          | 1                 |
+| 2  | A SQLITE Post for the generated column constraint. | 8          | 1                 |
++----+----------------------------------------------------+------------+-------------------+
+
+sqlite&gt; UPDATE posts SET content = content || 'New content
+'  ...&gt; some more content' where id = 2;
+
+sqlite&gt; SELECT * FROM posts;
++----+--------------------------------------------------------------+------------+-------------------+
+| id |                           content                            | word_count | read_time_minutes |
++----+--------------------------------------------------------------+------------+-------------------+
+| 1  | A sample post                                                | 3          | 1                 |
++----+--------------------------------------------------------------+------------+-------------------+
+| 2  | A SQLITE Post for the generated column constraint.New conten | 11         | 1                 |
+|    | t                                                            |            |                   |
+|    | some more content                                            |            |                   |
++----+--------------------------------------------------------------+------------+-------------------+
+
+sqlite&gt; INSERT INTO posts(content) VALUES('New post');
+
+sqlite&gt; SELECT * FROM posts;
++----+--------------------------------------------------------------+------------+-------------------+
+| id |                           content                            | word_count | read_time_minutes |
++----+--------------------------------------------------------------+------------+-------------------+
+| 1  | A sample post                                                | 3          | 1                 |
++----+--------------------------------------------------------------+------------+-------------------+
+| 2  | A SQLITE Post for the generated column constraint.New conten | 11         | 1                 |
+|    | t                                                            |            |                   |
+|    | some more content                                            |            |                   |
++----+--------------------------------------------------------------+------------+-------------------+
+| 3  | New post                                                     | 2          | 1                 |
++----+--------------------------------------------------------------+------------+-------------------+
+
+sqlite&gt; UPDATE posts SET content = content || replace(printf('%200c', ' '), ' ', ' Adding some extra words here.') WHERE id = 3;
+
+sqlite&gt; SELECT * FROM posts;
++----+--------------------------------------------------------------+------------+-------------------+
+| id |                           content                            | word_count | read_time_minutes |
++----+--------------------------------------------------------------+------------+-------------------+
+| 1  | A sample post                                                | 3          | 1                 |
++----+--------------------------------------------------------------+------------+-------------------+
+| 2  | A SQLITE Post for the generated column constraint.New conten | 11         | 1                 |
+|    | t                                                            |            |                   |
+|    | some more content                                            |            |                   |
++----+--------------------------------------------------------------+------------+-------------------+
+| 3  | New post Adding some extra words here. Adding some extra wor | 1002       | 6                 |
+|    | ds here. Adding some extra words here. Adding some extra wor |            |                   |
+|    | ds here. Adding some extra words here. Adding some extra wor |            |                   |
+|    |..............................................................|            |                   |
+|    | ds here. Adding some extra words here. Adding some extra wor |            |                   |
+|    | ds here.                                                     |            |                   |
++----+--------------------------------------------------------------+------------+-------------------+
+
+</code></pre>
+<h2>Generated columns cannot be updated manually</h2>
+<p>If you tried to update the columns with <code>GENERATED ALWAYS</code> constraint, you will get a <code>constraint failed</code> error. As the constraint itself says, it is <strong>GENERATED ALWAYS</strong>, hence not to be updated or inserted.</p>
+<pre><code class="language-sql">UPDATE posts SET word_count = 10 WHERE id = 1;
+</code></pre>
+<p>It will fail with <code>cannot UPDATE generated column &quot;word_count&quot;</code> as mentioned.</p>
+<pre><code class="language-sql">UPDATE posts SET read_time_minutes = 10 WHERE id = 1;
+</code></pre>
+<p>Similarly, this will also fail, as it is also a <code>GENERATED ALWAYS</code> constrained column.</p>
+<pre><code>sqlite&gt; UPDATE posts SET word_count = 10 WHERE id = 1;
+Parse error: cannot UPDATE generated column &quot;word_count&quot;
+
+sqlite&gt; UPDATE posts SET read_time_minutes = 10 WHERE id = 1;
+Parse error: cannot UPDATE generated column &quot;read_time_minutes&quot;
+</code></pre>
+<h2>STORED VS VIRTUAL</h2>
+<p>Now, the Generated columns can be <code>STORED</code> as in stored in the database to the disk file, or they could be <code>VIRTUAL</code> as in computed (generated,calculated each time). There are trade-offs and I will definitely add the meme here <code>IT ACTUALLY DEPENDS</code>!</p>
+<p>The <code>STORED</code> column will take up space but the queries will be quick, since it doesn't need to calculate it each time, only it needs to do it at each updation (that can't be avoided).
+The <code>VIRTUAL</code> column will not take up space but the queries will be a little slower, depending on the number of data to compute, since it doesn't store the column values, it will have to compute each time and it as well need to update it each time.</p>
+<blockquote>
+<p>The default is <code>VIRTUAL</code> if not specified.</p>
+</blockquote>
+<p>The commonality of <code>STORED</code> and <code>VIRTUAL</code> is that they are both updated at the updation of the column it relates to or the updation of the row, the only difference is that one stores it the other calculates it for each query made to it.</p>
+<p>We'll see the difference how is that the case, it generates each time in the case of the <code>VIRTUAL</code> column <code>GENERATED</code> constraint.</p>
+<p>I'll show the most basic example continuing with the same table, but with the <code>VIRTUAL</code> clause on the <code>GENERATED ALWAYS</code> constraint.</p>
+<h3>Virtual generated column</h3>
+<p>By default, it is <code>VIRTUAL</code> it doesn't matter if you add it or not (let's add it to make it clear).</p>
+<p>I'll specify the <code>word_count</code> as the <code>VIRTUAL</code> column with the <code>GENERATED ALWAYS</code> constraint with the same formula to get the word count and at the end specify the <code>VIRTUAL</code> keyword (its optional).</p>
+<blockquote>
+<p>Let's skip the <code>read_time_minutes</code> for now, you can add it won't make it any difference (it was a little extreme example to use 200 words to update its value)</p>
+</blockquote>
+<pre><code class="language-sql">CREATE TABLE posts_virtual (
+   id INTEGER PRIMARY KEY,
+   content TEXT,
+   word_count INTEGER GENERATED ALWAYS AS (
+     length(content) - length(replace(content, ' ', '')) + 1
+   ) VIRTUAL
+);
+</code></pre>
+<p>Now, we'll add some data to the table and check the value of the <code>word_count</code> column.</p>
+<pre><code class="language-sql">INSERT INTO posts_virtual(content) VALUES('A sample post');
+INSERT INTO posts_virtual(content) VALUES('A SQLITE Post for the virtual generated column constraint.');
+SELECT * FROM posts_virtual;
+</code></pre>
+<p>This we already know, the plain old <code>word_count</code> is <code>3</code> and <code>9</code> for the two posts respectively.</p>
+<p>But let's see how is the <code>word_count</code> column is actually stored and how slow or fast it actually is.</p>
+<pre><code class="language-sql">PRAGMA table_info(posts_virtual);
+</code></pre>
+<p>HH? There is no <code>word_count</code> column here, it is not stored, it is a <code>VIRTUAL</code> column.</p>
+<pre><code>sqlite&gt; PRAGMA table_info(posts_virtual);
++-----+---------+---------+---------+------------+----+
+| cid |  name   |  type   | notnull | dflt_value | pk |
++-----+---------+---------+---------+------------+----+
+| 0   | id      | INTEGER | 0       |            | 1  |
+| 1   | content | TEXT    | 0       |            | 0  |
++-----+---------+---------+---------+------------+----+
+sqlite&gt;
+</code></pre>
+<p>What about extra info?</p>
+<pre><code class="language-sql">PRAGMA table_xinfo(posts_virtual);
+</code></pre>
+<p>Yes, that is indeed there, and its hidden? Nope, its <code>generated</code> a special type.</p>
+<ul>
+<li><code>0</code> is not hidden</li>
+<li><code>1</code> is hidden</li>
+<li><code>2</code> is generated</li>
+</ul>
+<pre><code>sqlite&gt; PRAGMA table_xinfo(posts_virtual);
++-----+------------+---------+---------+------------+----+--------+
+| cid |    name    |  type   | notnull | dflt_value | pk | hidden |
++-----+------------+---------+---------+------------+----+--------+
+| 0   | id         | INTEGER | 0       |            | 1  | 0      |
+| 1   | content    | TEXT    | 0       |            | 0  | 0      |
+| 2   | word_count | INTEGER | 0       |            | 0  | 2      |
++-----+------------+---------+---------+------------+----+--------+
+sqlite&gt;
+</code></pre>
+<p>It's time to benchmark it then, let's bulk insert 100000 posts.</p>
+<pre><code class="language-sql">WITH RECURSIVE cnt(x) AS (
+  SELECT 1
+  UNION ALL
+  SELECT x+1 FROM cnt WHERE x &lt; 100000
+)
+INSERT INTO posts_virtual(content)
+SELECT 'This is a sample post number ' || x || ' with some words repeated multiple times.'
+FROM cnt;
+</code></pre>
+<p>If we see now the <code>posts_virtual</code> table has over 100000 rows.</p>
+<pre><code class="language-sql">SELECT COUNT(*) FROM posts_virtual;
+</code></pre>
+<p>We already had <code>2</code> records, and we added <code>100000</code> more, so the total is <code>100002</code>.</p>
+<p>Let's check the sum of the <code>word_count</code> to be sure it inserted it right.</p>
+<pre><code class="language-sql">SELECT SUM(word_count) FROM posts_virtual;
+</code></pre>
+<p>Ok that shows the sum of the <code>word_count</code> is <code>1300012</code>.</p>
+<p>Let's check with the timer on and evaluate the query.</p>
+<pre><code>sqlite&gt; WITH RECURSIVE cnt(x) AS (
+  SELECT 1
+  UNION ALL
+  SELECT x+1 FROM cnt WHERE x &lt; 100000
+)
+INSERT INTO posts_virtual(content)
+SELECT 'This is a sample post number ' || x || ' with some words repeated multiple times.'
+FROM cnt;
+
+sqlite&gt; PRAGMA table_xinfo(posts_virtual);
++-----+------------+---------+---------+------------+----+--------+
+| cid |    name    |  type   | notnull | dflt_value | pk | hidden |
++-----+------------+---------+---------+------------+----+--------+
+| 0   | id         | INTEGER | 0       |            | 1  | 0      |
+| 1   | content    | TEXT    | 0       |            | 0  | 0      |
+| 2   | word_count | INTEGER | 0       |            | 0  | 2      |
++-----+------------+---------+---------+------------+----+--------+
+
+sqlite&gt; .timer on
+
+sqlite&gt; SELECT COUNT(*) FROM posts_virtual;
++----------+
+| COUNT(*) |
++----------+
+| 100002   |
++----------+
+Run Time: real 0.001 user 0.000352 sys 0.000103
+
+sqlite&gt; SELECT SUM(word_count) FROM posts_virtual;
++-----------------+
+| SUM(word_count) |
++-----------------+
+| 1300012         |
++-----------------+
+Run Time: real 0.041 user 0.040682 sys 0.000418
+
+sqlite&gt; PRAGMA page_count;
++------------+
+| page_count |
++------------+
+| 2086       |
++------------+
+Run Time: real 0.000 user 0.000000 sys 0.000078
+
+sqlite&gt; PRAGMA page_size;
++-----------+
+| page_size |
++-----------+
+| 4096      |
++-----------+
+Run Time: real 0.000 user 0.000025 sys 0.000006
+
+sqlite&gt; UPDATE posts_virtual SET content = content || ' extra text' WHERE id % 1000 = 0;
+Run Time: real 0.010 user 0.009353 sys 0.000161
+</code></pre>
+<p>I think we'll leave it here and move onto creating the <code>STORED</code> column as a generated value</p>
+<h3>Stored generated column</h3>
+<p>Similar to the <code>VIRTUAL</code> column, we'll create the <code>STORED</code> column with the <code>GENERATED ALWAYS</code> constraint.</p>
+<p>This will be the same table named as <code>posts_stored</code> but with the <code>word_count</code> being a <code>STORED</code> column rather than a <code>VIRTUAL</code> column.</p>
+<pre><code class="language-sql">CREATE TABLE posts_stored (
+   id INTEGER PRIMARY KEY,
+   content TEXT,
+   word_count INTEGER GENERATED ALWAYS AS (
+     length(content) - length(replace(content, ' ', '')) + 1
+   ) STORED
+);
+</code></pre>
+<p>Now, we'll add some data to the table.</p>
+<pre><code class="language-sql">INSERT INTO posts_stored(content) VALUES('A sample post');
+INSERT INTO posts_stored(content) VALUES('A SQLITE Post for the virtual generated column constraint.');
+SELECT * FROM posts_stored;
+</code></pre>
+<p>This is cool, working as expected, we have already seen it, we need to take a look at how this values are stored now.</p>
+<p>Let's take a look at the <code>table_info</code> for the <code>posts_stored</code> table.</p>
+<pre><code class="language-sql">PRAGMA table_info(posts_stored);
+</code></pre>
+<p>It still doesn't have the <code>GENERATED</code> column <code>word_count</code>.</p>
+<p>Let's take a look at the <code>table_xinfo</code> for the <code>posts_stored</code> table.</p>
+<pre><code class="language-sql">PRAGMA table_xinfo(posts_stored);
+</code></pre>
+<p>Ok, wiredly it has the <code>GENERATED ALWAYS</code> column <code>word_count</code> as well but the <code>hidden</code> value is <code>3</code>.</p>
+<p>We knew it was <code>2</code> for hidden but <code>3</code> is for? You guessed it right, stored and generated column.</p>
+<p>Now, let's also populate the <code>posts_stored</code> table with some data, bulk inserting the data.</p>
+<p>Let's add <code>100000</code> rows in it.</p>
+<pre><code class="language-sql">WITH RECURSIVE cnt(x) AS (
+  SELECT 1
+  UNION ALL
+  SELECT x+1 FROM cnt WHERE x &lt; 100000
+)
+INSERT INTO posts_stored(content)
+SELECT 'This is a sample post number ' || x || ' with some words repeated multiple times.'
+FROM cnt;
+</code></pre>
+<p>This is the same query except its inserting in the <code>posts_stored</code> table.</p>
+<p>Let's check if it has inserted the right number of rows.</p>
+<pre><code class="language-sql">SELECT COUNT(*) FROM posts_stored;
+</code></pre>
+<p>Indeed there are <code>100000</code> rows in the <code>posts_stored</code> table.</p>
+<p>Now, let's verify that the inserted values are rightly populated.</p>
+<pre><code class="language-sql">SELECT SUM(word_count) FROM posts_stored;
+</code></pre>
+<p>This gives <code>1300012</code> as the sum of the <code>word_count</code> from the <code>posts_stored</code> table. Which matches the sum of the <code>word_count</code> from the <code>posts_virtual</code> table.</p>
+<pre><code class="language-sql">sqlite&gt; CREATE TABLE posts_stored (
+   id INTEGER PRIMARY KEY,
+   content TEXT,
+   word_count INTEGER GENERATED ALWAYS AS (
+     length(content) - length(replace(content, ' ', '')) + 1
+   ) STORED
+);
+Run Time: real 0.000 user 0.000258 sys 0.000027
+
+sqlite&gt; INSERT INTO posts_stored(content) VALUES('A sample post');
+sqlite&gt; INSERT INTO posts_stored(content) VALUES('A SQLITE Post for the virtual generated column constraint.');
+
+SELECT * FROM posts_stored;
++----+------------------------------------------------------------+------------+
+| id |                          content                           | word_count |
++----+------------------------------------------------------------+------------+
+| 1  | A sample post                                              | 3          |
+| 2  | A SQLITE Post for the virtual generated column constraint. | 9          |
++----+------------------------------------------------------------+------------+
+Run Time: real 0.000 user 0.000224 sys 0.000000
+
+sqlite&gt; PRAGMA table_info(posts_stored);
++-----+---------+---------+---------+------------+----+
+| cid |  name   |  type   | notnull | dflt_value | pk |
++-----+---------+---------+---------+------------+----+
+| 0   | id      | INTEGER | 0       |            | 1  |
+| 1   | content | TEXT    | 0       |            | 0  |
++-----+---------+---------+---------+------------+----+
+
+sqlite&gt; PRAGMA table_xinfo(posts_stored);
++-----+------------+---------+---------+------------+----+--------+
+| cid |    name    |  type   | notnull | dflt_value | pk | hidden |
++-----+------------+---------+---------+------------+----+--------+
+| 0   | id         | INTEGER | 0       |            | 1  | 0      |
+| 1   | content    | TEXT    | 0       |            | 0  | 0      |
+| 2   | word_count | INTEGER | 0       |            | 0  | 3      |
++-----+------------+---------+---------+------------+----+--------+
+Run Time: real 0.000 user 0.000013 sys 0.000322
+
+sqlite&gt; SELECT COUNT(*) FROM posts_stored;
++----------+
+| COUNT(*) |
++----------+
+| 2        |
++----------+
+Run Time: real 0.000 user 0.000108 sys 0.000012
+
+sqlite&gt; WITH RECURSIVE cnt(x) AS (
+  SELECT 1
+  UNION ALL
+  SELECT x+1 FROM cnt WHERE x &lt; 100000
+)
+INSERT INTO posts_stored(content)
+SELECT 'This is a sample post number ' || x || ' with some words repeated multiple times.'
+FROM cnt;
+Run Time: real 0.071 user 0.067858 sys 0.002929
+
+sqlite&gt; SELECT COUNT(*) FROM posts_stored;
++----------+
+| COUNT(*) |
++----------+
+| 100002   |
++----------+
+Run Time: real 0.000 user 0.000367 sys 0.000000
+
+sqlite&gt; SELECT SUM(word_count) FROM posts_stored;
++-----------------+
+| SUM(word_count) |
++-----------------+
+| 1300012         |
++-----------------+
+Run Time: real 0.008 user 0.006492 sys 0.000941
+</code></pre>
+<p>This is all setup for the comparison of both the tables.</p>
+<h3>The difference</h3>
+<p>Now, let's check the difference between the <code>STORED</code> and <code>VIRTUAL</code> column.</p>
+<p>Let's sum the <code>word_count</code> from each of the tables <code>posts_stored</code> and <code>posts_virtual</code></p>
+<p>First, lets set the timer on, which will give the breakdown of the time for each ran query.</p>
+<pre><code>.timer on
+</code></pre>
+<p>The timer will give three time durations, the real, user and the system.
+The breakdown is like this:</p>
+<ul>
+<li>real time : The full clock time form the start to the end of the query</li>
+<li>user time : The CPU time in the user space (I/O) operations on the sqlite side, computations on the obtained data, or preprocessing the data before inserting.</li>
+<li>system time: The CPU time in the kernel space (I/O) operations on the host side, it could be reading or writing to the actual db file, etc.</li>
+</ul>
+<p>And then run the query for the <code>posts_stored</code> table.</p>
+<pre><code class="language-sql">SELECT SUM(word_count) FROM posts_stored;
+</code></pre>
+<p>This is giving the result in around <code>~0.008</code> seconds might be approximately <code>0.01</code> in certain cases.
+We can even get the breakdown of the time for each ran query.</p>
+<ul>
+<li>full query execution time: <code>0.008</code></li>
+<li>user time: <code>0.006492</code></li>
+<li>system time: <code>0.000941</code></li>
+</ul>
+<p>So, here in this case, the system and user time are around the same, however there is some system time for reading from the database file.</p>
+<p>And then run the query for the <code>posts_virtual</code> table.</p>
+<pre><code class="language-sql">SELECT SUM(word_count) FROM posts_virtual;
+</code></pre>
+<p>This is giving the result in around <code>~0.039</code> seconds might be approximately <code>0.04</code> in certain cases.</p>
+<p>We can even get the breakdown of the time for each ran query.</p>
+<ul>
+<li>full query execution time: <code>0.039</code></li>
+<li>user time: <code>0.039366</code></li>
+<li>system time: <code>0.000000</code> this can go sometimes to <code>0.000652</code>, almost negligible, but if it happens, in that case the full query time will increase by a bit.</li>
+</ul>
+<p>So, it is taking a quite lot of time in the user space by the CPU right?
+And almost 0 time in the kernel level (disk operation) to read from the database file.</p>
+<p>That is so clear, as this is a virtual column, and we are only reading a single column, and that too is a virtual column, we don't need to hit a read to the database file. Clever right? But that costs some CPU to compute the sum for the <code>100002</code> rows.</p>
+<p>This is the trade-off</p>
+<ul>
+<li>Time spent on the CPU on the computation vs the time spent on the disk operation to read the data.</li>
+<li>These can be different depending on the query.</li>
+</ul>
+<pre><code class="language-sql">sqlite&gt; SELECT SUM(word_count) FROM posts_stored;
++-----------------+
+| SUM(word_count) |
++-----------------+
+| 1300012         |
++-----------------+
+Run Time: real 0.008 user 0.006492 sys 0.000941
+
+sqlite&gt; SELECT SUM(word_count) FROM posts_virtual;
++-----------------+
+| SUM(word_count) |
++-----------------+
+| 1300012         |
++-----------------+
+Run Time: real 0.039 user 0.039366 sys 0.000000
+</code></pre>
+<p>You can clearly see the difference, the <code>STORED</code> column is almost <code>4</code> to <code>5</code> times faster than the <code>VIRTUAL</code> column.</p>
+<h3>Key observations</h3>
+<ol>
+<li>If you have lot of processing to do in the generated column, better to go with the <code>STORED</code> column.</li>
+<li>If you have a lot of data to compute and not necessarily complex, better to go with the <code>VIRTUAL</code> column.</li>
+<li>It really depends on the data too, and we cannot say which one is better over the other without knowing the structure and the design of the queries.</li>
+</ol>
+<p>There are lot of details as well beyond this, it will require specific guides on how to do certain things and busting certain myths in the documentation.</p>
+
+            </div>
+        </article>
+    </main>
+      <div id="comments">
+        <script src="https://giscus.app/client.js"
+            data-repo="Mr-Destructive/mr-destructive.github.io"
+            data-repo-id="R_kgDOHZ6V_g"
+            data-category="Q&A"
+            data-category-id="DIC_kwDOHZ6V_s4CRfn4"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-theme="dark_high_contrast"
+            data-lang="en"
+            crossorigin="anonymous"
+            async
+        >
+        </script>
+      </div>
+    
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; Meet Gor. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const editBtn = document.getElementById('editor-edit');
+
+        if (editBtn) {
+            editBtn.addEventListener('click', async function () {
+                const slug = "sqlog\/sqlite-generated-column-constraint";
+                const type = "sqlog";
+                console.log("Editing post:", slug, type);
+                const url = "https:\/\/devmeetgor.netlify.app/.netlify/functions/api?slug=" + slug + "&method=edit&type=" + type;
+
+                try {
+                    const res = await fetch(url);
+
+                    if (!res.ok) throw new Error("Failed to fetch edit content");
+                    console.log(res);
+
+                    const html = await res.text();
+                    console.log(html);
+
+                    document.querySelector('.post-content').innerHTML = html;
+                } catch (err) {
+                    console.error(err);
+                    alert("Error loading editor content");
+                }
+            });
+        }
+    });
+    </script>
+</body>
+</html>

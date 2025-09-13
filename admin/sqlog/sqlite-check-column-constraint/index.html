@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <link id="syntax-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:url" content="https://dev.meetgor.com/sqlog/sqlite-check-column-constraint">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Meet Gor | SQLite SQL: CHECK column constraint">
+    <meta property="og:description" content="">
+    <meta property="twitter:domain" content="dev.meetgor.com">
+    <meta property="twitter:url" content="https://dev.meetgor.com/sqlog/sqlite-check-column-constraint">
+    <meta name="twitter:title" content="SQLite SQL: CHECK column constraint">
+    <meta name="twitter:description" content="">
+    
+        <meta property="og:image" content="tbicon.png">
+        <meta name="twitter:image" content="tbicon.png">
+        <meta name="twitter:image" content="../tbicon.png">
+    
+    <link rel="icon" href="../tbicon.png" type="image/png">
+    <link rel="icon" href="tbicon.png" type="image/png">
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll("pre code").forEach((block) => {
+            hljs.highlightElement(block);
+        });
+    });
+    </script>
+    <title>Meet Gor | SQLite SQL: CHECK column constraint</title>
+    <style>
+            :root {
+                --bg-color: #ffffff;
+                --text-color: #333333;
+                --secondary-text-color: ;
+                --link-normal: #007bff;
+                --link-hover: #0056b3;
+                --link-active: #003a75;
+                --quote-color: #999999;
+                --code-bg-color: #dddddd;
+                --code-border-color: #ced4da;
+                --code-text-color: #444444;
+                --code-comment-color: #808080;
+                --code-keyword-color: #008000;
+                --code-string-color: #000080;
+                --code-number-color: #000000;
+                --code-variable-color: #000000;
+                --code-function-color: #000000;
+            }
+
+             
+            .secondary-theme {
+                --bg-color: #121212;
+                --text-color: #ffffff;
+                --secondary-text-color: #00ffff;
+                --link-normal: #ff6600;
+                --link-hover: #4682b4;
+                --link-active: #00008b;
+                --quote-color: #a9a9a9;
+                --code-bg-color: #333333;
+                --code-border-color: #444444;
+                --code-text-color: #ffffff;
+                --code-comment-color: #b0b0b0;
+                --code-keyword-color: #32cd32;
+                --code-string-color: #ff6347;
+                --code-number-color: #d3d3d3;
+                --code-variable-color: #b0e0e6;
+                --code-function-color: #ff4500;
+            }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            line-height: 1.6;
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--secondary-text-color);
+        }
+
+        .site-title {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        .site-title a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .site-title a:hover {
+            color: var(--hover-color);
+        }
+
+        .Post-meta {
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+
+        article {
+            margin: 2rem 0;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        code {
+            font-family: 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        p code {
+            background-color: var(--inline-code-bg);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+        }
+
+        blockquote {
+            border-left: 3px solid var(--accent-color);
+            margin: 1.5rem 0;
+            padding-left: 1rem;
+            color: var(--secondary-text);
+        }
+
+        a {
+            color: var(--link-normal);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--hover-color);
+        }
+
+        .Hljs-comment { color: var(--code-comment); } 
+        .Hljs-keyword { color: var(--code-keyword); }
+        .Hljs-string { color: var(--code-string); }
+        .Hljs-number { color: var(--code-number); }
+        .Hljs-function { color: var(--code-function); }
+        .Hljs-variable { color: var(--code-variable); }
+
+        button, .Button {
+            background-color: var(--accent-color);
+            border: none;
+            border-radius: 6px;
+            color: var(--bg-color);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover, .Button:hover {
+            background-color: var(--hover-color);
+        }
+
+
+         
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            pre {
+                margin: 1rem -1rem;
+                border-radius: 0;
+            }
+        }
+
+        code {
+          font-family: monospace;
+          padding: 2px 4px;
+          border-radius: 4px;
+        }
+
+pre {
+    background-color: var(--code-bg-color, #f5f5f5);
+    border: 1px solid var(--code-border-color, #d1d1d1);
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+
+code {
+    font-family: 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    font-size: 0.9em;
+    color: var(--code-text-color, #fff);
+}
+
+p code {
+    color: var(--code-text-color, #000);
+    background-color: var(--code-bg-color, #444444);
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+}
+
+ 
+.Hljs-comment { color: var(--code-comment-color, #7d7d7d); }
+.Hljs-keyword { color: var(--code-keyword-color, #005cc5); }
+.Hljs-string { color: var(--code-string-color, #d73a49); }
+.Hljs-number { color: var(--code-number-color, #e36209); }
+.Hljs-variable { color: var(--code-variable-color, #6f42c1); }
+.Hljs-function { color: var(--code-function-color, #005cc5); }
+
+ 
+.secondary-theme pre {
+    background-color: var(--code-bg-color, #1e1e1e);
+    border: 1px solid var(--code-border-color, #3c3c3c);
+}
+
+.secondary-theme .Hljs-comment { color: var(--code-comment-color, #6a737d); }
+.secondary-theme .Hljs-keyword { color: var(--code-keyword-color, #569cd6); }
+.secondary-theme .Hljs-string { color: var(--code-string-color, #ce9178); }
+.secondary-theme .Hljs-number { color: var(--code-number-color, #b5cea8); }
+.secondary-theme .Hljs-variable { color: var(--code-variable-color, #9cdcfe); }
+.secondary-theme .Hljs-function { color: var(--code-function-color, #dcdcaa); }
+
+pre {
+    background: var(--code-bg-color, #1e1e1e);
+    border: 1px solid var(--code-border-color, #3c3c3c);
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+
+ 
+code {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 0.9em;
+    color: var(--code-text-color, #ffffff);
+}
+
+ 
+p code {
+    background-color: var(--code-bg-color, #333);
+    color: var(--code-text-color, #ffcb6b);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+ 
+.Hljs-comment { color: var(--code-comment-color, #6a737d); font-style: italic; }
+.Hljs-keyword { color: var(--code-keyword-color, #c678dd); font-weight: bold; }
+.Hljs-string { color: var(--code-string-color, #98c379); }
+.Hljs-number { color: var(--code-number-color, #d19a66); }
+.Hljs-variable { color: var(--code-variable-color, #e06c75); }
+.Hljs-function { color: var(--code-function-color, #61afef); }
+
+ 
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.copy-btn:hover {
+    background: #45a049;
+}
+
+.copy-btn.copied {
+    background: #ffa500;
+}
+
+blockquote {
+    border-left: 4px solid var(--quote-color);
+    background-color: rgba(255, 255, 255, 0.05);  
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: var(--secondary-text-color);
+    border-radius: 6px;
+    position: relative;
+}
+
+blockquote::before {
+    content: "“";  
+    font-size: 2rem;
+    color: var(--quote-color);
+    position: absolute;
+    top: 0;
+    left: 10px;
+}
+
+blockquote::after {
+    content: "”";  
+    font-size: 2rem;
+    color: var(--quote-color);
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}
+
+ 
+blockquote cite {
+    display: block;
+    text-align: right;
+    font-size: 0.9em;
+    margin-top: 0.5rem;
+    color: var(--secondary-text-color);
+    font-style: normal;
+}
+        #editor, #editor-edit {
+            background-color: #4CAF50;  
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #editor i {
+            margin-right: 5px;  
+        }
+        #editor-edit i {
+            margin-right: 5px;  
+        }
+    </style>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const stylesheet = document.getElementById("syntax-theme");
+
+        
+        const currentTheme = localStorage.getItem("theme") || "light";
+
+        
+        function setSyntaxTheme(theme) {
+            if (theme === "secondary") {
+                stylesheet.href = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/dracula.min.css";
+            } else {
+                stylesheet.href = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css";
+            }
+        }
+
+        
+        if (currentTheme === "secondary") {
+            body.classList.add("secondary-theme");
+            setSyntaxTheme("secondary");
+        } else {
+            setSyntaxTheme("light");
+        }
+
+        
+        themeToggle.addEventListener("click", () => {
+            if (body.classList.contains("secondary-theme")) {
+                body.classList.remove("secondary-theme");
+                localStorage.setItem("theme", "light");
+                setSyntaxTheme("light");
+            } else {
+                body.classList.add("secondary-theme");
+                localStorage.setItem("theme", "secondary");
+                setSyntaxTheme("secondary");
+            }
+        });
+    });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll("pre").forEach((pre) => {
+                const button = document.createElement("button");
+                button.classList.add("copy-btn");
+                button.textContent = "Copy";
+
+                button.addEventListener("click", () => {
+                    const code = pre.querySelector("code");
+                    if (!code) return;
+
+                    const textToCopy = code.innerText || code.textContent;
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        button.textContent = "Copied!";
+                        button.classList.add("copied");
+
+                        setTimeout(() => {
+                            button.textContent = "Copy";
+                            button.classList.remove("copied");
+                        }, 1500);
+                    });
+                });
+
+                pre.appendChild(button);
+            });
+        });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JX3T4E0964"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-JX3T4E0964');
+    </script>
+    
+    <link rel="icon" href="../../tbicon.png" type="image/png">
+</head>
+<body>
+    <header class="header">
+        <h1 class="site-title animated-gradient-text"><a href="/">Meet Gor</a></h1>
+        <div class="theme-switch">
+          <input type="checkbox" id="theme-toggle" aria-label="Toggle Theme">
+          <label for="theme-toggle"></label>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h1>SQLite SQL: CHECK column constraint</h1>
+            <div class="post-meta">
+                Published on 📅 <time datetime="2025-09-12">2025-09-12</time>
+            </div>
+            <div class="post-meta">
+                Type: <a href="/sqlog">sqlog</a>
+            </div>
+            <div class="post-meta">
+                <span class="post-series-label"> 🏷️ Tags:</span>
+                
+                <a href="/tags/sqlite">#sqlite</a>
+                
+                <a href="/tags/sql">#sql</a>
+                
+            </div>
+            
+            <div class="post-meta">
+                
+                    <button id="editor-edit">Edit</button>
+                    <button id="editor-delete" 
+                            onclick="location.href='/editor/?slug=sqlog\/sqlite-check-column-constraint&method=delete'">
+                        <i class="fas fa-trash"></i>Delete
+                    </button>
+                
+            </div>
+            <hr>
+            <div class="post-content">
+                <h2>The CHECK column constraint</h2>
+<p>The <a href="https://sqlite.org/lang_createtable.html#check_constraints">CHECK</a> clause is a column constraint that allows us to define certain conditions that we want to evaluate before inserting the column for the row and populate it accordingly. In this post, we will check, what this check is and when it is performed.</p>
+<h2>What it checks</h2>
+<p>The <code>CHECK</code> constraint basically acts a validator, we define the condition and if the condition is not met (is false) then the row is not inserted or updated.</p>
+<p>Let's take a simplest example with our good-ol users table:</p>
+<pre><code class="language-sql">CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    age INTEGER CHECK(age &gt;= 18)
+);
+</code></pre>
+<p>Let's insert a user:</p>
+<pre><code class="language-sql">INSERT INTO users (name, age) VALUES ('John', 21);
+</code></pre>
+<pre><code class="language-sql">SELECT * FROM users;
+</code></pre>
+<p>This rightly populates with the user <code>John</code> with age <code>21</code>.</p>
+<p>If we try to insert a user with age less than 18, it will fail:</p>
+<pre><code class="language-sql">INSERT INTO users (name, age) VALUES ('Alice', 17);
+</code></pre>
+<p>This should fail the constraint as the age is less than 18.</p>
+<pre><code>sqlite&gt; INSERT INTO users (name, age) VALUES ('Alice', 17);
+Runtime error: CHECK constraint failed: age &gt;= 18 (19)
+sqlite&gt;
+</code></pre>
+<p>As you would see, the insertion query failed as a <code>CHECK</code> constraint failed.</p>
+<p>Let's add one more valid user:</p>
+<pre><code class="language-sql">INSERT INTO users (name, age) VALUES ('Bob', 20);
+</code></pre>
+<p>This is fine, and now, let's try to update the age of a user:</p>
+<pre><code class="language-sql">UPDATE users SET age = 17 WHERE id = 2;
+</code></pre>
+<p>This should fail the constraint as the age is less than 18.</p>
+<pre><code>sqlite&gt; INSERT INTO users (name, age) VALUES ('Bob', 20);
+sqlite&gt; SELECT * FROM users;
++----+------+-----+
+| id | name | age |
++----+------+-----+
+| 1  | John | 21  |
+| 2  | Bob  | 20  |
++----+------+-----+
+
+sqlite&gt; UPDATE users SET age = 17 where id = 2;
+Runtime error: CHECK constraint failed: age &gt;= 18 (19)
+sqlite&gt;
+</code></pre>
+<p>As you would see, the update query failed as a <code>CHECK</code> constraint failed.</p>
+<h2>When it is checked?</h2>
+<p>As we saw it is checked before the row is inserted or updated.</p>
+<h2>Disabling CHECK constraint</h2>
+<p>We can disable the <code>CHECK</code> constraint on all the tables in the database by setting the <code>PRAGMA</code> of <code>ignore_check_constraints</code> to <code>TRUE</code>:</p>
+<pre><code class="language-sql">PRAGMA ignore_check_constraints = TRUE;
+</code></pre>
+<p>This will disable all the <code>CHECK</code> constraints on all the tables in the database.</p>
+<p>Let's try again updating the user's age with less then 18:</p>
+<pre><code class="language-sql">UPDATE users SET age = 17 WHERE id = 2;
+</code></pre>
+<p>This time, it readily updates the age to less then 18, without failing the constraint, which means the constraint was disable or shunned down.</p>
+<pre><code>sqlite&gt; UPDATE users SET age = 17 where id = 2;
+Runtime error: CHECK constraint failed: age &gt;= 18 (19)
+sqlite&gt; PRAGMA ignore_check_constraints = TRUE;
+sqlite&gt; SELECT * FROM users;
++----+------+-----+
+| id | name | age |
++----+------+-----+
+| 1  | John | 21  |
+| 2  | Bob  | 20  |
++----+------+-----+
+sqlite&gt; UPDATE users SET age = 17 where id = 2;
+sqlite&gt; SELECT * FROM users;
++----+------+-----+
+| id | name | age |
++----+------+-----+
+| 1  | John | 21  |
+| 2  | Bob  | 17  |
++----+------+-----+
+sqlite&gt;
+</code></pre>
+<p>Similarly the inserts will be allowed if the constraint is disabled.</p>
+<pre><code class="language-sql">INSERT INTO users (name, age) VALUES ('Harry', 14);
+</code></pre>
+<pre><code>sqlite&gt; INSERT INTO users (name, age) VALUES ('Harry', 14);
+sqlite&gt; SELECT * FROM users;
++----+-------+-----+
+| id | name  | age |
++----+-------+-----+
+| 1  | John  | 21  |
+| 2  | Bob   | 17  |
+| 3  | Harry | 14  |
++----+-------+-----+
+sqlite&gt;
+</code></pre>
+<h2>Table level check constraint</h2>
+<p>The <code>CHECK</code> constraint can be applied to a table too, in fact it doesn't really matter you add it to a column or a table, as it will be evaluated for insertion or updation of the column and it's not tied to a column.</p>
+<p>Let's take a better example:</p>
+<pre><code class="language-sql">CREATE TABLE accounts (
+    id INTEGER PRIMARY KEY,
+    account_type TEXT NOT NULL,
+    balance INTEGER NOT NULL,
+    CHECK (
+        (account_type = 'savings' AND balance &gt;= 0)
+        OR (account_type = 'loan' AND balance &lt;= 0)
+    )
+);
+</code></pre>
+<p>Here, we have a <code>CHECK</code> constraint that checks if the account type is <code>savings</code> and balance is greater than or equal to 0, or if the account type is <code>loan</code> and balance is less than or equal to 0.</p>
+<p>So we are combining two columns to form a condition and check if the row is actually valid or not to be inserted.</p>
+<p>Let's insert a few rows:</p>
+<pre><code class="language-sql">INSERT INTO accounts (account_type, balance) VALUES ('savings', 1000);
+INSERT INTO accounts (account_type, balance) VALUES ('loan', -1000);
+</code></pre>
+<p>This will insert readily the <code>savings</code> and the <code>loan</code> account as the constraint passes.</p>
+<p>However if we try to do the opposite and make the constraint check fail.</p>
+<pre><code class="language-sql">INSERT INTO accounts (account_type, balance) VALUES ('savings', -1000);
+</code></pre>
+<pre><code class="language-sql">INSERT INTO accounts (account_type, balance) VALUES ('loan', 1000);
+</code></pre>
+<p>It will fail as the check condition is not TRUE anymore for both the cases.</p>
+<pre><code>sqlite&gt; INSERT INTO accounts (account_type, balance) VALUES ('savings', 1000);
+sqlite&gt; INSERT INTO accounts (account_type, balance) VALUES ('loan', -1000);
+sqlite&gt; INSERT INTO accounts (account_type, balance) VALUES ('loan', 1000);
+Runtime error: CHECK constraint failed: (account_type = 'savings' AND balance &gt;= 0)
+        OR (account_type = 'loan' AND balance &lt;= 0) (19)
+sqlite&gt; INSERT INTO accounts (account_type, balance) VALUES ('savings', -1000);
+Runtime error: CHECK constraint failed: (account_type = 'savings' AND balance &gt;= 0)
+        OR (account_type = 'loan' AND balance &lt;= 0) (19)
+sqlite&gt;
+</code></pre>
+<p>As you can see the <code>CHECK</code> condition failed for both the cases.</p>
+<h2>Check constraint values</h2>
+<p>Note, here the value will be either <code>TRUE</code> or <code>FALSE</code>. But what about other values? NULL, 0, ?</p>
+<p>That brings us to the fundamental of how <code>CHECK</code> considers the values as <code>TRUE</code> and <code>FALSE</code>.</p>
+<p>From the documentation:</p>
+<blockquote>
+<p>If the result is zero (integer value 0 or real value 0.0), then a constraint violation has occurred.
+If the CHECK expression evaluates to NULL, or any other non-zero value, it is not a constraint violation</p>
+</blockquote>
+<p>So, its not really <code>TRUE</code> or <code>FALSE</code> but:</p>
+<ul>
+<li><code>TRUE</code>: is any non-zero value or <code>NULL</code> (if a condition is true, it is set as <code>1</code>)</li>
+<li><code>FALSE</code>: is <code>0</code> (if a condition is false, it is set as <code>0</code>)</li>
+</ul>
+<p>So, let's create a few tables with different <code>CHECK</code> constraints having different values for the check constraint:</p>
+<pre><code class="language-sql">CREATE TABLE test (
+    val INTEGER,
+    CHECK(val)
+);
+</code></pre>
+<p>Now, let's insert some values</p>
+<p>The below query will evaluate to false, hence failing the constraint.</p>
+<pre><code class="language-sql">INSERT INTO test(val) VALUES (0);
+</code></pre>
+<p>The value is <code>1</code> which is a non-zero value, hence passing the constraint.</p>
+<pre><code class="language-sql">INSERT INTO test(val) VALUES (1);
+</code></pre>
+<p>Here the value is <code>0.000</code> which is still zero, hence failing the constraint.</p>
+<pre><code class="language-sql">INSERT INTO test(val) VALUES (0.000);
+</code></pre>
+<p>The value here is <code>0.0001</code> which is a non-zero value, hence passing the constraint.</p>
+<pre><code class="language-sql">INSERT INTO test(val) VALUES (0.0001);
+</code></pre>
+<p>The <code>FALSE</code> is alias for <code>0</code> hence failing the constraint.</p>
+<pre><code class="language-sql">INSERT INTO test(val) VALUES (FALSE);
+</code></pre>
+<p>Similarly, <code>TRUE</code> is an alias for <code>1</code> hence passing the constraint.</p>
+<pre><code class="language-sql">INSERT INTO test(val) VALUES (TRUE);
+</code></pre>
+<p>The empty string is casted as numeric, it evaluates to <code>0</code>, hence failing the constraint.</p>
+<pre><code class="language-sql">INSERT INTO test(val) VALUES ('');
+</code></pre>
+<p>Similarly, the string <code>'a'</code> is casted as numeric, it evaluates to <code>0</code>, hence failing the constraint.</p>
+<pre><code class="language-sql">INSERT INTO test(val) VALUES ('a');
+</code></pre>
+<p>Here's the log, the SQLog :)</p>
+<pre><code class="language-sql">sqlite&gt; CREATE TABLE test (
+    val INTEGER,
+    CHECK(val)
+);
+sqlite&gt; INSERT INTO test(val) VALUES (0);
+Runtime error: CHECK constraint failed: val (19)
+sqlite&gt; INSERT INTO test(val) VALUES (1);
+sqlite&gt; INSERT INTO test(val) VALUES (0.000);
+Runtime error: CHECK constraint failed: val (19)
+sqlite&gt; INSERT INTO test(val) VALUES (0.0001);
+sqlite&gt; INSERT INTO test(val) VALUES (FALSE);
+Runtime error: CHECK constraint failed: val (19)
+sqlite&gt; INSERT INTO test(val) VALUES (TRUE);
+sqlite&gt; INSERT INTO test(val) VALUES ('');
+Runtime error: CHECK constraint failed: val (19)
+sqlite&gt; INSERT INTO test(val) VALUES ('a');
+Runtime error: CHECK constraint failed: val (19)
+sqlite&gt; INSERT INTO test(val) VALUES (124);
+sqlite&gt; SELECT * FROM test;
++--------+
+|  val   |
++--------+
+| 1      |
+| 0.0001 |
+| 1      |
+| 124    |
++--------+
+sqlite&gt;
+
+sqlite&gt; INSERT INTO test(val) VALUES (NULL);
+sqlite&gt; INSERT INTO test DEFAULT VALUES;
+sqlite&gt; SELECT * FROM test;
++--------+
+|  val   |
++--------+
+| 1      |
+| 0.0001 |
+| 1      |
+| 124    |
+|        |
+|        |
++--------+
+sqlite&gt;
+</code></pre>
+<p>Now, you might be wondering why the heck <code>'a'</code> failed? Well, becuase casting strings in numeric form, will evaluate to <code>0</code></p>
+<pre><code class="language-sql">SELECT CAST('a' AS NUMERIC);
+</code></pre>
+<p>A wired quirk but worth noting, so won't work with strings, need to cast or perform better checks for string related values.</p>
+<pre><code>sqlite&gt; INSERT INTO test(val) VALUES ('a');
+Runtime error: CHECK constraint failed: val (19)
+sqlite&gt; SELECT CAST('a' AS NUMERIC);
++----------------------+
+| CAST('a' AS NUMERIC) |
++----------------------+
+| 0                    |
++----------------------+
+sqlite&gt;
+</code></pre>
+<p>So that is it from the basic walkthrough of the <code>CHECK</code> constraint.</p>
+<p>Some TLDRs:</p>
+<ol>
+<li>The <code>CHECK</code> clause is a column constraint that allows us to define certain conditions that we want to evaluate on the column(s) before inserting/updating the row.</li>
+<li>The constraint is table wide, as it boils down to inserting/updating or not inserting/updating the row.</li>
+<li>The <code>CHECK</code> constraint is evaluated before the row is inserted/updated.</li>
+<li>The value of the conditions is evaluated as a <code>NUMERIC</code> value so any value is <code>TRUE</code> if it is not <code>0</code>, even <code>NULL</code> is true, and <code>FALSE</code> if it is <code>0</code>.</li>
+<li>The <code>CHECK</code> constraint can be disabled using the <code>PRAGMA</code> command <code>PRAGMA ignore_check_constraints = TRUE;</code> or <code>PRAGMA ignore_check_constraints = ON;</code> <code>ON</code>, <code>TRUE</code>, either works.</li>
+</ol>
+
+            </div>
+        </article>
+    </main>
+      <div id="comments">
+        <script src="https://giscus.app/client.js"
+            data-repo="Mr-Destructive/mr-destructive.github.io"
+            data-repo-id="R_kgDOHZ6V_g"
+            data-category="Q&A"
+            data-category-id="DIC_kwDOHZ6V_s4CRfn4"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-theme="dark_high_contrast"
+            data-lang="en"
+            crossorigin="anonymous"
+            async
+        >
+        </script>
+      </div>
+    
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; Meet Gor. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const editBtn = document.getElementById('editor-edit');
+
+        if (editBtn) {
+            editBtn.addEventListener('click', async function () {
+                const slug = "sqlog\/sqlite-check-column-constraint";
+                const type = "sqlog";
+                console.log("Editing post:", slug, type);
+                const url = "https:\/\/devmeetgor.netlify.app/.netlify/functions/api?slug=" + slug + "&method=edit&type=" + type;
+
+                try {
+                    const res = await fetch(url);
+
+                    if (!res.ok) throw new Error("Failed to fetch edit content");
+                    console.log(res);
+
+                    const html = await res.text();
+                    console.log(html);
+
+                    document.querySelector('.post-content').innerHTML = html;
+                } catch (err) {
+                    console.error(err);
+                    alert("Error loading editor content");
+                }
+            });
+        }
+    });
+    </script>
+</body>
+</html>

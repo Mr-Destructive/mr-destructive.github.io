@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <link id="syntax-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:url" content="https://dev.meetgor.com/sqlog/sqlite-dot-command-header">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Meet Gor | SQLite dot commands: header command">
+    <meta property="og:description" content="">
+    <meta property="twitter:domain" content="dev.meetgor.com">
+    <meta property="twitter:url" content="https://dev.meetgor.com/sqlog/sqlite-dot-command-header">
+    <meta name="twitter:title" content="SQLite dot commands: header command">
+    <meta name="twitter:description" content="">
+    
+        <meta property="og:image" content="tbicon.png">
+        <meta name="twitter:image" content="tbicon.png">
+        <meta name="twitter:image" content="../tbicon.png">
+    
+    <link rel="icon" href="../tbicon.png" type="image/png">
+    <link rel="icon" href="tbicon.png" type="image/png">
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll("pre code").forEach((block) => {
+            hljs.highlightElement(block);
+        });
+    });
+    </script>
+    <title>Meet Gor | SQLite dot commands: header command</title>
+    <style>
+            :root {
+                --bg-color: #ffffff;
+                --text-color: #333333;
+                --secondary-text-color: ;
+                --link-normal: #007bff;
+                --link-hover: #0056b3;
+                --link-active: #003a75;
+                --quote-color: #999999;
+                --code-bg-color: #dddddd;
+                --code-border-color: #ced4da;
+                --code-text-color: #444444;
+                --code-comment-color: #808080;
+                --code-keyword-color: #008000;
+                --code-string-color: #000080;
+                --code-number-color: #000000;
+                --code-variable-color: #000000;
+                --code-function-color: #000000;
+            }
+
+             
+            .secondary-theme {
+                --bg-color: #121212;
+                --text-color: #ffffff;
+                --secondary-text-color: #00ffff;
+                --link-normal: #ff6600;
+                --link-hover: #4682b4;
+                --link-active: #00008b;
+                --quote-color: #a9a9a9;
+                --code-bg-color: #333333;
+                --code-border-color: #444444;
+                --code-text-color: #ffffff;
+                --code-comment-color: #b0b0b0;
+                --code-keyword-color: #32cd32;
+                --code-string-color: #ff6347;
+                --code-number-color: #d3d3d3;
+                --code-variable-color: #b0e0e6;
+                --code-function-color: #ff4500;
+            }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            line-height: 1.6;
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--secondary-text-color);
+        }
+
+        .site-title {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        .site-title a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .site-title a:hover {
+            color: var(--hover-color);
+        }
+
+        .Post-meta {
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+
+        article {
+            margin: 2rem 0;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        code {
+            font-family: 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        p code {
+            background-color: var(--inline-code-bg);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+        }
+
+        blockquote {
+            border-left: 3px solid var(--accent-color);
+            margin: 1.5rem 0;
+            padding-left: 1rem;
+            color: var(--secondary-text);
+        }
+
+        a {
+            color: var(--link-normal);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--hover-color);
+        }
+
+        .Hljs-comment { color: var(--code-comment); } 
+        .Hljs-keyword { color: var(--code-keyword); }
+        .Hljs-string { color: var(--code-string); }
+        .Hljs-number { color: var(--code-number); }
+        .Hljs-function { color: var(--code-function); }
+        .Hljs-variable { color: var(--code-variable); }
+
+        button, .Button {
+            background-color: var(--accent-color);
+            border: none;
+            border-radius: 6px;
+            color: var(--bg-color);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover, .Button:hover {
+            background-color: var(--hover-color);
+        }
+
+
+         
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            pre {
+                margin: 1rem -1rem;
+                border-radius: 0;
+            }
+        }
+
+        code {
+          font-family: monospace;
+          padding: 2px 4px;
+          border-radius: 4px;
+        }
+
+pre {
+    background-color: var(--code-bg-color, #f5f5f5);
+    border: 1px solid var(--code-border-color, #d1d1d1);
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+
+code {
+    font-family: 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    font-size: 0.9em;
+    color: var(--code-text-color, #fff);
+}
+
+p code {
+    color: var(--code-text-color, #000);
+    background-color: var(--code-bg-color, #444444);
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+}
+
+ 
+.Hljs-comment { color: var(--code-comment-color, #7d7d7d); }
+.Hljs-keyword { color: var(--code-keyword-color, #005cc5); }
+.Hljs-string { color: var(--code-string-color, #d73a49); }
+.Hljs-number { color: var(--code-number-color, #e36209); }
+.Hljs-variable { color: var(--code-variable-color, #6f42c1); }
+.Hljs-function { color: var(--code-function-color, #005cc5); }
+
+ 
+.secondary-theme pre {
+    background-color: var(--code-bg-color, #1e1e1e);
+    border: 1px solid var(--code-border-color, #3c3c3c);
+}
+
+.secondary-theme .Hljs-comment { color: var(--code-comment-color, #6a737d); }
+.secondary-theme .Hljs-keyword { color: var(--code-keyword-color, #569cd6); }
+.secondary-theme .Hljs-string { color: var(--code-string-color, #ce9178); }
+.secondary-theme .Hljs-number { color: var(--code-number-color, #b5cea8); }
+.secondary-theme .Hljs-variable { color: var(--code-variable-color, #9cdcfe); }
+.secondary-theme .Hljs-function { color: var(--code-function-color, #dcdcaa); }
+
+pre {
+    background: var(--code-bg-color, #1e1e1e);
+    border: 1px solid var(--code-border-color, #3c3c3c);
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+
+ 
+code {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 0.9em;
+    color: var(--code-text-color, #ffffff);
+}
+
+ 
+p code {
+    background-color: var(--code-bg-color, #333);
+    color: var(--code-text-color, #ffcb6b);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+ 
+.Hljs-comment { color: var(--code-comment-color, #6a737d); font-style: italic; }
+.Hljs-keyword { color: var(--code-keyword-color, #c678dd); font-weight: bold; }
+.Hljs-string { color: var(--code-string-color, #98c379); }
+.Hljs-number { color: var(--code-number-color, #d19a66); }
+.Hljs-variable { color: var(--code-variable-color, #e06c75); }
+.Hljs-function { color: var(--code-function-color, #61afef); }
+
+ 
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.copy-btn:hover {
+    background: #45a049;
+}
+
+.copy-btn.copied {
+    background: #ffa500;
+}
+
+blockquote {
+    border-left: 4px solid var(--quote-color);
+    background-color: rgba(255, 255, 255, 0.05);  
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: var(--secondary-text-color);
+    border-radius: 6px;
+    position: relative;
+}
+
+blockquote::before {
+    content: "“";  
+    font-size: 2rem;
+    color: var(--quote-color);
+    position: absolute;
+    top: 0;
+    left: 10px;
+}
+
+blockquote::after {
+    content: "”";  
+    font-size: 2rem;
+    color: var(--quote-color);
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}
+
+ 
+blockquote cite {
+    display: block;
+    text-align: right;
+    font-size: 0.9em;
+    margin-top: 0.5rem;
+    color: var(--secondary-text-color);
+    font-style: normal;
+}
+        #editor, #editor-edit {
+            background-color: #4CAF50;  
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #editor i {
+            margin-right: 5px;  
+        }
+        #editor-edit i {
+            margin-right: 5px;  
+        }
+    </style>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const stylesheet = document.getElementById("syntax-theme");
+
+        
+        const currentTheme = localStorage.getItem("theme") || "light";
+
+        
+        function setSyntaxTheme(theme) {
+            if (theme === "secondary") {
+                stylesheet.href = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/dracula.min.css";
+            } else {
+                stylesheet.href = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css";
+            }
+        }
+
+        
+        if (currentTheme === "secondary") {
+            body.classList.add("secondary-theme");
+            setSyntaxTheme("secondary");
+        } else {
+            setSyntaxTheme("light");
+        }
+
+        
+        themeToggle.addEventListener("click", () => {
+            if (body.classList.contains("secondary-theme")) {
+                body.classList.remove("secondary-theme");
+                localStorage.setItem("theme", "light");
+                setSyntaxTheme("light");
+            } else {
+                body.classList.add("secondary-theme");
+                localStorage.setItem("theme", "secondary");
+                setSyntaxTheme("secondary");
+            }
+        });
+    });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll("pre").forEach((pre) => {
+                const button = document.createElement("button");
+                button.classList.add("copy-btn");
+                button.textContent = "Copy";
+
+                button.addEventListener("click", () => {
+                    const code = pre.querySelector("code");
+                    if (!code) return;
+
+                    const textToCopy = code.innerText || code.textContent;
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        button.textContent = "Copied!";
+                        button.classList.add("copied");
+
+                        setTimeout(() => {
+                            button.textContent = "Copy";
+                            button.classList.remove("copied");
+                        }, 1500);
+                    });
+                });
+
+                pre.appendChild(button);
+            });
+        });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JX3T4E0964"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-JX3T4E0964');
+    </script>
+    
+    <link rel="icon" href="../../tbicon.png" type="image/png">
+</head>
+<body>
+    <header class="header">
+        <h1 class="site-title animated-gradient-text"><a href="/">Meet Gor</a></h1>
+        <div class="theme-switch">
+          <input type="checkbox" id="theme-toggle" aria-label="Toggle Theme">
+          <label for="theme-toggle"></label>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h1>SQLite dot commands: header command</h1>
+            <div class="post-meta">
+                Published on 📅 <time datetime="2025-09-03">2025-09-03</time>
+            </div>
+            <div class="post-meta">
+                Type: <a href="/sqlog">sqlog</a>
+            </div>
+            <div class="post-meta">
+                <span class="post-series-label"> 🏷️ Tags:</span>
+                
+                <a href="/tags/sqlite">#sqlite</a>
+                
+                <a href="/tags/sql">#sql</a>
+                
+            </div>
+            
+            <div class="post-meta">
+                
+            </div>
+            <hr>
+            <div class="post-content">
+                <p>The <code>.headers</code> command is crucial as might effect the way the result set is displayed. The first row would be set to the name of the columns in the output of the relevant commands like <code>.output</code>, <code>.once</code>, or even your simple standard out queries if it is set on.</p>
+<pre><code>.headers on
+
+OR
+
+.header on
+</code></pre>
+<p>Some how either of them work. You need to set it to <code>on</code> to enable the headers in the output of the result set. And you can turn off with <code>.headers off</code>.</p>
+<p>Which modes are effected with this command if set on or off?</p>
+<p>Well we need to think about how effected means</p>
+<ol>
+<li>Only added in the first row</li>
+<li>Added in each row</li>
+<li>No effect</li>
+</ol>
+<hr>
+<ol>
+<li>Only added in the first row
+<ol>
+<li>ascii</li>
+<li>column</li>
+<li>csv</li>
+<li>html</li>
+<li>list</li>
+<li>quote</li>
+<li>tabs</li>
+<li>tcl</li>
+</ol>
+</li>
+<li>Added in each row
+<ol>
+<li>insert</li>
+</ol>
+</li>
+<li>No effect
+<ol>
+<li>box</li>
+<li>json</li>
+<li>line</li>
+<li>markdown</li>
+<li>table</li>
+</ol>
+</li>
+</ol>
+<p>Reference table</p>
+<pre><code class="language-sql">CREATE TABLE IF NOT EXISTS books(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    author TEXT NOT NULL,
+    pages INTEGER NOT NULL,
+    release_date TEXT NOT NULL,
+    price REAL NOT NULL
+);
+
+INSERT INTO books(title, author, pages, release_date, price)
+VALUES
+('The Hobbit', 'J.R.R. Tolkien', 310, '1937-09-21', 39.99),
+('The Fellowship of the Ring', 'J.R.R. Tolkien', 423, '1954-07-29', 49.99),
+('The Two Towers', 'J.R.R. Tolkien', 352, '1954-11-11', 49.99), 
+('The Return of the King', 'J.R.R. Tolkien', 416, '1955-10-20', 49.99);
+
+SELECT * FROM books;
+</code></pre>
+<p>Below are the outputs of each command</p>
+<h3>Added on the first row</h3>
+<p>In the below modes, the headers command if set will add the column name as the header in the first row.</p>
+<ol>
+<li>ASCII</li>
+</ol>
+<pre><code class="language-sqlite">.mode ascii
+.headers on
+select * from books;
+.headers off
+select * from books;
+</code></pre>
+<p>Output:</p>
+<pre><code>sqlite&gt; .mode ascii
+sqlite&gt; .headers on
+sqlite&gt; select * from books;
+idtitleauthorpagesrelease_dateprice1The HobbitJ.R.R. Tolkien3101937-09-2139.992The Fellowship of the RingJ.R.R. Tolkien4231954-07-2949.993The Two TowersJ.R.R. Tolkien3521954-11-1149.994The Return of the KingJ.R.R. Tolkien4161955-10-2049.99sqlite&gt;
+sqlite&gt; .headers off
+sqlite&gt; select * from books;
+1The HobbitJ.R.R. Tolkien3101937-09-2139.992The Fellowship of the RingJ.R.R. Tolkien4231954-07-2949.993The Two TowersJ.R.R. Tolkien3521954-11-1149.994The Return of the KingJ.R.R. Tolkien4161955-10-2049.99sqlite&gt;
+sqlite&gt;
+</code></pre>
+<ol start="2">
+<li>Column</li>
+</ol>
+<pre><code>.mode column
+.headers on
+select * from books;
+.headers off
+select * from books;
+</code></pre>
+<p>Output</p>
+<pre><code>sqlite&gt; .mode column
+sqlite&gt; .headers on
+sqlite&gt; select * from books;
+id  title                       author          pages  release_date  price
+--  --------------------------  --------------  -----  ------------  -----
+1   The Hobbit                  J.R.R. Tolkien  310    1937-09-21    39.99
+2   The Fellowship of the Ring  J.R.R. Tolkien  423    1954-07-29    49.99
+3   The Two Towers              J.R.R. Tolkien  352    1954-11-11    49.99
+4   The Return of the King      J.R.R. Tolkien  416    1955-10-20    49.99
+sqlite&gt; .headers off
+sqlite&gt; select * from books;
+1   The Hobbit                  J.R.R. Tolkien  310    1937-09-21    39.99
+2   The Fellowship of the Ring  J.R.R. Tolkien  423    1954-07-29    49.99
+3   The Two Towers              J.R.R. Tolkien  352    1954-11-11    49.99
+4   The Return of the King      J.R.R. Tolkien  416    1955-10-20    49.99
+sqlite&gt;
+</code></pre>
+<ol start="3">
+<li>CSV</li>
+</ol>
+<pre><code class="language-sqlite">.mode csv
+.headers on
+select * from books;
+.headers off
+select * from books;
+</code></pre>
+<p>Output:</p>
+<pre><code>sqlite&gt; .mode csv
+sqlite&gt; .headers on
+sqlite&gt; select * from books;
+id,title,author,pages,release_date,price
+1,&quot;The Hobbit&quot;,&quot;J.R.R. Tolkien&quot;,310,1937-09-21,39.99
+2,&quot;The Fellowship of the Ring&quot;,&quot;J.R.R. Tolkien&quot;,423,1954-07-29,49.99
+3,&quot;The Two Towers&quot;,&quot;J.R.R. Tolkien&quot;,352,1954-11-11,49.99
+4,&quot;The Return of the King&quot;,&quot;J.R.R. Tolkien&quot;,416,1955-10-20,49.99
+sqlite&gt; .headers off
+sqlite&gt; select * from books;
+1,&quot;The Hobbit&quot;,&quot;J.R.R. Tolkien&quot;,310,1937-09-21,39.99
+2,&quot;The Fellowship of the Ring&quot;,&quot;J.R.R. Tolkien&quot;,423,1954-07-29,49.99
+3,&quot;The Two Towers&quot;,&quot;J.R.R. Tolkien&quot;,352,1954-11-11,49.99
+4,&quot;The Return of the King&quot;,&quot;J.R.R. Tolkien&quot;,416,1955-10-20,49.99
+sqlite&gt;
+</code></pre>
+<ol start="4">
+<li>HTML</li>
+</ol>
+<pre><code class="language-sqlite">.mode html
+.headers on
+select * from books;
+.headers off
+select * from books;
+</code></pre>
+<p>Output:</p>
+<pre><code>sqlite&gt; .mode html
+sqlite&gt; .headers on
+sqlite&gt; select * from books;
+&lt;TR&gt;&lt;TH&gt;id&lt;/TH&gt;
+&lt;TH&gt;title&lt;/TH&gt;
+&lt;TH&gt;author&lt;/TH&gt;
+&lt;TH&gt;pages&lt;/TH&gt;
+&lt;TH&gt;release_date&lt;/TH&gt;
+&lt;TH&gt;price&lt;/TH&gt;
+&lt;/TR&gt;
+&lt;TR&gt;&lt;TD&gt;1&lt;/TD&gt;
+&lt;TD&gt;The Hobbit&lt;/TD&gt;
+&lt;TD&gt;J.R.R. Tolkien&lt;/TD&gt;
+&lt;TD&gt;310&lt;/TD&gt;
+&lt;TD&gt;1937-09-21&lt;/TD&gt;
+&lt;TD&gt;39.99&lt;/TD&gt;
+&lt;/TR&gt;
+&lt;TR&gt;&lt;TD&gt;2&lt;/TD&gt;
+&lt;TD&gt;The Fellowship of the Ring&lt;/TD&gt;
+&lt;TD&gt;J.R.R. Tolkien&lt;/TD&gt;
+&lt;TD&gt;423&lt;/TD&gt;
+&lt;TD&gt;1954-07-29&lt;/TD&gt;
+&lt;TD&gt;49.99&lt;/TD&gt;
+&lt;/TR&gt;
+&lt;TR&gt;&lt;TD&gt;3&lt;/TD&gt;
+&lt;TD&gt;The Two Towers&lt;/TD&gt;
+&lt;TD&gt;J.R.R. Tolkien&lt;/TD&gt;
+&lt;TD&gt;352&lt;/TD&gt;
+&lt;TD&gt;1954-11-11&lt;/TD&gt;
+&lt;TD&gt;49.99&lt;/TD&gt;
+&lt;/TR&gt;
+&lt;TR&gt;&lt;TD&gt;4&lt;/TD&gt;
+&lt;TD&gt;The Return of the King&lt;/TD&gt;
+&lt;TD&gt;J.R.R. Tolkien&lt;/TD&gt;
+&lt;TD&gt;416&lt;/TD&gt;
+&lt;TD&gt;1955-10-20&lt;/TD&gt;
+&lt;TD&gt;49.99&lt;/TD&gt;
+&lt;/TR&gt;
+sqlite&gt; .headers off
+sqlite&gt; select * from books;
+&lt;TR&gt;&lt;TD&gt;1&lt;/TD&gt;
+&lt;TD&gt;The Hobbit&lt;/TD&gt;
+&lt;TD&gt;J.R.R. Tolkien&lt;/TD&gt;
+&lt;TD&gt;310&lt;/TD&gt;
+&lt;TD&gt;1937-09-21&lt;/TD&gt;
+&lt;TD&gt;39.99&lt;/TD&gt;
+&lt;/TR&gt;
+&lt;TR&gt;&lt;TD&gt;2&lt;/TD&gt;
+&lt;TD&gt;The Fellowship of the Ring&lt;/TD&gt;
+&lt;TD&gt;J.R.R. Tolkien&lt;/TD&gt;
+&lt;TD&gt;423&lt;/TD&gt;
+&lt;TD&gt;1954-07-29&lt;/TD&gt;
+&lt;TD&gt;49.99&lt;/TD&gt;
+&lt;/TR&gt;
+&lt;TR&gt;&lt;TD&gt;3&lt;/TD&gt;
+&lt;TD&gt;The Two Towers&lt;/TD&gt;
+&lt;TD&gt;J.R.R. Tolkien&lt;/TD&gt;
+&lt;TD&gt;352&lt;/TD&gt;
+&lt;TD&gt;1954-11-11&lt;/TD&gt;
+&lt;TD&gt;49.99&lt;/TD&gt;
+&lt;/TR&gt;
+&lt;TR&gt;&lt;TD&gt;4&lt;/TD&gt;
+&lt;TD&gt;The Return of the King&lt;/TD&gt;
+&lt;TD&gt;J.R.R. Tolkien&lt;/TD&gt;
+&lt;TD&gt;416&lt;/TD&gt;
+&lt;TD&gt;1955-10-20&lt;/TD&gt;
+&lt;TD&gt;49.99&lt;/TD&gt;
+&lt;/TR&gt;
+sqlite&gt;
+</code></pre>
+<ol start="5">
+<li>List</li>
+</ol>
+<pre><code class="language-sqlite">.mode list
+.headers on
+select * from books;
+.headers off
+select * from books;
+</code></pre>
+<p>Output:</p>
+<pre><code>sqlite&gt; .mode list
+sqlite&gt; .headers on
+sqlite&gt; select * from books;
+id|title|author|pages|release_date|price
+1|The Hobbit|J.R.R. Tolkien|310|1937-09-21|39.99
+2|The Fellowship of the Ring|J.R.R. Tolkien|423|1954-07-29|49.99
+3|The Two Towers|J.R.R. Tolkien|352|1954-11-11|49.99
+4|The Return of the King|J.R.R. Tolkien|416|1955-10-20|49.99
+sqlite&gt; .headers off
+sqlite&gt; select * from books;
+1|The Hobbit|J.R.R. Tolkien|310|1937-09-21|39.99
+2|The Fellowship of the Ring|J.R.R. Tolkien|423|1954-07-29|49.99
+3|The Two Towers|J.R.R. Tolkien|352|1954-11-11|49.99
+4|The Return of the King|J.R.R. Tolkien|416|1955-10-20|49.99
+sqlite&gt;
+</code></pre>
+<ol start="6">
+<li>Quote</li>
+</ol>
+<pre><code class="language-sqlite">.mode quote
+.headers on
+select * from books;
+.headers off
+select * from books;
+</code></pre>
+<p>Output:</p>
+<pre><code>sqlite&gt; .mode quote
+sqlite&gt; .headers on
+sqlite&gt; select * from books;
+'id','title','author','pages','release_date','price'
+1,'The Hobbit','J.R.R. Tolkien',310,'1937-09-21',39.99000000000000198
+2,'The Fellowship of the Ring','J.R.R. Tolkien',423,'1954-07-29',49.99000000000000198
+3,'The Two Towers','J.R.R. Tolkien',352,'1954-11-11',49.99000000000000198
+4,'The Return of the King','J.R.R. Tolkien',416,'1955-10-20',49.99000000000000198
+sqlite&gt; .headers off
+sqlite&gt; select * from books;
+1,'The Hobbit','J.R.R. Tolkien',310,'1937-09-21',39.99000000000000198
+2,'The Fellowship of the Ring','J.R.R. Tolkien',423,'1954-07-29',49.99000000000000198
+3,'The Two Towers','J.R.R. Tolkien',352,'1954-11-11',49.99000000000000198
+4,'The Return of the King','J.R.R. Tolkien',416,'1955-10-20',49.99000000000000198
+sqlite&gt;
+
+</code></pre>
+<ol start="7">
+<li>Tabs</li>
+</ol>
+<pre><code class="language-sqlite">.mode tabs
+.headers on
+select * from books;
+.headers off
+select * from books;
+</code></pre>
+<p>Output:</p>
+<pre><code>sqlite&gt; .mode tabs
+sqlite&gt; .headers on
+sqlite&gt; select * from books;
+id      title   author  pages   release_date    price
+1       The Hobbit      J.R.R. Tolkien  310     1937-09-21      39.99
+2       The Fellowship of the Ring      J.R.R. Tolkien  423     1954-07-29      49.99
+3       The Two Towers  J.R.R. Tolkien  352     1954-11-11      49.99
+4       The Return of the King  J.R.R. Tolkien  416     1955-10-20      49.99
+sqlite&gt; .headers off
+sqlite&gt; select * from books;
+1       The Hobbit      J.R.R. Tolkien  310     1937-09-21      39.99
+2       The Fellowship of the Ring      J.R.R. Tolkien  423     1954-07-29      49.99
+3       The Two Towers  J.R.R. Tolkien  352     1954-11-11      49.99
+4       The Return of the King  J.R.R. Tolkien  416     1955-10-20      49.99
+sqlite&gt;
+</code></pre>
+<ol start="8">
+<li>TCL</li>
+</ol>
+<pre><code class="language-sqlite">.mode tcl
+.headers on
+select * from books;
+.headers off
+select * from books;
+</code></pre>
+<p>Output:</p>
+<pre><code>sqlite&gt; .mode tcl
+sqlite&gt; .headers on
+sqlite&gt; select * from books;
+&quot;id&quot; &quot;title&quot; &quot;author&quot; &quot;pages&quot; &quot;release_date&quot; &quot;price&quot;
+&quot;1&quot; &quot;The Hobbit&quot; &quot;J.R.R. Tolkien&quot; &quot;310&quot; &quot;1937-09-21&quot; &quot;39.99&quot;
+&quot;2&quot; &quot;The Fellowship of the Ring&quot; &quot;J.R.R. Tolkien&quot; &quot;423&quot; &quot;1954-07-29&quot; &quot;49.99&quot;
+&quot;3&quot; &quot;The Two Towers&quot; &quot;J.R.R. Tolkien&quot; &quot;352&quot; &quot;1954-11-11&quot; &quot;49.99&quot;
+&quot;4&quot; &quot;The Return of the King&quot; &quot;J.R.R. Tolkien&quot; &quot;416&quot; &quot;1955-10-20&quot; &quot;49.99&quot;
+sqlite&gt; .headers off
+sqlite&gt; select * from books;
+&quot;1&quot; &quot;The Hobbit&quot; &quot;J.R.R. Tolkien&quot; &quot;310&quot; &quot;1937-09-21&quot; &quot;39.99&quot;
+&quot;2&quot; &quot;The Fellowship of the Ring&quot; &quot;J.R.R. Tolkien&quot; &quot;423&quot; &quot;1954-07-29&quot; &quot;49.99&quot;
+&quot;3&quot; &quot;The Two Towers&quot; &quot;J.R.R. Tolkien&quot; &quot;352&quot; &quot;1954-11-11&quot; &quot;49.99&quot;
+&quot;4&quot; &quot;The Return of the King&quot; &quot;J.R.R. Tolkien&quot; &quot;416&quot; &quot;1955-10-20&quot; &quot;49.99&quot;
+sqlite&gt;
+</code></pre>
+<h3>Added in each row</h3>
+<p>In this type, each row has the column name as some form of the row.</p>
+<ol>
+<li>Insert</li>
+</ol>
+<pre><code class="language-sqlite">.mode insert
+.headers on
+select * from books;
+.headers off
+select * from books;
+</code></pre>
+<p>Output:</p>
+<pre><code>sqlite&gt; .mode insert
+sqlite&gt; .headers on
+sqlite&gt; select * from books;
+INSERT INTO &quot;table&quot;(id,title,author,pages,release_date,price) VALUES(1,'The Hobbit','J.R.R. Tolkien',310,'1937-09-21',39.99000000000000198);
+INSERT INTO &quot;table&quot;(id,title,author,pages,release_date,price) VALUES(2,'The Fellowship of the Ring','J.R.R. Tolkien',423,'1954-07-29',49.99000000000000198);
+INSERT INTO &quot;table&quot;(id,title,author,pages,release_date,price) VALUES(3,'The Two Towers','J.R.R. Tolkien',352,'1954-11-11',49.99000000000000198);
+INSERT INTO &quot;table&quot;(id,title,author,pages,release_date,price) VALUES(4,'The Return of the King','J.R.R. Tolkien',416,'1955-10-20',49.99000000000000198);
+sqlite&gt; .headers off
+sqlite&gt; select * from books;
+INSERT INTO &quot;table&quot; VALUES(1,'The Hobbit','J.R.R. Tolkien',310,'1937-09-21',39.99000000000000198);
+INSERT INTO &quot;table&quot; VALUES(2,'The Fellowship of the Ring','J.R.R. Tolkien',423,'1954-07-29',49.99000000000000198);
+INSERT INTO &quot;table&quot; VALUES(3,'The Two Towers','J.R.R. Tolkien',352,'1954-11-11',49.99000000000000198);
+INSERT INTO &quot;table&quot; VALUES(4,'The Return of the King','J.R.R. Tolkien',416,'1955-10-20',49.99000000000000198);
+sqlite&gt;
+
+</code></pre>
+<h3>No effect</h3>
+<p>These modes show the headers or column names irrespective of the <code>.headers</code> flag, as for these modes the headers form quite a bit of structure to the output they are showing.</p>
+<ol>
+<li>Box</li>
+</ol>
+<pre><code class="language-sqlite">.mode box
+.headers on
+select * from books;
+.headers off
+select * from books;
+</code></pre>
+<p>Output:</p>
+<pre><code>sqlite&gt; .mode box
+sqlite&gt; .headers on
+sqlite&gt; select * from books;
+┌────┬────────────────────────────┬────────────────┬───────┬──────────────┬───────┐
+│ id │           title            │     author     │ pages │ release_date │ price │
+├────┼────────────────────────────┼────────────────┼───────┼──────────────┼───────┤
+│ 1  │ The Hobbit                 │ J.R.R. Tolkien │ 310   │ 1937-09-21   │ 39.99 │
+│ 2  │ The Fellowship of the Ring │ J.R.R. Tolkien │ 423   │ 1954-07-29   │ 49.99 │
+│ 3  │ The Two Towers             │ J.R.R. Tolkien │ 352   │ 1954-11-11   │ 49.99 │
+│ 4  │ The Return of the King     │ J.R.R. Tolkien │ 416   │ 1955-10-20   │ 49.99 │
+└────┴────────────────────────────┴────────────────┴───────┴──────────────┴───────┘
+sqlite&gt; .headers off
+sqlite&gt; select * from books;
+┌────┬────────────────────────────┬────────────────┬───────┬──────────────┬───────┐
+│ id │           title            │     author     │ pages │ release_date │ price │
+├────┼────────────────────────────┼────────────────┼───────┼──────────────┼───────┤
+│ 1  │ The Hobbit                 │ J.R.R. Tolkien │ 310   │ 1937-09-21   │ 39.99 │
+│ 2  │ The Fellowship of the Ring │ J.R.R. Tolkien │ 423   │ 1954-07-29   │ 49.99 │
+│ 3  │ The Two Towers             │ J.R.R. Tolkien │ 352   │ 1954-11-11   │ 49.99 │
+│ 4  │ The Return of the King     │ J.R.R. Tolkien │ 416   │ 1955-10-20   │ 49.99 │
+└────┴────────────────────────────┴────────────────┴───────┴──────────────┴───────┘
+sqlite&gt;
+</code></pre>
+<ol start="2">
+<li>JSON</li>
+</ol>
+<pre><code class="language-sqlite">.mode json
+.headers on
+select * from books;
+.headers off
+select * from books;
+</code></pre>
+<p>Output:</p>
+<pre><code>sqlite&gt; .mode json
+sqlite&gt; .headers on
+sqlite&gt; select * from books;
+[{&quot;id&quot;:1,&quot;title&quot;:&quot;The Hobbit&quot;,&quot;author&quot;:&quot;J.R.R. Tolkien&quot;,&quot;pages&quot;:310,&quot;release_date&quot;:&quot;1937-09-21&quot;,&quot;price&quot;:39.99000000000000198},
+{&quot;id&quot;:2,&quot;title&quot;:&quot;The Fellowship of the Ring&quot;,&quot;author&quot;:&quot;J.R.R. Tolkien&quot;,&quot;pages&quot;:423,&quot;release_date&quot;:&quot;1954-07-29&quot;,&quot;price&quot;:49.99000000000000198},
+{&quot;id&quot;:3,&quot;title&quot;:&quot;The Two Towers&quot;,&quot;author&quot;:&quot;J.R.R. Tolkien&quot;,&quot;pages&quot;:352,&quot;release_date&quot;:&quot;1954-11-11&quot;,&quot;price&quot;:49.99000000000000198},
+{&quot;id&quot;:4,&quot;title&quot;:&quot;The Return of the King&quot;,&quot;author&quot;:&quot;J.R.R. Tolkien&quot;,&quot;pages&quot;:416,&quot;release_date&quot;:&quot;1955-10-20&quot;,&quot;price&quot;:49.99000000000000198}]
+sqlite&gt; .headers off
+sqlite&gt; select * from books;
+[{&quot;id&quot;:1,&quot;title&quot;:&quot;The Hobbit&quot;,&quot;author&quot;:&quot;J.R.R. Tolkien&quot;,&quot;pages&quot;:310,&quot;release_date&quot;:&quot;1937-09-21&quot;,&quot;price&quot;:39.99000000000000198},
+{&quot;id&quot;:2,&quot;title&quot;:&quot;The Fellowship of the Ring&quot;,&quot;author&quot;:&quot;J.R.R. Tolkien&quot;,&quot;pages&quot;:423,&quot;release_date&quot;:&quot;1954-07-29&quot;,&quot;price&quot;:49.99000000000000198},
+{&quot;id&quot;:3,&quot;title&quot;:&quot;The Two Towers&quot;,&quot;author&quot;:&quot;J.R.R. Tolkien&quot;,&quot;pages&quot;:352,&quot;release_date&quot;:&quot;1954-11-11&quot;,&quot;price&quot;:49.99000000000000198},
+{&quot;id&quot;:4,&quot;title&quot;:&quot;The Return of the King&quot;,&quot;author&quot;:&quot;J.R.R. Tolkien&quot;,&quot;pages&quot;:416,&quot;release_date&quot;:&quot;1955-10-20&quot;,&quot;price&quot;:49.99000000000000198}]
+sqlite&gt;
+</code></pre>
+<ol start="3">
+<li>Line</li>
+</ol>
+<pre><code class="language-sqlite">.mode line
+.headers on
+select * from books;
+.headers off
+select * from books;
+</code></pre>
+<p>Output:</p>
+<pre><code>sqlite&gt; .mode line
+sqlite&gt; .headers on
+sqlite&gt; select * from books;
+          id = 1
+       title = The Hobbit
+      author = J.R.R. Tolkien
+       pages = 310
+release_date = 1937-09-21
+       price = 39.99
+
+          id = 2
+       title = The Fellowship of the Ring
+      author = J.R.R. Tolkien
+       pages = 423
+release_date = 1954-07-29
+       price = 49.99
+
+          id = 3
+       title = The Two Towers
+      author = J.R.R. Tolkien
+       pages = 352
+release_date = 1954-11-11
+       price = 49.99
+
+          id = 4
+       title = The Return of the King
+      author = J.R.R. Tolkien
+       pages = 416
+release_date = 1955-10-20
+       price = 49.99
+
+
+sqlite&gt; .headers off
+sqlite&gt; select * from books;
+          id = 1
+       title = The Hobbit
+      author = J.R.R. Tolkien
+       pages = 310
+release_date = 1937-09-21
+       price = 39.99
+
+          id = 2
+       title = The Fellowship of the Ring
+      author = J.R.R. Tolkien
+       pages = 423
+release_date = 1954-07-29
+       price = 49.99
+
+          id = 3
+       title = The Two Towers
+      author = J.R.R. Tolkien
+       pages = 352
+release_date = 1954-11-11
+       price = 49.99
+
+          id = 4
+       title = The Return of the King
+      author = J.R.R. Tolkien
+       pages = 416
+release_date = 1955-10-20
+       price = 49.99
+sqlite&gt;
+</code></pre>
+<ol start="4">
+<li>Markdown</li>
+</ol>
+<pre><code class="language-sqlite">.mode markdown
+.headers on
+select * from books;
+.headers off
+select * from books;
+</code></pre>
+<p>Output:</p>
+<pre><code>sqlite&gt; .mode markdown
+sqlite&gt; .headers on
+sqlite&gt; select * from books;
+| id |           title            |     author     | pages | release_date | price |
+|----|----------------------------|----------------|-------|--------------|-------|
+| 1  | The Hobbit                 | J.R.R. Tolkien | 310   | 1937-09-21   | 39.99 |
+| 2  | The Fellowship of the Ring | J.R.R. Tolkien | 423   | 1954-07-29   | 49.99 |
+| 3  | The Two Towers             | J.R.R. Tolkien | 352   | 1954-11-11   | 49.99 |
+| 4  | The Return of the King     | J.R.R. Tolkien | 416   | 1955-10-20   | 49.99 |
+sqlite&gt; .headers off
+sqlite&gt; select * from books;
+| id |           title            |     author     | pages | release_date | price |
+|----|----------------------------|----------------|-------|--------------|-------|
+| 1  | The Hobbit                 | J.R.R. Tolkien | 310   | 1937-09-21   | 39.99 |
+| 2  | The Fellowship of the Ring | J.R.R. Tolkien | 423   | 1954-07-29   | 49.99 |
+| 3  | The Two Towers             | J.R.R. Tolkien | 352   | 1954-11-11   | 49.99 |
+| 4  | The Return of the King     | J.R.R. Tolkien | 416   | 1955-10-20   | 49.99 |
+sqlite&gt;
+</code></pre>
+<ol start="5">
+<li>Table</li>
+</ol>
+<pre><code class="language-sqlite">.mode table
+.headers on
+select * from books;
+.headers off
+select * from books;
+</code></pre>
+<p>Output:</p>
+<pre><code>sqlite&gt; .mode table
+sqlite&gt; .headers on
+sqlite&gt; select * from books;
++----+----------------------------+----------------+-------+--------------+-------+
+| id |           title            |     author     | pages | release_date | price |
++----+----------------------------+----------------+-------+--------------+-------+
+| 1  | The Hobbit                 | J.R.R. Tolkien | 310   | 1937-09-21   | 39.99 |
+| 2  | The Fellowship of the Ring | J.R.R. Tolkien | 423   | 1954-07-29   | 49.99 |
+| 3  | The Two Towers             | J.R.R. Tolkien | 352   | 1954-11-11   | 49.99 |
+| 4  | The Return of the King     | J.R.R. Tolkien | 416   | 1955-10-20   | 49.99 |
++----+----------------------------+----------------+-------+--------------+-------+
+sqlite&gt; .headers off
+sqlite&gt; select * from books;
++----+----------------------------+----------------+-------+--------------+-------+
+| id |           title            |     author     | pages | release_date | price |
++----+----------------------------+----------------+-------+--------------+-------+
+| 1  | The Hobbit                 | J.R.R. Tolkien | 310   | 1937-09-21   | 39.99 |
+| 2  | The Fellowship of the Ring | J.R.R. Tolkien | 423   | 1954-07-29   | 49.99 |
+| 3  | The Two Towers             | J.R.R. Tolkien | 352   | 1954-11-11   | 49.99 |
+| 4  | The Return of the King     | J.R.R. Tolkien | 416   | 1955-10-20   | 49.99 |
++----+----------------------------+----------------+-------+--------------+-------+
+sqlite&gt;
+
+</code></pre>
+
+            </div>
+        </article>
+    </main>
+      <div id="comments">
+        <script src="https://giscus.app/client.js"
+            data-repo="Mr-Destructive/mr-destructive.github.io"
+            data-repo-id="R_kgDOHZ6V_g"
+            data-category="Q&A"
+            data-category-id="DIC_kwDOHZ6V_s4CRfn4"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-theme="dark_high_contrast"
+            data-lang="en"
+            crossorigin="anonymous"
+            async
+        >
+        </script>
+      </div>
+    
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; Meet Gor. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const editBtn = document.getElementById('editor-edit');
+
+        if (editBtn) {
+            editBtn.addEventListener('click', async function () {
+                const slug = "sqlog\/sqlite-dot-command-header";
+                const type = "sqlog";
+                console.log("Editing post:", slug, type);
+                const url = "https:\/\/devmeetgor.netlify.app/.netlify/functions/api?slug=" + slug + "&method=edit&type=" + type;
+
+                try {
+                    const res = await fetch(url);
+
+                    if (!res.ok) throw new Error("Failed to fetch edit content");
+                    console.log(res);
+
+                    const html = await res.text();
+                    console.log(html);
+
+                    document.querySelector('.post-content').innerHTML = html;
+                } catch (err) {
+                    console.error(err);
+                    alert("Error loading editor content");
+                }
+            });
+        }
+    });
+    </script>
+</body>
+</html>

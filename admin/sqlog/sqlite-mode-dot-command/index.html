@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <link id="syntax-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:url" content="https://dev.meetgor.com/sqlog/sqlite-mode-dot-command">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Meet Gor | SQLite dot commands: Output mode">
+    <meta property="og:description" content="">
+    <meta property="twitter:domain" content="dev.meetgor.com">
+    <meta property="twitter:url" content="https://dev.meetgor.com/sqlog/sqlite-mode-dot-command">
+    <meta name="twitter:title" content="SQLite dot commands: Output mode">
+    <meta name="twitter:description" content="">
+    
+        <meta property="og:image" content="tbicon.png">
+        <meta name="twitter:image" content="tbicon.png">
+        <meta name="twitter:image" content="../tbicon.png">
+    
+    <link rel="icon" href="../tbicon.png" type="image/png">
+    <link rel="icon" href="tbicon.png" type="image/png">
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll("pre code").forEach((block) => {
+            hljs.highlightElement(block);
+        });
+    });
+    </script>
+    <title>Meet Gor | SQLite dot commands: Output mode</title>
+    <style>
+            :root {
+                --bg-color: #ffffff;
+                --text-color: #333333;
+                --secondary-text-color: ;
+                --link-normal: #007bff;
+                --link-hover: #0056b3;
+                --link-active: #003a75;
+                --quote-color: #999999;
+                --code-bg-color: #dddddd;
+                --code-border-color: #ced4da;
+                --code-text-color: #444444;
+                --code-comment-color: #808080;
+                --code-keyword-color: #008000;
+                --code-string-color: #000080;
+                --code-number-color: #000000;
+                --code-variable-color: #000000;
+                --code-function-color: #000000;
+            }
+
+             
+            .secondary-theme {
+                --bg-color: #121212;
+                --text-color: #ffffff;
+                --secondary-text-color: #00ffff;
+                --link-normal: #ff6600;
+                --link-hover: #4682b4;
+                --link-active: #00008b;
+                --quote-color: #a9a9a9;
+                --code-bg-color: #333333;
+                --code-border-color: #444444;
+                --code-text-color: #ffffff;
+                --code-comment-color: #b0b0b0;
+                --code-keyword-color: #32cd32;
+                --code-string-color: #ff6347;
+                --code-number-color: #d3d3d3;
+                --code-variable-color: #b0e0e6;
+                --code-function-color: #ff4500;
+            }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            line-height: 1.6;
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--secondary-text-color);
+        }
+
+        .site-title {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        .site-title a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .site-title a:hover {
+            color: var(--hover-color);
+        }
+
+        .Post-meta {
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+
+        article {
+            margin: 2rem 0;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        code {
+            font-family: 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        p code {
+            background-color: var(--inline-code-bg);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+        }
+
+        blockquote {
+            border-left: 3px solid var(--accent-color);
+            margin: 1.5rem 0;
+            padding-left: 1rem;
+            color: var(--secondary-text);
+        }
+
+        a {
+            color: var(--link-normal);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--hover-color);
+        }
+
+        .Hljs-comment { color: var(--code-comment); } 
+        .Hljs-keyword { color: var(--code-keyword); }
+        .Hljs-string { color: var(--code-string); }
+        .Hljs-number { color: var(--code-number); }
+        .Hljs-function { color: var(--code-function); }
+        .Hljs-variable { color: var(--code-variable); }
+
+        button, .Button {
+            background-color: var(--accent-color);
+            border: none;
+            border-radius: 6px;
+            color: var(--bg-color);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover, .Button:hover {
+            background-color: var(--hover-color);
+        }
+
+
+         
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            pre {
+                margin: 1rem -1rem;
+                border-radius: 0;
+            }
+        }
+
+        code {
+          font-family: monospace;
+          padding: 2px 4px;
+          border-radius: 4px;
+        }
+
+pre {
+    background-color: var(--code-bg-color, #f5f5f5);
+    border: 1px solid var(--code-border-color, #d1d1d1);
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+
+code {
+    font-family: 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    font-size: 0.9em;
+    color: var(--code-text-color, #fff);
+}
+
+p code {
+    color: var(--code-text-color, #000);
+    background-color: var(--code-bg-color, #444444);
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+}
+
+ 
+.Hljs-comment { color: var(--code-comment-color, #7d7d7d); }
+.Hljs-keyword { color: var(--code-keyword-color, #005cc5); }
+.Hljs-string { color: var(--code-string-color, #d73a49); }
+.Hljs-number { color: var(--code-number-color, #e36209); }
+.Hljs-variable { color: var(--code-variable-color, #6f42c1); }
+.Hljs-function { color: var(--code-function-color, #005cc5); }
+
+ 
+.secondary-theme pre {
+    background-color: var(--code-bg-color, #1e1e1e);
+    border: 1px solid var(--code-border-color, #3c3c3c);
+}
+
+.secondary-theme .Hljs-comment { color: var(--code-comment-color, #6a737d); }
+.secondary-theme .Hljs-keyword { color: var(--code-keyword-color, #569cd6); }
+.secondary-theme .Hljs-string { color: var(--code-string-color, #ce9178); }
+.secondary-theme .Hljs-number { color: var(--code-number-color, #b5cea8); }
+.secondary-theme .Hljs-variable { color: var(--code-variable-color, #9cdcfe); }
+.secondary-theme .Hljs-function { color: var(--code-function-color, #dcdcaa); }
+
+pre {
+    background: var(--code-bg-color, #1e1e1e);
+    border: 1px solid var(--code-border-color, #3c3c3c);
+    border-radius: 8px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+
+ 
+code {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 0.9em;
+    color: var(--code-text-color, #ffffff);
+}
+
+ 
+p code {
+    background-color: var(--code-bg-color, #333);
+    color: var(--code-text-color, #ffcb6b);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+ 
+.Hljs-comment { color: var(--code-comment-color, #6a737d); font-style: italic; }
+.Hljs-keyword { color: var(--code-keyword-color, #c678dd); font-weight: bold; }
+.Hljs-string { color: var(--code-string-color, #98c379); }
+.Hljs-number { color: var(--code-number-color, #d19a66); }
+.Hljs-variable { color: var(--code-variable-color, #e06c75); }
+.Hljs-function { color: var(--code-function-color, #61afef); }
+
+ 
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.copy-btn:hover {
+    background: #45a049;
+}
+
+.copy-btn.copied {
+    background: #ffa500;
+}
+
+blockquote {
+    border-left: 4px solid var(--quote-color);
+    background-color: rgba(255, 255, 255, 0.05);  
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: var(--secondary-text-color);
+    border-radius: 6px;
+    position: relative;
+}
+
+blockquote::before {
+    content: "“";  
+    font-size: 2rem;
+    color: var(--quote-color);
+    position: absolute;
+    top: 0;
+    left: 10px;
+}
+
+blockquote::after {
+    content: "”";  
+    font-size: 2rem;
+    color: var(--quote-color);
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}
+
+ 
+blockquote cite {
+    display: block;
+    text-align: right;
+    font-size: 0.9em;
+    margin-top: 0.5rem;
+    color: var(--secondary-text-color);
+    font-style: normal;
+}
+        #editor, #editor-edit {
+            background-color: #4CAF50;  
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #editor i {
+            margin-right: 5px;  
+        }
+        #editor-edit i {
+            margin-right: 5px;  
+        }
+    </style>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const stylesheet = document.getElementById("syntax-theme");
+
+        
+        const currentTheme = localStorage.getItem("theme") || "light";
+
+        
+        function setSyntaxTheme(theme) {
+            if (theme === "secondary") {
+                stylesheet.href = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/dracula.min.css";
+            } else {
+                stylesheet.href = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css";
+            }
+        }
+
+        
+        if (currentTheme === "secondary") {
+            body.classList.add("secondary-theme");
+            setSyntaxTheme("secondary");
+        } else {
+            setSyntaxTheme("light");
+        }
+
+        
+        themeToggle.addEventListener("click", () => {
+            if (body.classList.contains("secondary-theme")) {
+                body.classList.remove("secondary-theme");
+                localStorage.setItem("theme", "light");
+                setSyntaxTheme("light");
+            } else {
+                body.classList.add("secondary-theme");
+                localStorage.setItem("theme", "secondary");
+                setSyntaxTheme("secondary");
+            }
+        });
+    });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll("pre").forEach((pre) => {
+                const button = document.createElement("button");
+                button.classList.add("copy-btn");
+                button.textContent = "Copy";
+
+                button.addEventListener("click", () => {
+                    const code = pre.querySelector("code");
+                    if (!code) return;
+
+                    const textToCopy = code.innerText || code.textContent;
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        button.textContent = "Copied!";
+                        button.classList.add("copied");
+
+                        setTimeout(() => {
+                            button.textContent = "Copy";
+                            button.classList.remove("copied");
+                        }, 1500);
+                    });
+                });
+
+                pre.appendChild(button);
+            });
+        });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JX3T4E0964"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-JX3T4E0964');
+    </script>
+    
+    <link rel="icon" href="../../tbicon.png" type="image/png">
+</head>
+<body>
+    <header class="header">
+        <h1 class="site-title animated-gradient-text"><a href="/">Meet Gor</a></h1>
+        <div class="theme-switch">
+          <input type="checkbox" id="theme-toggle" aria-label="Toggle Theme">
+          <label for="theme-toggle"></label>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h1>SQLite dot commands: Output mode</h1>
+            <div class="post-meta">
+                Published on 📅 <time datetime="2025-09-01">2025-09-01</time>
+            </div>
+            <div class="post-meta">
+                Type: <a href="/sqlog">sqlog</a>
+            </div>
+            <div class="post-meta">
+                <span class="post-series-label"> 🏷️ Tags:</span>
+                
+                <a href="/tags/sqlite">#sqlite</a>
+                
+                <a href="/tags/sql">#sql</a>
+                
+            </div>
+            
+            <div class="post-meta">
+                
+                    <button id="editor-edit">Edit</button>
+                    <button id="editor-delete" 
+                            onclick="location.href='/editor/?slug=sqlog\/sqlite-mode-dot-command&method=delete'">
+                        <i class="fas fa-trash"></i>Delete
+                    </button>
+                
+            </div>
+            <hr>
+            <div class="post-content">
+                <h2>Output mode dot command</h2>
+<p>The SQLite shell is a great way to test out and run bunch of queries, but the output might be squished or cluttered. You might need to view the output in a specific way, and the creators of SQLite were already hearing your screams.</p>
+<p>They created not 5, not 10, but 14 different output modes, and to extend it even further, you can even use any delimiter/separator as well.</p>
+<p>The <code>.mode</code> will give you the currently configured/set output mode with some options which are default for certain type of modes.</p>
+<p>The default mode is <code>list</code>, with the option of <code>escape</code> with the ascii character set.</p>
+<pre><code>current output mode: list --escape ascii
+</code></pre>
+<p>The list mode defined in the <a href="https://www.sqlite.org/cli.html#changing_output_formats">docs</a> as:</p>
+<blockquote>
+<p>In list mode, each row of a query result is written on one line of output and each column within that row is separated by a specific separator string. The default separator is a pipe symbol (&quot;|&quot;). List mode is especially useful when you are going to send the output of a query to another program (such as AWK) for additional processing.</p>
+</blockquote>
+<p>So, in short, the <code>list</code> output mode prints each row on a line with a <code>|</code> as the separator.</p>
+<p>You can get all the information you need with the <code>.help mode</code> command</p>
+<pre><code>.mode ?MODE? ?OPTIONS?   Set output mode
+   MODE is one of:
+     ascii       Columns/rows delimited by 0x1F and 0x1E
+     box         Tables using unicode box-drawing characters
+     csv         Comma-separated values
+     column      Output in columns.  (See .width)
+     html        HTML \&lt;table\&gt; code
+     insert      SQL insert statements for TABLE
+     json        Results in a JSON array
+     line        One value per line
+     list        Values delimited by &quot;|&quot;
+     markdown    Markdown table format
+     qbox        Shorthand for &quot;box --wrap 60 --quote&quot;
+     quote       Escape answers as for SQL
+     table       ASCII-art table
+     tabs        Tab-separated values
+     tcl         TCL list elements
+   OPTIONS: (for columnar modes or insert mode):
+     --escape T     ctrl-char escape; T is one of: symbol, ascii, off
+     --wrap N       Wrap output lines to no longer than N characters
+     --wordwrap B   Wrap or not at word boundaries per B (on/off)
+     --ww           Shorthand for &quot;--wordwrap 1&quot;
+     --quote        Quote output text as SQL literals
+     --noquote      Do not quote output text
+     TABLE          The name of SQL table used for &quot;insert&quot; mode
+</code></pre>
+<p>Let's set up with some sample data</p>
+<pre><code class="language-sql">CREATE TABLE IF NOT EXISTS books(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    author TEXT NOT NULL,
+    pages INTEGER NOT NULL,
+    release_date TEXT NOT NULL,
+    price REAL NOT NULL
+);
+
+INSERT INTO books(title, author, pages, release_date, price)
+VALUES
+('The Hobbit', 'J.R.R. Tolkien', 310, '1937-09-21', 39.99),
+('The Fellowship of the Ring', 'J.R.R. Tolkien', 423, '1954-07-29', 49.99),
+('The Two Towers', 'J.R.R. Tolkien', 352, '1954-11-11', 49.99), 
+('The Return of the King', 'J.R.R. Tolkien', 416, '1955-10-20', 49.99);
+
+SELECT * FROM books;
+</code></pre>
+<pre><code>1|The Hobbit|J.R.R. Tolkien|310|1937-09-21|39.99
+2|The Fellowship of the Ring|J.R.R. Tolkien|423|1954-07-29|49.99
+3|The Two Towers|J.R.R. Tolkien|352|1954-11-11|49.99
+4|The Return of the King|J.R.R. Tolkien|416|1955-10-20|49.99
+</code></pre>
+<p>Not the best way to look at the data, but handy in some cases. We can change it, we have 14 different modes to choose from.
+Its like choosing a taste flovour for an ice-cream, you want something different each time, or you stick to the simple vanilla one. Which one are you? I am a vanilla guy (I like the table mode, but use csv heavily too).</p>
+<p>Let's change it to a table format with <code>.mode table</code> This will set the mode as <code>table</code></p>
+<blockquote>
+<p>table       ASCII-art table</p>
+</blockquote>
+<p>This will show the result sets in a ascii-like table structure with the <code>+++</code> and <code>---</code> to separate the rows and columns.</p>
+<pre><code>SELECT * FROM books;
+</code></pre>
+<pre><code>+----+----------------------------+----------------+-------+--------------+-------+
+| id |           title            |     author     | pages | release_date | price |
++----+----------------------------+----------------+-------+--------------+-------+
+| 1  | The Hobbit                 | J.R.R. Tolkien | 310   | 1937-09-21   | 39.99 |
+| 2  | The Fellowship of the Ring | J.R.R. Tolkien | 423   | 1954-07-29   | 49.99 |
+| 3  | The Two Towers             | J.R.R. Tolkien | 352   | 1954-11-11   | 49.99 |
+| 4  | The Return of the King     | J.R.R. Tolkien | 416   | 1955-10-20   | 49.99 |
++----+----------------------------+----------------+-------+--------------+-------+
+</code></pre>
+<p>That is soo nice looking! Crystal clear.</p>
+<p>You can even see the current set mode precisely with the <code>.mode</code> command</p>
+<p>Since I changed the mode to table, let's see what the mode is now set as?</p>
+<pre><code>sqlite&gt; .mode
+current output mode: table --wrap 60 --wordwrap off --noquote --escape ascii
+</code></pre>
+<p>It has a bunch of options like <code>wrap</code>, <code>wordwrap</code>, <code>noquote</code>, and <code>escape</code> etc. You can take a look at the help and tweak them as per your liking, I usually don't change the options, but it might be very rare to switch from the defaults.</p>
+<h2>Output modes</h2>
+<h3>ASCII</h3>
+<p>This mode separates the columns with by <code>0x1F</code> and rows with <code>0x1E</code>.</p>
+<pre><code>.mode ascii
+SELECT * FROM books;
+</code></pre>
+<pre><code>idtitleauthorpagesrelease_dateprice1The HobbitJ.R.R. Tolkien3101937-09-2139.992The Fellowship of the RingJ.R.R. Tolkien4231954-07-2949.993The Two TowersJ.R.R. Tolkien3521954-11-1149.994The Return of the KingJ.R.R. Tolkien4161955-10-2049.99
+</code></pre>
+<h3>Box</h3>
+<p>The box mode renders the result set using unicode box-drawing characters.</p>
+<pre><code>.mode box
+SELECT * FROM books;
+</code></pre>
+<pre><code>┌────┬────────────────────────────┬────────────────┬───────┬──────────────┬───────┐
+│ id │           title            │     author     │ pages │ release_date │ price │
+├────┼────────────────────────────┼────────────────┼───────┼──────────────┼───────┤
+│ 1  │ The Hobbit                 │ J.R.R. Tolkien │ 310   │ 1937-09-21   │ 39.99 │
+│ 2  │ The Fellowship of the Ring │ J.R.R. Tolkien │ 423   │ 1954-07-29   │ 49.99 │
+│ 3  │ The Two Towers             │ J.R.R. Tolkien │ 352   │ 1954-11-11   │ 49.99 │
+│ 4  │ The Return of the King     │ J.R.R. Tolkien │ 416   │ 1955-10-20   │ 49.99 │
+└────┴────────────────────────────┴────────────────┴───────┴──────────────┴───────┘
+</code></pre>
+<h3>CSV</h3>
+<p>The csv mode simply outputs the result in the comma-separated values for columns and newline character for rows.</p>
+<pre><code>.mode csv
+SELECT * FROM books;
+</code></pre>
+<pre><code class="language-csv">1,&quot;The Hobbit&quot;,&quot;J.R.R. Tolkien&quot;,310,1937-09-21,39.99
+2,&quot;The Fellowship of the Ring&quot;,&quot;J.R.R. Tolkien&quot;,423,1954-07-29,49.99
+3,&quot;The Two Towers&quot;,&quot;J.R.R. Tolkien&quot;,352,1954-11-11,49.99
+4,&quot;The Return of the King&quot;,&quot;J.R.R. Tolkien&quot;,416,1955-10-20,49.99
+</code></pre>
+<h3>Column</h3>
+<p>The column mode simply outputs the result in columns with certain width. We can set the option <code>.width</code> to change the width.</p>
+<pre><code>.mode column
+SELECT * FROM books;
+</code></pre>
+<pre><code>id  title                       author          pages  release_date  price
+--  --------------------------  --------------  -----  ------------  -----
+1   The Hobbit                  J.R.R. Tolkien  310    1937-09-21    39.99
+2   The Fellowship of the Ring  J.R.R. Tolkien  423    1954-07-29    49.99
+3   The Two Towers              J.R.R. Tolkien  352    1954-11-11    49.99
+4   The Return of the King      J.R.R. Tolkien  416    1955-10-20    49.99
+</code></pre>
+<h3>HTML</h3>
+<p>The html output mode simply renders the result set / tables into an table element in html.</p>
+<pre><code>.mode html
+SELECT * FROM books;
+</code></pre>
+<pre><code class="language-html">&lt;TR&gt;&lt;TH&gt;id&lt;/TH&gt;
+&lt;TH&gt;title&lt;/TH&gt;
+&lt;TH&gt;author&lt;/TH&gt;
+&lt;TH&gt;pages&lt;/TH&gt;
+&lt;TH&gt;release_date&lt;/TH&gt;
+&lt;TH&gt;price&lt;/TH&gt;
+&lt;/TR&gt;
+&lt;TR&gt;&lt;TD&gt;1&lt;/TD&gt;
+&lt;TD&gt;The Hobbit&lt;/TD&gt;
+&lt;TD&gt;J.R.R. Tolkien&lt;/TD&gt;
+&lt;TD&gt;310&lt;/TD&gt;
+&lt;TD&gt;1937-09-21&lt;/TD&gt;
+&lt;TD&gt;39.99&lt;/TD&gt;
+&lt;/TR&gt;
+&lt;TR&gt;&lt;TD&gt;2&lt;/TD&gt;
+&lt;TD&gt;The Fellowship of the Ring&lt;/TD&gt;
+&lt;TD&gt;J.R.R. Tolkien&lt;/TD&gt;
+&lt;TD&gt;423&lt;/TD&gt;
+&lt;TD&gt;1954-07-29&lt;/TD&gt;
+&lt;TD&gt;49.99&lt;/TD&gt;
+&lt;/TR&gt;
+&lt;TR&gt;&lt;TD&gt;3&lt;/TD&gt;
+&lt;TD&gt;The Two Towers&lt;/TD&gt;
+&lt;TD&gt;J.R.R. Tolkien&lt;/TD&gt;
+&lt;TD&gt;352&lt;/TD&gt;
+&lt;TD&gt;1954-11-11&lt;/TD&gt;
+&lt;TD&gt;49.99&lt;/TD&gt;
+&lt;/TR&gt;
+&lt;TR&gt;&lt;TD&gt;4&lt;/TD&gt;
+&lt;TD&gt;The Return of the King&lt;/TD&gt;
+&lt;TD&gt;J.R.R. Tolkien&lt;/TD&gt;
+&lt;TD&gt;416&lt;/TD&gt;
+&lt;TD&gt;1955-10-20&lt;/TD&gt;
+&lt;TD&gt;49.99&lt;/TD&gt;
+&lt;/TR&gt;
+</code></pre>
+<h3>Insert</h3>
+<p>The insert mode simply outputs the result in SQL insert statements. This is really handy for bulk inserting or migrating data across databases or tables.</p>
+<pre><code>.mode insert
+SELECT * FROM books;
+</code></pre>
+<pre><code>INSERT INTO &quot;table&quot;(id,title,author,pages,release_date,price) VALUES(1,'The Hobbit','J.R.R. Tolkien',310,'1937-09-21',39.99000000000000198);
+INSERT INTO &quot;table&quot;(id,title,author,pages,release_date,price) VALUES(2,'The Fellowship of the Ring','J.R.R. Tolkien',423,'1954-07-29',49.99000000000000198);
+INSERT INTO &quot;table&quot;(id,title,author,pages,release_date,price) VALUES(3,'The Two Towers','J.R.R. Tolkien',352,'1954-11-11',49.99000000000000198);
+INSERT INTO &quot;table&quot;(id,title,author,pages,release_date,price) VALUES(4,'The Return of the King','J.R.R. Tolkien',416,'1955-10-20',49.99000000000000198);
+</code></pre>
+<h3>JSON</h3>
+<p>The json mode simply outputs the result in json format.</p>
+<pre><code>.mode json
+SELECT * FROM books;
+</code></pre>
+<pre><code class="language-json">[
+    {&quot;id&quot;:1,&quot;title&quot;:&quot;The Hobbit&quot;,&quot;author&quot;:&quot;J.R.R. Tolkien&quot;,&quot;pages&quot;:310,&quot;release_date&quot;:&quot;1937-09-21&quot;,&quot;price&quot;:39.99000000000000198},
+    {&quot;id&quot;:2,&quot;title&quot;:&quot;The Fellowship of the Ring&quot;,&quot;author&quot;:&quot;J.R.R. Tolkien&quot;,&quot;pages&quot;:423,&quot;release_date&quot;:&quot;1954-07-29&quot;,&quot;price&quot;:49.99000000000000198},
+    {&quot;id&quot;:3,&quot;title&quot;:&quot;The Two Towers&quot;,&quot;author&quot;:&quot;J.R.R. Tolkien&quot;,&quot;pages&quot;:352,&quot;release_date&quot;:&quot;1954-11-11&quot;,&quot;price&quot;:49.99000000000000198},
+    {&quot;id&quot;:4,&quot;title&quot;:&quot;The Return of the King&quot;,&quot;author&quot;:&quot;J.R.R. Tolkien&quot;,&quot;pages&quot;:416,&quot;release_date&quot;:&quot;1955-10-20&quot;,&quot;price&quot;:49.99000000000000198}
+]
+</code></pre>
+<h3>List (The default)</h3>
+<p>As we already know, the list mode is the default mode.</p>
+<pre><code>.mode list
+SELECT * FROM books;
+</code></pre>
+<pre><code>id|title|author|pages|release_date|price
+1|The Hobbit|J.R.R. Tolkien|310|1937-09-21|39.99
+2|The Fellowship of the Ring|J.R.R. Tolkien|423|1954-07-29|49.99
+3|The Two Towers|J.R.R. Tolkien|352|1954-11-11|49.99
+4|The Return of the King|J.R.R. Tolkien|416|1955-10-20|49.99
+</code></pre>
+<h3>Markdown</h3>
+<p>The markdown mode simply outputs the result in markdown format. We can use this output in a markdown file and it will nicely draw the tables out.</p>
+<pre><code>.mode markdown
+SELECT * FROM books;
+</code></pre>
+<pre><code class="language-md">| id |           title            |     author     | pages | release_date | price |
+|----|----------------------------|----------------|-------|--------------|-------|
+| 1  | The Hobbit                 | J.R.R. Tolkien | 310   | 1937-09-21   | 39.99 |
+| 2  | The Fellowship of the Ring | J.R.R. Tolkien | 423   | 1954-07-29   | 49.99 |
+| 3  | The Two Towers             | J.R.R. Tolkien | 352   | 1954-11-11   | 49.99 |
+| 4  | The Return of the King     | J.R.R. Tolkien | 416   | 1955-10-20   | 49.99 |
+</code></pre>
+<h3>Qbox</h3>
+<p>The qbox mode simply outputs the result in box format with the option as <code>--wrap 60 --quote</code>.</p>
+<pre><code>.mode qbox
+SELECT * FROM books;
+</code></pre>
+<pre><code>┌────┬──────────────────────────────┬──────────────────┬───────┬──────────────┬───────┐
+│ id │            title             │      author      │ pages │ release_date │ price │
+├────┼──────────────────────────────┼──────────────────┼───────┼──────────────┼───────┤
+│ 1  │ 'The Hobbit'                 │ 'J.R.R. Tolkien' │ 310   │ '1937-09-21' │ 39.99 │
+│ 2  │ 'The Fellowship of the Ring' │ 'J.R.R. Tolkien' │ 423   │ '1954-07-29' │ 49.99 │
+│ 3  │ 'The Two Towers'             │ 'J.R.R. Tolkien' │ 352   │ '1954-11-11' │ 49.99 │
+│ 4  │ 'The Return of the King'     │ 'J.R.R. Tolkien' │ 416   │ '1955-10-20' │ 49.99 │
+└────┴──────────────────────────────┴──────────────────┴───────┴──────────────┴───────┘
+</code></pre>
+<h3>Quote</h3>
+<p>The quote mode simply outputs the result in SQL-string quote format.</p>
+<pre><code>.mode quote
+SELECT * FROM books;
+</code></pre>
+<pre><code>'id','title','author','pages','release_date','price'
+1,'The Hobbit','J.R.R. Tolkien',310,'1937-09-21',39.99000000000000198
+2,'The Fellowship of the Ring','J.R.R. Tolkien',423,'1954-07-29',49.99000000000000198
+3,'The Two Towers','J.R.R. Tolkien',352,'1954-11-11',49.99000000000000198
+4,'The Return of the King','J.R.R. Tolkien',416,'1955-10-20',49.99000000000000198
+</code></pre>
+<h3>Table</h3>
+<p>The table mode simply outputs the result in table format. We saw this mode in the previous example.</p>
+<pre><code>.mode table
+SELECT * FROM books;
+</code></pre>
+<pre><code>+----+----------------------------+----------------+-------+--------------+-------+
+| id |           title            |     author     | pages | release_date | price |
++----+----------------------------+----------------+-------+--------------+-------+
+| 1  | The Hobbit                 | J.R.R. Tolkien | 310   | 1937-09-21   | 39.99 |
+| 2  | The Fellowship of the Ring | J.R.R. Tolkien | 423   | 1954-07-29   | 49.99 |
+| 3  | The Two Towers             | J.R.R. Tolkien | 352   | 1954-11-11   | 49.99 |
+| 4  | The Return of the King     | J.R.R. Tolkien | 416   | 1955-10-20   | 49.99 |
++----+----------------------------+----------------+-------+--------------+-------+
+</code></pre>
+<h3>Tabs</h3>
+<p>The tabs mode simply outputs the result in tab-separated values.</p>
+<pre><code>.mode tabs
+SELECT * FROM books;
+</code></pre>
+<pre><code>id      title   author  pages   release_date    price
+1       The Hobbit      J.R.R. Tolkien  310     1937-09-21      39.99
+2       The Fellowship of the Ring      J.R.R. Tolkien  423     1954-07-29      49.99
+3       The Two Towers  J.R.R. Tolkien  352     1954-11-11      49.99
+4       The Return of the King  J.R.R. Tolkien  416     1955-10-20      49.99
+</code></pre>
+<h3>Tcl</h3>
+<p>The Tcl mode simply outputs the result in Tcl format. Tcl or tool command language is a configuration friendly format.</p>
+<pre><code>.mode tcl
+SELECT * FROM books;
+</code></pre>
+<pre><code class="language-tcl">&quot;id&quot; &quot;title&quot; &quot;author&quot; &quot;pages&quot; &quot;release_date&quot; &quot;price&quot;
+&quot;1&quot; &quot;The Hobbit&quot; &quot;J.R.R. Tolkien&quot; &quot;310&quot; &quot;1937-09-21&quot; &quot;39.99&quot;
+&quot;2&quot; &quot;The Fellowship of the Ring&quot; &quot;J.R.R. Tolkien&quot; &quot;423&quot; &quot;1954-07-29&quot; &quot;49.99&quot;
+&quot;3&quot; &quot;The Two Towers&quot; &quot;J.R.R. Tolkien&quot; &quot;352&quot; &quot;1954-11-11&quot; &quot;49.99&quot;
+&quot;4&quot; &quot;The Return of the King&quot; &quot;J.R.R. Tolkien&quot; &quot;416&quot; &quot;1955-10-20&quot; &quot;49.99&quot;
+</code></pre>
+
+            </div>
+        </article>
+    </main>
+      <div id="comments">
+        <script src="https://giscus.app/client.js"
+            data-repo="Mr-Destructive/mr-destructive.github.io"
+            data-repo-id="R_kgDOHZ6V_g"
+            data-category="Q&A"
+            data-category-id="DIC_kwDOHZ6V_s4CRfn4"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-theme="dark_high_contrast"
+            data-lang="en"
+            crossorigin="anonymous"
+            async
+        >
+        </script>
+      </div>
+    
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; Meet Gor. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const editBtn = document.getElementById('editor-edit');
+
+        if (editBtn) {
+            editBtn.addEventListener('click', async function () {
+                const slug = "sqlog\/sqlite-mode-dot-command";
+                const type = "sqlog";
+                console.log("Editing post:", slug, type);
+                const url = "https:\/\/devmeetgor.netlify.app/.netlify/functions/api?slug=" + slug + "&method=edit&type=" + type;
+
+                try {
+                    const res = await fetch(url);
+
+                    if (!res.ok) throw new Error("Failed to fetch edit content");
+                    console.log(res);
+
+                    const html = await res.text();
+                    console.log(html);
+
+                    document.querySelector('.post-content').innerHTML = html;
+                } catch (err) {
+                    console.error(err);
+                    alert("Error loading editor content");
+                }
+            });
+        }
+    });
+    </script>
+</body>
+</html>
